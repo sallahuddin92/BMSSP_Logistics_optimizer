@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMSSP Logistics Optimizer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-route"></i>
+                    <h1>BMSSP Routing</h1>
+                </div>
+                <div class="header-stats">
+                    <div class="stat">
+                        <span class="stat-label">Locations</span>
+                        <span class="stat-value" id="location-count">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Vehicles</span>
+                        <span class="stat-value" id="vehicle-count">1</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Total Distance</span>
+                        <span class="stat-value" id="total-distance">-</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="control-panel">
+                    <h3><i class="fas fa-cogs"></i> Route Planning</h3>
+                    
+                    <!-- Mode Selection -->
+                    <div class="control-group">
+                        <label>Planning Mode</label>
+                        <div class="mode-buttons">
+                            <button id="depot-mode" class="mode-btn active">
+                                <i class="fas fa-warehouse"></i> Set Depot
+                            </button>
+                            <button id="stop-mode" class="mode-btn">
+                                <i class="fas fa-map-marker-alt"></i> Add Stops
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Vehicle Configuration -->
+                    <div class="control-group">
+                        <label for="vehicle-input">Number of Vehicles</label>
+                        <input type="number" id="vehicle-input" min="1" max="10" value="1">
+                    </div>
+
+                    <!-- Advanced Options -->
+                    <div class="control-group">
+                        <button id="advanced-toggle" class="toggle-btn">
+                            <i class="fas fa-chevron-down"></i> Advanced Options
+                        </button>
+                        <div id="advanced-options" class="advanced-options">
+                            <div class="option-group">
+                                <label>
+                                    <input type="checkbox" id="enable-capacity"> 
+                                    Enable Capacity Constraints
+                                </label>
+                                <div id="capacity-inputs" class="capacity-inputs">
+                                    <input type="number" id="default-capacity" placeholder="Vehicle Capacity" min="1" value="100">
+                                    <input type="number" id="default-demand" placeholder="Default Demand" min="1" value="10">
+                                </div>
+                            </div>
+                            <div class="option-group">
+                                <label>
+                                    <input type="checkbox" id="enable-time-windows"> 
+                                    Enable Time Windows
+                                </label>
+                                <div id="time-inputs" class="time-inputs">
+                                    <input type="number" id="default-start-time" placeholder="Start Time" min="0" value="0">
+                                    <input type="number" id="default-end-time" placeholder="End Time" min="0" value="1000">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button id="solve-btn" class="btn btn-primary" disabled>
+                            <i class="fas fa-play"></i> Solve Routes
+                        </button>
+                        <button id="clear-btn" class="btn btn-secondary">
+                            <i class="fas fa-trash"></i> Clear All
+                        </button>
+                    </div>
+
+                    <!-- Location List -->
+                    <div class="location-list">
+                        <h4><i class="fas fa-list"></i> Locations</h4>
+                        <div id="depot-info" class="location-item depot" style="display: none;">
+                            <i class="fas fa-warehouse"></i>
+                            <span class="location-text">Depot: <span id="depot-coords">Not set</span></span>
+                            <button class="remove-btn" onclick="removeDepot()"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div id="stops-list" class="stops-list"></div>
+                    </div>
+                </div>
+
+                <!-- Loading Indicator -->
+                <div id="loading" class="loading" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>Solving routes...</span>
+                </div>
+
+                <!-- Results -->
+                <div id="results" class="results" style="display: none;">
+                    <h4><i class="fas fa-chart-line"></i> Results</h4>
+                    <div id="results-content"></div>
+                </div>
+            </aside>
+
+            <!-- Map Container -->
+            <main class="map-container">
+                <div id="map"></div>
+                <div class="map-instructions">
+                    <div id="instruction-text">
+                        <i class="fas fa-info-circle"></i>
+                        Click "Set Depot" then click on the map to place your depot
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js?v=20250918"></script>
+</body>
+</html>

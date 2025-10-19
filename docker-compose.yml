@@ -1,0 +1,41 @@
+services:
+  backend:
+    build: ./backend
+    container_name: bmssp-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - graph_cache:/app/cache
+      - ./malaysia-singapore-brunei-250915.osm.pbf:/app/malaysia-singapore-brunei-250915.osm.pbf:ro
+    environment:
+      - GRAPH_CACHE_DIR=/app/cache
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+
+  frontend:
+    build: ./frontend
+    container_name: bmssp-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    environment:
+      - BACKEND_URL=http://backend:8000
+
+  benchmarks:
+    build: ./benchmarks
+    container_name: bmssp-benchmarks
+    volumes:
+      - ./benchmarks/results:/app/results
+      - graph_cache:/app/cache
+    depends_on:
+      - backend
+    profiles:
+      - benchmarks
+
+volumes:
+  graph_cache:
+    driver: local

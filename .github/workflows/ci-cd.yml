@@ -1,0 +1,344 @@
+name: BMSSP Routing CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run benchmarks weekly on Sunday at 2 AM UTC
+    - cron: '0 2 * * 0'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake libgeos-dev libspatialindex-dev
+    
+    - name: Cache Python dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install Python dependencies
+      run: |
+        cd backend
+        pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Compile BMSSP extension
+      run: |
+        cd backend
+        c++ -O3 -Wall -shared -std=c++17 -fPIC \
+          $(python3 -m pybind11 --includes) \
+          bindings.cpp -o bmssp$(python3-config --extension-suffix)
+    
+    - name: Run unit tests
+      run: |
+        cd backend
+        python -m pytest tests/ -v --tb=short
+      env:
+        PYTHONPATH: ${{ github.workspace }}/backend
+        GRAPH_CACHE_DIR: /tmp/cache
+
+  build-backend:
+    name: Build Backend Image
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Log in to Container Registry
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Extract metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-backend
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
+    
+    - name: Build and push Backend image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./backend
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+  build-frontend:
+    name: Build Frontend Image
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Log in to Container Registry
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Extract metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-frontend
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
+    
+    - name: Build and push Frontend image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./frontend
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+  integration-test:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: [build-backend, build-frontend]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Docker Compose
+      run: |
+        docker compose --version
+    
+    - name: Start services
+      run: |
+        docker compose up -d --wait
+        sleep 30  # Give services time to fully start
+    
+    - name: Health check
+      run: |
+        curl -f http://localhost:8000/health || exit 1
+        curl -f http://localhost:8080/ || exit 1
+    
+    - name: Run API integration tests
+      run: |
+        # Test VRP endpoint
+        curl -X POST http://localhost:8000/vrp \
+          -H "Content-Type: application/json" \
+          -d '{
+            "locations": ["node_123", "node_456", "node_789"],
+            "vehicle_count": 2,
+            "depot": 0
+          }' || exit 1
+    
+    - name: Check logs
+      if: failure()
+      run: |
+        docker compose logs backend
+        docker compose logs frontend
+    
+    - name: Cleanup
+      if: always()
+      run: |
+        docker compose down -v
+
+  benchmark:
+    name: Run Benchmarks
+    runs-on: ubuntu-latest
+    needs: integration-test
+    if: github.event_name == 'schedule' || github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Set up Docker Compose
+      run: |
+        docker compose --version
+    
+    - name: Run benchmark suite
+      run: |
+        docker compose --profile benchmarks up --build benchmarks
+    
+    - name: Collect benchmark results
+      run: |
+        docker compose cp benchmarks:/app/results ./benchmark-results
+    
+    - name: Upload benchmark results
+      uses: actions/upload-artifact@v3
+      with:
+        name: benchmark-results-${{ github.sha }}
+        path: benchmark-results/
+        retention-days: 30
+    
+    - name: Create benchmark comment (PR)
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          const path = './benchmark-results';
+          
+          if (fs.existsSync(path)) {
+            const files = fs.readdirSync(path);
+            const reportFile = files.find(f => f.endsWith('.json') && f.includes('benchmark_results'));
+            
+            if (reportFile) {
+              const data = JSON.parse(fs.readFileSync(`${path}/${reportFile}`, 'utf8'));
+              
+              let comment = '## 📊 Benchmark Results\n\n';
+              
+              for (const benchmark of data.benchmarks || []) {
+                if (benchmark.test_type === 'single_source') {
+                  comment += `**Single-Source Performance:** ${benchmark.speedup.toFixed(2)}x speedup over Dijkstra\n`;
+                }
+              }
+              
+              comment += '\n[View detailed results in the artifacts above]';
+              
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              });
+            }
+          }
+    
+    - name: Cleanup
+      if: always()
+      run: |
+        docker compose --profile benchmarks down -v
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+    
+    - name: Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'
+
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [integration-test, security-scan]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment: production
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Deploy to production
+      run: |
+        echo "🚀 Deploying to production..."
+        # Add your production deployment steps here
+        # This could include:
+        # - Deploying to cloud provider (AWS, GCP, Azure)
+        # - Updating Kubernetes manifests
+        # - Triggering deployment webhooks
+        # - etc.
+        echo "✅ Deployment completed"
+    
+    - name: Create deployment status
+      uses: actions/github-script@v6
+      with:
+        script: |
+          github.rest.repos.createDeploymentStatus({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            deployment_id: context.payload.deployment?.id || 0,
+            state: 'success',
+            description: 'Deployment completed successfully',
+            environment_url: 'https://your-production-url.com'
+          });
+
+  cleanup:
+    name: Cleanup
+    runs-on: ubuntu-latest
+    needs: [deploy]
+    if: always()
+    
+    steps:
+    - name: Clean up old artifacts
+      uses: actions/github-script@v6
+      with:
+        script: |
+          // Clean up old benchmark artifacts (keep last 10)
+          const artifacts = await github.rest.actions.listArtifactsForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            per_page: 100
+          });
+          
+          const benchmarkArtifacts = artifacts.data.artifacts
+            .filter(a => a.name.startsWith('benchmark-results-'))
+            .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+            .slice(10); // Keep last 10, delete the rest
+          
+          for (const artifact of benchmarkArtifacts) {
+            await github.rest.actions.deleteArtifact({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              artifact_id: artifact.id
+            });
+          }
