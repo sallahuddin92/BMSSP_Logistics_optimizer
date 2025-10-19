@@ -278,3 +278,30 @@ def find_nearest_nodes(lat: float, lon: float, radius: float = 1000, place: str 
     except Exception as e:
         logger.error(f"Error finding nearest nodes: {e}")
         return []
+
+
+def get_graph_stats(place: str = "Kuala Lumpur, Malaysia") -> dict:
+    """
+    Get statistics about the loaded graph.
+    
+    Args:
+        place: Name of the place/city
+        
+    Returns:
+        Dictionary with graph statistics (node_count, edge_count)
+    """
+    try:
+        graph = load_graph(place)
+        return {
+            "node_count": graph.number_of_nodes(),
+            "edge_count": graph.number_of_edges(),
+            "place": place
+        }
+    except Exception as e:
+        logger.error(f"Error getting graph stats: {e}")
+        return {
+            "node_count": 0,
+            "edge_count": 0,
+            "place": place,
+            "error": str(e)
+        }
