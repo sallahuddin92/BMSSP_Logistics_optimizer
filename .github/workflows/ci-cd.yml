@@ -196,7 +196,7 @@ jobs:
         docker compose cp benchmarks:/app/results ./benchmark-results
     
     - name: Upload benchmark results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: benchmark-results-${{ github.sha }}
         path: benchmark-results/
@@ -284,19 +284,6 @@ jobs:
         # - Triggering deployment webhooks
         # - etc.
         echo "✅ Deployment completed"
-    
-    - name: Create deployment status
-      uses: actions/github-script@v6
-      with:
-        script: |
-          github.rest.repos.createDeploymentStatus({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            deployment_id: context.payload.deployment?.id || 0,
-            state: 'success',
-            description: 'Deployment completed successfully',
-            environment_url: 'https://your-production-url.com'
-          });
 
   cleanup:
     name: Cleanup
