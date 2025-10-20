@@ -76,11 +76,8 @@ class TestDistanceMatrix:
         """Test handling of invalid node IDs."""
         from distance_matrix import compute_matrix
         
-        mock_load_graph.return_value = (
-            self.mock_engine,
-            self.mock_id_map,
-            self.mock_rev_map
-        )
+        # Return NetworkX graph
+        mock_load_graph.return_value = self.mock_graph
         
         # Test with invalid node
         invalid_locations = ["node_1", "invalid_node", "node_3"]
@@ -93,11 +90,8 @@ class TestDistanceMatrix:
         """Test handling of empty location list."""
         from distance_matrix import compute_matrix
         
-        mock_load_graph.return_value = (
-            self.mock_engine,
-            self.mock_id_map,
-            self.mock_rev_map
-        )
+        # Return NetworkX graph
+        mock_load_graph.return_value = self.mock_graph
         
         result = compute_matrix([])
         

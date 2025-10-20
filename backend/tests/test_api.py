@@ -68,7 +68,7 @@ def mock_get_node_coordinates(node_id):
 
 
 # Apply mocks
-with patch('distance_matrix.load_graph', mock_load_graph), \
+with patch('graph_loader.load_graph', mock_load_graph), \
      patch('distance_matrix.compute_matrix', mock_compute_matrix), \
      patch('vrp_solver.solve_vrp', mock_solve_vrp), \
      patch('distance_matrix.get_node_coordinates', mock_get_node_coordinates), \
