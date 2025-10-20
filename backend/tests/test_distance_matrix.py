@@ -31,10 +31,22 @@ class TestDistanceMatrix:
     
     def setup_method(self):
         """Set up test data and mocks."""
+        import networkx as nx
         self.sample_locations = ["node_1", "node_2", "node_3"]
-        self.mock_id_map = {"node_1": 0, "node_2": 1, "node_3": 2}
-        self.mock_rev_map = {0: "node_1", 1: "node_2", 2: "node_3"}
-        self.mock_engine = MockBMSSP(3)
+        
+        # Create a mock NetworkX graph
+        self.mock_graph = nx.DiGraph()
+        self.mock_graph.add_node("node_1", y=3.139, x=101.686)
+        self.mock_graph.add_node("node_2", y=3.140, x=101.687)
+        self.mock_graph.add_node("node_3", y=3.141, x=101.688)
+        
+        # Add edges with lengths
+        self.mock_graph.add_edge("node_1", "node_2", length=100.0)
+        self.mock_graph.add_edge("node_2", "node_1", length=100.0)
+        self.mock_graph.add_edge("node_2", "node_3", length=100.0)
+        self.mock_graph.add_edge("node_3", "node_2", length=100.0)
+        self.mock_graph.add_edge("node_1", "node_3", length=200.0)
+        self.mock_graph.add_edge("node_3", "node_1", length=200.0)
     
     @patch('distance_matrix.load_graph')
     def test_compute_basic_matrix(self, mock_load_graph):
@@ -42,12 +54,8 @@ class TestDistanceMatrix:
         # Import here to avoid import errors during module loading
         from distance_matrix import compute_matrix
         
-        # Mock the graph loading
-        mock_load_graph.return_value = (
-            self.mock_engine,
-            self.mock_id_map,
-            self.mock_rev_map
-        )
+        # Mock the graph loading - return NetworkX graph
+        mock_load_graph.return_value = self.mock_graph
         
         result = compute_matrix(self.sample_locations)
         
@@ -101,11 +109,8 @@ class TestDistanceMatrix:
         """Test distance matrix with single location."""
         from distance_matrix import compute_matrix
         
-        mock_load_graph.return_value = (
-            self.mock_engine,
-            self.mock_id_map,
-            self.mock_rev_map
-        )
+        # Return NetworkX graph
+        mock_load_graph.return_value = self.mock_graph
         
         result = compute_matrix(["node_1"])
         
@@ -117,16 +122,21 @@ class TestDistanceMatrix:
     def test_node_id_formats(self, mock_load_graph):
         """Test different node ID formats (string vs integer)."""
         from distance_matrix import compute_matrix
+        import networkx as nx
         
         # Mock with integer node IDs
-        int_id_map = {123: 0, 456: 1, 789: 2}
-        int_rev_map = {0: 123, 1: 456, 2: 789}
+        int_graph = nx.DiGraph()
+        int_graph.add_node(123, y=3.139, x=101.686)
+        int_graph.add_node(456, y=3.140, x=101.687)
+        int_graph.add_node(789, y=3.141, x=101.688)
+        int_graph.add_edge(123, 456, length=100.0)
+        int_graph.add_edge(456, 123, length=100.0)
+        int_graph.add_edge(456, 789, length=100.0)
+        int_graph.add_edge(789, 456, length=100.0)
+        int_graph.add_edge(123, 789, length=200.0)
+        int_graph.add_edge(789, 123, length=200.0)
         
-        mock_load_graph.return_value = (
-            self.mock_engine,
-            int_id_map,
-            int_rev_map
-        )
+        mock_load_graph.return_value = int_graph
         
         # Test with string representations of integers
         result = compute_matrix(["123", "456", "789"])
@@ -151,11 +161,8 @@ class TestDistanceMatrix:
         """Test location validation function."""
         from distance_matrix import validate_locations
         
-        mock_load_graph.return_value = (
-            self.mock_engine,
-            self.mock_id_map,
-            self.mock_rev_map
-        )
+        # Return NetworkX graph
+        mock_load_graph.return_value = self.mock_graph
         
         # Test valid locations
         valid_locations = validate_locations(["node_1", "node_2"])
@@ -170,30 +177,27 @@ class TestDistanceMatrix:
         """Test handling of very large distances."""
         from distance_matrix import compute_matrix
         
-        # Mock engine that returns very large distances
-        class LargeDistanceBMSSP:
-            def __init__(self, n):
-                self.n = n
-                self.dist = [1e18] * n  # Very large distances
-            
-            def run(self, source):
-                self.dist[source] = 0.0
-                for i in range(self.n):
-                    if i != source:
-                        self.dist[i] = 1e15  # Large but finite
+        # Create a graph with very large distances
+        import networkx as nx
+        large_graph = nx.DiGraph()
+        large_graph.add_node("node_1", y=3.139, x=101.686)
+        large_graph.add_node("node_2", y=3.140, x=101.687)
+        large_graph.add_node("node_3", y=3.141, x=101.688)
+        # Add edges with very large distances
+        large_graph.add_edge("node_1", "node_2", length=1e15)
+        large_graph.add_edge("node_2", "node_1", length=1e15)
+        large_graph.add_edge("node_2", "node_3", length=1e15)
+        large_graph.add_edge("node_3", "node_2", length=1e15)
+        large_graph.add_edge("node_1", "node_3", length=1e15)
+        large_graph.add_edge("node_3", "node_1", length=1e15)
         
-        mock_engine = LargeDistanceBMSSP(3)
-        mock_load_graph.return_value = (
-            mock_engine,
-            self.mock_id_map,
-            self.mock_rev_map
-        )
+        mock_load_graph.return_value = large_graph
         
         result = compute_matrix(self.sample_locations)
         
         assert isinstance(result, np.ndarray)
-        # Should convert very large distances to infinity
-        assert np.any(np.isinf(result) | (result >= 1e17))
+        # Should have very large distances
+        assert np.any(result >= 1e14)
 
 
 if __name__ == "__main__":

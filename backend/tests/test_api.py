@@ -12,16 +12,25 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 
 # Mock the dependencies before importing the API
-def mock_load_graph():
-    """Mock load_graph function."""
-    mock_engine = Mock()
-    mock_engine.run = Mock()
-    mock_engine.dist = [0.0, 100.0, 200.0]
+def mock_load_graph(place=None):
+    """Mock load_graph function - returns NetworkX graph."""
+    import networkx as nx
     
-    mock_id_map = {"node_1": 0, "node_2": 1, "node_3": 2}
-    mock_rev_map = {0: "node_1", 1: "node_2", 2: "node_3"}
+    # Create a mock NetworkX graph
+    mock_graph = nx.DiGraph()
+    mock_graph.add_node("node_1", y=3.139, x=101.686)
+    mock_graph.add_node("node_2", y=3.140, x=101.687)
+    mock_graph.add_node("node_3", y=3.141, x=101.688)
     
-    return mock_engine, mock_id_map, mock_rev_map
+    # Add edges with lengths
+    mock_graph.add_edge("node_1", "node_2", length=100.0)
+    mock_graph.add_edge("node_2", "node_1", length=100.0)
+    mock_graph.add_edge("node_2", "node_3", length=100.0)
+    mock_graph.add_edge("node_3", "node_2", length=100.0)
+    mock_graph.add_edge("node_1", "node_3", length=200.0)
+    mock_graph.add_edge("node_3", "node_1", length=200.0)
+    
+    return mock_graph
 
 
 def mock_compute_matrix(locations):

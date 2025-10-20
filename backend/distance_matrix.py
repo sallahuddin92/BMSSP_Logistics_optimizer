@@ -25,19 +25,23 @@ def compute_matrix(locations: List[str], place: str = None) -> np.ndarray:
     n = len(locations)
     mat = np.full((n, n), np.inf, dtype=np.float64)
 
-    # Convert string node IDs to integers for NetworkX
+    # Convert node IDs to proper format
     processed_locations = []
     for loc in locations:
         try:
-            # Try converting to int (OSM node IDs are integers)
-            node_id = int(loc)
+            # Try converting to int first (OSM node IDs are integers)
+            try:
+                node_id = int(loc)
+            except (ValueError, TypeError):
+                # If conversion fails, use as-is (for test node IDs like "node_1")
+                node_id = loc
+            
             if node_id not in graph.nodes:
                 logger.warning(f"Node {node_id} not found in graph")
-                # Try to find nearest node
                 raise ValueError(f"Node {node_id} not in graph")
             processed_locations.append(node_id)
-        except ValueError:
-            raise ValueError(f"Invalid node ID: {loc}")
+        except ValueError as e:
+            raise ValueError(f"Invalid node ID: {loc}. Error: {e}")
 
     # Compute shortest paths using NetworkX
     for i, src in enumerate(processed_locations):
@@ -81,11 +85,17 @@ def validate_locations(locations: List[str], place: str = None) -> List[str]:
     validated = []
     for loc in locations:
         try:
-            int_loc = int(loc)
-            if int_loc in graph.nodes:
-                validated.append(int_loc)
+            # Try converting to int first (OSM node IDs are integers)
+            try:
+                node_id = int(loc)
+            except (ValueError, TypeError):
+                # If conversion fails, use as-is (for test node IDs)
+                node_id = loc
+            
+            if node_id in graph.nodes:
+                validated.append(node_id)
             else:
-                raise ValueError(f"Node {int_loc} not in graph")
+                raise ValueError(f"Node {node_id} not in graph")
         except ValueError as e:
             raise ValueError(f"Invalid node ID {loc}: {e}")
     

@@ -102,7 +102,9 @@ def load_graph(place: str = "Kuala Lumpur, Malaysia", force_reload: bool = False
         
         return G
     except Exception as e:
-        logger.error(f"Failed to load graph for '{place}': {e}")
+        logger.error(f"Failed to load graph for '{place}': {str(e)}")
+        import traceback
+        logger.debug(f"Full traceback: {traceback.format_exc()}")
         
         # Fallback: create a minimal test graph
         logger.warning("Creating minimal test graph as fallback")
