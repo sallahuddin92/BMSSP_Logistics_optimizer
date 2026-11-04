@@ -6,6 +6,8 @@ let stops = [];
 let routeMarkers = [];
 let routeLines = [];
 let nearestNodes = [];
+let selectionVersion = 0;
+let solving = false;
 
 // Route colors for multiple vehicles
 const ROUTE_COLORS = [
@@ -37,85 +39,14 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeMap() {
-    console.log('Initializing map...');
-    // Initialize map centered between KL and Singapore  
     map = L.map('map').setView([2.5, 102.5], 7);
-    console.log('Map created:', map);
-    
-    // Add tile layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors',
-        maxZoom: 18
+        attribution: '© OpenStreetMap contributors', maxZoom: 18
     }).addTo(map);
-    
-    // Add coverage area indicators
     addCoverageAreas();
-    
-    // Add raw DOM click handler to override Leaflet's coordinate calculation
-    document.getElementById('map').addEventListener('click', function(domEvent) {
-        console.log('Raw DOM click intercepted');
-        
-        const mapContainer = document.getElementById('map');
-        const containerRect = mapContainer.getBoundingClientRect();
-        
-        // Calculate correct relative position
-        const relativeX = domEvent.clientX - containerRect.left;
-        const relativeY = domEvent.clientY - containerRect.top;
-        
-        console.log('DOM click details:', {
-            clientX: domEvent.clientX,
-            clientY: domEvent.clientY,
-            containerLeft: containerRect.left,
-            containerTop: containerRect.top,
-            relativeX: relativeX,
-            relativeY: relativeY
-        });
-        
-        // Convert to lat/lng using map's containerPointToLatLng
-        const containerPoint = L.point(relativeX, relativeY);
-        const latLng = map.containerPointToLatLng(containerPoint);
-        
-        console.log('Corrected coordinates:', latLng);
-        
-        // Create a synthetic event object
-        const syntheticEvent = {
-            latlng: latLng,
-            containerPoint: containerPoint,
-            layerPoint: containerPoint,
-            originalEvent: domEvent
-        };
-        
-        // Call our handler with corrected coordinates
-        handleMapClick(syntheticEvent);
-        
-        // Prevent the original Leaflet click from firing
-        domEvent.stopPropagation();
-    });
-    console.log('Map click handler added');
-
-    // Add zoom control
+    map.on('click', handleMapClick);
     map.zoomControl.setPosition('bottomright');
-    
-    // Fix map size calculation after DOM is ready
-    setTimeout(() => {
-        map.invalidateSize();
-        console.log('Map size invalidated and recalculated');
-        
-        // Debug container positioning
-        const mapContainer = document.getElementById('map');
-        const containerRect = mapContainer.getBoundingClientRect();
-        console.log('Map container position:', {
-            left: containerRect.left,
-            top: containerRect.top,
-            width: containerRect.width,
-            height: containerRect.height
-        });
-    }, 100);
-    
-    // Also invalidate size when window is resized
-    window.addEventListener('resize', () => {
-        map.invalidateSize();
-    });
+    window.addEventListener('resize', () => map.invalidateSize());
 }
 
 function initializeUI() {
@@ -124,7 +55,8 @@ function initializeUI() {
     document.getElementById('stop-mode').addEventListener('click', () => setMode('stops'));
     
     // Vehicle count input
-    document.getElementById('vehicle-input').addEventListener('change', updateVehicleCount);
+    document.getElementById('vehicle-input').addEventListener('change', () => { updateVehicleCount(); invalidateSolution(); });
+    document.getElementById('engine-select').addEventListener('change', invalidateSolution);
     
     // Advanced options toggle
     document.getElementById('advanced-toggle').addEventListener('click', toggleAdvancedOptions);
@@ -133,6 +65,9 @@ function initializeUI() {
     document.getElementById('enable-capacity').addEventListener('change', toggleCapacityInputs);
     document.getElementById('enable-time-windows').addEventListener('change', toggleTimeInputs);
     
+    for (const id of ['enable-capacity','enable-time-windows','default-capacity','default-demand','default-start-time','default-end-time','duration-matrix','service-duration']) {
+        document.getElementById(id).addEventListener('change', invalidateSolution);
+    }
     // Action buttons
     document.getElementById('solve-btn').addEventListener('click', solveRoutes);
     document.getElementById('clear-btn').addEventListener('click', clearAll);
@@ -157,6 +92,7 @@ async function loadInitialData() {
 
 function getBackendUrl() {
     // Use environment variable or default to localhost
+    if (window.BMSSP_BACKEND_URL) return window.BMSSP_BACKEND_URL;
     return window.location.hostname === 'localhost' 
         ? 'http://localhost:8000' 
         : `http://${window.location.hostname}:8000`;
@@ -192,85 +128,41 @@ function updateInstructions() {
 }
 
 async function handleMapClick(e) {
-    console.log('Map clicked!', e.latlng);
-    const lat = e.latlng.lat;
-    const lon = e.latlng.lng;
-    
-    // Add temporary red marker to show exactly where click was registered
-    const tempMarker = L.circleMarker([lat, lon], {
-        color: 'red',
-        fillColor: 'red',
-        fillOpacity: 0.8,
-        radius: 10,
-        weight: 2
-    }).addTo(map);
-    
-    // Remove temp marker after 2 seconds
-    setTimeout(() => {
-        map.removeLayer(tempMarker);
-    }, 2000);
-    
-    console.log('Current mode:', currentMode);
-    console.log('Searching for nodes at:', lat, lon);
-    console.log('Backend URL:', getBackendUrl());
-    
+    const version = selectionVersion;
+    const mode = currentMode;
     try {
-        // Find nearest nodes to the clicked location with progressive search radius
-        let data = null;
-        const searchRadii = [1000, 2000, 5000, 10000, 20000, 50000]; // Progressive search from 1km to 50km
-        
-        for (const radius of searchRadii) {
-            console.log('Trying radius:', radius);
-            const requestBody = { lat, lon, radius };
-            console.log('Request body:', requestBody);
-            
-            const response = await fetch(`${getBackendUrl()}/search-nodes`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody)
+        let data;
+        for (const radius of [1000, 2000, 5000, 10000]) {
+            const response = await fetch(`${getBackendUrl()}/search-nodes?engine=${encodeURIComponent(document.getElementById("engine-select").value)}`, {
+                method: 'POST', headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({lat: e.latlng.lat, lon: e.latlng.lng, radius})
             });
-            
-            console.log('Response status:', response.status);
-            console.log('Response ok:', response.ok);
-            
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.log('Error response:', errorText);
-                throw new Error(`Failed to find nearby nodes: ${response.status} ${errorText}`);
-            }
-            
+            if (!response.ok) throw new Error('Nearby road search is unavailable. Load road data and retry.');
             data = await response.json();
-            console.log('API Response data:', data);
-            console.log('Found nodes:', data.nodes ? data.nodes.length : 0);
-            
-            if (data.nodes && data.nodes.length > 0) {
-                break; // Found nodes, stop searching
-            }
+            if (data.nodes && data.nodes.length) break;
         }
-        
-        if (!data || !data.nodes || data.nodes.length === 0) {
-            showToast('No nearby road nodes found within 50km. Try clicking closer to a major road or city center in Malaysia, Singapore, or Brunei.', 'warning');
-            return;
+        if (selectionVersion !== version) return;
+        if (!data || !data.nodes || !data.nodes.length) {
+            showToast('No road node found within 10 km.', 'warning'); return;
         }
-        
-        const nearestNode = data.nodes[0];
-        console.log('Selected nearest node:', nearestNode);
-        
-        if (currentMode === 'depot') {
-            console.log('Setting depot with node:', nearestNode);
-            setDepot(nearestNode);
-        } else {
-            console.log('Adding stop with node:', nearestNode);
-            addStop(nearestNode);
-        }
-        
-    } catch (error) {
-        console.error('Error handling map click:', error);
-        showToast('Error finding nearby locations. Please try again.', 'error');
-    }
+        const node = normalizeNode(data.nodes[0]);
+        if (mode === 'depot') setDepot(node); else addStop(node);
+    } catch (error) { showToast(error.message || 'Road search failed.', 'error'); }
+}
+
+function normalizeNode(node) { return RoutingContract.normalizeNode(node); }
+
+function invalidateSolution() {
+    selectionVersion++;
+    clearRoutes();
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('total-distance').textContent = '-';
 }
 
 function setDepot(node) {
+    node = normalizeNode(node);
+    if (stops.some(stop => stop.node_id === node.node_id)) { showToast('Remove this stop before using it as depot.', 'warning'); return; }
+    invalidateSolution();
     console.log('setDepot called with node:', node);
     
     // Remove existing depot
@@ -282,6 +174,7 @@ function setDepot(node) {
     // Create depot marker
     console.log('Creating depot marker at:', node.lat, node.lon);
     const marker = L.marker([node.lat, node.lon], {
+        interactive: false,
         icon: L.divIcon({
             className: 'depot-marker',
             html: '<div class="depot-icon"><i class="fas fa-warehouse"></i></div>',
@@ -321,6 +214,8 @@ function setDepot(node) {
 }
 
 function addStop(node) {
+    node = normalizeNode(node);
+    if (depot && depot.node_id === node.node_id) { showToast('The depot is already selected.', 'warning'); return; }
     // Check if this node is already added
     const existingStop = stops.find(stop => stop.node_id === node.node_id);
     if (existingStop) {
@@ -328,9 +223,11 @@ function addStop(node) {
         return;
     }
     
+    invalidateSolution();
     // Create stop marker
     const stopNumber = stops.length + 1;
     const marker = L.marker([node.lat, node.lon], {
+        interactive: false,
         icon: L.divIcon({
             className: 'stop-marker',
             html: `<div class="stop-icon">${stopNumber}</div>`,
@@ -376,6 +273,7 @@ function addStopToList(stop, number) {
 }
 
 function removeDepot() {
+    invalidateSolution();
     if (depot && depot.marker) {
         map.removeLayer(depot.marker);
     }
@@ -387,6 +285,7 @@ function removeDepot() {
 }
 
 function removeStop(index) {
+    invalidateSolution();
     const stop = stops[index];
     if (stop && stop.marker) {
         map.removeLayer(stop.marker);
@@ -447,154 +346,105 @@ function updateUI() {
     document.getElementById('location-count').textContent = depot ? stops.length + 1 : stops.length;
     
     // Enable/disable solve button
-    const canSolve = depot && stops.length > 0;
+    const canSolve = depot && stops.length > 0 && !solving;
     document.getElementById('solve-btn').disabled = !canSolve;
 }
 
 async function solveRoutes() {
-    if (!depot || stops.length === 0) {
-        showToast('Please set a depot and add at least one stop', 'warning');
-        return;
-    }
-    
-    // Show loading
+    if (!depot || !stops.length || solving) return;
+    invalidateSolution();
+    const version = selectionVersion;
+    solving = true; updateUI();
     document.getElementById('loading').style.display = 'block';
-    document.getElementById('results').style.display = 'none';
-    
     try {
-        // Prepare request data
-        const locations = [depot.node_id, ...stops.map(stop => stop.node_id)];
-        const vehicleCount = parseInt(document.getElementById('vehicle-input').value);
-        
-        const requestData = {
-            locations: locations,
-            vehicle_count: vehicleCount,
-            depot: 0 // Depot is always first in locations array
+        const locations = [depot.node_id, ...stops.map(x => x.node_id)];
+        const integer = (id) => {
+            const raw = document.getElementById(id).value.trim();
+            if (!raw) throw new Error('Complete all enabled numeric fields; zero is allowed.');
+            const value = Number(raw);
+            if (!Number.isSafeInteger(value) || value < 0) throw new Error('Enter nonnegative whole-number counts.');
+            return value;
         };
-        
-        // Add capacity constraints if enabled
+        const count = integer('vehicle-input');
+        if (count < 1 || count > 10) throw new Error('Choose 1 to 10 vehicles.');
+        const request = {locations, vehicle_count: count, depot: 0, engine: document.getElementById('engine-select').value};
         if (document.getElementById('enable-capacity').checked) {
-            const capacity = parseInt(document.getElementById('default-capacity').value) || 100;
-            const demand = parseInt(document.getElementById('default-demand').value) || 10;
-            
-            requestData.capacities = Array(vehicleCount).fill(capacity);
-            requestData.demands = [0, ...Array(stops.length).fill(demand)]; // Depot has 0 demand
+            request.capacities = Array(count).fill(integer('default-capacity'));
+            request.demands = [0, ...stops.map(() => integer('default-demand'))];
         }
-        
-        // Add time windows if enabled
         if (document.getElementById('enable-time-windows').checked) {
-            const startTime = parseInt(document.getElementById('default-start-time').value) || 0;
-            const endTime = parseInt(document.getElementById('default-end-time').value) || 1000;
-            
-            requestData.time_windows = Array(locations.length).fill([startTime, endTime]);
+            if (['default-start-time','default-end-time','service-duration'].some(id => !document.getElementById(id).value.trim())) throw new Error('Complete the enabled seconds fields.');
+            const start = Number(document.getElementById('default-start-time').value);
+            const end = Number(document.getElementById('default-end-time').value);
+            if (!Number.isFinite(start) || !Number.isFinite(end) || start < 0 || end < start) throw new Error('Enter valid time windows in seconds.');
+            request.time_windows = locations.map(() => [start, end]);
+            const durations = document.getElementById('duration-matrix').value.trim();
+            if (durations) request.duration_matrix = JSON.parse(durations);
+            const service = Number(document.getElementById('service-duration').value);
+            if (!Number.isFinite(service) || service < 0) throw new Error('Service duration must be nonnegative seconds.');
+            request.service_durations = [0, ...stops.map(() => service)];
         }
-        
-        // Solve VRP
         const response = await fetch(`${getBackendUrl()}/vrp`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(requestData)
+            method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(request)
         });
-        
+        if (selectionVersion !== version) return;
         if (!response.ok) {
-            const errorData = await response.json();
-            // Handle validation errors (422) which return array of error objects
-            let errorMessage = 'Failed to solve routes';
-            if (Array.isArray(errorData.detail)) {
-                errorMessage = errorData.detail.map(err => err.msg || err).join(', ');
-            } else if (typeof errorData.detail === 'string') {
-                errorMessage = errorData.detail;
+            let message = response.status >= 500 ? 'Routing is unavailable or failed. Check that native road data and the module are loaded.' : 'Invalid route request. Check stops, capacities and duration/time inputs.';
+            if (response.status === 413) message = 'Request exceeds the routing resource budget. Reduce stops or vehicles.';
+            if (response.status === 400) {
+                const details = await response.json();
+                if (typeof details.detail === 'string' && /duration|time window|capacity|capacities|demand|duplicate/i.test(details.detail)) message = details.detail;
             }
-            throw new Error(errorMessage);
+            throw new Error(message);
         }
-        
         const solution = await response.json();
+        if (solution.selected_engine !== request.engine) throw new Error('Unexpected routing engine in response.');
         displaySolution(solution);
-        
     } catch (error) {
-        console.error('Error solving routes:', error);
-        showToast(`Error solving routes: ${error.message || error}`, 'error');
+        if (selectionVersion === version) showToast(error instanceof SyntaxError ? 'Duration matrix must be valid JSON seconds.' : error.message, 'error');
     } finally {
+        solving = false;
         document.getElementById('loading').style.display = 'none';
+        updateUI();
     }
 }
 
 function displaySolution(solution) {
-    // Clear existing routes
     clearRoutes();
-    
-    const routes = solution.routes;
-    const locationCoords = solution.location_coordinates;
-    const routeGeometries = solution.route_geometries || [];
-    
-    let totalDistance = 0;
-    const routeInfos = [];
-    
-    // Draw routes using real road paths if available
-    routeGeometries.forEach((geometry, vehicleIndex) => {
-        if (!geometry || geometry.length < 2) return;
-        const color = ROUTE_COLORS[vehicleIndex % ROUTE_COLORS.length];
-        const latlngs = geometry.map(pt => [pt.lat, pt.lon]);
-        const routeLine = L.polyline(latlngs, {
-            color: color,
-            weight: 4,
-            opacity: 0.8
-        }).addTo(map);
-        routeLines.push(routeLine);
-        // Add route info
-        const vehicleDistance = solution.vehicle_distances[vehicleIndex] || 0;
-        totalDistance += vehicleDistance;
-        routeInfos.push({
-            vehicle: vehicleIndex + 1,
-            stops: routes[vehicleIndex] ? routes[vehicleIndex].length - 1 : 0, // Exclude depot
-            distance: vehicleDistance,
-            color: color
-        });
-    });
-    // Fallback: if no geometries, use old method
-    if (routeGeometries.length === 0) {
-        routes.forEach((route, vehicleIndex) => {
-            if (route.length <= 2) return; // Skip empty routes (just depot)
-            const color = ROUTE_COLORS[vehicleIndex % ROUTE_COLORS.length];
-            const routeCoords = [];
-            route.forEach(locationIndex => {
-                const nodeId = solution.locations[locationIndex];
-                if (locationCoords[nodeId]) {
-                    routeCoords.push([locationCoords[nodeId].lat, locationCoords[nodeId].lon]);
-                }
-            });
-            if (routeCoords.length > 1) {
-                const routeLine = L.polyline(routeCoords, {
-                    color: color,
-                    weight: 4,
-                    opacity: 0.8
-                }).addTo(map);
-                routeLines.push(routeLine);
-                const vehicleDistance = solution.vehicle_distances[vehicleIndex] || 0;
-                totalDistance += vehicleDistance;
-                routeInfos.push({
-                    vehicle: vehicleIndex + 1,
-                    stops: route.length - 1, // Exclude depot
-                    distance: vehicleDistance,
-                    color: color
-                });
-            }
-        });
+    const accepted = RoutingContract.validSolution(solution);
+    document.getElementById('results').style.display = 'block';
+    if (!accepted) {
+        document.getElementById('total-distance').textContent = '-';
+        document.getElementById('results-content').textContent = `No verified route: ${['NO_SOLUTION','TIMEOUT','INVALID_INPUT'].includes(solution.status) ? solution.status : 'FAILED'}. Check reachability, capacities and time inputs.`;
+        showToast('No feasible route was established.', 'warning'); return false;
     }
-    
-    // Update total distance display
-    document.getElementById('total-distance').textContent = formatDistanceKm(totalDistance);
-    
-    // Display results
+    const native = solution.selected_engine !== 'legacy_networkx';
+    if (native && (!solution.exact_routing || !Array.isArray(solution.route_legs)
+        || solution.route_legs.length !== solution.routes.length
+        || solution.route_legs.some((legs, i) => legs.length !== solution.routes[i].length-1 || legs.some(l => l.path_status !== 'VERIFIED')))) {
+        document.getElementById('results-content').textContent = 'Invalid native route verification data.';
+        return false;
+    }
+    const validPoint = p => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite) && Math.abs(p[0])<=90 && Math.abs(p[1])<=180;
+    const routeInfos = solution.routes.map((route, i) => ({vehicle: i+1, stops: Math.max(0, route.length-2),
+        distance: solution.vehicle_distances[i], assignment: route.slice(1,-1).map(index => `Stop ${index}`).join(' → ') || 'Unused vehicle', color: ROUTE_COLORS[i % ROUTE_COLORS.length]}));
+    const segments = native ? solution.route_geometry_segments : (solution.route_geometries || []).map(g => [g]);
+    let unavailable = false;
+    const endpointGeometry = native && solution.route_legs.some(legs => legs.some(l => l.geometry_status === 'ENDPOINTS_ONLY'));
+    (segments || []).forEach((parts, i) => parts.forEach(points => {
+        if (Array.isArray(points) && points.length === 1 && validPoint(points[0])) return;
+        if (!points || points.length<2 || !points.every(validPoint)) { unavailable = true; return; }
+        routeLines.push(L.polyline(points, {color: ROUTE_COLORS[i % ROUTE_COLORS.length], weight:4, opacity:.8}).addTo(map));
+    }));
+    if (native && solution.route_legs.some(legs => legs.some(l => l.geometry_status === 'UNAVAILABLE'))) unavailable = true;
+    document.getElementById('total-distance').textContent = formatDistanceKm(solution.total_distance);
     displayResults(routeInfos, solution);
-    
-    // Fit map to show all routes
-    if (routeLines.length > 0) {
-        const group = new L.featureGroup(routeLines);
-        map.fitBounds(group.getBounds().pad(0.1));
-    }
-    
-    showToast('Routes optimized successfully!', 'success');
+    const label = document.createElement('p');
+    label.textContent = `Engine: ${solution.selected_engine} · ${solution.status}${solution.exact_routing ? '' : ' · Legacy approximation / non-certified'}${unavailable ? ' · Some geometry unavailable' : ''}${endpointGeometry ? ' · Some edges have endpoint-only geometry' : ''}`;
+    document.getElementById('results-content').prepend(label);
+    if (routeLines.length) map.fitBounds(L.featureGroup(routeLines).getBounds().pad(.1));
+    showToast(solution.status === 'APPROXIMATED' ? 'Approximate legacy result.' : 'Feasible routes found; global optimality is not claimed.', solution.exact_routing ? 'success' : 'warning');
+    return true;
 }
 
 function displayResults(routeInfos, solution) {
@@ -622,7 +472,7 @@ function displayResults(routeInfos, solution) {
                     <span class="route-distance">${formatDistanceKm(route.distance)}</span>
                 </div>
                 <div class="route-info">
-                    <span class="route-stops">${route.stops} stops</span>
+                    <span class="route-stops">${route.stops} stops · ${route.assignment}</span>
                 </div>
             </div>
         `;
@@ -673,10 +523,9 @@ function showToast(message, type = 'info') {
                 type === 'error' ? 'fas fa-times-circle' :
                 'fas fa-info-circle';
     
-    toast.innerHTML = `
-        <i class="${icon}"></i>
-        <span>${message}</span>
-    `;
+    const text = document.createElement("span");
+    text.textContent = message;
+    toast.appendChild(text);
     
     container.appendChild(toast);
     
@@ -702,6 +551,7 @@ function addCoverageAreas() {
     
     // Add a rectangle to show the coverage area
     L.rectangle(malaysiaBounds, {
+        interactive: false,
         color: '#4ECDC4',
         fillColor: '#4ECDC4',
         fillOpacity: 0.05,
@@ -721,6 +571,7 @@ function addCoverageAreas() {
     
     majorCities.forEach(city => {
         L.circleMarker(city.coords, {
+            interactive: false,
             color: '#007bff',
             fillColor: '#007bff',
             fillOpacity: 0.3,
@@ -735,7 +586,7 @@ function addCoverageAreas() {
         const div = L.DomUtil.create('div', 'legend');
         div.innerHTML = `
             <div style="background: white; padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-                <h4 style="margin: 0 0 5px 0;">Coverage Area</h4>
+                <h4 style="margin: 0 0 5px 0;">Map reference area</h4>
                 <div style="display: flex; align-items: center; margin-bottom: 3px;">
                     <div style="width: 15px; height: 15px; background: #4ECDC4; opacity: 0.3; margin-right: 8px;"></div>
                     <span style="font-size: 12px;">Malaysia, Singapore & Brunei</span>
@@ -745,7 +596,7 @@ function addCoverageAreas() {
                     <span style="font-size: 12px;">Major cities</span>
                 </div>
                 <p style="font-size: 11px; margin: 5px 0 0 0; color: #666;">
-                    Click anywhere in the highlighted region to add locations
+                    Road data coverage must be verified separately
                 </p>
             </div>
         `;

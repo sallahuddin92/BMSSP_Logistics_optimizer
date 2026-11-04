@@ -76,12 +76,16 @@ def load_graph(place: str = "Kuala Lumpur, Malaysia", force_reload: bool = False
     with _graph_state_lock:
         if not force_reload and _current_place == place and _current_graph is not None:
             logger.info(f"Using already loaded graph for '{place}'")
+            if _current_graph.graph.get("routing_data_origin") == "synthetic_fallback":
+                raise RuntimeError("Synthetic routing graphs are not permitted by the application loader")
             return _current_graph
     
     # Try loading from cache
     if not force_reload:
         cached_graph = load_graph_from_cache(place)
         if cached_graph is not None:
+            if cached_graph.graph.get("routing_data_origin") == "synthetic_fallback":
+                raise RuntimeError("Synthetic cached routing graphs are not permitted")
             with _graph_state_lock:
                 _current_graph = cached_graph
                 _current_place = place
@@ -115,13 +119,9 @@ def load_graph(place: str = "Kuala Lumpur, Malaysia", force_reload: bool = False
         import traceback
         logger.debug(f"Full traceback: {traceback.format_exc()}")
         
-        # Fallback: create a minimal test graph
-        logger.warning("Creating minimal test graph as fallback")
-        G = create_test_graph()
-        with _graph_state_lock:
-            _current_graph = G
-            _current_place = "test_graph"
-        return G
+        # Data failure is an error in every application mode. The explicit demo
+        # helper below remains available, but is never a production replacement.
+        raise RuntimeError("Road graph could not be loaded; no synthetic replacement is used") from e
 
 def create_test_graph():
     """Create a minimal test graph for basic functionality."""

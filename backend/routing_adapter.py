@@ -7,7 +7,7 @@ from native_graph import RoutingLimits, RoutingBudgetExceeded, normalize_node_id
 NATIVE_ENGINES = ("native_bmssp_2025", "native_reference_dijkstra")
 
 
-def compute_native_matrix(graph_snapshot, locations, engine="native_bmssp_2025", limits=None):
+def compute_native_matrix(graph_snapshot, locations, engine="native_bmssp_2025", limits=None, source_results=None):
     start = perf_counter()
     limits = limits or RoutingLimits.from_environment()
     if engine not in NATIVE_ENGINES:
@@ -43,6 +43,8 @@ def compute_native_matrix(graph_snapshot, locations, engine="native_bmssp_2025",
         call_time = perf_counter() - query_start
         if result.algorithm != engine:
             raise RuntimeError("Native engine identity mismatch")
+        if source_results is not None:
+            source_results[source] = result
         diag = result.diagnostics
         native_time = diag["query_seconds"]
         query_time += native_time

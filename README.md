@@ -409,3 +409,10 @@ This project is licensed under the Apache License 2.0 License - see the [LICENSE
 **Made with ❤️ by the BMSSP Routing Team**
 
 *Building the future of logistics optimization, one route at a time.*
+
+## Verified native logistics development
+
+Explicit native BMSSP/Dijkstra matrix and VRP modes are available on the development
+branch. Legacy routing remains the default. See [integration contracts](docs/exact_logistics.md)
+and [Task 7 verification](docs/exact_logistics_validation.md) for exact directed-road
+constraints, genuine duration units, geometry and offline acceptance limits.

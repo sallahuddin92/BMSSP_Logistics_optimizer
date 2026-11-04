@@ -61,6 +61,14 @@
                         <input type="number" id="vehicle-input" min="1" max="10" value="1">
                     </div>
 
+                    <div class="control-group">
+                        <label for="engine-select">Routing engine</label>
+                        <select id="engine-select">
+                            <option value="legacy_networkx">Legacy NetworkX (non-certified)</option>
+                            <option value="native_bmssp_2025">Native BMSSP 2025</option>
+                            <option value="native_reference_dijkstra">Native reference Dijkstra</option>
+                        </select>
+                    </div>
                     <!-- Advanced Options -->
                     <div class="control-group">
                         <button id="advanced-toggle" class="toggle-btn">
@@ -73,8 +81,8 @@
                                     Enable Capacity Constraints
                                 </label>
                                 <div id="capacity-inputs" class="capacity-inputs">
-                                    <input type="number" id="default-capacity" placeholder="Vehicle Capacity" min="1" value="100">
-                                    <input type="number" id="default-demand" placeholder="Default Demand" min="1" value="10">
+                                    <input type="number" id="default-capacity" placeholder="Vehicle Capacity" min="0" value="100">
+                                    <input type="number" id="default-demand" placeholder="Default Demand" min="0" value="10">
                                 </div>
                             </div>
                             <div class="option-group">
@@ -83,8 +91,13 @@
                                     Enable Time Windows
                                 </label>
                                 <div id="time-inputs" class="time-inputs">
-                                    <input type="number" id="default-start-time" placeholder="Start Time" min="0" value="0">
-                                    <input type="number" id="default-end-time" placeholder="End Time" min="0" value="1000">
+                                    <input type="number" id="default-start-time" aria-label="Window start seconds" placeholder="Start seconds" min="0" value="0">
+                                    <input type="number" id="default-end-time" aria-label="Window end seconds" placeholder="End seconds" min="0" value="1000">
+                                    <label for="duration-matrix">Duration matrix (JSON seconds; depot then listed stops; optional if road travel times exist)</label>
+                                    <textarea id="duration-matrix" rows="3" placeholder="[[0,10],[10,0]]"></textarea>
+                                    <label for="service-duration">Service seconds per stop</label>
+                                    <input id="service-duration" type="number" min="0" value="0">
+                                    <small>Window/service values use seconds. No speed is assumed.</small>
                                 </div>
                             </div>
                         </div>
@@ -143,6 +156,7 @@
 
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="app.js?v=20250918"></script>
+    <script src="routing_contract.js"></script>
+    <script src="app.js?v=task7"></script>
 </body>
 </html>

@@ -618,3 +618,6 @@ input[type="number"]:focus {
         margin: 0 1rem 0.5rem 1rem;
     }
 }
+/* Explicit routing and seconds input controls retain the existing panel style. */
+.control-group select, .time-inputs textarea { width:100%; padding:8px; border:1px solid #ddd; border-radius:4px; }
+.time-inputs textarea { resize:vertical; max-height:180px; }

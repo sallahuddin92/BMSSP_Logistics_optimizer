@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, StrictInt, StrictFloat
 from typing import List, Optional, Tuple, Literal
 import uvicorn
 import logging
@@ -27,11 +27,20 @@ logger = logging.getLogger(__name__)
 # Pydantic models
 class VRPRequest(BaseModel):
     locations: List[str] = Field(..., description="List of node IDs")
-    vehicle_count: int = Field(1, ge=1, description="Number of vehicles")
-    depot: int = Field(0, ge=0, description="Depot index in locations")
-    demands: Optional[List[int]] = Field(None, description="Demand at each location")
-    capacities: Optional[List[int]] = Field(None, description="Vehicle capacities")
-    time_windows: Optional[List[Tuple[int, int]]] = Field(None, description="Time windows for each location")
+    vehicle_count: StrictInt = Field(1, ge=1, description="Number of vehicles")
+    depot: StrictInt = Field(0, ge=0, description="Depot index in locations")
+    demands: Optional[List[StrictInt]] = Field(None, description="Demand at each location")
+    capacities: Optional[List[StrictInt]] = Field(None, description="Vehicle capacities")
+    time_windows: Optional[List[Tuple[StrictFloat, StrictFloat]]] = Field(None, description="Time windows for each location")
+
+    engine: Literal["legacy_networkx", "native_bmssp_2025", "native_reference_dijkstra"] = "legacy_networkx"
+    place: Optional[str] = None
+    duration_matrix: Optional[List[List[Optional[StrictFloat]]]] = None
+    service_durations: Optional[List[StrictFloat]] = None
+    vehicle_start_windows: Optional[List[Tuple[StrictFloat, StrictFloat]]] = None
+    vehicle_end_windows: Optional[List[Tuple[StrictFloat, StrictFloat]]] = None
+    max_wait_seconds: StrictFloat = 86400.0
+    max_search_seconds: StrictInt = 1
 
 class NodeSearchRequest(BaseModel):
     lat: float = Field(..., ge=-90, le=90)
@@ -141,16 +150,52 @@ async def get_cities():
         logger.error(f"Error getting cities: {str(e)}")
         raise HTTPException(status_code=500, detail="Failed to get available cities")
 
-@app.post("/search-nodes")
-async def search_nodes(request: NodeSearchRequest):
-    """Find nearest nodes to a coordinate within radius."""
+def _search_native_nodes(request, place):
+    if not _native_slots.acquire(blocking=False):
+        raise NativeUnavailable("Native routing capacity is busy; retry later")
     try:
-        from graph_loader import find_nearest_nodes
-        nodes = find_nearest_nodes(request.lat, request.lon, request.radius)
-        return {"nodes": nodes}
-    except Exception as e:
-        logger.error(f"Error searching nodes: {str(e)}")
-        raise HTTPException(status_code=500, detail="Failed to search nodes")
+        from graph_loader import load_native_graph, haversine_distance
+        from road_geometry import coordinate
+        from pyproj import CRS
+        graph = load_native_graph(place)
+        if len(graph) > RoutingLimits.from_environment().max_nodes:
+            raise RoutingBudgetExceeded("Native search node budget exceeded")
+        if not CRS.from_user_input(graph.graph.get("crs", "EPSG:4326")).equals(CRS.from_epsg(4326), ignore_axis_order=True):
+            raise ValueError("Node search requires WGS84 geographical coordinates")
+        nodes = []
+        for node, data in graph.nodes(data=True):
+            point = coordinate(data.get("x"), data.get("y"))
+            if point is not None:
+                distance = haversine_distance(request.lat, request.lon, *point)
+                if distance <= request.radius:
+                    nodes.append({"id": str(node), "node_id": str(node), "lat": point[0], "lon": point[1], "distance": distance})
+        return sorted(nodes, key=lambda item: item["distance"])
+    finally:
+        _native_slots.release()
+
+
+@app.post("/search-nodes")
+async def search_nodes(request: NodeSearchRequest,
+    engine: Literal["legacy_networkx", "native_bmssp_2025", "native_reference_dijkstra"] = "legacy_networkx",
+    place: Optional[str] = None):
+    """Nearest-node discovery only; proximity never establishes road feasibility."""
+    try:
+        if engine == "legacy_networkx":
+            from graph_loader import find_nearest_nodes
+            nodes = await run_in_threadpool(find_nearest_nodes, request.lat, request.lon, request.radius)
+        else:
+            nodes = await run_in_threadpool(_search_native_nodes, request, place)
+        return {"nodes": [{**node, "id": str(node.get("node_id", node.get("id"))),
+                            "node_id": str(node.get("node_id", node.get("id")))} for node in nodes]}
+    except RoutingBudgetExceeded as exc:
+        raise HTTPException(status_code=413, detail=str(exc))
+    except NativeUnavailable as exc:
+        raise HTTPException(status_code=503, detail=str(exc))
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
+    except Exception:
+        logger.exception("Node search failed")
+        raise HTTPException(status_code=500, detail="Road-node search failed")
 
 @app.get("/node-coordinates/{node_id}")
 async def get_node_coords(node_id: str):
@@ -265,8 +310,7 @@ async def get_distance_matrix(
         logger.error(f"Error computing distance matrix: {str(e)}")
         raise HTTPException(status_code=500, detail=f"{engine} distance matrix failed: {e}")
 
-@app.post("/vrp")
-async def solve_vehicle_routing(request: VRPRequest):
+def _legacy_vehicle_routing(request: VRPRequest):
     """Solve Vehicle Routing Problem with capacity and time window constraints."""
     try:
         start_time = time.time()
@@ -275,13 +319,13 @@ async def solve_vehicle_routing(request: VRPRequest):
         if request.depot >= len(request.locations):
             raise HTTPException(status_code=400, detail="Depot index out of range")
         
-        if request.demands and len(request.demands) != len(request.locations):
+        if request.demands is not None and len(request.demands) != len(request.locations):
             raise HTTPException(status_code=400, detail="Demands length must match locations length")
         
-        if request.capacities and len(request.capacities) != request.vehicle_count:
+        if request.capacities is not None and len(request.capacities) != request.vehicle_count:
             raise HTTPException(status_code=400, detail="Capacities length must match vehicle count")
         
-        if request.time_windows and len(request.time_windows) != len(request.locations):
+        if request.time_windows is not None and len(request.time_windows) != len(request.locations):
             raise HTTPException(status_code=400, detail="Time windows length must match locations length")
         
         # Compute distance matrix with fallbacks
@@ -297,7 +341,13 @@ async def solve_vehicle_routing(request: VRPRequest):
             request.depot,
             request.demands, 
             request.capacities, 
-            request.time_windows
+            request.time_windows,
+            max_search_seconds=request.max_search_seconds,
+            duration_matrix=request.duration_matrix,
+            service_durations=request.service_durations,
+            vehicle_start_windows=request.vehicle_start_windows,
+            vehicle_end_windows=request.vehicle_end_windows,
+            max_wait_seconds=request.max_wait_seconds,
         )
         vrp_time = time.time() - vrp_start
         total_time = time.time() - start_time
@@ -314,13 +364,12 @@ async def solve_vehicle_routing(request: VRPRequest):
         total_distance = sanitize(solution.get("total_distance"))
         vehicle_distances = [sanitize(v) for v in solution.get("vehicle_distances", [])]
         
-        # Determine status
-        status = solution.get("status", "OK")
-        if total_distance is None or any(v is None for v in vehicle_distances):
-            status = "PARTIAL_OR_UNREACHABLE"
-        if (meta.get("fallback_counts", {}).get("symmetric", 0) + meta.get("fallback_counts", {}).get("haversine", 0)) > 0:
-            status = "APPROXIMATED"
-        
+        # Compatibility is explicit; never mask a genuine failure with approximation.
+        status = solution.get("status", "FAILED")
+        established = status in ("OPTIMAL", "FEASIBLE") and total_distance is not None
+        if established:
+            status = "APPROXIMATED" if sum(meta.get("fallback_counts", {}).values()) else "FEASIBLE"
+
         location_coords = {}
         for loc in request.locations:
             coords = get_node_coordinates(loc)
@@ -330,21 +379,33 @@ async def solve_vehicle_routing(request: VRPRequest):
         # Build full path geometries for each route
         from graph_loader import get_full_path_coordinates
         route_geometries = []
+        geometry_point_count = 0
         for route in solution.get("routes", []):
             route_path = []
+            geometry_complete = True
             for i in range(len(route) - 1):
                 start_idx = route[i]
                 end_idx = route[i+1]
                 start_id = request.locations[start_idx]
                 end_id = request.locations[end_idx]
-                segment = get_full_path_coordinates(start_id, end_id)
+                try:
+                    segment = get_full_path_coordinates(start_id, end_id)
+                except (RuntimeError, ValueError):
+                    segment = []  # Explicit legacy geometry-unavailable condition.
                 if segment:
+                    geometry_point_count += len(segment)
+                    if geometry_point_count > positive_budget("VRP_MAX_GEOMETRY_POINTS", 100000):
+                        raise RoutingBudgetExceeded("VRP geometry response budget exceeded")
                     # Avoid duplicating points
                     if route_path and segment[0] == route_path[-1]:
                         route_path.extend(segment[1:])
                     else:
+                        if route_path:
+                            geometry_complete = False
                         route_path.extend(segment)
-            route_geometries.append(route_path)
+                else:
+                    geometry_complete = False
+            route_geometries.append(route_path if geometry_complete else [])
 
         response = {
             "locations": request.locations,
@@ -352,9 +413,13 @@ async def solve_vehicle_routing(request: VRPRequest):
             "route_locations": [[request.locations[i] for i in route] for route in solution.get("routes", [])],
             "location_coordinates": location_coords,
             "route_geometries": route_geometries,
+            "route_geometry_status": ["LEGACY_UNVERIFIED" if geometry else "UNAVAILABLE" for geometry in route_geometries],
             "total_distance": total_distance,
             "vehicle_distances": vehicle_distances,
             "status": status,
+            "selected_engine": "legacy_networkx", "exact_routing": False,
+            "route_feasibility": bool(established), "solver_status": solution.get("solver_status", solution.get("status")),
+            "weight_units": "meters", "duration_units": solution.get("duration_units"),
             "computation_times": {
                 "matrix_computation": matrix_time,
                 "vrp_solving": vrp_time,
@@ -362,6 +427,10 @@ async def solve_vehicle_routing(request: VRPRequest):
             },
             "metadata": {
                 **meta,
+                "selected_engine": "legacy_networkx", "exact_routing": False,
+                "certification": "Legacy routing is not certified for exact directed-road feasibility",
+                "reason": solution.get("reason"),
+                "approximation_provenance": meta.get("fallback_counts", {}),
                 "vehicle_count": request.vehicle_count,
                 "depot": request.depot,
                 "has_demands": request.demands is not None,
@@ -372,12 +441,64 @@ async def solve_vehicle_routing(request: VRPRequest):
         return _sanitize_for_json(response)
     except HTTPException:
         raise
+    except RoutingBudgetExceeded as e:
+        raise HTTPException(status_code=413, detail=str(e))
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         logger.error(f"Error solving VRP: {str(e)}")
         logger.error(traceback.format_exc())
         raise HTTPException(status_code=500, detail="Failed to solve VRP")
+
+
+def _run_native_vrp(request, selected):
+    if not _native_slots.acquire(blocking=False):
+        raise NativeUnavailable("Native routing capacity is busy; retry later")
+    try:
+        from logistics_routing import native_vrp
+        response = native_vrp(request, selected)
+        clock = time.perf_counter()
+        json.dumps(response, allow_nan=False)
+        response["computation_times"]["serialization"] = time.perf_counter()-clock
+        return JSONResponse(response)
+    finally:
+        _native_slots.release()
+
+
+@app.post("/vrp")
+async def solve_vehicle_routing(
+    request: VRPRequest,
+    engine: Optional[Literal["native_bmssp_2025", "native_reference_dijkstra", "legacy_networkx"]] = None,
+):
+    selected = engine or request.engine
+    if engine and request.engine != "legacy_networkx" and request.engine != engine:
+        raise HTTPException(status_code=400, detail="Conflicting routing engine selections")
+    try:
+        if not request.locations:
+            raise ValueError("At least one location is required")
+        if request.depot >= len(request.locations):
+            raise ValueError("Depot index out of range")
+        if len(request.locations) > positive_budget("VRP_MAX_LOCATIONS", 32):
+            raise RoutingBudgetExceeded("VRP location budget exceeded")
+        if not 1 <= request.vehicle_count <= positive_budget("VRP_MAX_VEHICLES", 10):
+            raise RoutingBudgetExceeded("VRP vehicle budget exceeded")
+        if not 1 <= request.max_search_seconds <= positive_budget("VRP_MAX_SEARCH_SECONDS", 10):
+            raise RoutingBudgetExceeded("VRP search budget exceeded")
+        if selected == "legacy_networkx":
+            return await run_in_threadpool(_legacy_vehicle_routing, request)
+        return await run_in_threadpool(_run_native_vrp, request, selected)
+    except HTTPException:
+        raise
+    except RoutingBudgetExceeded as exc:
+        raise HTTPException(status_code=413, detail=str(exc))
+    except NativeUnavailable as exc:
+        raise HTTPException(status_code=503, detail=str(exc))
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
+    except Exception:
+        logger.exception("Native VRP execution failed")
+        raise HTTPException(status_code=500, detail="Routing execution failed; no verified route was returned")
+
 
 @app.get("/stats")
 async def get_system_stats():

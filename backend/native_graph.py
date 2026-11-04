@@ -13,6 +13,7 @@ from types import MappingProxyType
 import weakref
 
 import networkx as nx
+from road_geometry import capture_roads, GeometryBudgetExceeded
 
 
 class NativeUnavailable(RuntimeError):
@@ -109,7 +110,12 @@ def _capture(graph, weight, limits):
     digest = hashlib.sha256(repr(content).encode("utf-8")).hexdigest()
     edges = [(i, a, b, w) for i, (a, b, _, w, _) in enumerate(rows)]
     mapping = {i: row[4] for i, row in enumerate(rows)}
-    return digest, ids, edges, nodes, mapping
+    try:
+        road, road_content = capture_roads(graph, nodes, mapping, positive_budget("NATIVE_SNAPSHOT_MAX_GEOMETRY_POINTS", 200000))
+    except GeometryBudgetExceeded as exc:
+        raise RoutingBudgetExceeded(str(exc)) from exc
+    digest = hashlib.sha256((digest + repr(road_content)).encode("utf-8")).hexdigest()
+    return digest, ids, edges, nodes, mapping, road
 
 
 @dataclass(frozen=True)
@@ -120,6 +126,7 @@ class GraphSnapshot:
     original_edges: object
     timings: object
     weight: str
+    road_data: object = None
     _engines: dict = field(default_factory=dict, repr=False, compare=False)
     _lock: object = field(default_factory=threading.RLock, repr=False, compare=False)
 
@@ -163,7 +170,7 @@ class SnapshotCache:
         start = perf_counter()
         with self._lock:
             try:
-                digest, ids, edges, nodes, mapping = _capture(graph, weight, limits)
+                digest, ids, edges, nodes, mapping, road = _capture(graph, weight, limits)
             except RuntimeError as exc:
                 raise ValueError("Graph changed during snapshot capture") from exc
             validated = perf_counter() - start
@@ -183,7 +190,7 @@ class SnapshotCache:
             snapshot = GraphSnapshot(native_graph, digest, MappingProxyType(nodes),
                                      MappingProxyType(mapping), MappingProxyType({
                                          "adapter_conversion_time": validated,
-                                         "native_graph_construction_time": construction}), weight)
+                                         "native_graph_construction_time": construction}), weight, road)
             # Retire previous versions of the same source instead of retaining stale entries.
             for previous in list(self._entries):
                 if previous[0] == id(graph):

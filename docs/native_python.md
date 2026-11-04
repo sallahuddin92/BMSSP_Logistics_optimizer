@@ -91,8 +91,8 @@ weight configuration and structural limits. Changes to nodes, arcs, keys or weig
 create a new immutable native graph; previous source versions are retired from
 the bounded LRU. The snapshot lazily retains one prepared instance per selected
 native engine under a lock. Old snapshots held by callers remain intentionally
-valid representations of their captured graph. A metadata-only coordinate change
-has no effect on a distance snapshot.
+valid representations of their captured graph. Task 7 also captures road coordinates, geometry and travel times; changes to
+these values invalidate snapshots used by the logistics transaction.
 
 Graph owners must serialize mutation during capture. NetworkX supplies no atomic
 snapshot contract for arbitrary concurrent writers. Capture iteration errors and
@@ -184,9 +184,10 @@ worker count. These are structural/workload admission limits, not hard allocator
 or wall-clock cancellation guarantees; low-level binding users manage their own
 budgets. Existing native path-label allocation costs remain relevant.
 
-The VRP endpoint still uses the legacy matrix and solver. It is **not certified
-for exact directed-road feasibility**, unreachable-arc handling, time-window units,
-route geometry or frontend contracts. No VRP/frontend migration occurs in Task 6.
+At Task 6, VRP/frontend migration remained deferred. Task 7 adds explicit native
+VRP, checked constraints and selected-road geometry; see
+[exact_logistics.md](exact_logistics.md). Legacy mode remains non-certified and
+real-road production acceptance remains separate.
 
 ## Verification
 
