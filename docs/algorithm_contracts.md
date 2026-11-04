@@ -2,8 +2,9 @@
 
 Task 4 provides graph storage, reference Dijkstra, and verification infrastructure.
 Task 5 adds the separately named recursive solver documented in [bmssp_2025.md](bmssp_2025.md).
-The Dijkstra contracts below remain unchanged. There is no implicit solver fallback,
-production Python integration, or road geometry in the new native engine.
+Task 6 adds optional bindings and explicit native matrix execution documented in
+[native_python.md](native_python.md). The Dijkstra contracts below remain unchanged.
+There is no implicit solver fallback or road geometry in the native core.
 
 ## Graph input, identity, and ownership
 

@@ -5,6 +5,7 @@ import os
 import logging
 from pathlib import Path
 import math
+import threading
 
 logger = logging.getLogger(__name__)
 
@@ -31,6 +32,7 @@ def haversine_distance(lat1: float, lon1: float, lat2: float, lon2: float) -> fl
 # Global graph cache
 _current_graph = None
 _current_place = None
+_graph_state_lock = threading.RLock()
 
 CACHE_DIR = os.getenv("GRAPH_CACHE_DIR", "/app/cache")
 Path(CACHE_DIR).mkdir(parents=True, exist_ok=True)
@@ -71,16 +73,18 @@ def load_graph(place: str = "Kuala Lumpur, Malaysia", force_reload: bool = False
     global _current_graph, _current_place
     
     # Return cached if available
-    if not force_reload and _current_place == place and _current_graph is not None:
-        logger.info(f"Using already loaded graph for '{place}'")
-        return _current_graph
+    with _graph_state_lock:
+        if not force_reload and _current_place == place and _current_graph is not None:
+            logger.info(f"Using already loaded graph for '{place}'")
+            return _current_graph
     
     # Try loading from cache
     if not force_reload:
         cached_graph = load_graph_from_cache(place)
         if cached_graph is not None:
-            _current_graph = cached_graph
-            _current_place = place
+            with _graph_state_lock:
+                _current_graph = cached_graph
+                _current_place = place
             logger.info(f"Graph '{place}' loaded from cache with {len(cached_graph.nodes)} nodes")
             return cached_graph
     
@@ -91,14 +95,19 @@ def load_graph(place: str = "Kuala Lumpur, Malaysia", force_reload: bool = False
         G = ox.graph_from_place(place, network_type='drive', simplify=True)
         logger.info(f"Loaded {len(G.nodes)} nodes and {len(G.edges)} edges")
         
-        # Add edge lengths if not present
-        G = ox.distance.add_edge_lengths(G)
+        # OSMnx has already summed unsimplified segment lengths. Recomputing
+        # endpoint great-circle distances here shortens curved simplified roads.
+        validate_preserved_road_lengths(G)
+        G.graph["routing_length_policy"] = "osmnx_preserved_v1"
+        G.graph["routing_data_origin"] = "osm"
+        G.graph["routing_weight_units"] = "meters"
         
         # Save to cache
         save_graph_to_cache(place, G)
         
-        _current_graph = G
-        _current_place = place
+        with _graph_state_lock:
+            _current_graph = G
+            _current_place = place
         
         return G
     except Exception as e:
@@ -109,8 +118,9 @@ def load_graph(place: str = "Kuala Lumpur, Malaysia", force_reload: bool = False
         # Fallback: create a minimal test graph
         logger.warning("Creating minimal test graph as fallback")
         G = create_test_graph()
-        _current_graph = G
-        _current_place = "test_graph"
+        with _graph_state_lock:
+            _current_graph = G
+            _current_place = "test_graph"
         return G
 
 def create_test_graph():
@@ -119,6 +129,7 @@ def create_test_graph():
     
     # Create a simple 5-node graph
     G = nx.DiGraph()
+    G.graph["routing_data_origin"] = "synthetic_fallback"
     
     # Add nodes with coordinates (around Kuala Lumpur)
     nodes = [
@@ -307,3 +318,37 @@ def get_graph_stats(place: str = "Kuala Lumpur, Malaysia") -> dict:
             "place": place,
             "error": str(e)
         }
+
+
+def validate_preserved_road_lengths(graph):
+    """Validate existing meter lengths without deriving or overwriting any cost."""
+    import numbers
+    for u, v, data in graph.edges(data=True):
+        weight = data.get("length")
+        if isinstance(weight, bool) or not isinstance(weight, numbers.Real):
+            raise ValueError(f"Road {u!r}->{v!r} has no numeric length")
+        if not math.isfinite(float(weight)) or weight < 0:
+            raise ValueError(f"Road {u!r}->{v!r} has invalid length")
+
+
+def load_native_graph(place=None):
+    """Strict local-only loader: never download, estimate, or substitute a graph.
+
+    Historical caches may contain overwritten simplified lengths. They cannot be
+    certified by inspecting their current numbers; require the corrected policy
+    marker from a newly loaded OSMnx graph. Legacy loading remains available.
+    """
+    from native_graph import NativeUnavailable
+    with _graph_state_lock:
+        target = place or _current_place or "Kuala Lumpur, Malaysia"
+        graph = _current_graph if _current_place == target else None
+    if graph is None:
+        graph = load_graph_from_cache(target)
+    if graph is None:
+        raise NativeUnavailable("No local road graph is loaded for native routing")
+    if (graph.graph.get("routing_length_policy") != "osmnx_preserved_v1"
+            or graph.graph.get("routing_data_origin") != "osm"
+            or graph.graph.get("routing_weight_units") != "meters"):
+        raise NativeUnavailable("Local road graph lacks verified preserved-length provenance; reload it explicitly")
+    validate_preserved_road_lengths(graph)
+    return graph

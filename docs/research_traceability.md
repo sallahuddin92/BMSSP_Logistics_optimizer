@@ -50,4 +50,4 @@ it is not inferred by labeling every visited vertex complete.
 
 The 2026 improvement is not mixed into this implementation. No third-party
 algorithm code was copied, no undisclosed solver fallback is used, and production
-Python/API integration remains a separate task.
+Python/API integration is explicit and optional; see [native_python.md](native_python.md).

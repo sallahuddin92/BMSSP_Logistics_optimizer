@@ -85,4 +85,5 @@ original graphs, seed 2025, one untimed warmup per source and three timed repeat
 preprocessing is reported separately and correctness gates run for every result.
 It is a bounded exploratory measurement, not evidence of an asymptotic speedup.
 See bmssp_2025.md for arithmetic/complexity limits and bmssp_validation.md for
-measured results and precise commands. No Python/API integration occurs.
+measured results and precise commands. For Task 6 optional Python/API integration,
+see [native_python.md](native_python.md).

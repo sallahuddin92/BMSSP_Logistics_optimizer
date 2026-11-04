@@ -2,8 +2,9 @@
 
 The native implementation targets arXiv:2504.17033v2 (30 July 2025), independently
 authored from the supplied specification and primary paper. No external algorithm
-implementation was copied. The existing Python/NetworkX/OR-Tools application and
-legacy extension remain unchanged and do not invoke this engine.
+implementation was copied. Task 5 kept the Python application independent. Task 6 adds the optional
+`bmssp_native` binding and explicit native matrix selection documented in
+[native_python.md](native_python.md); legacy routing and VRP remain available.
 
 ## Interfaces and ownership
 

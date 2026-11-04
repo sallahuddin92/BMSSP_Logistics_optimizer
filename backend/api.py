@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Literal
 import uvicorn
 import logging
 import time
@@ -10,6 +10,11 @@ import traceback
 import os
 import json
 import math
+import threading
+from starlette.concurrency import run_in_threadpool
+from native_graph import (NativeUnavailable, RoutingBudgetExceeded, RoutingLimits,
+                          positive_budget, snapshot_cache, normalize_node_id)
+from routing_adapter import compute_native_matrix
 import numpy as np
 from distance_matrix import compute_matrix, get_node_coordinates, compute_matrix_with_fallback
 from vrp_solver import solve_vrp
@@ -35,7 +40,7 @@ class NodeSearchRequest(BaseModel):
 
 app = FastAPI(
     title="BMSSP Routing API",
-    description="Production-ready vehicle routing service using BMSSP algorithm",
+    description="Directed routing with explicit native BMSSP/Dijkstra and legacy compatibility",
     version="1.0.0"
 )
 
@@ -179,12 +184,49 @@ def _sanitize_for_json(obj):
     except Exception:
         return None
 
+# Process-wide admission bound; all capture/preprocessing/query work is in a worker.
+_native_slots = threading.BoundedSemaphore(positive_budget("NATIVE_MAX_CONCURRENT_REQUESTS", 2))
+
+
+def _native_matrix_request(locations, engine, place, limits):
+    if not _native_slots.acquire(blocking=False):
+        raise NativeUnavailable("Native routing capacity is busy; retry later")
+    try:
+        from graph_loader import load_native_graph
+        graph = load_native_graph(place)
+        snapshot, snapshot_meta = snapshot_cache.get(graph, limits=limits)
+        matrix, metadata = compute_native_matrix(snapshot, locations, engine, limits)
+        return matrix, {**metadata, **snapshot_meta}
+    finally:
+        _native_slots.release()
+
+
 @app.post("/distance-matrix")
-async def get_distance_matrix(locations: List[str]):
-    """Compute distance matrix between locations using BMSSP with production fallbacks."""
+async def get_distance_matrix(
+    locations: List[str],
+    engine: Literal["legacy_networkx", "native_bmssp_2025", "native_reference_dijkstra"] = "legacy_networkx",
+    place: Optional[str] = None,
+):
+    """Legacy compatibility by default; native exact road routing is explicit."""
     try:
         start_time = time.time()
-        mat, meta = compute_matrix_with_fallback(locations, place=None)
+        if engine == "legacy_networkx":
+            mat, meta = await run_in_threadpool(compute_matrix_with_fallback, locations, place)
+            meta = {**meta, "selected_engine": engine, "algorithm_version": "networkx-legacy",
+                    "exact_routing": False,
+                    "approximation_provenance": {"mode": meta.get("fallback_mode"),
+                                                  "fallback_counts": meta.get("fallback_counts", {})}}
+        else:
+            # Validate request cardinality before graph capture or native work.
+            limits = RoutingLimits.from_environment()
+            if len(locations) > limits.max_locations:
+                raise RoutingBudgetExceeded("Native location budget exceeded")
+            if not locations:
+                raise ValueError("Native routing requires at least one location")
+            normalized = [normalize_node_id(loc) for loc in locations]
+            if len(set(normalized)) > limits.max_sources:
+                raise RoutingBudgetExceeded("Native distinct-source budget exceeded")
+            mat, meta = await run_in_threadpool(_native_matrix_request, locations, engine, place, limits)
         computation_time = time.time() - start_time
         
         # Sanitize matrix for JSON (convert inf/NaN to None)
@@ -213,11 +255,15 @@ async def get_distance_matrix(locations: List[str]):
             "metadata": meta,
         }
         return _sanitize_for_json(response)
+    except RoutingBudgetExceeded as e:
+        raise HTTPException(status_code=413, detail=str(e))
+    except NativeUnavailable as e:
+        raise HTTPException(status_code=503, detail=str(e))
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         logger.error(f"Error computing distance matrix: {str(e)}")
-        raise HTTPException(status_code=500, detail="Failed to compute distance matrix")
+        raise HTTPException(status_code=500, detail=f"{engine} distance matrix failed: {e}")
 
 @app.post("/vrp")
 async def solve_vehicle_routing(request: VRPRequest):
@@ -342,7 +388,9 @@ async def get_system_stats():
         return {
             "graph_stats": stats,
             "api_version": "1.0.0",
-            "algorithm": "BMSSP (Bidirectional Multi-Source Shortest Path)"
+            "algorithm": "Legacy NetworkX by default; native engines require explicit selection",
+            "default_engine": "legacy_networkx",
+            "native_engines": ["native_bmssp_2025", "native_reference_dijkstra"]
         }
     except Exception as e:
         logger.error(f"Error getting stats: {str(e)}")
