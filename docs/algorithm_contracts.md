@@ -1,8 +1,9 @@
 # Native foundation contracts
 
-Task 4 provides graph storage, a reference Dijkstra, and verification infrastructure.
-It does not provide BMSSP, a BMSSP fallback, Python integration, or road geometry.
-The existing application remains independent and unchanged.
+Task 4 provides graph storage, reference Dijkstra, and verification infrastructure.
+Task 5 adds the separately named recursive solver documented in [bmssp_2025.md](bmssp_2025.md).
+The Dijkstra contracts below remain unchanged. There is no implicit solver fallback,
+production Python integration, or road geometry in the new native engine.
 
 ## Graph input, identity, and ownership
 

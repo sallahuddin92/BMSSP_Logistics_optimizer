@@ -28,39 +28,26 @@ Use k=floor(log^(1/3)n), t=floor(log^(2/3)n), root level ceil(log(n)/t),
 S={source}, B=infinity. Equality-valid relaxations must be reused across levels
 (Remark 3.4); numeric strict-improvement alone is insufficient.
 
-## Engineering implementation gates (not implemented research algorithms)
+## Implemented modules and evidence (Task 5)
 
-The CSR representation is usable for both original and transformed graphs; dense
-indices are graph-local and are never original road IDs. Task 5 must add a separate
-transformation object mapping transformed vertices to originals and each edge to
-an optional original edge. Synthetic zero-weight edges need a distinct namespace;
-path projection must remove them and verify the original directed sequence.
-Isolated vertices stay explicit. Do not apply a source-reachability assumption to
-unreachable application vertices without an explicit adapter.
+| Mechanism | Module | Independent verification |
+|---|---|---|
+| Degree reduction and projection | `degree_reduction.cpp` | degree_reduction_tests; actual-query projection in bmssp_tests |
+| Symbolic ordering | `symbolic_label.cpp` | symbolic_label_tests; independent full-vector Bellman-Ford order |
+| BaseCase | `bmssp_bounded.cpp::base_case` | bounded_tests: full/partial, strict B, symbolic zero boundaries |
+| FindPivots | `bmssp_bounded.cpp::find_pivots` | bounded_tests: early exit, reduction, membership, coverage |
+| Lemma 3.3 strategy | `bounded_frontier.cpp` | ordered reference model, mixed operations, splits, duplicate minima |
+| Algorithm 3 | `bmssp_bounded.cpp::run` | intermediate coverage/completion oracle, disjointness and monotone bounds |
+| Full original-graph SSSP | `bmssp_2025.cpp` | Dijkstra, independent Bellman-Ford, exhaustive integer simple-path oracle |
 
-Task 5 must introduce query-owned symbolic labels and bounds. Scalar distances in
-the Dijkstra result are only an oracle interface. Pin the chosen tie policy to
-section 2, including parallel-edge identity as an explicitly justified engineering
-extension. Do not infer symbolic uniqueness from floating inequality. If binary64
-collapses distinct path lengths, document the arithmetic model separately from
-exact-real theoretical guarantees. Extend label/workspace types alongside existing
-graph storage; changing storage is unnecessary.
+All listed mechanisms are executable. The retained paper contract table above
+is the research specification, not a claim that all machine costs match its model.
+See [bmssp_2025.md](bmssp_2025.md) for snapshot ownership, parallel-edge refinement,
+explicit stale-record Delete bookkeeping, original tight-tree projection, checked
+parameters, IEEE limitations, and concrete complexity deviations. Source-rooted
+completeness is a mathematical precondition checked independently on test traces;
+it is not inferred by labeling every visited vertex complete.
 
-Before adding recursive execution, specify typed bounded-call inputs and outputs,
-parameter calculation (including tiny graphs), empty frontier behavior, and checked
-level/workload arithmetic. Parameter powers must never rely on unchecked shifts.
-Turn the coverage, return-set, and boundary obligations into small-graph oracle
-checks. Source-completeness assumptions are proof obligations; they are not an
-instruction to mark arbitrary frontier labels settled.
-
-BaseCase needs its own bounded contract tests. The full-source Dijkstra function
-must not be substituted as a BMSSP implementation. FindPivots needs explicit W/P
-membership, tie-aware forest construction, early workload exit, and adversarial
-fixtures. The frontier structure needs independent operation-sequence tests,
-separating-boundary checks, duplicate-key handling, and amortized-work accounting.
-Using a standard heap for everything cannot establish the desired complexity.
-
-No degree transformation, symbolic label engine, BaseCase, FindPivots, specialized
-frontier, bounded recursion, or BMSSP performance guarantee is delivered in Task 4.
-The 2026 improvement is outside this implementation target. Existing Python/native
-legacy code is preserved and is not evidence of any research mechanism.
+The 2026 improvement is not mixed into this implementation. No third-party
+algorithm code was copied, no undisclosed solver fallback is used, and production
+Python/API integration remains a separate task.

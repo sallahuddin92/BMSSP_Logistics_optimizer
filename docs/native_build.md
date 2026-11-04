@@ -39,7 +39,8 @@ Warnings are errors: GCC/Clang use `-Wall -Wextra -Wpedantic -Wconversion
 controls optimization/debug flags. Sanitizers add address/undefined instrumentation
 and frame pointers. Compile commands are exported. Do not enable fast-math.
 
-CTest runs graph, shortest_path, path, oracle, and CLI smoke executables. Native
+CTest runs the foundation groups plus degree_reduction, symbolic_label, frontier,
+bounded, bmssp, numerical, and separate Dijkstra/BMSSP CLI smoke checks. Native
 case assertions remain active with NDEBUG. The differential test prints graph,
 source-query, and path-check totals; any failure prints its seed and full raw
 fixture. Seeds are 2025, 17033, and 45141 (0xB055); sizes 1,2,5,12,32,64 and edge
@@ -68,3 +69,20 @@ VRP, frontend, Dockerfiles, or GitHub workflow. Existing regression tests can be
 run in the isolated Task 3 environment with its outbound-network guard, a fresh
 external GRAPH_CACHE_DIR, PYTHONDONTWRITEBYTECODE=1, and pytest's cache disabled.
 Do not use `run.sh clean` or download road datasets for native verification.
+
+## Explicit BMSSP selection and bounded exploration
+
+```sh
+"$BMSSP_BUILD/release/shortest_path_cli" --bmssp-demo
+"$BMSSP_BUILD/release/shortest_path_cli" --algorithm bmssp SOURCE TARGET < graph.txt
+"$BMSSP_BUILD/release/shortest_path_cli" --algorithm dijkstra SOURCE TARGET < graph.txt
+"$BMSSP_BUILD/release/bmssp_benchmark"
+```
+
+The original no-option CLI remains Dijkstra. BMSSP output identifies the algorithm
+and emits recursive/pivot/frontier diagnostics. The comparison tool uses identical
+original graphs, seed 2025, one untimed warmup per source and three timed repeats;
+preprocessing is reported separately and correctness gates run for every result.
+It is a bounded exploratory measurement, not evidence of an asymptotic speedup.
+See bmssp_2025.md for arithmetic/complexity limits and bmssp_validation.md for
+measured results and precise commands. No Python/API integration occurs.
