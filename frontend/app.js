@@ -56,7 +56,14 @@ function initializeUI() {
     
     // Vehicle count input
     document.getElementById('vehicle-input').addEventListener('change', () => { updateVehicleCount(); invalidateSolution(); });
-    document.getElementById('engine-select').addEventListener('change', invalidateSolution);
+    document.getElementById('engine-select').addEventListener('change', () => {
+        const legacy = document.getElementById('engine-select').value === 'legacy_networkx';
+        const roads = document.getElementById('road-select');
+        roads.disabled = legacy;
+        if (legacy && roads.value) { roads.value = ''; clearAll(); }
+        else invalidateSolution();
+    });
+    document.getElementById('road-select').addEventListener('change', clearAll);
     
     // Advanced options toggle
     document.getElementById('advanced-toggle').addEventListener('click', toggleAdvancedOptions);
@@ -133,7 +140,7 @@ async function handleMapClick(e) {
     try {
         let data;
         for (const radius of [1000, 2000, 5000, 10000]) {
-            const response = await fetch(`${getBackendUrl()}/search-nodes?engine=${encodeURIComponent(document.getElementById("engine-select").value)}`, {
+            const response = await fetch(`${getBackendUrl()}/search-nodes?engine=${encodeURIComponent(document.getElementById("engine-select").value)}&place=${encodeURIComponent(document.getElementById("road-select").value)}`, {
                 method: 'POST', headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({lat: e.latlng.lat, lon: e.latlng.lng, radius})
             });
@@ -367,7 +374,7 @@ async function solveRoutes() {
         };
         const count = integer('vehicle-input');
         if (count < 1 || count > 10) throw new Error('Choose 1 to 10 vehicles.');
-        const request = {locations, vehicle_count: count, depot: 0, engine: document.getElementById('engine-select').value};
+        const request = {locations, vehicle_count: count, depot: 0, engine: document.getElementById('engine-select').value, place: document.getElementById('road-select').value || null};
         if (document.getElementById('enable-capacity').checked) {
             request.capacities = Array(count).fill(integer('default-capacity'));
             request.demands = [0, ...stops.map(() => integer('default-demand'))];

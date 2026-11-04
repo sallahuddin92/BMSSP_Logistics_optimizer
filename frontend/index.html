@@ -62,6 +62,14 @@
                     </div>
 
                     <div class="control-group">
+                        <label for="road-select">Native road dataset</label>
+                        <select id="road-select" disabled>
+                            <option value="">Current local graph</option>
+                            <option value="osm-fixture:seremban-small">Seremban urban (prepared OSM)</option>
+                            <option value="osm-fixture:seremban-medium">Seremban area (prepared OSM)</option>
+                            <option value="osm-fixture:seremban-port-dickson">Seremban–Port Dickson (prepared OSM)</option>
+                        </select>
+                        <small>Prepared datasets are boundary-clipped. © OpenStreetMap contributors · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">ODbL</a>. No turn restrictions or traffic model.</small>
                         <label for="engine-select">Routing engine</label>
                         <select id="engine-select">
                             <option value="legacy_networkx">Legacy NetworkX (non-certified)</option>

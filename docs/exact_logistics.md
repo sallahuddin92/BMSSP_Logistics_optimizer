@@ -186,3 +186,14 @@ inserted as HTML. Shape/path/geometry checks precede native drawing.
 See [Task 7 validation](exact_logistics_validation.md) for tests, browser acceptance,
 measured costs and remaining limitations. No real-road/production-coverage or Linux
 validation claim is made. Task 8 is not started.
+
+
+## Task 8 real-road fixtures
+
+An explicit `osm-fixture:<region>` selection uses a source/file-checksum-verified
+private immutable snapshot through the same native matrix and logistics path.
+The frontend native dataset selector clears stale locations when changed. Default
+engine and production admission limits are unchanged. Prepared native VRP fixtures
+require a native engine; legacy routing remains available for its existing input.
+See [preparation, clipping, licensing and numerical contracts](real_road_workflow.md)
+and [measured validation](real_road_validation.md).

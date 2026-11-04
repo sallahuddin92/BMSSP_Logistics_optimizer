@@ -416,3 +416,8 @@ Explicit native BMSSP/Dijkstra matrix and VRP modes are available on the develop
 branch. Legacy routing remains the default. See [integration contracts](docs/exact_logistics.md)
 and [Task 7 verification](docs/exact_logistics_validation.md) for exact directed-road
 constraints, genuine duration units, geometry and offline acceptance limits.
+
+
+Real Malaysian road validation and explicit fixture preparation are documented in
+[the Task 8 workflow](docs/real_road_workflow.md) and
+[the measured acceptance report](docs/real_road_validation.md).

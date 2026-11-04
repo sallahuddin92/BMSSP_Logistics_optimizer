@@ -2,6 +2,7 @@
 #pragma once
 #include "bmssp/bounded_frontier.hpp"
 #include "bmssp/degree_reduction.hpp"
+#include "bmssp/profile.hpp"
 #include <functional>
 namespace bmssp {
 struct BMSSPDiagnostics {
@@ -14,6 +15,7 @@ struct BMSSPDiagnostics {
     std::size_t transformed_vertices = 0, transformed_edges = 0, k = 0, t = 0, root_level = 0;
     double preprocessing_seconds = 0, query_seconds = 0;
     FrontierCounters frontier;
+    QueryProfile profile;
 };
 struct BoundedResult {
     SymbolicLabel bound;
@@ -33,6 +35,7 @@ struct BoundedTrace {
 struct BMSSPOptions {
     bool validate_frontier_operations = false;
     std::function<void(const BoundedTrace &)> observer;
+    bool profile = false; // Append fields to preserve existing aggregate initializers.
 };
 class BMSSPWorkspace {
   public:

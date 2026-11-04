@@ -217,6 +217,21 @@ int main() {
         CHECK(a.get().shortest_paths.distances == reference_dijkstra(graph, 0).distances);
         CHECK(b.get().shortest_paths.distances == reference_dijkstra(graph, 3).distances);
     });
+    test::run("legacy_options_and_opt_in_profile", [] {
+        const BMSSP2025Engine engine(test::fixture());
+        std::size_t observed = 0;
+        BMSSPOptions legacy{false, [&](const BoundedTrace &) { ++observed; }};
+        CHECK(!legacy.profile);
+        const auto plain = engine.solve(0, legacy);
+        CHECK(observed > 0);
+        legacy.profile = true;
+        const auto profiled = engine.solve(0, legacy);
+        CHECK(plain.shortest_paths.distances == profiled.shortest_paths.distances);
+        const auto recursion = static_cast<std::size_t>(ProfilePart::recursion);
+        CHECK(plain.diagnostics.profile.calls[recursion] == 0);
+        CHECK(profiled.diagnostics.profile.calls[recursion] ==
+              profiled.diagnostics.recursive_calls);
+    });
     test::run("completed_record_retirement_exercised", [] { CHECK(discarded > 0); });
     std::cout << "graphs=" << graphs << " queries=" << queries << " paths=" << paths
               << " bounded_contract_checks=" << trace_calls

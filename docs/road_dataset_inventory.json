@@ -1,0 +1,67 @@
+{
+  "source_url": "https://download.geofabrik.de/asia/malaysia-singapore-brunei-latest.osm.pbf",
+  "source_bytes": 252760912,
+  "source_sha256": "4807c977d1cf559928f41ca004f6e0a51722db0e994d06ab4597088189c60668",
+  "source_replication_utc": "2026-11-03T21:24:23Z",
+  "attribution": "\u00a9 OpenStreetMap contributors",
+  "license": "ODbL 1.0",
+  "workloads": {
+    "seremban-port-dickson": {
+      "bbox_south_west_north_east": [
+        2.47,
+        101.76,
+        2.8,
+        102.02
+      ],
+      "graph_sha256": "7b11dee038b79ea36a85d7237526bca88ea7f973aa8a7495b8b5097255f2ac08",
+      "snapshot_id": "3a404e0196a500ec2320cffb600efe960ff4b50f4dbe0d91bc81c303411ac8df",
+      "nodes": 24736,
+      "edges": 60214,
+      "weak_components": 44,
+      "strong_components": 220,
+      "oneway_edges": 7426,
+      "parallel_pairs": 822,
+      "curved_edges": 34329,
+      "max_node_id": 14339861151,
+      "extraction_utc": "2026-11-04T17:38:28.256583+00:00"
+    },
+    "seremban-small": {
+      "bbox_south_west_north_east": [
+        2.718,
+        101.925,
+        2.742,
+        101.953
+      ],
+      "graph_sha256": "ab74c84d6817a5a2cf6d810d7d13f9d6922822e6e3c3649a30ab432841d19595",
+      "snapshot_id": "ee772ad6f5e66e90556fccb44ab3ba83cfbe4ad287dc96d06a69dfdc4f167c11",
+      "nodes": 834,
+      "edges": 1776,
+      "weak_components": 9,
+      "strong_components": 56,
+      "oneway_edges": 376,
+      "parallel_pairs": 17,
+      "curved_edges": 1203,
+      "max_node_id": 14058103232,
+      "extraction_utc": "2026-11-04T17:33:01.690083+00:00"
+    },
+    "seremban-medium": {
+      "bbox_south_west_north_east": [
+        2.66,
+        101.86,
+        2.8,
+        102.01
+      ],
+      "graph_sha256": "bbfe6f261d392eef7f17c30d73be5afeeb38000159c8536f3fc3c220b85b80e2",
+      "snapshot_id": "17b023d65bd0af6d1319a9fe4ed26c61eca795f09ca7ea17c98eec8df2b2c1d2",
+      "nodes": 14464,
+      "edges": 35530,
+      "weak_components": 22,
+      "strong_components": 157,
+      "oneway_edges": 4466,
+      "parallel_pairs": 432,
+      "curved_edges": 20164,
+      "max_node_id": 14324513112,
+      "extraction_utc": "2026-11-04T17:38:16.559452+00:00"
+    }
+  }
+}

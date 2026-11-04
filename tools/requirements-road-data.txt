@@ -1,0 +1,3 @@
+# Optional explicit fixture preparation; backend runtime dependencies stay unchanged.
+osmium==4.2.0
+osmnx==1.6.0

@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "bmssp/symbolic_label.hpp"
+#include "bmssp/profile.hpp"
 #include <mutex>
 namespace bmssp {
 struct LabelArena {
     std::mutex mutex;
     std::vector<std::unique_ptr<LabelNode>> nodes;
     const LabelNode *allocate(LabelNode value) {
+        ProfileScope scope(ProfilePart::labels);
         auto node = std::make_unique<LabelNode>(std::move(value));
         const auto *result = node.get();
         std::lock_guard<std::mutex> lock(mutex);
@@ -28,6 +30,7 @@ SymbolicLabel SymbolicLabel::extend(const Edge &edge) const {
                                      checked_size_add(node_->hops, 1), edge.to, edge.id, node_}));
 }
 int compare(const SymbolicLabel &a, const SymbolicLabel &b) {
+    ProfileScope scope(ProfilePart::comparison);
     if (a.node_ == b.node_)
         return 0;
     if (!a.node_)

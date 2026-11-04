@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "bmssp/bmssp_2025.hpp"
+#include "bmssp/profile.hpp"
 #include <algorithm>
 #include <queue>
 #include <sstream>
@@ -63,6 +64,7 @@ bool BMSSPWorkspace::relax(const Edge &edge, const SymbolicLabel &bound) {
 }
 BoundedResult BMSSPWorkspace::base_case(const SymbolicLabel &bound,
                                         const std::vector<VertexIndex> &frontier) {
+    ProfileScope scope(ProfilePart::base);
     validate_frontier(bound, frontier);
     if (frontier.size() != 1)
         throw std::invalid_argument("BaseCase requires singleton frontier");
@@ -97,6 +99,7 @@ BoundedResult BMSSPWorkspace::base_case(const SymbolicLabel &bound,
 }
 PivotResult BMSSPWorkspace::find_pivots(const SymbolicLabel &bound,
                                         const std::vector<VertexIndex> &frontier) {
+    ProfileScope scope(ProfilePart::pivots);
     validate_frontier(bound, frontier);
     increment(diagnostics_.pivot_calls);
     std::vector<VertexIndex> visited = frontier, current = frontier;
@@ -183,6 +186,7 @@ std::size_t BMSSPWorkspace::exponent(std::size_t level) const {
 }
 BoundedResult BMSSPWorkspace::run(std::size_t level, const SymbolicLabel &bound,
                                   const std::vector<VertexIndex> &frontier) {
+    ProfileScope scope(ProfilePart::recursion);
     validate_frontier(bound, frontier);
     if (level > std::numeric_limits<std::size_t>::digits ||
         frontier.size() > power(exponent(level)))

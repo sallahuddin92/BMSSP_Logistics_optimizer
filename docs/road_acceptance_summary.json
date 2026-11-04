@@ -1,0 +1,191 @@
+{
+  "verdict": "PASS",
+  "road_acceptance": "PASS",
+  "optimization": "PASS: verified immutable fixture reuse; no native algorithm speedup claimed",
+  "seed": 20261105,
+  "source_sha256": "4807c977d1cf559928f41ca004f6e0a51722db0e994d06ab4597088189c60668",
+  "distance_comparisons": 960816,
+  "original_paths": 643571,
+  "workloads": {
+    "seremban-small": {
+      "snapshot_id": "ee772ad6f5e66e90556fccb44ab3ba83cfbe4ad287dc96d06a69dfdc4f167c11",
+      "checks": {
+        "distance_comparisons": 20016,
+        "original_paths": 11113,
+        "unreachable_comparisons": 8903,
+        "geometry_statuses": {
+          "ENDPOINTS_ONLY": 10914,
+          "AVAILABLE": 175,
+          "STATIONARY": 24
+        },
+        "longest_path_m": 7462.718000000001,
+        "one_way_edges": 376,
+        "parallel_pairs": 17,
+        "large_node_ids": true,
+        "directed_asymmetry": [
+          {
+            "u": 250552934,
+            "v": 4875175754,
+            "forward": 297.09799999999996,
+            "reverse": null
+          }
+        ]
+      },
+      "query_seconds": {
+        "native_bmssp_2025": {
+          "count": 100,
+          "p50": 0.003781624998737243,
+          "p95": 0.0040735830007179175,
+          "p99": 0.004306332999476581
+        },
+        "native_reference_dijkstra": {
+          "count": 100,
+          "p50": 3.262499922129791e-05,
+          "p95": 3.5458999263937585e-05,
+          "p99": 3.6499999623629265e-05
+        }
+      },
+      "paired_selection_seconds": {
+        "before": {
+          "count": 30,
+          "p50": 0.025782124999750522,
+          "p95": 0.043515957999261445,
+          "p99": null
+        },
+        "after": {
+          "count": 30,
+          "p50": 0.0003925419987353962,
+          "p95": 0.0005425839990493841,
+          "p99": null
+        }
+      },
+      "peak_process_rss_bytes": 203784192,
+      "engine_metadata": {
+        "preprocessing_seconds": 0.000449917,
+        "preprocessing_count": 1,
+        "transformed_vertices": 3552,
+        "transformed_edges": 5307
+      }
+    },
+    "seremban-medium": {
+      "snapshot_id": "17b023d65bd0af6d1319a9fe4ed26c61eca795f09ca7ea17c98eec8df2b2c1d2",
+      "checks": {
+        "distance_comparisons": 347136,
+        "original_paths": 242088,
+        "unreachable_comparisons": 105048,
+        "geometry_statuses": {
+          "ENDPOINTS_ONLY": 241937,
+          "AVAILABLE": 127,
+          "STATIONARY": 24
+        },
+        "longest_path_m": 31410.58399999998,
+        "one_way_edges": 4466,
+        "parallel_pairs": 432,
+        "large_node_ids": true,
+        "directed_asymmetry": [
+          {
+            "u": 33139143,
+            "v": 4427765311,
+            "forward": 5052.821000000001,
+            "reverse": null
+          }
+        ]
+      },
+      "query_seconds": {
+        "native_bmssp_2025": {
+          "count": 100,
+          "p50": 0.08642158299880975,
+          "p95": 0.08957783299956645,
+          "p99": 0.09449629200025811
+        },
+        "native_reference_dijkstra": {
+          "count": 100,
+          "p50": 0.0007687500001338776,
+          "p95": 0.0008337919989571674,
+          "p99": 0.0009162919996015262
+        }
+      },
+      "paired_selection_seconds": {
+        "before": {
+          "count": 30,
+          "p50": 0.5022024999998393,
+          "p95": 0.5128759999988688,
+          "p99": null
+        },
+        "after": {
+          "count": 30,
+          "p50": 0.0071535839997523,
+          "p95": 0.008488249999572872,
+          "p99": null
+        }
+      },
+      "peak_process_rss_bytes": 959184896,
+      "engine_metadata": {
+        "preprocessing_seconds": 0.010696084,
+        "preprocessing_count": 1,
+        "transformed_vertices": 71060,
+        "transformed_edges": 106487
+      }
+    },
+    "seremban-port-dickson": {
+      "snapshot_id": "3a404e0196a500ec2320cffb600efe960ff4b50f4dbe0d91bc81c303411ac8df",
+      "checks": {
+        "distance_comparisons": 593664,
+        "original_paths": 390370,
+        "unreachable_comparisons": 203294,
+        "geometry_statuses": {
+          "ENDPOINTS_ONLY": 390177,
+          "AVAILABLE": 169,
+          "STATIONARY": 24
+        },
+        "longest_path_m": 57891.16100000003,
+        "one_way_edges": 7426,
+        "parallel_pairs": 822,
+        "large_node_ids": true,
+        "directed_asymmetry": [
+          {
+            "u": 33139131,
+            "v": 3257636604,
+            "forward": 5742.955000000002,
+            "reverse": null
+          }
+        ]
+      },
+      "query_seconds": {
+        "native_bmssp_2025": {
+          "count": 100,
+          "p50": 0.17186095800025214,
+          "p95": 0.18023512499894423,
+          "p99": 0.18867920899901947
+        },
+        "native_reference_dijkstra": {
+          "count": 100,
+          "p50": 0.0015590000002703164,
+          "p95": 0.0016693340003257617,
+          "p99": 0.0016842090008140076
+        }
+      },
+      "paired_selection_seconds": {
+        "before": {
+          "count": 30,
+          "p50": 0.9019729580013518,
+          "p95": 0.9235600419997354,
+          "p99": null
+        },
+        "after": {
+          "count": 30,
+          "p50": 0.012452582999685546,
+          "p95": 0.01630433299942524,
+          "p99": null
+        }
+      },
+      "peak_process_rss_bytes": 1576321024,
+      "engine_metadata": {
+        "preprocessing_seconds": 0.018576917,
+        "preprocessing_count": 1,
+        "transformed_vertices": 120428,
+        "transformed_edges": 180496
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 """Native exact logistics transaction: one snapshot, matrix and retained SSSP set."""
 import math
+import json
 from time import perf_counter
 import numpy as np
 from native_graph import snapshot_cache, RoutingLimits, RoutingBudgetExceeded, normalize_node_id, positive_budget
@@ -118,7 +119,7 @@ def native_vrp(request, selected):
         'computation_times': {'matrix_computation': matrix_time, 'vrp_solving': solve_time,
                               'path_reconstruction': path_time, 'geometry_assembly': geometry_time,
                               'total': perf_counter()-start},
-        'metadata': {**metadata, **capture, 'duration_provenance': duration_provenance,
+        'metadata': {**metadata, **capture, 'road_provenance': json.loads(snapshot.provenance_json) or None, 'duration_provenance': duration_provenance,
                      'objective_value': str(solution['objective_value']) if 'objective_value' in solution else None,
                      'time_scale': solution.get('time_scale'), 'cost_scale': solution.get('cost_scale'),
                      'objective_units': solution.get('objective_units'), 'forbidden_transition_count': solution.get('forbidden_transition_count'),

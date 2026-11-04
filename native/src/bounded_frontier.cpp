@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "bmssp/bounded_frontier.hpp"
+#include "bmssp/profile.hpp"
 #include <algorithm>
 #include <functional>
 #include <unordered_set>
@@ -48,6 +49,7 @@ BoundedFrontier::BoundedFrontier(std::size_t m, SymbolicLabel bound, FrontierCou
     initialize(m_, bound_);
 }
 void BoundedFrontier::initialize(std::size_t m, SymbolicLabel bound) {
+    ProfileScope scope(ProfilePart::frontier);
     if (m == 0)
         throw std::invalid_argument("frontier block size must be positive");
     m_ = m;
@@ -61,6 +63,7 @@ void BoundedFrontier::initialize(std::size_t m, SymbolicLabel bound) {
     counters_.initializations = checked_size_add(counters_.initializations, 1);
 }
 void BoundedFrontier::discard(VertexIndex key) {
+    ProfileScope scope(ProfilePart::frontier);
     if (locations_.contains(key)) {
         erase(key);
         counters_.discards = checked_size_add(counters_.discards, 1);
@@ -111,6 +114,7 @@ void BoundedFrontier::split(Blocks::iterator block) {
     counters_.splits = checked_size_add(counters_.splits, 1);
 }
 void BoundedFrontier::insert(VertexIndex key, const SymbolicLabel &value) {
+    ProfileScope scope(ProfilePart::frontier);
     counters_.inserts = checked_size_add(counters_.inserts, 1);
     if (!value.finite() || value.node()->vertex != key || !(value < bound_))
         throw std::invalid_argument("invalid frontier key/value/bound");
@@ -164,6 +168,7 @@ void BoundedFrontier::prepend_partition(std::vector<FrontierEntry> entries, std:
     prepend_partition(std::move(low), limit);
 }
 void BoundedFrontier::batch_prepend(std::vector<FrontierEntry> batch) {
+    ProfileScope scope(ProfilePart::frontier);
     counters_.batches = checked_size_add(counters_.batches, 1);
     std::vector<FrontierEntry> unique;
     std::unordered_map<VertexIndex, std::size_t> indices;
@@ -196,6 +201,7 @@ void BoundedFrontier::batch_prepend(std::vector<FrontierEntry> batch) {
         validate();
 }
 FrontierPull BoundedFrontier::pull() {
+    ProfileScope scope(ProfilePart::frontier);
     counters_.pulls = checked_size_add(counters_.pulls, 1);
     std::vector<FrontierEntry> candidates;
     for (const auto *seq : {&d0_, &d1_}) {

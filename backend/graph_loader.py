@@ -71,6 +71,9 @@ def load_graph(place: str = "Kuala Lumpur, Malaysia", force_reload: bool = False
     Returns a NetworkX DiGraph.
     """
     global _current_graph, _current_place
+    if place.startswith("osm-fixture:"):
+        from road_fixture import load_fixture
+        return load_fixture(place)
     
     # Return cached if available
     with _graph_state_lock:
@@ -339,6 +342,9 @@ def load_native_graph(place=None):
     marker from a newly loaded OSMnx graph. Legacy loading remains available.
     """
     from native_graph import NativeUnavailable
+    if place and place.startswith("osm-fixture:"):
+        from road_fixture import load_fixture_snapshot
+        return load_fixture_snapshot(place)
     with _graph_state_lock:
         target = place or _current_place or "Kuala Lumpur, Malaysia"
         graph = _current_graph if _current_place == target else None

@@ -158,6 +158,18 @@ def _search_native_nodes(request, place):
         from road_geometry import coordinate
         from pyproj import CRS
         graph = load_native_graph(place)
+        from native_graph import GraphSnapshot
+        if isinstance(graph, GraphSnapshot):
+            # Prepared fixtures use the same immutable coordinate capture as routing.
+            graph, _ = snapshot_cache.get(graph)
+            nodes = []
+            for node, point in graph.road_data.nodes.items():
+                if point is None:
+                    continue
+                distance = haversine_distance(request.lat, request.lon, *point)
+                if distance <= request.radius:
+                    nodes.append({"id": str(node), "node_id": str(node), "lat": point[0], "lon": point[1], "distance": distance})
+            return sorted(nodes, key=lambda item: item["distance"])
         if len(graph) > RoutingLimits.from_environment().max_nodes:
             raise RoutingBudgetExceeded("Native search node budget exceeded")
         if not CRS.from_user_input(graph.graph.get("crs", "EPSG:4326")).equals(CRS.from_epsg(4326), ignore_axis_order=True):
@@ -181,6 +193,8 @@ async def search_nodes(request: NodeSearchRequest,
     """Nearest-node discovery only; proximity never establishes road feasibility."""
     try:
         if engine == "legacy_networkx":
+            if place and place.startswith("osm-fixture:"):
+                raise ValueError("Prepared road fixtures require an explicit native engine")
             from graph_loader import find_nearest_nodes
             nodes = await run_in_threadpool(find_nearest_nodes, request.lat, request.lon, request.radius)
         else:
@@ -485,6 +499,8 @@ async def solve_vehicle_routing(
         if not 1 <= request.max_search_seconds <= positive_budget("VRP_MAX_SEARCH_SECONDS", 10):
             raise RoutingBudgetExceeded("VRP search budget exceeded")
         if selected == "legacy_networkx":
+            if request.place and request.place.startswith("osm-fixture:"):
+                raise ValueError("Prepared road fixtures require an explicit native engine")
             return await run_in_threadpool(_legacy_vehicle_routing, request)
         return await run_in_threadpool(_run_native_vrp, request, selected)
     except HTTPException:

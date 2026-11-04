@@ -79,6 +79,17 @@ py::dict diagnostics(const BMSSPDiagnostics &d) {
     FIELD(peak_keys);
 #undef FIELD
     out["frontier"] = frontier;
+    py::dict profile;
+    const char *names[] = {"label_creation", "label_comparison", "find_pivots",
+                           "base_case",      "frontier",         "recursive_bmssp"};
+    for (std::size_t i = 0; i < QueryProfile::size; ++i) {
+        py::dict row;
+        row["inclusive_seconds"] = d.profile.inclusive[i];
+        row["exclusive_seconds"] = d.profile.exclusive[i];
+        row["calls"] = d.profile.calls[i];
+        profile[names[i]] = row;
+    }
+    out["profile"] = profile;
     out["implementation"] = "BMSSP2025Engine::solve";
     return out;
 }
@@ -190,15 +201,20 @@ PYBIND11_MODULE(bmssp_native, m) {
                                        e.engine.reduction().graph.edge_count();
                                    return out;
                                })
-        .def("solve", [](const PreparedBMSSP &e, py::handle input) {
-            const auto source = integer_id<ExternalVertexId>(input);
-            auto result = [&] {
-                py::gil_scoped_release release;
-                return e.engine.solve(source);
-            }();
-            auto d = diagnostics(result.diagnostics);
-            return Query{std::move(result.shortest_paths), std::move(d), "native_bmssp_2025"};
-        });
+        .def(
+            "solve",
+            [](const PreparedBMSSP &e, py::handle input, bool profile) {
+                const auto source = integer_id<ExternalVertexId>(input);
+                auto result = [&] {
+                    py::gil_scoped_release release;
+                    BMSSPOptions options;
+                    options.profile = profile;
+                    return e.engine.solve(source, options);
+                }();
+                auto d = diagnostics(result.diagnostics);
+                return Query{std::move(result.shortest_paths), std::move(d), "native_bmssp_2025"};
+            },
+            py::arg("source"), py::arg("profile") = false);
     py::class_<PreparedDijkstra>(m, "NativeReferenceDijkstra")
         .def(py::init([](const Graph &g) { return PreparedDijkstra{g}; }))
         .def("solve", [](const PreparedDijkstra &e, py::handle input) {

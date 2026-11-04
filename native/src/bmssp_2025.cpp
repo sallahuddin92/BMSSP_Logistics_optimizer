@@ -20,6 +20,8 @@ DegreeReduction timed_reduce(const Graph &graph, double &duration) {
 BMSSP2025Engine::BMSSP2025Engine(const Graph &graph)
     : reduction_(timed_reduce(graph, preprocessing_seconds_)) {}
 BMSSPResult BMSSP2025Engine::solve(ExternalVertexId source, BMSSPOptions options) const {
+    QueryProfile profile;
+    ProfileSession profile_session(options.profile ? &profile : nullptr);
     validate_numeric_environment();
     const auto original_source = reduction_.original.vertex_index(source);
     const auto start = Clock::now();
@@ -92,6 +94,7 @@ BMSSPResult BMSSP2025Engine::solve(ExternalVertexId source, BMSSPOptions options
     diagnostics.root_level = level;
     diagnostics.preprocessing_seconds = preprocessing_seconds_;
     diagnostics.query_seconds = seconds(start);
+    diagnostics.profile = profile;
     return {std::move(result), diagnostics};
 }
 BMSSPResult bmssp_2025(const Graph &graph, ExternalVertexId source, BMSSPOptions options) {

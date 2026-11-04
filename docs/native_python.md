@@ -195,3 +195,17 @@ See [Task 6 executable evidence](native_python_validation.md) for commands, timi
 oracles, sanitizer launch details and bounded cold/warm measurements. Preserve
 [Task 5 measurements](bmssp_validation.md): BMSSP was slower than native Dijkstra
 on its small fixtures; this integration makes no automatic fastest-engine claim.
+
+
+## Task 8 prepared road snapshots
+
+`SnapshotCache.get` also accepts an explicit immutable `GraphSnapshot`, checking
+current node/edge/geometry admission limits without recapturing a mutable graph.
+Prepared fixtures return a private captured snapshot; mutable NetworkX graphs
+retain the original full-validation behavior. `solve(source, profile=True)` opts
+into native component timing; default calls remain compatible. See
+[real-road contracts and commands](real_road_workflow.md).
+
+The profiling flag is appended after the existing observer in `BMSSPOptions`;
+legacy C++ aggregate initializers such as `{false, observer}` remain valid and
+are covered by a native compatibility test.

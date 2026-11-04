@@ -44,3 +44,9 @@ malaysia-singapore-brunei-*/
 .env
 *.sqlite
 .ipynb_checkpoints/
+
+# Explicit real-road preparation artifacts (fixtures/evidence remain external)
+*.graphml
+*.osm
+*.osm.partial
+road-evidence/

@@ -127,8 +127,14 @@ class GraphSnapshot:
     timings: object
     weight: str
     road_data: object = None
+    provenance_json: str = "{}"
+    geometry_points: int = field(init=False, default=0)
     _engines: dict = field(default_factory=dict, repr=False, compare=False)
     _lock: object = field(default_factory=threading.RLock, repr=False, compare=False)
+
+    def __post_init__(self):
+        if self.road_data is not None:
+            object.__setattr__(self, "geometry_points", sum(len(e.points) for e in self.road_data.edges.values() if e.points is not None))
 
     def engine(self, selected):
         if selected not in ("native_bmssp_2025", "native_reference_dijkstra"):
@@ -152,8 +158,9 @@ class GraphSnapshot:
 class SnapshotCache:
     """Bounded LRU keyed by weak source identity, validated content and configuration.
 
-    Every lookup scans/validates current routing content; object identity alone is
-    never a cache hit. Snapshots already handed to callers remain immutable.
+    Mutable inputs are scanned/validated on every lookup; identity alone is never
+    a cache hit. Explicit GraphSnapshot inputs reuse immutable captured content.
+    Snapshots already handed to callers remain immutable.
     Source graph mutations must be serialized by their owner during capture.
     """
     def __init__(self, max_entries=2):
@@ -168,6 +175,18 @@ class SnapshotCache:
         if weight != "length":
             raise ValueError("Native road routing currently supports only length in meters")
         start = perf_counter()
+        # Explicit immutable input contract, never inferred from NetworkX identity,
+        # graph attributes, nx.freeze(), file timestamps, or a caller version token.
+        if isinstance(graph, GraphSnapshot):
+            size = graph.native_graph.metadata
+            if (size["vertex_count"] > limits.max_nodes or size["edge_count"] > limits.max_edges
+                    or graph.geometry_points > positive_budget("NATIVE_SNAPSHOT_MAX_GEOMETRY_POINTS", 200000)):
+                raise RoutingBudgetExceeded("Immutable snapshot exceeds routing/geometry budget")
+            if graph.weight != weight:
+                raise ValueError("Snapshot weight mismatch")
+            return graph, {"cache_hit": True, "immutable_snapshot_reused": True,
+                           "snapshot_validation_time": perf_counter()-start,
+                           "adapter_conversion_time": 0.0, "native_graph_construction_time": 0.0}
         with self._lock:
             try:
                 digest, ids, edges, nodes, mapping, road = _capture(graph, weight, limits)
