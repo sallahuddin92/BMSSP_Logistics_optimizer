@@ -54,8 +54,8 @@ SymbolicLabel SymbolicLabel::materialize(const LabelNode &value) const {
 SymbolicLabel SymbolicLabel::extend(const Edge &edge) const {
     return materialize(extension_node(edge));
 }
-int SymbolicLabel::compare_nodes(const LabelNode *a, const LabelNode *b) {
-    ProfileScope scope(ProfilePart::comparison);
+namespace {
+int compare_unprofiled(const LabelNode *a, const LabelNode *b) {
     if (a == b)
         return 0;
     if (!a)
@@ -85,6 +85,21 @@ int SymbolicLabel::compare_nodes(const LabelNode *a, const LabelNode *b) {
     }
     return 0;
 }
+// Keep timing/bookkeeping off the ordinary comparison's stack frame.
+#if defined(__GNUC__) || defined(__clang__)
+__attribute__((noinline))
+#endif
+int compare_profiled(const LabelNode *a, const LabelNode *b) {
+    ProfileScope scope(ProfilePart::comparison);
+    return compare_unprofiled(a, b);
+}
+} // namespace
+int SymbolicLabel::compare_nodes(const LabelNode *a, const LabelNode *b) {
+    if (!active_profile)
+        return compare_unprofiled(a, b);
+    return compare_profiled(a, b);
+}
+
 int compare(const SymbolicLabel &a, const SymbolicLabel &b) {
     return SymbolicLabel::compare_nodes(a.node_, b.node_);
 }

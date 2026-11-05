@@ -169,3 +169,13 @@ remain intact. Legacy logical creation work and actual arena materialization hav
 separate diagnostics. See [lifetime/reproduction](symbolic_execution_workflow.md),
 [Task 13 validation and retained tail regressions](symbolic_execution_validation.md),
 and [compact measurements](symbolic_execution_summary.json).
+
+## Task 14 comparison profiling dispatch
+
+Comparison now separates the optional timed helper from the ordinary pure path.
+Both use the original exact decision body; inactive calls avoid scope bookkeeping
+and its larger frame on the measured compiler. Profiling still records every call
+with the original nesting/session semantics. No header, ownership, materialization
+or BMSSP algorithm phase changes. See [reproduction](comparison_execution_workflow.md),
+[measurements and mixed tails](comparison_execution_validation.md), and
+[compact evidence](comparison_execution_summary.json).

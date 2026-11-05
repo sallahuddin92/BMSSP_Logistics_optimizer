@@ -1,0 +1,16 @@
+# Count real comparator entries in a test-only translation unit. Public class
+# definitions and all normal library/binding/benchmark objects are unchanged.
+file(READ "${CMAKE_SOURCE_DIR}/native/src/symbolic_label.cpp" text)
+set(marker "int SymbolicLabel::compare_nodes(const LabelNode *a, const LabelNode *b) {")
+string(FIND "${text}" "${marker}" found)
+if(found EQUAL -1)
+  message(FATAL_ERROR "Unsupported comparator for test entry observer")
+endif()
+string(REPLACE "${marker}" "${marker}\n    profile_test::compared();" text "${text}")
+file(WRITE "${CMAKE_BINARY_DIR}/profile_test_symbolic.cpp" "#include \"profile_test_observer.hpp\"\n${text}")
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/native/src/symbolic_label.cpp")
+add_executable(profile_scope_tests native/tests/profile_scope_tests.cpp native/tests/compare_task13_symbolic.cpp "${CMAKE_BINARY_DIR}/profile_test_symbolic.cpp")
+target_include_directories(profile_scope_tests PRIVATE native/test_support native/tests)
+target_link_libraries(profile_scope_tests PRIVATE bmssp_foundation)
+add_test(NAME comparison_profile COMMAND profile_scope_tests)
+set_tests_properties(comparison_profile PROPERTIES TIMEOUT 120)
