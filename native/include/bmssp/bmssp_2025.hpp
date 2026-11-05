@@ -20,6 +20,9 @@ struct BMSSPDiagnostics {
     double preprocessing_seconds = 0, query_seconds = 0;
     FrontierCounters frontier;
     QueryProfile profile;
+    // label_nodes_created remains the legacy logical root/extension-node count,
+    // including transient candidates. This separately counts arena publication.
+    std::size_t label_nodes_materialized = 0;
 };
 struct BoundedResult {
     SymbolicLabel bound;

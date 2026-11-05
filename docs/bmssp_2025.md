@@ -159,3 +159,13 @@ Returned complete vectors remain owned; bounded semantics and checks are unchang
 See [ownership and reproduction](completed_membership_workflow.md),
 [Task 12 validation](completed_membership_validation.md) and
 [compact measurements](completed_membership_summary.json).
+
+## Task 13 symbolic candidate publication
+
+Relaxation now compares a fully checked borrowed extension node and publishes stable
+arena storage only for a strict improvement. Public extend, immutable saved-label
+ownership, full symbolic ordering, bounded recursion and equality-valid returns
+remain intact. Legacy logical creation work and actual arena materialization have
+separate diagnostics. See [lifetime/reproduction](symbolic_execution_workflow.md),
+[Task 13 validation and retained tail regressions](symbolic_execution_validation.md),
+and [compact measurements](symbolic_execution_summary.json).

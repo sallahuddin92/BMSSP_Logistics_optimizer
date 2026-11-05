@@ -41,6 +41,9 @@ def host():
     return {
         "utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "load_average": os.getloadavg(),
+        "cpu_processes": subprocess.check_output(
+            ["ps", "-Ao", "pid,pcpu,pmem,comm", "-r"], text=True
+        ).splitlines()[:16],
         "vm_stat": subprocess.check_output(["vm_stat"], text=True),
         "thermal": subprocess.run(
             ["pmset", "-g", "therm"], capture_output=True, text=True
@@ -124,6 +127,9 @@ def worker(args):
                 assert result.algorithm == "native_bmssp_2025"
                 d = result.diagnostics
                 assert all(value["calls"] == 0 for value in d["profile"].values())
+                if "label_nodes_materialized" in d:
+                    assert d["label_nodes_materialized"] == d["label_updates"] + 1
+                    assert d["label_nodes_materialized"] <= d["label_nodes_created"]
                 distances = result.distances
                 digest = hashlib.sha256(
                     struct.pack("<" + "d" * len(distances), *distances)
@@ -135,13 +141,22 @@ def worker(args):
                 work = {
                     k: v
                     for k, v in d.items()
-                    if k not in ("query_seconds", "preprocessing_seconds", "profile")
+                    if k
+                    not in (
+                        "query_seconds",
+                        "preprocessing_seconds",
+                        "profile",
+                        "label_nodes_materialized",
+                    )
                 }
                 response["samples"].append(
                     {
                         "source": source,
                         "seconds": elapsed,
                         "native_seconds": d["query_seconds"],
+                        "label_nodes_materialized": d.get(
+                            "label_nodes_materialized", d["label_nodes_created"]
+                        ),
                         "distance_sha256": digest,
                         "path_sha256": path_digest,
                         "work": work,

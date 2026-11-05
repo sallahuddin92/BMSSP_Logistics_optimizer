@@ -97,8 +97,28 @@ def test_opt_in_profile_preserves_results():
     )
     assert (
         profiled.diagnostics["profile"]["label_creation"]["calls"]
-        == profiled.diagnostics["label_nodes_created"]
+        == profiled.diagnostics["label_nodes_materialized"]
+        == 1 + profiled.diagnostics["label_updates"]
     )
+
+    # Logical candidate work remains deterministic; arena publication is now
+    # separately counted and excludes rejected/equality-only temporary nodes.
+    assert (
+        profiled.diagnostics["label_nodes_materialized"]
+        < profiled.diagnostics["label_nodes_created"]
+    )
+    for field in (
+        "relaxed_edges",
+        "label_nodes_created",
+        "label_nodes_materialized",
+        "label_updates",
+        "equality_relaxations",
+    ):
+        assert (
+            before.diagnostics[field]
+            == profiled.diagnostics[field]
+            == after.diagnostics[field]
+        )
 
 
 def test_immutable_snapshot_reuse_is_explicit_and_budgeted(prepared, monkeypatch):

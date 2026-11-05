@@ -58,6 +58,7 @@ py::dict diagnostics(const BMSSPDiagnostics &d) {
     FIELD(completed_vertices);
     FIELD(original_reachable_vertices);
     FIELD(label_nodes_created);
+    FIELD(label_nodes_materialized);
     FIELD(transformed_vertices);
     FIELD(transformed_edges);
     FIELD(k);

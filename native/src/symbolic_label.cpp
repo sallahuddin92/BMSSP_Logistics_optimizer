@@ -41,27 +41,33 @@ SymbolicLabel SymbolicLabel::root(VertexIndex vertex, Distance distance) {
     const auto *node = arena->allocate({distance, 0, vertex, std::nullopt, nullptr});
     return SymbolicLabel(std::move(arena), node);
 }
-SymbolicLabel SymbolicLabel::extend(const Edge &edge) const {
+LabelNode SymbolicLabel::extension_node(const Edge &edge) const {
     if (!node_ || node_->vertex != edge.from)
         throw std::invalid_argument("label/edge endpoint mismatch");
-    return SymbolicLabel(arena_, arena_->allocate(LabelNode{
-                                     checked_distance_add(node_->distance, edge.weight),
-                                     checked_size_add(node_->hops, 1), edge.to, edge.id, node_}));
+    // Preserve distance then hop validation even when a scalar bound could reject.
+    return {checked_distance_add(node_->distance, edge.weight), checked_size_add(node_->hops, 1),
+            edge.to, edge.id, node_};
 }
-int compare(const SymbolicLabel &a, const SymbolicLabel &b) {
+SymbolicLabel SymbolicLabel::materialize(const LabelNode &value) const {
+    return SymbolicLabel(arena_, arena_->allocate(value));
+}
+SymbolicLabel SymbolicLabel::extend(const Edge &edge) const {
+    return materialize(extension_node(edge));
+}
+int SymbolicLabel::compare_nodes(const LabelNode *a, const LabelNode *b) {
     ProfileScope scope(ProfilePart::comparison);
-    if (a.node_ == b.node_)
+    if (a == b)
         return 0;
-    if (!a.node_)
+    if (!a)
         return 1;
-    if (!b.node_)
+    if (!b)
         return -1;
     const auto scalar = [](auto x, auto y) { return x < y ? -1 : (y < x ? 1 : 0); };
-    if (const auto c = scalar(a.node_->distance, b.node_->distance); c != 0)
+    if (const auto c = scalar(a->distance, b->distance); c != 0)
         return c;
-    if (const auto c = scalar(a.node_->hops, b.node_->hops); c != 0)
+    if (const auto c = scalar(a->hops, b->hops); c != 0)
         return c;
-    auto x = a.node_, y = b.node_;
+    auto x = a, y = b;
     while (x && y && x != y) {
         if (const auto c = scalar(x->vertex, y->vertex); c != 0)
             return c;
@@ -69,8 +75,8 @@ int compare(const SymbolicLabel &a, const SymbolicLabel &b) {
         y = y->parent;
     }
     // Parallel edges are a deterministic final refinement after the paper's vertex order.
-    x = a.node_;
-    y = b.node_;
+    x = a;
+    y = b;
     while (x && y && x != y) {
         if (const auto c = scalar(x->edge, y->edge); c != 0)
             return c;
@@ -78,5 +84,8 @@ int compare(const SymbolicLabel &a, const SymbolicLabel &b) {
         y = y->parent;
     }
     return 0;
+}
+int compare(const SymbolicLabel &a, const SymbolicLabel &b) {
+    return SymbolicLabel::compare_nodes(a.node_, b.node_);
 }
 } // namespace bmssp

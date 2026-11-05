@@ -43,6 +43,12 @@ class SymbolicLabel {
     }
 
   private:
+    friend class BMSSPWorkspace;
+    // A borrowed extension is used only synchronously, while *this owns its
+    // immutable parent chain. Only materialize() publishes stable arena storage.
+    [[nodiscard]] LabelNode extension_node(const Edge &edge) const;
+    [[nodiscard]] SymbolicLabel materialize(const LabelNode &value) const;
+    static int compare_nodes(const LabelNode *a, const LabelNode *b);
     SymbolicLabel(std::shared_ptr<LabelArena> arena, const LabelNode *node)
         : arena_(std::move(arena)), node_(node) {}
     std::shared_ptr<LabelArena> arena_;

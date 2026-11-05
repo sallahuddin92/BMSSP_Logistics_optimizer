@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
         while (source_file >> source) {
             (void)engine.solve(source); // Untallied warmup; this is not a latency benchmark.
             allocation_probe::Counters stats;
-            std::size_t labels = 0;
+            std::size_t labels = 0, materialized = 0;
             const auto expected = reference_dijkstra(graph, source);
             {
                 allocation_probe::Track tracking(stats);
@@ -74,6 +74,7 @@ int main(int argc, char **argv) {
                 if (actual.shortest_paths.distances != expected.distances)
                     throw std::logic_error("Allocation probe oracle mismatch");
                 labels = actual.diagnostics.label_nodes_created;
+                materialized = actual.diagnostics.label_nodes_materialized;
                 allocation_probe::active = &stats;
             } // Includes returned result destruction, as well as workspace teardown.
             allocation_probe::active = nullptr;
@@ -81,6 +82,7 @@ int main(int argc, char **argv) {
                 std::cout << ',';
             first = false;
             std::cout << "{\"source\":" << source << ",\"label_nodes\":" << labels
+                      << ",\"label_nodes_materialized\":" << materialized
                       << ",\"new_calls\":" << stats.calls << ",\"requested_bytes\":" << stats.bytes
                       << ",\"delete_calls\":" << stats.frees << ",\"size_bins_pow2_upper_bound\":[";
             for (std::size_t i = 0; i < stats.size_bins.size(); ++i) {

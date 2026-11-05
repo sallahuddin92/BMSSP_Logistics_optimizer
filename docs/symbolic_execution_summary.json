@@ -1,0 +1,2409 @@
+{
+  "status": "PASS",
+  "baseline": {
+    "root": "/private/tmp/bmssp-task13.fxf1jvif",
+    "workspace": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+    "evidence": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence",
+    "head": "71ddb767437df3df602d1ba81471c13540199996",
+    "origin": "https://github.com/sallahuddin92/BMSSP_Logistics_optimizer.git",
+    "source_archive_sha256": "7c2e59572bc961f3e657e6a44a84a00423f836ca53c3024ec2579efc670a48c9",
+    "main_before": "94f54b5206b46541dc12f5c7d8cb7fa019e4f877"
+  },
+  "scope": {
+    "status": "PASS",
+    "unchanged": "BaseCase, FindPivots, recursive run and all other engine source files; LabelArena storage/locking",
+    "comparator": "identical body after pointer parameter substitution",
+    "frozen_sources": "Task12 namespace/class renaming and formatting only",
+    "binaries": {
+      "baseline": "1b7e5d053c8b0307a9340b4dab2b684b4769a31ca8423f179420df9091254c4d",
+      "candidate": "740c5a3c41217290895975024bba46562ee68bffc48c78e8e3e174948f8ed241",
+      "final-release": "740c5a3c41217290895975024bba46562ee68bffc48c78e8e3e174948f8ed241"
+    }
+  },
+  "regions": {
+    "seremban-small": {
+      "profiles": {
+        "baseline": {
+          "instrumented_query_seconds": 0.06372713199999999,
+          "calls": 853013,
+          "vertex_steps": 77313,
+          "edge_steps": 77313,
+          "attempts": 154648,
+          "strict": 22078,
+          "equal": 77157,
+          "rejected": 55413,
+          "bounded": 14657,
+          "allocations": 154658,
+          "slabs": 90,
+          "capacity": 174208,
+          "copies": 354950,
+          "moves": 275154,
+          "assigns": 58377,
+          "destroys": 876995,
+          "arena_copies": 154648,
+          "locks": 154658,
+          "contended": 0,
+          "current_labels": 20927,
+          "ancestry": 20927,
+          "allocation_seconds": 0.010422874,
+          "lock_seconds": 0.003117031,
+          "teardown_seconds": 6.667999999999999e-06,
+          "label_destruction_seconds": 0.016446207000000004,
+          "new_calls": 150612,
+          "requested_bytes": 27966680,
+          "max_walk": 2,
+          "categories": [
+            62969,
+            255471,
+            389691,
+            67569,
+            77313,
+            0,
+            77313,
+            0,
+            77313
+          ],
+          "slab_payload_bytes": 8361984,
+          "slab_utilization": 0.8877778288023512,
+          "obsolete_published_nodes": 133731
+        },
+        "candidate": {
+          "instrumented_query_seconds": 0.050859313,
+          "calls": 853013,
+          "vertex_steps": 77313,
+          "edge_steps": 77313,
+          "attempts": 154648,
+          "strict": 22078,
+          "equal": 77157,
+          "rejected": 55413,
+          "bounded": 14657,
+          "allocations": 22088,
+          "slabs": 49,
+          "capacity": 24960,
+          "copies": 354950,
+          "moves": 297232,
+          "assigns": 58377,
+          "destroys": 766503,
+          "arena_copies": 22078,
+          "locks": 22088,
+          "contended": 0,
+          "current_labels": 20927,
+          "ancestry": 20927,
+          "allocation_seconds": 0.0016997179999999998,
+          "lock_seconds": 0.00048670299999999995,
+          "teardown_seconds": 4.9610000000000004e-06,
+          "label_destruction_seconds": 0.015667538999999998,
+          "new_calls": 150561,
+          "requested_bytes": 20801880,
+          "max_walk": 2,
+          "categories": [
+            62969,
+            255471,
+            389691,
+            67569,
+            77313,
+            0,
+            77313,
+            0,
+            77313
+          ],
+          "slab_payload_bytes": 1198080,
+          "slab_utilization": 0.8849358974358974,
+          "obsolete_published_nodes": 1161
+        }
+      },
+      "regressions": [
+        {
+          "source": 5735886101,
+          "baseline_seconds": 2.8271002520341426e-05,
+          "candidate_seconds": 2.9208495107013732e-05,
+          "delta_seconds": 9.374925866723061e-07,
+          "percent": 3.3160924731896775,
+          "reachable": 1
+        }
+      ],
+      "baseline": {
+        "sssp": {
+          "count": 800,
+          "p50": 0.001955957995960489,
+          "p95": 0.002176750000216998,
+          "p99": 0.0024110410013236105
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.001970208002603613,
+            "p95": 0.0021213750005699694,
+            "p99": 0.0022160829976201057
+          },
+          {
+            "count": 100,
+            "p50": 0.001957499989657663,
+            "p95": 0.002062333995127119,
+            "p99": 0.0021105420019011945
+          },
+          {
+            "count": 100,
+            "p50": 0.0019263330032117665,
+            "p95": 0.0020720409956993535,
+            "p99": 0.002112875008606352
+          },
+          {
+            "count": 100,
+            "p50": 0.001963792004971765,
+            "p95": 0.002150667001842521,
+            "p99": 0.002299708008649759
+          },
+          {
+            "count": 100,
+            "p50": 0.0020362500072224066,
+            "p95": 0.002403167003649287,
+            "p99": 0.00250433299515862
+          },
+          {
+            "count": 100,
+            "p50": 0.0019241669942857698,
+            "p95": 0.0020798330078832805,
+            "p99": 0.0021494590037036687
+          },
+          {
+            "count": 100,
+            "p50": 0.0019288330076960847,
+            "p95": 0.0020570420019794255,
+            "p99": 0.0021200420014793053
+          },
+          {
+            "count": 100,
+            "p50": 0.0019642080005723983,
+            "p95": 0.002391041998635046,
+            "p99": 0.0024506250047124922
+          }
+        ],
+        "matrix": {
+          "1": {
+            "count": 40,
+            "p50": 0.0019474590080790222,
+            "p95": 0.002519791989470832,
+            "p99": null
+          },
+          "4": {
+            "count": 40,
+            "p50": 0.003982041002018377,
+            "p95": 0.004139791999477893,
+            "p99": null
+          },
+          "8": {
+            "count": 40,
+            "p50": 0.009705167001811787,
+            "p95": 0.009994874999392778,
+            "p99": null
+          }
+        },
+        "python_rss_peak_bytes": [
+          805683200,
+          859389952,
+          886063104,
+          856997888,
+          820641792,
+          814514176,
+          852262912,
+          866385920
+        ],
+        "preprocessing_seconds": [
+          0.000436167,
+          0.000404167,
+          0.000400667,
+          0.000435541,
+          0.000427083,
+          0.000410541,
+          0.000425541,
+          0.00041825
+        ],
+        "native_allocation": {
+          "new_calls": 150612,
+          "requested_bytes": 27966680,
+          "delete_calls": 150612,
+          "label_nodes": 154658,
+          "peak_rss_bytes": 8536064
+        },
+        "diagnostic_elapsed_over_ordinary_query_estimate": 5.395450836747374
+      },
+      "candidate": {
+        "sssp": {
+          "count": 800,
+          "p50": 0.0017792919970816001,
+          "p95": 0.0019166660058544949,
+          "p99": 0.001997208993998356
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.0017643340106587857,
+            "p95": 0.0018715829937718809,
+            "p99": 0.001933709005243145
+          },
+          {
+            "count": 100,
+            "p50": 0.0017982079880312085,
+            "p95": 0.001944791991263628,
+            "p99": 0.0020012090099044144
+          },
+          {
+            "count": 100,
+            "p50": 0.0017656249983701855,
+            "p95": 0.0018863329896703362,
+            "p99": 0.001960999987204559
+          },
+          {
+            "count": 100,
+            "p50": 0.0017709170060697943,
+            "p95": 0.0019227909942856058,
+            "p99": 0.0020915000059176236
+          },
+          {
+            "count": 100,
+            "p50": 0.0017733749991748482,
+            "p95": 0.0018768330046441406,
+            "p99": 0.001950625010067597
+          },
+          {
+            "count": 100,
+            "p50": 0.0017810419958550483,
+            "p95": 0.001930916987475939,
+            "p99": 0.001958084001671523
+          },
+          {
+            "count": 100,
+            "p50": 0.001788749999832362,
+            "p95": 0.001903583004605025,
+            "p99": 0.001943833995028399
+          },
+          {
+            "count": 100,
+            "p50": 0.0017849580035544932,
+            "p95": 0.0019335420074639842,
+            "p99": 0.0019997079944005236
+          }
+        ],
+        "matrix": {
+          "1": {
+            "count": 40,
+            "p50": 0.0017465410055592656,
+            "p95": 0.0019685000006575137,
+            "p99": null
+          },
+          "4": {
+            "count": 40,
+            "p50": 0.0036181659961584955,
+            "p95": 0.0036950829962734133,
+            "p99": null
+          },
+          "8": {
+            "count": 40,
+            "p50": 0.008781458993325941,
+            "p95": 0.009093208005651832,
+            "p99": null
+          }
+        },
+        "python_rss_peak_bytes": [
+          865959936,
+          854671360,
+          819527680,
+          854900736,
+          880164864,
+          855195648,
+          816529408,
+          854933504
+        ],
+        "preprocessing_seconds": [
+          0.000483708,
+          0.000405125,
+          0.000425667,
+          0.000409,
+          0.000451792,
+          0.000413542,
+          0.000428291,
+          0.000406583
+        ],
+        "native_allocation": {
+          "new_calls": 150561,
+          "requested_bytes": 20801880,
+          "delete_calls": 150561,
+          "label_nodes": 154658,
+          "peak_rss_bytes": 8536064
+        },
+        "diagnostic_elapsed_over_ordinary_query_estimate": 4.6830701871503875
+      },
+      "reductions_percent": {
+        "p50": 9.032197994217945,
+        "p95": 11.948271245507097,
+        "p99": 17.164038566663503
+      },
+      "trial_median_reductions_percent": [
+        10.449353148132909,
+        8.13752247601861,
+        8.342690727596592,
+        9.821559432652023,
+        12.909760938743423,
+        7.438283623810309,
+        7.262578320921954,
+        9.125815441423164
+      ],
+      "materialization_800_queries": {
+        "baseline": 17642440,
+        "candidate": 2519688
+      },
+      "reference": {
+        "bmssp": {
+          "count": 100,
+          "p50": 0.0017757089954102412,
+          "p95": 0.001904791992274113,
+          "p99": 0.001970790995983407
+        },
+        "dijkstra": {
+          "count": 100,
+          "p50": 3.487498906906694e-05,
+          "p95": 3.8999991375021636e-05,
+          "p99": 4.1916006011888385e-05
+        }
+      },
+      "remaining_dijkstra_median_ratio": 50.91640292398661
+    },
+    "seremban-medium": {
+      "profiles": {
+        "baseline": {
+          "instrumented_query_seconds": 2.0529810000000004,
+          "calls": 35988087,
+          "vertex_steps": 2826769,
+          "edge_steps": 2826648,
+          "attempts": 5422948,
+          "strict": 756868,
+          "equal": 2818079,
+          "rejected": 1848001,
+          "bounded": 510741,
+          "allocations": 5422958,
+          "slabs": 1389,
+          "capacity": 5443264,
+          "copies": 12482176,
+          "moves": 17303974,
+          "assigns": 1953256,
+          "destroys": 37084025,
+          "arena_copies": 5422980,
+          "locks": 5422958,
+          "contended": 0,
+          "current_labels": 702750,
+          "ancestry": 702750,
+          "allocation_seconds": 0.29070739999999995,
+          "lock_seconds": 0.08701293000000002,
+          "teardown_seconds": 0.00015324999999999998,
+          "label_destruction_seconds": 0.5515367999999999,
+          "new_calls": 5482839,
+          "requested_bytes": 1159285248,
+          "max_walk": 2,
+          "categories": [
+            2146025,
+            6452725,
+            22284193,
+            2278375,
+            2826769,
+            121,
+            2826648,
+            0,
+            2826648
+          ],
+          "slab_payload_bytes": 261276672,
+          "slab_utilization": 0.996269517701144,
+          "obsolete_published_nodes": 4720208
+        },
+        "candidate": {
+          "instrumented_query_seconds": 1.576899,
+          "calls": 35988087,
+          "vertex_steps": 2826769,
+          "edge_steps": 2826648,
+          "attempts": 5422948,
+          "strict": 756868,
+          "equal": 2818079,
+          "rejected": 1848001,
+          "bounded": 510741,
+          "allocations": 756878,
+          "slabs": 250,
+          "capacity": 777920,
+          "copies": 12482176,
+          "moves": 18060842,
+          "assigns": 1953256,
+          "destroys": 33174813,
+          "arena_copies": 756900,
+          "locks": 756878,
+          "contended": 0,
+          "current_labels": 702750,
+          "ancestry": 702750,
+          "allocation_seconds": 0.040957759999999996,
+          "lock_seconds": 0.012264379999999998,
+          "teardown_seconds": 1.8584000000000004e-05,
+          "label_destruction_seconds": 0.5028709999999998,
+          "new_calls": 5481670,
+          "requested_bytes": 935312896,
+          "max_walk": 2,
+          "categories": [
+            2146025,
+            6452725,
+            22284193,
+            2278375,
+            2826769,
+            121,
+            2826648,
+            0,
+            2826648
+          ],
+          "slab_payload_bytes": 37340160,
+          "slab_utilization": 0.9729509461127108,
+          "obsolete_published_nodes": 54128
+        }
+      },
+      "regressions": [],
+      "baseline": {
+        "sssp": {
+          "count": 800,
+          "p50": 0.047143458999926224,
+          "p95": 0.06054170800780412,
+          "p99": 0.06976220900833141
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.04685445799259469,
+            "p95": 0.05118325000512414,
+            "p99": 0.056153166995500214
+          },
+          {
+            "count": 100,
+            "p50": 0.04671583299932536,
+            "p95": 0.05053670800407417,
+            "p99": 0.052035709013580345
+          },
+          {
+            "count": 100,
+            "p50": 0.0576054999983171,
+            "p95": 0.07001000001037028,
+            "p99": 0.07570041700091679
+          },
+          {
+            "count": 100,
+            "p50": 0.047706833996926434,
+            "p95": 0.050506125000538304,
+            "p99": 0.0510558329988271
+          },
+          {
+            "count": 100,
+            "p50": 0.047000250007840805,
+            "p95": 0.04877741700329352,
+            "p99": 0.050021791001199745
+          },
+          {
+            "count": 100,
+            "p50": 0.046713916992302984,
+            "p95": 0.05208166700322181,
+            "p99": 0.05708487500669435
+          },
+          {
+            "count": 100,
+            "p50": 0.04677679100132082,
+            "p95": 0.04995404099463485,
+            "p99": 0.05404716699558776
+          },
+          {
+            "count": 100,
+            "p50": 0.046856124987243675,
+            "p95": 0.0484822079888545,
+            "p99": 0.0490049999934854
+          }
+        ],
+        "matrix": {
+          "1": {
+            "count": 40,
+            "p50": 0.04840579199662898,
+            "p95": 0.07338720798725262,
+            "p99": null
+          },
+          "4": {
+            "count": 40,
+            "p50": 0.18887924999580719,
+            "p95": 0.2391888339916477,
+            "p99": null
+          },
+          "8": {
+            "count": 40,
+            "p50": 0.37514695899153594,
+            "p95": 0.4922151670034509,
+            "p99": null
+          }
+        },
+        "python_rss_peak_bytes": [
+          805683200,
+          859389952,
+          886063104,
+          856997888,
+          820641792,
+          814514176,
+          852262912,
+          866385920
+        ],
+        "preprocessing_seconds": [
+          0.010708875,
+          0.0107705,
+          0.01059475,
+          0.013118667,
+          0.010999208,
+          0.011094667,
+          0.010525958,
+          0.011122417
+        ],
+        "native_allocation": {
+          "new_calls": 5482839,
+          "requested_bytes": 1159285248,
+          "delete_calls": 5482839,
+          "label_nodes": 5422958,
+          "peak_rss_bytes": 56164352
+        },
+        "diagnostic_elapsed_over_ordinary_query_estimate": 4.405731840641119
+      },
+      "candidate": {
+        "sssp": {
+          "count": 800,
+          "p50": 0.0423486670042621,
+          "p95": 0.0455045829876326,
+          "p99": 0.05201275000581518
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.041662957999506034,
+            "p95": 0.04354979199706577,
+            "p99": 0.044163333004689775
+          },
+          {
+            "count": 100,
+            "p50": 0.041968584002461284,
+            "p95": 0.04362191699328832,
+            "p99": 0.04422366700600833
+          },
+          {
+            "count": 100,
+            "p50": 0.04197566700167954,
+            "p95": 0.05201275000581518,
+            "p99": 0.07435966699267738
+          },
+          {
+            "count": 100,
+            "p50": 0.042735708004329354,
+            "p95": 0.04732854101166595,
+            "p99": 0.05189370800508186
+          },
+          {
+            "count": 100,
+            "p50": 0.04219404199102428,
+            "p95": 0.04350287499255501,
+            "p99": 0.04443829201045446
+          },
+          {
+            "count": 100,
+            "p50": 0.04343983400030993,
+            "p95": 0.046262833988294005,
+            "p99": 0.053556083992589265
+          },
+          {
+            "count": 100,
+            "p50": 0.04306975001236424,
+            "p95": 0.04562679100490641,
+            "p99": 0.04652312499820255
+          },
+          {
+            "count": 100,
+            "p50": 0.042545167001662776,
+            "p95": 0.04480012500425801,
+            "p99": 0.0455045829876326
+          }
+        ],
+        "matrix": {
+          "1": {
+            "count": 40,
+            "p50": 0.04326754200155847,
+            "p95": 0.04825341700052377,
+            "p99": null
+          },
+          "4": {
+            "count": 40,
+            "p50": 0.1709447080065729,
+            "p95": 0.1875017080019461,
+            "p99": null
+          },
+          "8": {
+            "count": 40,
+            "p50": 0.342189667004277,
+            "p95": 0.3690632500074571,
+            "p99": null
+          }
+        },
+        "python_rss_peak_bytes": [
+          865959936,
+          854671360,
+          819527680,
+          854900736,
+          880164864,
+          855195648,
+          816824320,
+          854933504
+        ],
+        "preprocessing_seconds": [
+          0.01101725,
+          0.01035625,
+          0.010950625,
+          0.010627334,
+          0.010540834,
+          0.010612083,
+          0.010774125,
+          0.010403417
+        ],
+        "native_allocation": {
+          "new_calls": 5481670,
+          "requested_bytes": 935312896,
+          "delete_calls": 5481670,
+          "label_nodes": 5422958,
+          "peak_rss_bytes": 30605312
+        },
+        "diagnostic_elapsed_over_ordinary_query_estimate": 3.748461402583224
+      },
+      "reductions_percent": {
+        "p50": 10.170641054725387,
+        "p95": 24.837629321976113,
+        "p99": 25.442799554120324
+      },
+      "trial_median_reductions_percent": [
+        11.08005559238177,
+        10.161970133193664,
+        27.132535950723756,
+        10.420154883716139,
+        10.225920108966935,
+        7.008795671175514,
+        7.92495788959081,
+        9.200415072212083
+      ],
+      "materialization_800_queries": {
+        "baseline": 433870512,
+        "candidate": 60535288
+      },
+      "reference": {
+        "bmssp": {
+          "count": 100,
+          "p50": 0.04212258299230598,
+          "p95": 0.04391279100673273,
+          "p99": 0.044995707998168655
+        },
+        "dijkstra": {
+          "count": 100,
+          "p50": 0.0007843330095056444,
+          "p95": 0.0008205839985748753,
+          "p99": 0.0008384170068893582
+        }
+      },
+      "remaining_dijkstra_median_ratio": 53.704972864594
+    },
+    "seremban-port-dickson": {
+      "profiles": {
+        "baseline": {
+          "instrumented_query_seconds": 3.598984,
+          "calls": 60761868,
+          "vertex_steps": 4773341,
+          "edge_steps": 4772672,
+          "attempts": 9204053,
+          "strict": 1283608,
+          "equal": 4758669,
+          "rejected": 3161776,
+          "bounded": 864344,
+          "allocations": 9204063,
+          "slabs": 2312,
+          "capacity": 9223872,
+          "copies": 21207476,
+          "moves": 28786289,
+          "assigns": 3310881,
+          "destroys": 62550878,
+          "arena_copies": 9204059,
+          "locks": 9204063,
+          "contended": 0,
+          "current_labels": 1193730,
+          "ancestry": 1193730,
+          "allocation_seconds": 0.504958,
+          "lock_seconds": 0.1514526,
+          "teardown_seconds": 0.00026825000000000004,
+          "label_destruction_seconds": 0.9533129,
+          "new_calls": 9294328,
+          "requested_bytes": 1938676888,
+          "max_walk": 2,
+          "categories": [
+            3638629,
+            11144278,
+            37339151,
+            3866469,
+            4773341,
+            669,
+            4772672,
+            0,
+            4772672
+          ],
+          "slab_payload_bytes": 442745856,
+          "slab_utilization": 0.9978524203284694,
+          "obsolete_published_nodes": 8010333
+        },
+        "candidate": {
+          "instrumented_query_seconds": 2.708646,
+          "calls": 60761868,
+          "vertex_steps": 4773341,
+          "edge_steps": 4772672,
+          "attempts": 9204053,
+          "strict": 1283608,
+          "equal": 4758669,
+          "rejected": 3161776,
+          "bounded": 864344,
+          "allocations": 1283618,
+          "slabs": 380,
+          "capacity": 1310400,
+          "copies": 21207476,
+          "moves": 30069897,
+          "assigns": 3310881,
+          "destroys": 55914041,
+          "arena_copies": 1283614,
+          "locks": 1283618,
+          "contended": 0,
+          "current_labels": 1193730,
+          "ancestry": 1193730,
+          "allocation_seconds": 0.07016489000000001,
+          "lock_seconds": 0.02093875,
+          "teardown_seconds": 4.8083e-05,
+          "label_destruction_seconds": 0.847164,
+          "new_calls": 9292376,
+          "requested_bytes": 1558799512,
+          "max_walk": 2,
+          "categories": [
+            3638629,
+            11144278,
+            37339151,
+            3866469,
+            4773341,
+            669,
+            4772672,
+            0,
+            4772672
+          ],
+          "slab_payload_bytes": 62899200,
+          "slab_utilization": 0.9795619658119659,
+          "obsolete_published_nodes": 89888
+        }
+      },
+      "regressions": [],
+      "baseline": {
+        "sssp": {
+          "count": 800,
+          "p50": 0.08039779200043995,
+          "p95": 0.08952854199742433,
+          "p99": 0.10261212498880923
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.08065095900383312,
+            "p95": 0.09079899999778718,
+            "p99": 0.10225679101131391
+          },
+          {
+            "count": 100,
+            "p50": 0.07942641600675415,
+            "p95": 0.08134716599306557,
+            "p99": 0.08247424999717623
+          },
+          {
+            "count": 100,
+            "p50": 0.08046537499467377,
+            "p95": 0.0966867499955697,
+            "p99": 0.11805708300380502
+          },
+          {
+            "count": 100,
+            "p50": 0.08574837500054855,
+            "p95": 0.09588158399856184,
+            "p99": 0.10691966699960176
+          },
+          {
+            "count": 100,
+            "p50": 0.08066287499968894,
+            "p95": 0.0876598750037374,
+            "p99": 0.09115924999059644
+          },
+          {
+            "count": 100,
+            "p50": 0.0799130840023281,
+            "p95": 0.08264966700517107,
+            "p99": 0.08404966699890792
+          },
+          {
+            "count": 100,
+            "p50": 0.08068816699960735,
+            "p95": 0.08408520800003316,
+            "p99": 0.08573366700147744
+          },
+          {
+            "count": 100,
+            "p50": 0.08014204200298991,
+            "p95": 0.08237350000126753,
+            "p99": 0.08412225000211038
+          }
+        ],
+        "matrix": {
+          "1": {
+            "count": 40,
+            "p50": 0.08236212500196416,
+            "p95": 0.08960279199527577,
+            "p99": null
+          },
+          "4": {
+            "count": 40,
+            "p50": 0.33044470800086856,
+            "p95": 0.4043341659998987,
+            "p99": null
+          },
+          "8": {
+            "count": 40,
+            "p50": 0.6497560830030125,
+            "p95": 0.7239342079992639,
+            "p99": null
+          }
+        },
+        "python_rss_peak_bytes": [
+          805683200,
+          859389952,
+          886063104,
+          856997888,
+          820641792,
+          814514176,
+          852262912,
+          866385920
+        ],
+        "preprocessing_seconds": [
+          0.019365417,
+          0.019865125,
+          0.017770084,
+          0.017756375,
+          0.017828,
+          0.018595375,
+          0.018505833,
+          0.018144375
+        ],
+        "native_allocation": {
+          "new_calls": 9294328,
+          "requested_bytes": 1938676888,
+          "delete_calls": 9294328,
+          "label_nodes": 9204063,
+          "peak_rss_bytes": 91521024
+        },
+        "diagnostic_elapsed_over_ordinary_query_estimate": 4.453514191328056
+      },
+      "candidate": {
+        "sssp": {
+          "count": 800,
+          "p50": 0.07297933399968315,
+          "p95": 0.09729016700293869,
+          "p99": 0.10949554199760314
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.07391741599712986,
+            "p95": 0.0804588339960901,
+            "p99": 0.08624525000050198
+          },
+          {
+            "count": 100,
+            "p50": 0.07196483299776446,
+            "p95": 0.07820558300591074,
+            "p99": 0.08626870899752248
+          },
+          {
+            "count": 100,
+            "p50": 0.09489033400313929,
+            "p95": 0.11251233299844898,
+            "p99": 0.12143541700788774
+          },
+          {
+            "count": 100,
+            "p50": 0.07291579099546652,
+            "p95": 0.08385433300281875,
+            "p99": 0.098090665997006
+          },
+          {
+            "count": 100,
+            "p50": 0.07297137500427198,
+            "p95": 0.07942179199017119,
+            "p99": 0.09142687500570901
+          },
+          {
+            "count": 100,
+            "p50": 0.07306279199838173,
+            "p95": 0.0791590839944547,
+            "p99": 0.08667483300087042
+          },
+          {
+            "count": 100,
+            "p50": 0.07233016699319705,
+            "p95": 0.07479912501003128,
+            "p99": 0.07604624998930376
+          },
+          {
+            "count": 100,
+            "p50": 0.07247516699135303,
+            "p95": 0.0746179160050815,
+            "p99": 0.08412829099688679
+          }
+        ],
+        "matrix": {
+          "1": {
+            "count": 40,
+            "p50": 0.07686770900909323,
+            "p95": 0.08711137500358745,
+            "p99": null
+          },
+          "4": {
+            "count": 40,
+            "p50": 0.2992036669893423,
+            "p95": 0.3514224579994334,
+            "p99": null
+          },
+          "8": {
+            "count": 40,
+            "p50": 0.5880499579943717,
+            "p95": 0.6857696660008514,
+            "p99": null
+          }
+        },
+        "python_rss_peak_bytes": [
+          865959936,
+          854671360,
+          819527680,
+          854900736,
+          880164864,
+          855195648,
+          816824320,
+          854933504
+        ],
+        "preprocessing_seconds": [
+          0.017904417,
+          0.017730625,
+          0.018102875,
+          0.020081042,
+          0.022278042,
+          0.018124709,
+          0.017521084,
+          0.01894025
+        ],
+        "native_allocation": {
+          "new_calls": 9292376,
+          "requested_bytes": 1558799512,
+          "delete_calls": 9292376,
+          "label_nodes": 9204063,
+          "peak_rss_bytes": 51494912
+        },
+        "diagnostic_elapsed_over_ordinary_query_estimate": 3.7447618404785965
+      },
+      "reductions_percent": {
+        "p50": 9.227191215296317,
+        "p95": -8.669441981684074,
+        "p99": -6.708190683649336
+      },
+      "trial_median_reductions_percent": [
+        8.348993105442467,
+        9.394334258208483,
+        -17.92691453860788,
+        14.96539614307552,
+        9.535365551310466,
+        8.57217824774077,
+        10.358396177782755,
+        9.566608012497165
+      ],
+      "materialization_800_queries": {
+        "baseline": 721672688,
+        "candidate": 100668344
+      },
+      "reference": {
+        "bmssp": {
+          "count": 100,
+          "p50": 0.07263933400099631,
+          "p95": 0.07673891598824412,
+          "p99": 0.07992966599704232
+        },
+        "dijkstra": {
+          "count": 100,
+          "p50": 0.0013747500051977113,
+          "p95": 0.0014272910048021004,
+          "p99": 0.0014550410123774782
+        }
+      },
+      "remaining_dijkstra_median_ratio": 52.838213294314265
+    }
+  },
+  "toolchain": {
+    "compiler": {
+      "argv": [
+        "/Library/Developer/CommandLineTools/usr/bin/clang++",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Apple clang version 21.0.0 (clang-2100.1.1.101)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+      "stderr": ""
+    },
+    "cmake": {
+      "argv": [
+        "cmake",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "cmake version 4.3.3\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n",
+      "stderr": ""
+    },
+    "python": {
+      "argv": [
+        "/private/tmp/bmssp-task6.ZTijar/venv/bin/python",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Python 3.11.15\n",
+      "stderr": ""
+    },
+    "sdk": {
+      "argv": [
+        "xcrun",
+        "--show-sdk-path"
+      ],
+      "exit_code": 0,
+      "stdout": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk\n",
+      "stderr": ""
+    },
+    "sdk_version": {
+      "argv": [
+        "xcrun",
+        "--show-sdk-version"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "2026-11-05 22:40:53.004 xcodebuild[16338:1322360] Writing error result bundle to /var/folders/yl/8kdbhlq96zn98b8bn8bgn4n80000gn/T/ResultBundle_2026-05-11_22-40-0053.xcresult\nxcodebuild: error: SDK \"/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk\" cannot be located.\nxcrun: error: unable to lookup item 'SDKVersion' in SDK '/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk'\n"
+    },
+    "node": {
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "v20.20.2\n",
+      "stderr": ""
+    },
+    "cpu": {
+      "argv": [
+        "sysctl",
+        "-n",
+        "machdep.cpu.brand_string"
+      ],
+      "exit_code": 0,
+      "stdout": "Apple M4\n",
+      "stderr": ""
+    },
+    "system": {
+      "argv": [
+        "sw_vers"
+      ],
+      "exit_code": 0,
+      "stdout": "ProductName:\t\tmacOS\nProductVersion:\t\t26.5.1\nBuildVersion:\t\t25F80\n",
+      "stderr": ""
+    },
+    "chrome": {
+      "argv": [
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Google Chrome 156.0.8078.80 \n",
+      "stderr": ""
+    }
+  },
+  "sampling": {
+    "baseline": {
+      "flat_top_frames": [
+        "bmssp::compare(bmssp::SymbolicLabel const&, bmssp::SymbolicLabel const&)  (in bmssp_native.cpython-311-darwin.so)        711",
+        "_xzm_free  (in libsystem_malloc.dylib)        238",
+        "_xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib)        217",
+        "bmssp::BMSSPWorkspace::run(unsigned long, bmssp::SymbolicLabel const&, std::vector<unsigned long> const&)  (in bmssp_native.cpython-311-darwin.so)        186",
+        "bmssp::BoundedFrontier::insert(unsigned long, bmssp::SymbolicLabel const&)  (in bmssp_native.cpython-311-darwin.so)        145",
+        "_tlv_get_addr  (in libdyld.dylib)        142",
+        "<deduplicated_symbol>  (in bmssp_native.cpython-311-darwin.so)        133",
+        "bmssp::BMSSPWorkspace::relax(bmssp::Edge const&, bmssp::SymbolicLabel const&)  (in bmssp_native.cpython-311-darwin.so)        118",
+        "std::pmr::unsynchronized_pool_resource::do_allocate(unsigned long, unsigned long)  (in libc++.1.dylib)        109",
+        "std::__hash_table<std::__hash_value_type<unsigned long, bmssp::BoundedFrontier::Location>, std::pmr::polymorphic_allocator<std::pair<unsigned long const, bmssp::BoundedFrontier::Location>>>::__emplace_unique_key_args<unsigned long, unsigned long const&, bmssp::BoundedFrontier::Location>(unsigned long const&, unsigned long const&, bmssp::BoundedFrontier::Location&&)  (in bmssp_native.cpython-311-darwin.so)        104",
+        "bmssp::SymbolicLabel::extend(bmssp::Edge const&) const  (in bmssp_native.cpython-311-darwin.so)        102",
+        "<deduplicated_symbol>  (in libsystem_malloc.dylib)        90",
+        "bmssp::(anonymous namespace)::linear_select(std::vector<bmssp::FrontierEntry>&, unsigned long, bmssp::FrontierCounters&)  (in bmssp_native.cpython-311-darwin.so)        86",
+        "bmssp::checked_distance_add(double, double)  (in bmssp_native.cpython-311-darwin.so)        86",
+        "bmssp::BMSSPWorkspace::base_case(bmssp::SymbolicLabel const&, std::vector<unsigned long> const&)  (in bmssp_native.cpython-311-darwin.so)        85",
+        "_free  (in libsystem_malloc.dylib)        83",
+        "pthread_mutex_lock  (in libsystem_pthread.dylib)        78",
+        "_platform_memset  (in libsystem_platform.dylib)        76",
+        "bmssp::LabelArena::allocate(bmssp::LabelNode)  (in bmssp_native.cpython-311-darwin.so)        70",
+        "bmssp::BoundedFrontier::discard(unsigned long)  (in bmssp_native.cpython-311-darwin.so)        69",
+        "bmssp::Graph::outgoing(unsigned long) const  (in bmssp_native.cpython-311-darwin.so)        66",
+        "bmssp::BoundedFrontier::pull()  (in bmssp_native.cpython-311-darwin.so)        63",
+        "pthread_mutex_unlock  (in libsystem_pthread.dylib)        63",
+        "bmssp::BoundedFrontier::split(std::__list_iterator<bmssp::BoundedFrontier::Block, void*>)  (in bmssp_native.cpython-311-darwin.so)        62",
+        "_xzm_xzone_malloc  (in libsystem_malloc.dylib)        61",
+        "bmssp::BoundedFrontier::batch_prepend(std::vector<bmssp::FrontierEntry>)  (in bmssp_native.cpython-311-darwin.so)        57",
+        "std::pmr::unsynchronized_pool_resource::do_deallocate(void*, unsigned long, unsigned long)  (in libc++.1.dylib)        46",
+        "bmssp::BMSSP2025Engine::solve(long long, bmssp::BMSSPOptions) const  (in bmssp_native.cpython-311-darwin.so)        44",
+        "bmssp::BoundedFrontier::erase(unsigned long)  (in bmssp_native.cpython-311-darwin.so)        43",
+        "std::__hash_table<std::__hash_value_type<unsigned long, bmssp::BoundedFrontier::Location>, std::pmr::polymorphic_allocator<std::pair<unsigned long const, bmssp::BoundedFrontier::Location>>>::remove(std::__hash_const_iterator<std::__hash_node<std::__hash_value_type<unsigned long, bmssp::BoundedFrontier::Location>, void*>*>)  (in bmssp_native.cpython-311-darwin.so)        42"
+      ]
+    },
+    "final-release": {
+      "flat_top_frames": [
+        "__psynch_cvwait  (in libsystem_kernel.dylib)        38034",
+        "bmssp::SymbolicLabel::compare_nodes(bmssp::LabelNode const*, bmssp::LabelNode const*)  (in bmssp_native.cpython-311-darwin.so)        745",
+        "_xzm_free  (in libsystem_malloc.dylib)        296",
+        "_xzm_xzone_malloc_tiny  (in libsystem_malloc.dylib)        220",
+        "bmssp::BMSSPWorkspace::run(unsigned long, bmssp::SymbolicLabel const&, std::vector<unsigned long> const&)  (in bmssp_native.cpython-311-darwin.so)        196",
+        "_free  (in libsystem_malloc.dylib)        192",
+        "bmssp::BoundedFrontier::insert(unsigned long, bmssp::SymbolicLabel const&)  (in bmssp_native.cpython-311-darwin.so)        134",
+        "<deduplicated_symbol>  (in bmssp_native.cpython-311-darwin.so)        119",
+        "__bzero  (in libsystem_platform.dylib)        119",
+        "std::pmr::unsynchronized_pool_resource::do_allocate(unsigned long, unsigned long)  (in libc++.1.dylib)        118",
+        "bmssp::BMSSPWorkspace::relax(bmssp::Edge const&, bmssp::SymbolicLabel const&)  (in bmssp_native.cpython-311-darwin.so)        116",
+        "_tlv_get_addr  (in libdyld.dylib)        114",
+        "bmssp::BMSSPWorkspace::base_case(bmssp::SymbolicLabel const&, std::vector<unsigned long> const&)  (in bmssp_native.cpython-311-darwin.so)        104",
+        "<deduplicated_symbol>  (in libsystem_malloc.dylib)        96",
+        "bmssp::BoundedFrontier::discard(unsigned long)  (in bmssp_native.cpython-311-darwin.so)        92",
+        "std::__hash_table<std::__hash_value_type<unsigned long, bmssp::BoundedFrontier::Location>, std::pmr::polymorphic_allocator<std::pair<unsigned long const, bmssp::BoundedFrontier::Location>>>::__emplace_unique_key_args<unsigned long, unsigned long const&, bmssp::BoundedFrontier::Location>(unsigned long const&, unsigned long const&, bmssp::BoundedFrontier::Location&&)  (in bmssp_native.cpython-311-darwin.so)        90",
+        "bmssp::checked_distance_add(double, double)  (in bmssp_native.cpython-311-darwin.so)        86",
+        "bmssp::(anonymous namespace)::linear_select(std::vector<bmssp::FrontierEntry>&, unsigned long, bmssp::FrontierCounters&)  (in bmssp_native.cpython-311-darwin.so)        69",
+        "bmssp::BoundedFrontier::erase(unsigned long)  (in bmssp_native.cpython-311-darwin.so)        62",
+        "bmssp::BoundedFrontier::pull()  (in bmssp_native.cpython-311-darwin.so)        55",
+        "std::pmr::unsynchronized_pool_resource::do_deallocate(void*, unsigned long, unsigned long)  (in libc++.1.dylib)        54",
+        "bmssp::BoundedFrontier::split(std::__list_iterator<bmssp::BoundedFrontier::Block, void*>)  (in bmssp_native.cpython-311-darwin.so)        53",
+        "bmssp::Graph::outgoing(unsigned long) const  (in bmssp_native.cpython-311-darwin.so)        52",
+        "bmssp::BoundedFrontier::batch_prepend(std::vector<bmssp::FrontierEntry>)  (in bmssp_native.cpython-311-darwin.so)        49",
+        "std::__hash_table<std::__hash_value_type<unsigned long, bmssp::BoundedFrontier::Location>, std::pmr::polymorphic_allocator<std::pair<unsigned long const, bmssp::BoundedFrontier::Location>>>::remove(std::__hash_const_iterator<std::__hash_node<std::__hash_value_type<unsigned long, bmssp::BoundedFrontier::Location>, void*>*>)  (in bmssp_native.cpython-311-darwin.so)        48",
+        "bmssp::SymbolicLabel::extension_node(bmssp::Edge const&) const  (in bmssp_native.cpython-311-darwin.so)        47",
+        "malloc_type_malloc  (in libsystem_malloc.dylib)        44",
+        "_xzm_xzone_malloc  (in libsystem_malloc.dylib)        41",
+        "bmssp::BMSSP2025Engine::solve(long long, bmssp::BMSSPOptions) const  (in bmssp_native.cpython-311-darwin.so)        39",
+        "bmssp::BMSSPWorkspace::find_pivots(bmssp::SymbolicLabel const&, std::vector<unsigned long> const&)  (in bmssp_native.cpython-311-darwin.so)        34"
+      ]
+    }
+  },
+  "road_checks": {
+    "seremban-small": {
+      "distance_comparisons": 20016,
+      "original_paths": 11113,
+      "unreachable_comparisons": 8903
+    },
+    "seremban-medium": {
+      "distance_comparisons": 347136,
+      "original_paths": 242088,
+      "unreachable_comparisons": 105048
+    },
+    "seremban-port-dickson": {
+      "distance_comparisons": 593664,
+      "original_paths": 390370,
+      "unreachable_comparisons": 203294
+    }
+  },
+  "native_commands": [
+    {
+      "label": "release-configure",
+      "argv": [
+        "cmake",
+        "-S",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+        "-B",
+        "/private/tmp/bmssp-task13.fxf1jvif/final-release",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DCMAKE_CXX_COMPILER=/Library/Developer/CommandLineTools/usr/bin/clang++",
+        "-DBMSSP_PYTHON=ON",
+        "-DPython_EXECUTABLE=/private/tmp/bmssp-task6.ZTijar/venv/bin/python",
+        "-Dpybind11_DIR=/private/tmp/bmssp-task6.ZTijar/venv/lib/python3.11/site-packages/pybind11/share/cmake/pybind11",
+        "-DBMSSP_ALLOCATION_PROBE=ON"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 0.23556549999999998
+    },
+    {
+      "label": "release-build",
+      "argv": [
+        "cmake",
+        "--build",
+        "/private/tmp/bmssp-task13.fxf1jvif/final-release",
+        "-j4"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 1.746496708
+    },
+    {
+      "label": "release-ctest",
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/bmssp-task13.fxf1jvif/final-release",
+        "--output-on-failure"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 2.5486282919999996
+    },
+    {
+      "label": "debug-configure",
+      "argv": [
+        "cmake",
+        "-S",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+        "-B",
+        "/private/tmp/bmssp-task13.fxf1jvif/final-debug",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DCMAKE_CXX_COMPILER=/Library/Developer/CommandLineTools/usr/bin/clang++",
+        "-DBMSSP_PYTHON=ON",
+        "-DPython_EXECUTABLE=/private/tmp/bmssp-task6.ZTijar/venv/bin/python",
+        "-Dpybind11_DIR=/private/tmp/bmssp-task6.ZTijar/venv/lib/python3.11/site-packages/pybind11/share/cmake/pybind11"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 0.7680890830000004
+    },
+    {
+      "label": "debug-build",
+      "argv": [
+        "cmake",
+        "--build",
+        "/private/tmp/bmssp-task13.fxf1jvif/final-debug",
+        "-j4"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 7.841526375000001
+    },
+    {
+      "label": "debug-ctest",
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/bmssp-task13.fxf1jvif/final-debug",
+        "--output-on-failure"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 29.187481166999998
+    },
+    {
+      "label": "asan-configure",
+      "argv": [
+        "cmake",
+        "-S",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+        "-B",
+        "/private/tmp/bmssp-task13.fxf1jvif/final-asan",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DCMAKE_CXX_COMPILER=/Library/Developer/CommandLineTools/usr/bin/clang++",
+        "-DBMSSP_PYTHON=ON",
+        "-DPython_EXECUTABLE=/private/tmp/bmssp-task6.ZTijar/venv/bin/python",
+        "-Dpybind11_DIR=/private/tmp/bmssp-task6.ZTijar/venv/lib/python3.11/site-packages/pybind11/share/cmake/pybind11",
+        "-DBMSSP_SANITIZERS=ON"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 0.9443249159999993
+    },
+    {
+      "label": "asan-build",
+      "argv": [
+        "cmake",
+        "--build",
+        "/private/tmp/bmssp-task13.fxf1jvif/final-asan",
+        "-j4"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 14.352100333000003
+    },
+    {
+      "label": "asan-ctest",
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/bmssp-task13.fxf1jvif/final-asan",
+        "--output-on-failure"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 90.39130875000001
+    },
+    {
+      "label": "tsan-configure",
+      "argv": [
+        "cmake",
+        "-S",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+        "-B",
+        "/private/tmp/bmssp-task13.fxf1jvif/final-tsan",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DCMAKE_CXX_COMPILER=/Library/Developer/CommandLineTools/usr/bin/clang++",
+        "-DBMSSP_PYTHON=OFF",
+        "-DCMAKE_CXX_FLAGS=-fsanitize=thread -fno-omit-frame-pointer",
+        "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=thread"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 0.6724544170000115
+    },
+    {
+      "label": "tsan-build",
+      "argv": [
+        "cmake",
+        "--build",
+        "/private/tmp/bmssp-task13.fxf1jvif/final-tsan",
+        "-j4"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 10.364520375000012
+    },
+    {
+      "label": "tsan-ctest",
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/bmssp-task13.fxf1jvif/final-tsan",
+        "--output-on-failure"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 243.513357875
+    }
+  ],
+  "application_commands": [
+    {
+      "label": "python-integration",
+      "argv": [
+        "/private/tmp/bmssp-task6.ZTijar/venv/bin/python",
+        "-m",
+        "pytest",
+        "backend/tests",
+        "backend/native_tests",
+        "backend/logistics_tests",
+        "backend/road_tests",
+        "-p",
+        "no:cacheprovider",
+        "-q"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 12.881181834000001
+    },
+    {
+      "label": "frontend",
+      "argv": [
+        "node",
+        "--test",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/frontend/tests/contracts.test.cjs"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 0.13284504199999958
+    },
+    {
+      "label": "real-roads",
+      "argv": [
+        "/private/tmp/bmssp-task6.ZTijar/venv/bin/python",
+        "tools/road_acceptance.py",
+        "--output",
+        "/private/tmp/bmssp-task13.fxf1jvif/real-roads"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 331.700447958
+    },
+    {
+      "label": "chrome-browser",
+      "argv": [
+        "python3",
+        "/private/tmp/bmssp-task13.fxf1jvif/browser_gate.py"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 9.021133832999965
+    },
+    {
+      "label": "sanitized-python",
+      "argv": [
+        "/private/tmp/bmssp-task6.ZTijar/venv/bin/python",
+        "native/python/run_sanitized_macos.py",
+        "--compiler",
+        "/Library/Developer/CommandLineTools/usr/bin/clang++",
+        "--",
+        "-m",
+        "pytest",
+        "backend/native_tests",
+        "backend/logistics_tests",
+        "backend/road_tests",
+        "-p",
+        "no:cacheprovider",
+        "-q"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 4.029613707999999
+    }
+  ],
+  "correctness": {
+    "release": "18/18",
+    "debug": "18/18",
+    "asan_ubsan": "17/17",
+    "tsan": "17/17",
+    "python": 123,
+    "sanitized_python": 89,
+    "frontend": 5,
+    "chrome": "PASS",
+    "frozen_labels": 345378,
+    "Task12_traces": 2841,
+    "symbolic_pairs": 91204,
+    "cases_in_new_executable": 7
+  },
+  "category_names": [
+    "pointer_identical",
+    "finite_infinite",
+    "different_distance",
+    "different_hops",
+    "distance_and_hops_equal_subtotal",
+    "vertex_difference",
+    "edge_pass_subtotal",
+    "edge_difference",
+    "full_equivalence"
+  ],
+  "performance_acceptance": "Useful median reduction reproduced across two exploratory trials and two four-trial batches; 23/24 final graph/trial medians improve. All observations retained. Pooled corridor p95/p99 regress 8.67%/6.71%; no universal-tail guarantee.",
+  "batch_regions": {
+    "initial": {
+      "seremban-small": {
+        "regressions": [
+          {
+            "source": 5735886101,
+            "baseline_seconds": 2.7437505195848644e-05,
+            "candidate_seconds": 2.9208495107013732e-05,
+            "delta_seconds": 1.7709899111650884e-06,
+            "percent": 6.454631711315514,
+            "reachable": 1
+          }
+        ],
+        "baseline": {
+          "sssp": {
+            "count": 400,
+            "p50": 0.0019549589924281463,
+            "p95": 0.0021105420019011945,
+            "p99": 0.0022413330007111654
+          },
+          "trials": [
+            {
+              "count": 100,
+              "p50": 0.001970208002603613,
+              "p95": 0.0021213750005699694,
+              "p99": 0.0022160829976201057
+            },
+            {
+              "count": 100,
+              "p50": 0.001957499989657663,
+              "p95": 0.002062333995127119,
+              "p99": 0.0021105420019011945
+            },
+            {
+              "count": 100,
+              "p50": 0.0019263330032117665,
+              "p95": 0.0020720409956993535,
+              "p99": 0.002112875008606352
+            },
+            {
+              "count": 100,
+              "p50": 0.001963792004971765,
+              "p95": 0.002150667001842521,
+              "p99": 0.002299708008649759
+            }
+          ],
+          "matrix": {
+            "1": {
+              "count": 20,
+              "p50": 0.0019289999909233302,
+              "p95": 0.002124957987689413,
+              "p99": null
+            },
+            "4": {
+              "count": 20,
+              "p50": 0.003967124997870997,
+              "p95": 0.004014459002064541,
+              "p99": null
+            },
+            "8": {
+              "count": 20,
+              "p50": 0.009671708001405932,
+              "p95": 0.00997500000812579,
+              "p99": null
+            }
+          }
+        },
+        "candidate": {
+          "sssp": {
+            "count": 400,
+            "p50": 0.00177329100552015,
+            "p95": 0.0019174590124748647,
+            "p99": 0.001995833998080343
+          },
+          "trials": [
+            {
+              "count": 100,
+              "p50": 0.0017643340106587857,
+              "p95": 0.0018715829937718809,
+              "p99": 0.001933709005243145
+            },
+            {
+              "count": 100,
+              "p50": 0.0017982079880312085,
+              "p95": 0.001944791991263628,
+              "p99": 0.0020012090099044144
+            },
+            {
+              "count": 100,
+              "p50": 0.0017656249983701855,
+              "p95": 0.0018863329896703362,
+              "p99": 0.001960999987204559
+            },
+            {
+              "count": 100,
+              "p50": 0.0017709170060697943,
+              "p95": 0.0019227909942856058,
+              "p99": 0.0020915000059176236
+            }
+          ],
+          "matrix": {
+            "1": {
+              "count": 20,
+              "p50": 0.0017427920101908967,
+              "p95": 0.0019644580024760216,
+              "p99": null
+            },
+            "4": {
+              "count": 20,
+              "p50": 0.003608750004786998,
+              "p95": 0.0036440409894566983,
+              "p99": null
+            },
+            "8": {
+              "count": 20,
+              "p50": 0.008776792004937306,
+              "p95": 0.008913208002923056,
+              "p99": null
+            }
+          }
+        },
+        "reductions_percent": {
+          "p50": 9.292675069483503,
+          "p95": 9.148502576702993,
+          "p99": 10.953258732768695
+        },
+        "trial_median_reductions_percent": [
+          10.449353148132909,
+          8.13752247601861,
+          8.342690727596592,
+          9.821559432652023
+        ]
+      },
+      "seremban-medium": {
+        "regressions": [],
+        "baseline": {
+          "sssp": {
+            "count": 400,
+            "p50": 0.04761358299583662,
+            "p95": 0.06410912499995902,
+            "p99": 0.07122604199685156
+          },
+          "trials": [
+            {
+              "count": 100,
+              "p50": 0.04685445799259469,
+              "p95": 0.05118325000512414,
+              "p99": 0.056153166995500214
+            },
+            {
+              "count": 100,
+              "p50": 0.04671583299932536,
+              "p95": 0.05053670800407417,
+              "p99": 0.052035709013580345
+            },
+            {
+              "count": 100,
+              "p50": 0.0576054999983171,
+              "p95": 0.07001000001037028,
+              "p99": 0.07570041700091679
+            },
+            {
+              "count": 100,
+              "p50": 0.047706833996926434,
+              "p95": 0.050506125000538304,
+              "p99": 0.0510558329988271
+            }
+          ],
+          "matrix": {
+            "1": {
+              "count": 20,
+              "p50": 0.05016970800352283,
+              "p95": 0.059997332995408215,
+              "p99": null
+            },
+            "4": {
+              "count": 20,
+              "p50": 0.1911164170014672,
+              "p95": 0.26415829100005794,
+              "p99": null
+            },
+            "8": {
+              "count": 20,
+              "p50": 0.3750528330128873,
+              "p95": 0.49711858300725,
+              "p99": null
+            }
+          }
+        },
+        "candidate": {
+          "sssp": {
+            "count": 400,
+            "p50": 0.04203745898848865,
+            "p95": 0.04564816600759514,
+            "p99": 0.060843583996756934
+          },
+          "trials": [
+            {
+              "count": 100,
+              "p50": 0.041662957999506034,
+              "p95": 0.04354979199706577,
+              "p99": 0.044163333004689775
+            },
+            {
+              "count": 100,
+              "p50": 0.041968584002461284,
+              "p95": 0.04362191699328832,
+              "p99": 0.04422366700600833
+            },
+            {
+              "count": 100,
+              "p50": 0.04197566700167954,
+              "p95": 0.05201275000581518,
+              "p99": 0.07435966699267738
+            },
+            {
+              "count": 100,
+              "p50": 0.042735708004329354,
+              "p95": 0.04732854101166595,
+              "p99": 0.05189370800508186
+            }
+          ],
+          "matrix": {
+            "1": {
+              "count": 20,
+              "p50": 0.042087833004188724,
+              "p95": 0.04838608400314115,
+              "p99": null
+            },
+            "4": {
+              "count": 20,
+              "p50": 0.17078766699705739,
+              "p95": 0.18876079200708773,
+              "p99": null
+            },
+            "8": {
+              "count": 20,
+              "p50": 0.3404544579971116,
+              "p95": 0.37841333299002144,
+              "p99": null
+            }
+          }
+        },
+        "reductions_percent": {
+          "p50": 11.711204359133301,
+          "p95": 28.796148742282295,
+          "p99": 14.576772356034567
+        },
+        "trial_median_reductions_percent": [
+          11.08005559238177,
+          10.161970133193664,
+          27.132535950723756,
+          10.420154883716139
+        ]
+      },
+      "seremban-port-dickson": {
+        "regressions": [
+          {
+            "source": 3069838223,
+            "baseline_seconds": 0.0008292290003737435,
+            "candidate_seconds": 0.0008628959985799156,
+            "delta_seconds": 3.366699820617214e-05,
+            "percent": 4.0600362735743705,
+            "reachable": 19
+          },
+          {
+            "source": 4866711343,
+            "baseline_seconds": 0.08078043699788395,
+            "candidate_seconds": 0.08487108299596002,
+            "delta_seconds": 0.00409064599807607,
+            "percent": 5.063906745371066,
+            "reachable": 24395
+          },
+          {
+            "source": 6138513271,
+            "baseline_seconds": 0.08071954150364036,
+            "candidate_seconds": 0.08435616649512667,
+            "delta_seconds": 0.0036366249914863147,
+            "percent": 4.50525972242088,
+            "reachable": 24395
+          },
+          {
+            "source": 11056440882,
+            "baseline_seconds": 0.0009641040014685132,
+            "candidate_seconds": 0.000968000000284519,
+            "delta_seconds": 3.895998816005886e-06,
+            "percent": 0.4041056576958026,
+            "reachable": 69
+          },
+          {
+            "source": 3302605187,
+            "baseline_seconds": 0.08105564550351119,
+            "candidate_seconds": 0.08312356249371078,
+            "delta_seconds": 0.002067916990199592,
+            "percent": 2.551231289756385,
+            "reachable": 24395
+          }
+        ],
+        "baseline": {
+          "sssp": {
+            "count": 400,
+            "p50": 0.08057370800815988,
+            "p95": 0.09451625001383945,
+            "p99": 0.10691966699960176
+          },
+          "trials": [
+            {
+              "count": 100,
+              "p50": 0.08065095900383312,
+              "p95": 0.09079899999778718,
+              "p99": 0.10225679101131391
+            },
+            {
+              "count": 100,
+              "p50": 0.07942641600675415,
+              "p95": 0.08134716599306557,
+              "p99": 0.08247424999717623
+            },
+            {
+              "count": 100,
+              "p50": 0.08046537499467377,
+              "p95": 0.0966867499955697,
+              "p99": 0.11805708300380502
+            },
+            {
+              "count": 100,
+              "p50": 0.08574837500054855,
+              "p95": 0.09588158399856184,
+              "p99": 0.10691966699960176
+            }
+          ],
+          "matrix": {
+            "1": {
+              "count": 20,
+              "p50": 0.083091707987478,
+              "p95": 0.08976529100618791,
+              "p99": null
+            },
+            "4": {
+              "count": 20,
+              "p50": 0.33175466700049583,
+              "p95": 0.4090196670003934,
+              "p99": null
+            },
+            "8": {
+              "count": 20,
+              "p50": 0.6390242500056047,
+              "p95": 0.6845305000024382,
+              "p99": null
+            }
+          }
+        },
+        "candidate": {
+          "sssp": {
+            "count": 400,
+            "p50": 0.07373449999431614,
+            "p95": 0.10228029200516175,
+            "p99": 0.11726966699643526
+          },
+          "trials": [
+            {
+              "count": 100,
+              "p50": 0.07391741599712986,
+              "p95": 0.0804588339960901,
+              "p99": 0.08624525000050198
+            },
+            {
+              "count": 100,
+              "p50": 0.07196483299776446,
+              "p95": 0.07820558300591074,
+              "p99": 0.08626870899752248
+            },
+            {
+              "count": 100,
+              "p50": 0.09489033400313929,
+              "p95": 0.11251233299844898,
+              "p99": 0.12143541700788774
+            },
+            {
+              "count": 100,
+              "p50": 0.07291579099546652,
+              "p95": 0.08385433300281875,
+              "p99": 0.098090665997006
+            }
+          ],
+          "matrix": {
+            "1": {
+              "count": 20,
+              "p50": 0.07829229100025259,
+              "p95": 0.08738087500387337,
+              "p99": null
+            },
+            "4": {
+              "count": 20,
+              "p50": 0.3106258329935372,
+              "p95": 0.3514224579994334,
+              "p99": null
+            },
+            "8": {
+              "count": 20,
+              "p50": 0.5950057090085465,
+              "p95": 0.6916358750022482,
+              "p99": null
+            }
+          }
+        },
+        "reductions_percent": {
+          "p50": 8.48813860366352,
+          "p95": -8.214504902792333,
+          "p99": -9.680164825870673
+        },
+        "trial_median_reductions_percent": [
+          8.348993105442467,
+          9.394334258208483,
+          -17.92691453860788,
+          14.96539614307552
+        ]
+      }
+    },
+    "replication": {
+      "seremban-small": {
+        "regressions": [
+          {
+            "source": 7610550429,
+            "baseline_seconds": 3.016649861820042e-05,
+            "candidate_seconds": 3.0166505894158036e-05,
+            "delta_seconds": 7.275957614183426e-12,
+            "percent": 2.411933087187522e-05,
+            "reachable": 4
+          },
+          {
+            "source": 11957995111,
+            "baseline_seconds": 3.4500000765547156e-05,
+            "candidate_seconds": 3.612500586314127e-05,
+            "delta_seconds": 1.6250050975941122e-06,
+            "percent": 4.710159598653969,
+            "reachable": 7
+          },
+          {
+            "source": 5735886101,
+            "baseline_seconds": 2.8687500162050128e-05,
+            "candidate_seconds": 3.14585049636662e-05,
+            "delta_seconds": 2.7710048016160727e-06,
+            "percent": 9.659275942355395,
+            "reachable": 1
+          }
+        ],
+        "baseline": {
+          "sssp": {
+            "count": 400,
+            "p50": 0.0019592919998103753,
+            "p95": 0.0023099999962141737,
+            "p99": 0.0024618750030640513
+          },
+          "trials": [
+            {
+              "count": 100,
+              "p50": 0.0020362500072224066,
+              "p95": 0.002403167003649287,
+              "p99": 0.00250433299515862
+            },
+            {
+              "count": 100,
+              "p50": 0.0019241669942857698,
+              "p95": 0.0020798330078832805,
+              "p99": 0.0021494590037036687
+            },
+            {
+              "count": 100,
+              "p50": 0.0019288330076960847,
+              "p95": 0.0020570420019794255,
+              "p99": 0.0021200420014793053
+            },
+            {
+              "count": 100,
+              "p50": 0.0019642080005723983,
+              "p95": 0.002391041998635046,
+              "p99": 0.0024506250047124922
+            }
+          ],
+          "matrix": {
+            "1": {
+              "count": 20,
+              "p50": 0.001984500006074086,
+              "p95": 0.002519791989470832,
+              "p99": null
+            },
+            "4": {
+              "count": 20,
+              "p50": 0.0040170419961214066,
+              "p95": 0.004157999996095896,
+              "p99": null
+            },
+            "8": {
+              "count": 20,
+              "p50": 0.009727500000735745,
+              "p95": 0.009994874999392778,
+              "p99": null
+            }
+          }
+        },
+        "candidate": {
+          "sssp": {
+            "count": 400,
+            "p50": 0.0017819999920902774,
+            "p95": 0.0019135829934384674,
+            "p99": 0.001997208993998356
+          },
+          "trials": [
+            {
+              "count": 100,
+              "p50": 0.0017733749991748482,
+              "p95": 0.0018768330046441406,
+              "p99": 0.001950625010067597
+            },
+            {
+              "count": 100,
+              "p50": 0.0017810419958550483,
+              "p95": 0.001930916987475939,
+              "p99": 0.001958084001671523
+            },
+            {
+              "count": 100,
+              "p50": 0.001788749999832362,
+              "p95": 0.001903583004605025,
+              "p99": 0.001943833995028399
+            },
+            {
+              "count": 100,
+              "p50": 0.0017849580035544932,
+              "p95": 0.0019335420074639842,
+              "p99": 0.0019997079944005236
+            }
+          ],
+          "matrix": {
+            "1": {
+              "count": 20,
+              "p50": 0.0017554999940330163,
+              "p95": 0.0019831249956041574,
+              "p99": null
+            },
+            "4": {
+              "count": 20,
+              "p50": 0.003639457994722761,
+              "p95": 0.003713290992891416,
+              "p99": null
+            },
+            "8": {
+              "count": 20,
+              "p50": 0.008797125003184192,
+              "p95": 0.009097040994674899,
+              "p99": null
+            }
+          }
+        },
+        "reductions_percent": {
+          "p50": 9.04877923950369,
+          "p95": 17.16090923919431,
+          "p99": 18.874476100020168
+        },
+        "trial_median_reductions_percent": [
+          12.909760938743423,
+          7.438283623810309,
+          7.262578320921954,
+          9.125815441423164
+        ]
+      },
+      "seremban-medium": {
+        "regressions": [],
+        "baseline": {
+          "sssp": {
+            "count": 400,
+            "p50": 0.04683358300826512,
+            "p95": 0.049708874998032115,
+            "p99": 0.05514595900604036
+          },
+          "trials": [
+            {
+              "count": 100,
+              "p50": 0.047000250007840805,
+              "p95": 0.04877741700329352,
+              "p99": 0.050021791001199745
+            },
+            {
+              "count": 100,
+              "p50": 0.046713916992302984,
+              "p95": 0.05208166700322181,
+              "p99": 0.05708487500669435
+            },
+            {
+              "count": 100,
+              "p50": 0.04677679100132082,
+              "p95": 0.04995404099463485,
+              "p99": 0.05404716699558776
+            },
+            {
+              "count": 100,
+              "p50": 0.046856124987243675,
+              "p95": 0.0484822079888545,
+              "p99": 0.0490049999934854
+            }
+          ],
+          "matrix": {
+            "1": {
+              "count": 20,
+              "p50": 0.04793379199691117,
+              "p95": 0.07362016699335072,
+              "p99": null
+            },
+            "4": {
+              "count": 20,
+              "p50": 0.1881487090140581,
+              "p95": 0.19005020799522754,
+              "p99": null
+            },
+            "8": {
+              "count": 20,
+              "p50": 0.37514695899153594,
+              "p95": 0.38364112499402836,
+              "p99": null
+            }
+          }
+        },
+        "candidate": {
+          "sssp": {
+            "count": 400,
+            "p50": 0.042678500001784414,
+            "p95": 0.04543358299997635,
+            "p99": 0.04683870798908174
+          },
+          "trials": [
+            {
+              "count": 100,
+              "p50": 0.04219404199102428,
+              "p95": 0.04350287499255501,
+              "p99": 0.04443829201045446
+            },
+            {
+              "count": 100,
+              "p50": 0.04343983400030993,
+              "p95": 0.046262833988294005,
+              "p99": 0.053556083992589265
+            },
+            {
+              "count": 100,
+              "p50": 0.04306975001236424,
+              "p95": 0.04562679100490641,
+              "p99": 0.04652312499820255
+            },
+            {
+              "count": 100,
+              "p50": 0.042545167001662776,
+              "p95": 0.04480012500425801,
+              "p99": 0.0455045829876326
+            }
+          ],
+          "matrix": {
+            "1": {
+              "count": 20,
+              "p50": 0.044109124995884486,
+              "p95": 0.048179500008700415,
+              "p99": null
+            },
+            "4": {
+              "count": 20,
+              "p50": 0.1709447080065729,
+              "p95": 0.18345116700220387,
+              "p99": null
+            },
+            "8": {
+              "count": 20,
+              "p50": 0.342189667004277,
+              "p95": 0.3686825000040699,
+              "p99": null
+            }
+          }
+        },
+        "reductions_percent": {
+          "p50": 8.872016061097494,
+          "p95": 8.600661347143774,
+          "p99": 15.064115606455752
+        },
+        "trial_median_reductions_percent": [
+          10.225920108966935,
+          7.008795671175514,
+          7.92495788959081,
+          9.200415072212083
+        ]
+      },
+      "seremban-port-dickson": {
+        "regressions": [],
+        "baseline": {
+          "sssp": {
+            "count": 400,
+            "p50": 0.08027004200266674,
+            "p95": 0.08427312500134576,
+            "p99": 0.08919499999319669
+          },
+          "trials": [
+            {
+              "count": 100,
+              "p50": 0.08066287499968894,
+              "p95": 0.0876598750037374,
+              "p99": 0.09115924999059644
+            },
+            {
+              "count": 100,
+              "p50": 0.0799130840023281,
+              "p95": 0.08264966700517107,
+              "p99": 0.08404966699890792
+            },
+            {
+              "count": 100,
+              "p50": 0.08068816699960735,
+              "p95": 0.08408520800003316,
+              "p99": 0.08573366700147744
+            },
+            {
+              "count": 100,
+              "p50": 0.08014204200298991,
+              "p95": 0.08237350000126753,
+              "p99": 0.08412225000211038
+            }
+          ],
+          "matrix": {
+            "1": {
+              "count": 20,
+              "p50": 0.08139625001058448,
+              "p95": 0.08498954199603759,
+              "p99": null
+            },
+            "4": {
+              "count": 20,
+              "p50": 0.3230128750001313,
+              "p95": 0.33847004199924413,
+              "p99": null
+            },
+            "8": {
+              "count": 20,
+              "p50": 0.6512816659960663,
+              "p95": 0.7284920409874758,
+              "p99": null
+            }
+          }
+        },
+        "candidate": {
+          "sssp": {
+            "count": 400,
+            "p50": 0.07269691700639669,
+            "p95": 0.07713070898898877,
+            "p99": 0.08471841699793003
+          },
+          "trials": [
+            {
+              "count": 100,
+              "p50": 0.07297137500427198,
+              "p95": 0.07942179199017119,
+              "p99": 0.09142687500570901
+            },
+            {
+              "count": 100,
+              "p50": 0.07306279199838173,
+              "p95": 0.0791590839944547,
+              "p99": 0.08667483300087042
+            },
+            {
+              "count": 100,
+              "p50": 0.07233016699319705,
+              "p95": 0.07479912501003128,
+              "p99": 0.07604624998930376
+            },
+            {
+              "count": 100,
+              "p50": 0.07247516699135303,
+              "p95": 0.0746179160050815,
+              "p99": 0.08412829099688679
+            }
+          ],
+          "matrix": {
+            "1": {
+              "count": 20,
+              "p50": 0.07516704199952073,
+              "p95": 0.07927112501056399,
+              "p99": null
+            },
+            "4": {
+              "count": 20,
+              "p50": 0.29361229100322817,
+              "p95": 0.33233399999153335,
+              "p99": null
+            },
+            "8": {
+              "count": 20,
+              "p50": 0.5825982079986716,
+              "p95": 0.6570656249969034,
+              "p99": null
+            }
+          }
+        },
+        "reductions_percent": {
+          "p50": 9.43455965305021,
+          "p95": 8.475318806847298,
+          "p99": 5.018872129164307
+        },
+        "trial_median_reductions_percent": [
+          9.535365551310466,
+          8.57217824774077,
+          10.358396177782755,
+          9.566608012497165
+        ]
+      }
+    }
+  },
+  "identities": {
+    "baseline": {
+      "ready": true,
+      "pid": 19694,
+      "extension": "/private/tmp/bmssp-task13.fxf1jvif/baseline/python/bmssp_native.cpython-311-darwin.so",
+      "binary_sha256": "1b7e5d053c8b0307a9340b4dab2b684b4769a31ca8423f179420df9091254c4d",
+      "compiler": "Apple LLVM 21.0.0 (clang-2100.1.1.101)",
+      "preparation": {
+        "seremban-small": {
+          "wall_seconds": 0.0004447920073289424,
+          "metadata": {
+            "preprocessing_seconds": 0.000436167,
+            "preprocessing_count": 1,
+            "transformed_vertices": 3552,
+            "transformed_edges": 5307
+          },
+          "snapshot_id": "ee772ad6f5e66e90556fccb44ab3ba83cfbe4ad287dc96d06a69dfdc4f167c11",
+          "graph_file_sha256": "ab74c84d6817a5a2cf6d810d7d13f9d6922822e6e3c3649a30ab432841d19595",
+          "query_file_sha256": "b4ed68e043c366d59ab74656b67c31ec0c219ed488c160b06458fd97bf235152"
+        },
+        "seremban-medium": {
+          "wall_seconds": 0.010734708004747517,
+          "metadata": {
+            "preprocessing_seconds": 0.010708875,
+            "preprocessing_count": 1,
+            "transformed_vertices": 71060,
+            "transformed_edges": 106487
+          },
+          "snapshot_id": "17b023d65bd0af6d1319a9fe4ed26c61eca795f09ca7ea17c98eec8df2b2c1d2",
+          "graph_file_sha256": "bbfe6f261d392eef7f17c30d73be5afeeb38000159c8536f3fc3c220b85b80e2",
+          "query_file_sha256": "1f8dec5023bd16ecfcb09239bae59ad85bb781b266ee2390484a70d41013cd64"
+        },
+        "seremban-port-dickson": {
+          "wall_seconds": 0.019391124995308928,
+          "metadata": {
+            "preprocessing_seconds": 0.019365417,
+            "preprocessing_count": 1,
+            "transformed_vertices": 120428,
+            "transformed_edges": 180496
+          },
+          "snapshot_id": "3a404e0196a500ec2320cffb600efe960ff4b50f4dbe0d91bc81c303411ac8df",
+          "graph_file_sha256": "7b11dee038b79ea36a85d7237526bca88ea7f973aa8a7495b8b5097255f2ac08",
+          "query_file_sha256": "25914657d0b1d04c77e561863ff468ed1a4635c4042b581b167060b82ddc5d95"
+        }
+      }
+    },
+    "candidate": {
+      "ready": true,
+      "pid": 19697,
+      "extension": "/private/tmp/bmssp-task13.fxf1jvif/candidate/python/bmssp_native.cpython-311-darwin.so",
+      "binary_sha256": "740c5a3c41217290895975024bba46562ee68bffc48c78e8e3e174948f8ed241",
+      "compiler": "Apple LLVM 21.0.0 (clang-2100.1.1.101)",
+      "preparation": {
+        "seremban-small": {
+          "wall_seconds": 0.0004999169905204326,
+          "metadata": {
+            "preprocessing_seconds": 0.000483708,
+            "preprocessing_count": 1,
+            "transformed_vertices": 3552,
+            "transformed_edges": 5307
+          },
+          "snapshot_id": "ee772ad6f5e66e90556fccb44ab3ba83cfbe4ad287dc96d06a69dfdc4f167c11",
+          "graph_file_sha256": "ab74c84d6817a5a2cf6d810d7d13f9d6922822e6e3c3649a30ab432841d19595",
+          "query_file_sha256": "b4ed68e043c366d59ab74656b67c31ec0c219ed488c160b06458fd97bf235152"
+        },
+        "seremban-medium": {
+          "wall_seconds": 0.011037333999411203,
+          "metadata": {
+            "preprocessing_seconds": 0.01101725,
+            "preprocessing_count": 1,
+            "transformed_vertices": 71060,
+            "transformed_edges": 106487
+          },
+          "snapshot_id": "17b023d65bd0af6d1319a9fe4ed26c61eca795f09ca7ea17c98eec8df2b2c1d2",
+          "graph_file_sha256": "bbfe6f261d392eef7f17c30d73be5afeeb38000159c8536f3fc3c220b85b80e2",
+          "query_file_sha256": "1f8dec5023bd16ecfcb09239bae59ad85bb781b266ee2390484a70d41013cd64"
+        },
+        "seremban-port-dickson": {
+          "wall_seconds": 0.01792658300837502,
+          "metadata": {
+            "preprocessing_seconds": 0.017904417,
+            "preprocessing_count": 1,
+            "transformed_vertices": 120428,
+            "transformed_edges": 180496
+          },
+          "snapshot_id": "3a404e0196a500ec2320cffb600efe960ff4b50f4dbe0d91bc81c303411ac8df",
+          "graph_file_sha256": "7b11dee038b79ea36a85d7237526bca88ea7f973aa8a7495b8b5097255f2ac08",
+          "query_file_sha256": "25914657d0b1d04c77e561863ff468ed1a4635c4042b581b167060b82ddc5d95"
+        }
+      }
+    }
+  },
+  "shipped_probe_verification": {
+    "status": "PASS",
+    "diagnostic_queries": 60,
+    "ordinary_allocation_queries": 30,
+    "materialization_and_allocation_counts": "identical across shipped/canonical/stage probes"
+  },
+  "evidence_root": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence"
+}

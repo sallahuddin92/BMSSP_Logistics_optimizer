@@ -37,6 +37,7 @@ void BMSSPWorkspace::reset(ExternalVertexId source) {
     diagnostics_.k = k_;
     diagnostics_.t = t_;
     diagnostics_.label_nodes_created = 1;
+    diagnostics_.label_nodes_materialized = 1;
     depth_ = 0;
 }
 void BMSSPWorkspace::validate_frontier(const SymbolicLabel &bound,
@@ -52,15 +53,27 @@ bool BMSSPWorkspace::relax(const Edge &edge, const SymbolicLabel &bound) {
     increment(diagnostics_.relaxed_edges);
     if (!labels_.at(edge.from).finite())
         return false;
-    const auto candidate = labels_[edge.from].extend(edge);
+    const auto &source = labels_[edge.from];
+    const auto candidate = source.extension_node(edge);
     increment(diagnostics_.label_nodes_created);
-    if (!(candidate < bound))
+    if (SymbolicLabel::compare_nodes(&candidate, bound.node()) >= 0)
         return false;
-    const auto c = compare(candidate, labels_.at(edge.to));
+    const auto c = SymbolicLabel::compare_nodes(&candidate, labels_.at(edge.to).node());
     if (c > 0)
         return false;
     if (c < 0) {
-        labels_[edge.to] = candidate;
+        // Only a strict improvement needs persistent storage. The borrowed node
+        // and its address never escape compare_nodes/materialize's copy.
+        SymbolicLabel published;
+        try {
+            published = source.materialize(candidate);
+        } catch (...) {
+            // The eager implementation counted creation only after allocation.
+            --diagnostics_.label_nodes_created;
+            throw;
+        }
+        increment(diagnostics_.label_nodes_materialized);
+        labels_[edge.to] = published;
         increment(diagnostics_.label_updates);
     } else
         increment(diagnostics_.equality_relaxations);
