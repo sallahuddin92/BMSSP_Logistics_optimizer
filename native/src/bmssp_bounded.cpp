@@ -230,7 +230,7 @@ BoundedResult BMSSPWorkspace::run(std::size_t level, const SymbolicLabel &bound,
     const auto cap = checked_size_add(graph_.vertex_count(), 1), scale = power(exponent(level));
     const auto workload = k_ > cap / scale ? cap : std::min(cap, k_ * scale);
     std::vector<VertexIndex> complete;
-    std::unordered_set<VertexIndex> complete_members;
+    auto complete_members = complete_frames_.acquire(depth_, graph_.vertex_count());
     while (complete.size() < workload && !data.empty()) {
         auto pulled = data.pull();
         std::vector<VertexIndex> children;
@@ -265,7 +265,7 @@ BoundedResult BMSSPWorkspace::run(std::size_t level, const SymbolicLabel &bound,
             throw std::logic_error("recursive call made no progress");
         boundary = child.bound;
         for (const auto u : child.completed) {
-            if (!complete_members.insert(u).second)
+            if (!complete_members.insert(u))
                 throw std::logic_error("completed child sets overlap");
             complete.push_back(u);
             // Nested calls can settle a key still stored with an older larger
@@ -290,7 +290,7 @@ BoundedResult BMSSPWorkspace::run(std::size_t level, const SymbolicLabel &bound,
     if (data.empty())
         boundary = bound;
     for (const auto x : pivots.visited)
-        if (labels_[x] < boundary && complete_members.insert(x).second)
+        if (labels_[x] < boundary && complete_members.insert(x))
             complete.push_back(x);
     return finish({boundary, std::move(complete)});
 }

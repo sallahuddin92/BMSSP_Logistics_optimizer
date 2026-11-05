@@ -1,0 +1,2118 @@
+{
+  "status": "PASS",
+  "baseline": {
+    "root": "/private/tmp/bmssp-task12.__5l7a80",
+    "evidence": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task12-evidence",
+    "workspace": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+    "initial_status": "clean",
+    "head": "6019d2752345d977f568635e344fd8c959fbd328",
+    "branch": "codex/genuine-bmssp-engine",
+    "origin": "https://github.com/sallahuddin92/BMSSP_Logistics_optimizer.git",
+    "archive_sha256": "7de81d3d1960e5b7d2069aa922a0837ea90b6f4f6fc549a135fc92f1719a96b7",
+    "main_before": "94f54b5206b46541dc12f5c7d8cb7fa019e4f877",
+    "baseline_binary_sha256": "303274e560a65465ee75899d72c7d720fb2654b2290355198f03ac3f17d2e80b"
+  },
+  "candidate_binary_sha256": "1b7e5d053c8b0307a9340b4dab2b684b4769a31ca8423f179420df9091254c4d",
+  "evidence_root": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task12-evidence",
+  "regions": {
+    "seremban-small": {
+      "baseline": {
+        "sssp": {
+          "count": 400,
+          "p50": 0.002332583004317712,
+          "p95": 0.0024776249993010424,
+          "p99": 0.0025588749995222315
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.0023332080018008128,
+            "p95": 0.00252583299879916,
+            "p99": 0.0025697919991216622
+          },
+          {
+            "count": 100,
+            "p50": 0.0023077080040820874,
+            "p95": 0.00243462499929592,
+            "p99": 0.002510834005079232
+          },
+          {
+            "count": 100,
+            "p50": 0.002342624997254461,
+            "p95": 0.002463917000568472,
+            "p99": 0.002472874999511987
+          },
+          {
+            "count": 100,
+            "p50": 0.0023342919957940467,
+            "p95": 0.00247687500086613,
+            "p99": 0.002515542000764981
+          }
+        ],
+        "matrix": {
+          "1": {
+            "count": 20,
+            "p50": 0.002295041995239444,
+            "p95": 0.002509250000002794,
+            "p99": null
+          },
+          "4": {
+            "count": 20,
+            "p50": 0.0047406669982592575,
+            "p95": 0.004905417001282331,
+            "p99": null
+          },
+          "8": {
+            "count": 20,
+            "p50": 0.01147175000369316,
+            "p95": 0.011646584003756288,
+            "p99": null
+          }
+        },
+        "rss": {
+          "peak": [
+            930136064,
+            973668352,
+            928595968,
+            975585280
+          ],
+          "resident": [
+            401801216,
+            569622528,
+            927891456,
+            812892160
+          ]
+        },
+        "trial_reductions": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "allocations": {
+          "queries": 10,
+          "calls": 215350,
+          "bytes": 30708264,
+          "peak_native_rss": 8536064
+        }
+      },
+      "adaptive": {
+        "sssp": {
+          "count": 400,
+          "p50": 0.0019502089999150485,
+          "p95": 0.002069041998765897,
+          "p99": 0.0021284169997670688
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.0019552919984562322,
+            "p95": 0.0020728749950649217,
+            "p99": 0.0021284169997670688
+          },
+          {
+            "count": 100,
+            "p50": 0.001931083003000822,
+            "p95": 0.00204479099920718,
+            "p99": 0.0020585410020430572
+          },
+          {
+            "count": 100,
+            "p50": 0.0019573750032577664,
+            "p95": 0.0020619170027202927,
+            "p99": 0.0021315420017344877
+          },
+          {
+            "count": 100,
+            "p50": 0.0019538749984349124,
+            "p95": 0.0020764590008184314,
+            "p99": 0.002122541998687666
+          }
+        ],
+        "matrix": {
+          "1": {
+            "count": 20,
+            "p50": 0.001941834001627285,
+            "p95": 0.002184042001317721,
+            "p99": null
+          },
+          "4": {
+            "count": 20,
+            "p50": 0.003993209000327624,
+            "p95": 0.004092499999387655,
+            "p99": null
+          },
+          "8": {
+            "count": 20,
+            "p50": 0.009654708999732975,
+            "p95": 0.009755207996931858,
+            "p99": null
+          }
+        },
+        "rss": {
+          "peak": [
+            912490496,
+            981385216,
+            930054144,
+            978518016
+          ],
+          "resident": [
+            912588800,
+            726548480,
+            929382400,
+            754712576
+          ]
+        },
+        "trial_reductions": [
+          16.19727015563541,
+          16.320305706573635,
+          16.445226805323287,
+          16.296889936844828
+        ],
+        "allocations": {
+          "queries": 10,
+          "calls": 150612,
+          "bytes": 27966680,
+          "peak_native_rss": 8536064
+        }
+      },
+      "dense": {
+        "allocations": {
+          "queries": 10,
+          "calls": 150456,
+          "bytes": 28063856,
+          "peak_native_rss": 8536064
+        }
+      },
+      "regressions": [
+        {
+          "source": 5735886101,
+          "baseline": 2.6875499315792695e-05,
+          "adaptive": 2.6999998226528987e-05,
+          "delta": 1.244989107362926e-07,
+          "percent": 0.4632431541955917,
+          "reachable": 1
+        },
+        {
+          "source": 11957995111,
+          "baseline": 3.362500137882307e-05,
+          "adaptive": 3.4645996493054554e-05,
+          "delta": 1.0209951142314821e-06,
+          "percent": 3.036416572088241,
+          "reachable": 7
+        }
+      ],
+      "identities": {
+        "wall_seconds": 0.00041775000136112794,
+        "metadata": {
+          "preprocessing_seconds": 0.000404584,
+          "preprocessing_count": 1,
+          "transformed_vertices": 3552,
+          "transformed_edges": 5307
+        },
+        "snapshot_id": "ee772ad6f5e66e90556fccb44ab3ba83cfbe4ad287dc96d06a69dfdc4f167c11",
+        "graph_file_sha256": "ab74c84d6817a5a2cf6d810d7d13f9d6922822e6e3c3649a30ab432841d19595",
+        "query_file_sha256": "b4ed68e043c366d59ab74656b67c31ec0c219ed488c160b06458fd97bf235152"
+      },
+      "profiles": {
+        "baseline": {
+          "run_calls": 11484,
+          "base_calls": 11127,
+          "constructions": 357,
+          "contains": 18754,
+          "peak_live_frames": 4,
+          "peak_active_members": 3440,
+          "scratch_bytes": 0,
+          "peak_active_scratch": 0,
+          "peak_tagged_live_bytes": 1625824,
+          "categories": {
+            "membership": {
+              "allocations": 64984,
+              "bytes": 3073608,
+              "frees": 64984,
+              "attempts": 74023,
+              "unique": 62781,
+              "duplicates": 11242,
+              "constructions": 357,
+              "instrumented_operation_seconds": 0.00592424
+            },
+            "owned": {
+              "allocations": 2731,
+              "bytes": 1480344,
+              "frees": 2731,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.0015095470000000004
+            },
+            "children": {
+              "allocations": 13012,
+              "bytes": 234432,
+              "frees": 13012,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.0008169279999999999
+            },
+            "prepend": {
+              "allocations": 8231,
+              "bytes": 826144,
+              "frees": 8231,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.000962289
+            },
+            "other": {
+              "allocations": 93486,
+              "bytes": 18881968,
+              "frees": 93486,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "base": {
+              "allocations": 27263,
+              "bytes": 3085176,
+              "frees": 27263,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "pivots": {
+              "allocations": 5511,
+              "bytes": 1564000,
+              "frees": 5511,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.001356666
+            }
+          },
+          "frame_cardinality": {
+            "count": 357,
+            "min": 4,
+            "max": 3440,
+            "median": 64,
+            "at_most_8": 3,
+            "at_most_16": 6
+          },
+          "rehashes": 2203,
+          "instrumented_frame_seconds": {
+            "setup_seconds": 0.005781492000000003,
+            "teardown_seconds": 0.003380527999999998,
+            "exclusive": 0.03908496400000001
+          }
+        },
+        "dense": {
+          "run_calls": 11484,
+          "base_calls": 11127,
+          "constructions": 357,
+          "contains": 18754,
+          "peak_live_frames": 4,
+          "peak_active_members": 3440,
+          "scratch_bytes": 42896,
+          "peak_active_scratch": 42864,
+          "peak_tagged_live_bytes": 1534792,
+          "categories": {
+            "membership": {
+              "allocations": 90,
+              "bytes": 429200,
+              "frees": 90,
+              "attempts": 74023,
+              "unique": 62781,
+              "duplicates": 11242,
+              "constructions": 357,
+              "instrumented_operation_seconds": 0.0025048329999999997
+            },
+            "owned": {
+              "allocations": 2731,
+              "bytes": 1480344,
+              "frees": 2731,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.001546771
+            },
+            "children": {
+              "allocations": 13012,
+              "bytes": 234432,
+              "frees": 13012,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.000778059
+            },
+            "prepend": {
+              "allocations": 8231,
+              "bytes": 826144,
+              "frees": 8231,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.000870438
+            },
+            "other": {
+              "allocations": 93486,
+              "bytes": 18881968,
+              "frees": 93486,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "base": {
+              "allocations": 27263,
+              "bytes": 3085176,
+              "frees": 27263,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "pivots": {
+              "allocations": 5511,
+              "bytes": 1564000,
+              "frees": 5511,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.001390217
+            }
+          },
+          "frame_cardinality": {
+            "count": 357,
+            "min": 4,
+            "max": 3440,
+            "median": 64,
+            "at_most_8": 3,
+            "at_most_16": 6
+          },
+          "rehashes": 0,
+          "instrumented_frame_seconds": {
+            "setup_seconds": 0.005932502999999993,
+            "teardown_seconds": 0.00043311699999999995,
+            "exclusive": 0.03294824399999996
+          }
+        },
+        "adaptive": {
+          "run_calls": 11484,
+          "base_calls": 11127,
+          "constructions": 357,
+          "contains": 18754,
+          "peak_live_frames": 4,
+          "peak_active_members": 3440,
+          "scratch_bytes": 43640,
+          "peak_active_scratch": 43608,
+          "peak_tagged_live_bytes": 1535536,
+          "categories": {
+            "membership": {
+              "allocations": 246,
+              "bytes": 332024,
+              "frees": 246,
+              "attempts": 74023,
+              "unique": 62781,
+              "duplicates": 11242,
+              "constructions": 357,
+              "instrumented_operation_seconds": 0.0027308890000000002
+            },
+            "owned": {
+              "allocations": 2731,
+              "bytes": 1480344,
+              "frees": 2731,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.001560493
+            },
+            "children": {
+              "allocations": 13012,
+              "bytes": 234432,
+              "frees": 13012,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.000810689
+            },
+            "prepend": {
+              "allocations": 8231,
+              "bytes": 826144,
+              "frees": 8231,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.0008412970000000001
+            },
+            "other": {
+              "allocations": 93486,
+              "bytes": 18881968,
+              "frees": 93486,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "base": {
+              "allocations": 27263,
+              "bytes": 3085176,
+              "frees": 27263,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "pivots": {
+              "allocations": 5511,
+              "bytes": 1564000,
+              "frees": 5511,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.001387829
+            }
+          },
+          "frame_cardinality": {
+            "count": 357,
+            "min": 4,
+            "max": 3440,
+            "median": 64,
+            "at_most_8": 3,
+            "at_most_16": 6
+          },
+          "rehashes": 0,
+          "instrumented_frame_seconds": {
+            "setup_seconds": 0.006004088999999997,
+            "teardown_seconds": 0.0004179639999999997,
+            "exclusive": 0.03439173799999999
+          }
+        }
+      },
+      "reduction_percent": {
+        "p50": 16.392728734406138,
+        "p95": 16.49091370366419,
+        "p99": 16.82215816855195
+      },
+      "dijkstra_reference": {
+        "bmssp": {
+          "count": 100,
+          "p50": 0.0019564169997465797,
+          "p95": 0.0021006250026402995,
+          "p99": 0.0021529579971684143
+        },
+        "dijkstra": {
+          "count": 100,
+          "p50": 3.499999729683623e-05,
+          "p95": 3.795800148509443e-05,
+          "p99": 3.929100057575852e-05
+        }
+      },
+      "remaining_median_ratio": 55.89763288134388,
+      "preprocessing_seconds": {
+        "baseline": [
+          0.000404584,
+          0.000406375,
+          0.000422,
+          0.00041075
+        ],
+        "adaptive": [
+          0.00040725,
+          0.000435209,
+          0.000408833,
+          0.000447667
+        ]
+      }
+    },
+    "seremban-medium": {
+      "baseline": {
+        "sssp": {
+          "count": 400,
+          "p50": 0.0546459170000162,
+          "p95": 0.05632941700605443,
+          "p99": 0.05725733400322497
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.05432983300124761,
+            "p95": 0.05616645899863215,
+            "p99": 0.05690195900388062
+          },
+          {
+            "count": 100,
+            "p50": 0.05467095800122479,
+            "p95": 0.05688075000216486,
+            "p99": 0.057621291001851205
+          },
+          {
+            "count": 100,
+            "p50": 0.05468204199860338,
+            "p95": 0.056381375005003065,
+            "p99": 0.05725733400322497
+          },
+          {
+            "count": 100,
+            "p50": 0.05474362499808194,
+            "p95": 0.05583487500553019,
+            "p99": 0.056236083000840154
+          }
+        ],
+        "matrix": {
+          "1": {
+            "count": 20,
+            "p50": 0.05459066700132098,
+            "p95": 0.05577916699985508,
+            "p99": null
+          },
+          "4": {
+            "count": 20,
+            "p50": 0.2175239589996636,
+            "p95": 0.22022991600533715,
+            "p99": null
+          },
+          "8": {
+            "count": 20,
+            "p50": 0.43814629199914634,
+            "p95": 0.4433024169993587,
+            "p99": null
+          }
+        },
+        "rss": {
+          "peak": [
+            930136064,
+            973668352,
+            959463424,
+            975585280
+          ],
+          "resident": [
+            441761792,
+            568541184,
+            959463424,
+            906674176
+          ]
+        },
+        "trial_reductions": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "allocations": {
+          "queries": 10,
+          "calls": 7626446,
+          "bytes": 1251915712,
+          "peak_native_rss": 54149120
+        }
+      },
+      "adaptive": {
+        "sssp": {
+          "count": 400,
+          "p50": 0.046629040996776894,
+          "p95": 0.04817283400188899,
+          "p99": 0.0494667910024873
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.04670979199727299,
+            "p95": 0.04852158400171902,
+            "p99": 0.0494667910024873
+          },
+          {
+            "count": 100,
+            "p50": 0.04645570799766574,
+            "p95": 0.04784425000252668,
+            "p99": 0.06197674999566516
+          },
+          {
+            "count": 100,
+            "p50": 0.04651491600088775,
+            "p95": 0.04788445799931651,
+            "p99": 0.048765458006528206
+          },
+          {
+            "count": 100,
+            "p50": 0.046780083001067396,
+            "p95": 0.04799654200178338,
+            "p99": 0.04876374999730615
+          }
+        ],
+        "matrix": {
+          "1": {
+            "count": 20,
+            "p50": 0.047336916002677754,
+            "p95": 0.04836241700104438,
+            "p99": null
+          },
+          "4": {
+            "count": 20,
+            "p50": 0.18657862500549527,
+            "p95": 0.18954866700369166,
+            "p99": null
+          },
+          "8": {
+            "count": 20,
+            "p50": 0.37235541599511635,
+            "p95": 0.3794522079988383,
+            "p99": null
+          }
+        },
+        "rss": {
+          "peak": [
+            930545664,
+            981385216,
+            954892288,
+            978518016
+          ],
+          "resident": [
+            916570112,
+            817774592,
+            954892288,
+            754597888
+          ]
+        },
+        "trial_reductions": [
+          14.02551891480991,
+          15.026716750372293,
+          14.935663883810745,
+          14.546976012811651
+        ],
+        "allocations": {
+          "queries": 10,
+          "calls": 5482839,
+          "bytes": 1159285248,
+          "peak_native_rss": 56164352
+        }
+      },
+      "dense": {
+        "allocations": {
+          "queries": 10,
+          "calls": 5478669,
+          "bytes": 1159237008,
+          "peak_native_rss": 55263232
+        }
+      },
+      "regressions": [],
+      "identities": {
+        "wall_seconds": 0.010890291996474843,
+        "metadata": {
+          "preprocessing_seconds": 0.010872583,
+          "preprocessing_count": 1,
+          "transformed_vertices": 71060,
+          "transformed_edges": 106487
+        },
+        "snapshot_id": "17b023d65bd0af6d1319a9fe4ed26c61eca795f09ca7ea17c98eec8df2b2c1d2",
+        "graph_file_sha256": "bbfe6f261d392eef7f17c30d73be5afeeb38000159c8536f3fc3c220b85b80e2",
+        "query_file_sha256": "1f8dec5023bd16ecfcb09239bae59ad85bb781b266ee2390484a70d41013cd64"
+      },
+      "profiles": {
+        "baseline": {
+          "run_calls": 372186,
+          "base_calls": 366613,
+          "constructions": 5573,
+          "contains": 712238,
+          "peak_live_frames": 4,
+          "peak_active_members": 70275,
+          "scratch_bytes": 0,
+          "peak_active_scratch": 0,
+          "peak_tagged_live_bytes": 30810888,
+          "categories": {
+            "membership": {
+              "allocations": 2147867,
+              "bytes": 101208864,
+              "frees": 2147867,
+              "attempts": 2539536,
+              "unique": 2108250,
+              "duplicates": 431286,
+              "constructions": 5573,
+              "instrumented_operation_seconds": 0.15910919999999998
+            },
+            "owned": {
+              "allocations": 47904,
+              "bytes": 59763576,
+              "frees": 47904,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.03418852
+            },
+            "children": {
+              "allocations": 405305,
+              "bytes": 8626720,
+              "frees": 405305,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.01938465
+            },
+            "prepend": {
+              "allocations": 254917,
+              "bytes": 30672896,
+              "frees": 254917,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.023834050000000002
+            },
+            "other": {
+              "allocations": 3745683,
+              "bytes": 850125944,
+              "frees": 3745683,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "base": {
+              "allocations": 918961,
+              "bytes": 86730696,
+              "frees": 918961,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "pivots": {
+              "allocations": 105669,
+              "bytes": 85616936,
+              "frees": 105669,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.03830194000000001
+            }
+          },
+          "frame_cardinality": {
+            "count": 5573,
+            "min": 2,
+            "max": 70275,
+            "median": 128,
+            "at_most_8": 2,
+            "at_most_16": 3
+          },
+          "rehashes": 39617,
+          "instrumented_frame_seconds": {
+            "setup_seconds": 0.1829561400000003,
+            "teardown_seconds": 0.09338811099999966,
+            "exclusive": 1.0660362929999994
+          }
+        },
+        "dense": {
+          "run_calls": 372186,
+          "base_calls": 366613,
+          "constructions": 5573,
+          "contains": 712238,
+          "peak_live_frames": 4,
+          "peak_active_members": 70275,
+          "scratch_bytes": 852992,
+          "peak_active_scratch": 852960,
+          "peak_tagged_live_bytes": 29154264,
+          "categories": {
+            "membership": {
+              "allocations": 90,
+              "bytes": 8530160,
+              "frees": 90,
+              "attempts": 2539536,
+              "unique": 2108250,
+              "duplicates": 431286,
+              "constructions": 5573,
+              "instrumented_operation_seconds": 0.06303458
+            },
+            "owned": {
+              "allocations": 47904,
+              "bytes": 59763576,
+              "frees": 47904,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.03390693
+            },
+            "children": {
+              "allocations": 405305,
+              "bytes": 8626720,
+              "frees": 405305,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.01769548
+            },
+            "prepend": {
+              "allocations": 254917,
+              "bytes": 30672896,
+              "frees": 254917,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.017767159999999997
+            },
+            "other": {
+              "allocations": 3745683,
+              "bytes": 850125944,
+              "frees": 3745683,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "base": {
+              "allocations": 918961,
+              "bytes": 86730696,
+              "frees": 918961,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "pivots": {
+              "allocations": 105669,
+              "bytes": 85616936,
+              "frees": 105669,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.03753568
+            }
+          },
+          "frame_cardinality": {
+            "count": 5573,
+            "min": 2,
+            "max": 70275,
+            "median": 128,
+            "at_most_8": 2,
+            "at_most_16": 3
+          },
+          "rehashes": 0,
+          "instrumented_frame_seconds": {
+            "setup_seconds": 0.18247997400000043,
+            "teardown_seconds": 0.007547254000000057,
+            "exclusive": 0.874495349999999
+          }
+        },
+        "adaptive": {
+          "run_calls": 372186,
+          "base_calls": 366613,
+          "constructions": 5573,
+          "contains": 712238,
+          "peak_live_frames": 4,
+          "peak_active_members": 70275,
+          "scratch_bytes": 857816,
+          "peak_active_scratch": 857784,
+          "peak_tagged_live_bytes": 29159088,
+          "categories": {
+            "membership": {
+              "allocations": 4260,
+              "bytes": 8578400,
+              "frees": 4260,
+              "attempts": 2539536,
+              "unique": 2108250,
+              "duplicates": 431286,
+              "constructions": 5573,
+              "instrumented_operation_seconds": 0.06567515
+            },
+            "owned": {
+              "allocations": 47904,
+              "bytes": 59763576,
+              "frees": 47904,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.03402144
+            },
+            "children": {
+              "allocations": 405305,
+              "bytes": 8626720,
+              "frees": 405305,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.01815081
+            },
+            "prepend": {
+              "allocations": 254917,
+              "bytes": 30672896,
+              "frees": 254917,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.01789306
+            },
+            "other": {
+              "allocations": 3745683,
+              "bytes": 850125944,
+              "frees": 3745683,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "base": {
+              "allocations": 918961,
+              "bytes": 86730696,
+              "frees": 918961,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "pivots": {
+              "allocations": 105669,
+              "bytes": 85616936,
+              "frees": 105669,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.03642543
+            }
+          },
+          "frame_cardinality": {
+            "count": 5573,
+            "min": 2,
+            "max": 70275,
+            "median": 128,
+            "at_most_8": 2,
+            "at_most_16": 3
+          },
+          "rehashes": 0,
+          "instrumented_frame_seconds": {
+            "setup_seconds": 0.18078468399999964,
+            "teardown_seconds": 0.007715490000000002,
+            "exclusive": 0.8755629289999992
+          }
+        }
+      },
+      "reduction_percent": {
+        "p50": 14.670585550310973,
+        "p95": 14.480148096133767,
+        "p99": 13.606192353103404
+      },
+      "dijkstra_reference": {
+        "bmssp": {
+          "count": 100,
+          "p50": 0.04675941700406838,
+          "p95": 0.04795991600258276,
+          "p99": 0.048742166996817105
+        },
+        "dijkstra": {
+          "count": 100,
+          "p50": 0.0007830829999875277,
+          "p95": 0.0008182910023606382,
+          "p99": 0.0008294580038636923
+        }
+      },
+      "remaining_median_ratio": 59.71195518841952,
+      "preprocessing_seconds": {
+        "baseline": [
+          0.010872583,
+          0.010705541,
+          0.010470083,
+          0.0105785
+        ],
+        "adaptive": [
+          0.010712333,
+          0.010651958,
+          0.010502417,
+          0.011030291
+        ]
+      }
+    },
+    "seremban-port-dickson": {
+      "baseline": {
+        "sssp": {
+          "count": 400,
+          "p50": 0.0929714169978979,
+          "p95": 0.09592262499791104,
+          "p99": 0.0978588750003837
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.0930198330024723,
+            "p95": 0.09577766599977622,
+            "p99": 0.11552208300417988
+          },
+          {
+            "count": 100,
+            "p50": 0.09274545800144551,
+            "p95": 0.09590425000351388,
+            "p99": 0.0969907089966
+          },
+          {
+            "count": 100,
+            "p50": 0.09242758399341255,
+            "p95": 0.09516604199598078,
+            "p99": 0.0978588750003837
+          },
+          {
+            "count": 100,
+            "p50": 0.09372587499819929,
+            "p95": 0.0967627080026432,
+            "p99": 0.09763445900171064
+          }
+        ],
+        "matrix": {
+          "1": {
+            "count": 20,
+            "p50": 0.09455354200326838,
+            "p95": 0.09535620899987407,
+            "p99": null
+          },
+          "4": {
+            "count": 20,
+            "p50": 0.3772918749964447,
+            "p95": 0.38422949999949196,
+            "p99": null
+          },
+          "8": {
+            "count": 20,
+            "p50": 0.7469662910007173,
+            "p95": 0.7559130840018042,
+            "p99": null
+          }
+        },
+        "rss": {
+          "peak": [
+            930136064,
+            973668352,
+            959463424,
+            975454208
+          ],
+          "resident": [
+            466567168,
+            904822784,
+            913571840,
+            975323136
+          ]
+        },
+        "trial_reductions": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "allocations": {
+          "queries": 10,
+          "calls": 12935530,
+          "bytes": 2101127488,
+          "peak_native_rss": 90308608
+        }
+      },
+      "adaptive": {
+        "sssp": {
+          "count": 400,
+          "p50": 0.07959437500539934,
+          "p95": 0.08189416700042784,
+          "p99": 0.08357995899859816
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.07945787499920698,
+            "p95": 0.08199241699912818,
+            "p99": 0.08360095899843145
+          },
+          {
+            "count": 100,
+            "p50": 0.07950433299993165,
+            "p95": 0.08191400000214344,
+            "p99": 0.08271670799877029
+          },
+          {
+            "count": 100,
+            "p50": 0.07976591699843993,
+            "p95": 0.08143379199464107,
+            "p99": 0.08330820799892535
+          },
+          {
+            "count": 100,
+            "p50": 0.07972850000078324,
+            "p95": 0.0817864999989979,
+            "p99": 0.08422187499672873
+          }
+        ],
+        "matrix": {
+          "1": {
+            "count": 20,
+            "p50": 0.08020179199957056,
+            "p95": 0.08109120799781522,
+            "p99": null
+          },
+          "4": {
+            "count": 20,
+            "p50": 0.32108795899694087,
+            "p95": 0.3236642080009915,
+            "p99": null
+          },
+          "8": {
+            "count": 20,
+            "p50": 0.63884733300074,
+            "p95": 0.6433980419969885,
+            "p99": null
+          }
+        },
+        "rss": {
+          "peak": [
+            930545664,
+            981319680,
+            976699392,
+            978518016
+          ],
+          "resident": [
+            856571904,
+            981188608,
+            945291264,
+            909688832
+          ]
+        },
+        "trial_reductions": [
+          14.57964131466981,
+          14.276844696057777,
+          13.699013268457861,
+          14.934376443735486
+        ],
+        "allocations": {
+          "queries": 10,
+          "calls": 9294328,
+          "bytes": 1938676888,
+          "peak_native_rss": 89407488
+        }
+      },
+      "dense": {
+        "allocations": {
+          "queries": 10,
+          "calls": 9287248,
+          "bytes": 1938569848,
+          "peak_native_rss": 92127232
+        }
+      },
+      "regressions": [
+        {
+          "source": 3069838223,
+          "baseline": 0.0008175000002665911,
+          "adaptive": 0.0008216880014515482,
+          "delta": 4.188001184957102e-06,
+          "percent": 0.5122937227634683,
+          "reachable": 19
+        }
+      ],
+      "identities": {
+        "wall_seconds": 0.01826574999722652,
+        "metadata": {
+          "preprocessing_seconds": 0.018243,
+          "preprocessing_count": 1,
+          "transformed_vertices": 120428,
+          "transformed_edges": 180496
+        },
+        "snapshot_id": "3a404e0196a500ec2320cffb600efe960ff4b50f4dbe0d91bc81c303411ac8df",
+        "graph_file_sha256": "7b11dee038b79ea36a85d7237526bca88ea7f973aa8a7495b8b5097255f2ac08",
+        "query_file_sha256": "25914657d0b1d04c77e561863ff468ed1a4635c4042b581b167060b82ddc5d95"
+      },
+      "profiles": {
+        "baseline": {
+          "run_calls": 631854,
+          "base_calls": 622395,
+          "constructions": 9459,
+          "contains": 1203391,
+          "peak_live_frames": 4,
+          "peak_active_members": 119373,
+          "scratch_bytes": 0,
+          "peak_active_scratch": 0,
+          "peak_tagged_live_bytes": 51689256,
+          "categories": {
+            "membership": {
+              "allocations": 3648372,
+              "bytes": 177011960,
+              "frees": 3648372,
+              "attempts": 4297293,
+              "unique": 3581190,
+              "duplicates": 716103,
+              "constructions": 9459,
+              "instrumented_operation_seconds": 0.2849895
+            },
+            "owned": {
+              "allocations": 81156,
+              "bytes": 86871144,
+              "frees": 81156,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.058472149999999994
+            },
+            "children": {
+              "allocations": 688174,
+              "bytes": 14634960,
+              "frees": 688174,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.03289771
+            },
+            "prepend": {
+              "allocations": 431470,
+              "bytes": 52636768,
+              "frees": 431470,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.043580690000000005
+            },
+            "other": {
+              "allocations": 6347955,
+              "bytes": 1438798448,
+              "frees": 6347955,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "base": {
+              "allocations": 1559078,
+              "bytes": 140477608,
+              "frees": 1559078,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "pivots": {
+              "allocations": 179185,
+              "bytes": 141275880,
+              "frees": 179185,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.06700955
+            }
+          },
+          "frame_cardinality": {
+            "count": 9459,
+            "min": 9,
+            "max": 119373,
+            "median": 128,
+            "at_most_8": 0,
+            "at_most_16": 2
+          },
+          "rehashes": 67182,
+          "instrumented_frame_seconds": {
+            "setup_seconds": 0.3105989889999991,
+            "teardown_seconds": 0.1724517450000003,
+            "exclusive": 1.857190442000003
+          }
+        },
+        "dense": {
+          "run_calls": 631854,
+          "base_calls": 622395,
+          "constructions": 9459,
+          "contains": 1203391,
+          "peak_live_frames": 4,
+          "peak_active_members": 119373,
+          "scratch_bytes": 1445408,
+          "peak_active_scratch": 1445376,
+          "peak_tagged_live_bytes": 48623640,
+          "categories": {
+            "membership": {
+              "allocations": 90,
+              "bytes": 14454320,
+              "frees": 90,
+              "attempts": 4297293,
+              "unique": 3581190,
+              "duplicates": 716103,
+              "constructions": 9459,
+              "instrumented_operation_seconds": 0.10720989999999998
+            },
+            "owned": {
+              "allocations": 81156,
+              "bytes": 86871144,
+              "frees": 81156,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.05708404
+            },
+            "children": {
+              "allocations": 688174,
+              "bytes": 14634960,
+              "frees": 688174,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.02976604
+            },
+            "prepend": {
+              "allocations": 431470,
+              "bytes": 52636768,
+              "frees": 431470,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.03082826
+            },
+            "other": {
+              "allocations": 6347955,
+              "bytes": 1438798448,
+              "frees": 6347955,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "base": {
+              "allocations": 1559078,
+              "bytes": 140477608,
+              "frees": 1559078,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "pivots": {
+              "allocations": 179185,
+              "bytes": 141275880,
+              "frees": 179185,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.06428654
+            }
+          },
+          "frame_cardinality": {
+            "count": 9459,
+            "min": 9,
+            "max": 119373,
+            "median": 128,
+            "at_most_8": 0,
+            "at_most_16": 2
+          },
+          "rehashes": 0,
+          "instrumented_frame_seconds": {
+            "setup_seconds": 0.3057887319999985,
+            "teardown_seconds": 0.013099722999999733,
+            "exclusive": 1.479833966999995
+          }
+        },
+        "adaptive": {
+          "run_calls": 631854,
+          "base_calls": 622395,
+          "constructions": 9459,
+          "contains": 1203391,
+          "peak_live_frames": 4,
+          "peak_active_members": 119373,
+          "scratch_bytes": 1456112,
+          "peak_active_scratch": 1456080,
+          "peak_tagged_live_bytes": 48634344,
+          "categories": {
+            "membership": {
+              "allocations": 7170,
+              "bytes": 14561360,
+              "frees": 7170,
+              "attempts": 4297293,
+              "unique": 3581190,
+              "duplicates": 716103,
+              "constructions": 9459,
+              "instrumented_operation_seconds": 0.11333030000000001
+            },
+            "owned": {
+              "allocations": 81156,
+              "bytes": 86871144,
+              "frees": 81156,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.057471579999999994
+            },
+            "children": {
+              "allocations": 688174,
+              "bytes": 14634960,
+              "frees": 688174,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.030332509999999997
+            },
+            "prepend": {
+              "allocations": 431470,
+              "bytes": 52636768,
+              "frees": 431470,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.030629050000000005
+            },
+            "other": {
+              "allocations": 6347955,
+              "bytes": 1438798448,
+              "frees": 6347955,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "base": {
+              "allocations": 1559078,
+              "bytes": 140477608,
+              "frees": 1559078,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "pivots": {
+              "allocations": 179185,
+              "bytes": 141275880,
+              "frees": 179185,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.06534224000000001
+            }
+          },
+          "frame_cardinality": {
+            "count": 9459,
+            "min": 9,
+            "max": 119373,
+            "median": 128,
+            "at_most_8": 0,
+            "at_most_16": 2
+          },
+          "rehashes": 0,
+          "instrumented_frame_seconds": {
+            "setup_seconds": 0.30693961399999886,
+            "teardown_seconds": 0.013361201999999671,
+            "exclusive": 1.4934799479999974
+          }
+        }
+      },
+      "reduction_percent": {
+        "p50": 14.388338291973133,
+        "p95": 14.624764488866631,
+        "p99": 14.591334717193059
+      },
+      "dijkstra_reference": {
+        "bmssp": {
+          "count": 100,
+          "p50": 0.0795786250018864,
+          "p95": 0.0824931659954018,
+          "p99": 0.08413845799805131
+        },
+        "dijkstra": {
+          "count": 100,
+          "p50": 0.0013667910025105812,
+          "p95": 0.0014170419963193126,
+          "p99": 0.0014637919957749546
+        }
+      },
+      "remaining_median_ratio": 58.222965219783354,
+      "preprocessing_seconds": {
+        "baseline": [
+          0.018243,
+          0.021162459,
+          0.018775916,
+          0.018965416
+        ],
+        "adaptive": [
+          0.019043292,
+          0.017949458,
+          0.01922525,
+          0.0183475
+        ]
+      }
+    }
+  },
+  "scope": {
+    "status": "PASS",
+    "prefix_including_FindPivots_and_BaseCase": "byte-identical",
+    "run_changes": "membership acquisition and two insert-result adaptations only",
+    "frozen_Task11_source": "identical after test namespace/class rename, using declaration and clang-format"
+  },
+  "toolchain": {
+    "compiler": {
+      "argv": [
+        "/Library/Developer/CommandLineTools/usr/bin/clang++",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Apple clang version 21.0.0 (clang-2100.1.1.101)\nTarget: arm64-apple-darwin25.5.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+      "stderr": ""
+    },
+    "cmake": {
+      "argv": [
+        "cmake",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "cmake version 4.3.3\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n",
+      "stderr": ""
+    },
+    "python": {
+      "argv": [
+        "/private/tmp/bmssp-task6.ZTijar/venv/bin/python",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Python 3.11.15\n",
+      "stderr": ""
+    },
+    "node": {
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "v24.12.0\n",
+      "stderr": ""
+    },
+    "chrome": {
+      "argv": [
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Google Chrome 156.0.8078.80 \n",
+      "stderr": ""
+    }
+  },
+  "tiny_profiles": {
+    "baseline": {
+      "11957995110": {
+        "scratch_bytes": 0,
+        "peak_active_scratch": 0,
+        "constructions": 1,
+        "membership": {
+          "allocations": 2,
+          "bytes": 40,
+          "frees": 2,
+          "peak_live": 40,
+          "attempts": 1,
+          "unique": 1,
+          "duplicates": 0,
+          "constructions": 0,
+          "instrumented_operation_seconds": 2.08e-07
+        }
+      },
+      "6535592704": {
+        "scratch_bytes": 0,
+        "peak_active_scratch": 0,
+        "constructions": 3,
+        "membership": {
+          "allocations": 18,
+          "bytes": 456,
+          "frees": 18,
+          "peak_live": 136,
+          "attempts": 21,
+          "unique": 12,
+          "duplicates": 9,
+          "constructions": 0,
+          "instrumented_operation_seconds": 1.918e-06
+        }
+      },
+      "7613411579": {
+        "scratch_bytes": 0,
+        "peak_active_scratch": 0,
+        "constructions": 3,
+        "membership": {
+          "allocations": 18,
+          "bytes": 456,
+          "frees": 18,
+          "peak_live": 136,
+          "attempts": 21,
+          "unique": 12,
+          "duplicates": 9,
+          "constructions": 0,
+          "instrumented_operation_seconds": 1.667e-06
+        }
+      },
+      "11957995111": {
+        "scratch_bytes": 0,
+        "peak_active_scratch": 0,
+        "constructions": 3,
+        "membership": {
+          "allocations": 63,
+          "bytes": 2208,
+          "frees": 63,
+          "peak_live": 592,
+          "attempts": 60,
+          "unique": 51,
+          "duplicates": 9,
+          "constructions": 0,
+          "instrumented_operation_seconds": 4.704e-06
+        }
+      }
+    },
+    "dense": {
+      "11957995110": {
+        "scratch_bytes": 14296,
+        "peak_active_scratch": 14288,
+        "constructions": 1,
+        "membership": {
+          "allocations": 3,
+          "bytes": 14296,
+          "frees": 3,
+          "peak_live": 14296,
+          "attempts": 1,
+          "unique": 1,
+          "duplicates": 0,
+          "constructions": 0,
+          "instrumented_operation_seconds": 3.75e-07
+        }
+      },
+      "6535592704": {
+        "scratch_bytes": 42896,
+        "peak_active_scratch": 14448,
+        "constructions": 3,
+        "membership": {
+          "allocations": 9,
+          "bytes": 42920,
+          "frees": 9,
+          "peak_live": 42896,
+          "attempts": 21,
+          "unique": 12,
+          "duplicates": 9,
+          "constructions": 0,
+          "instrumented_operation_seconds": 1.415e-06
+        }
+      },
+      "7613411579": {
+        "scratch_bytes": 42896,
+        "peak_active_scratch": 14448,
+        "constructions": 3,
+        "membership": {
+          "allocations": 9,
+          "bytes": 42920,
+          "frees": 9,
+          "peak_live": 42896,
+          "attempts": 21,
+          "unique": 12,
+          "duplicates": 9,
+          "constructions": 0,
+          "instrumented_operation_seconds": 1.499e-06
+        }
+      },
+      "11957995111": {
+        "scratch_bytes": 42896,
+        "peak_active_scratch": 14448,
+        "constructions": 3,
+        "membership": {
+          "allocations": 9,
+          "bytes": 42920,
+          "frees": 9,
+          "peak_live": 42896,
+          "attempts": 60,
+          "unique": 51,
+          "duplicates": 9,
+          "constructions": 0,
+          "instrumented_operation_seconds": 2.703e-06
+        }
+      }
+    },
+    "adaptive": {
+      "11957995110": {
+        "scratch_bytes": 152,
+        "peak_active_scratch": 144,
+        "constructions": 1,
+        "membership": {
+          "allocations": 2,
+          "bytes": 152,
+          "frees": 2,
+          "peak_live": 152,
+          "attempts": 1,
+          "unique": 1,
+          "duplicates": 0,
+          "constructions": 0,
+          "instrumented_operation_seconds": 2.92e-07
+        }
+      },
+      "6535592704": {
+        "scratch_bytes": 464,
+        "peak_active_scratch": 432,
+        "constructions": 3,
+        "membership": {
+          "allocations": 6,
+          "bytes": 488,
+          "frees": 6,
+          "peak_live": 464,
+          "attempts": 21,
+          "unique": 12,
+          "duplicates": 9,
+          "constructions": 0,
+          "instrumented_operation_seconds": 1.541e-06
+        }
+      },
+      "7613411579": {
+        "scratch_bytes": 464,
+        "peak_active_scratch": 432,
+        "constructions": 3,
+        "membership": {
+          "allocations": 6,
+          "bytes": 488,
+          "frees": 6,
+          "peak_live": 464,
+          "attempts": 21,
+          "unique": 12,
+          "duplicates": 9,
+          "constructions": 0,
+          "instrumented_operation_seconds": 1.288e-06
+        }
+      },
+      "11957995111": {
+        "scratch_bytes": 19064,
+        "peak_active_scratch": 6632,
+        "constructions": 3,
+        "membership": {
+          "allocations": 18,
+          "bytes": 19088,
+          "frees": 18,
+          "peak_live": 19064,
+          "attempts": 60,
+          "unique": 51,
+          "duplicates": 9,
+          "constructions": 0,
+          "instrumented_operation_seconds": 3.462e-06
+        }
+      }
+    }
+  },
+  "native_commands": [
+    {
+      "label": "release-configure",
+      "argv": [
+        "cmake",
+        "-S",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+        "-B",
+        "/private/tmp/bmssp-task12.__5l7a80/final-release",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DCMAKE_CXX_COMPILER=/Library/Developer/CommandLineTools/usr/bin/clang++",
+        "-DBMSSP_PYTHON=ON",
+        "-DPython_EXECUTABLE=/private/tmp/bmssp-task6.ZTijar/venv/bin/python",
+        "-Dpybind11_DIR=/private/tmp/bmssp-task6.ZTijar/venv/lib/python3.11/site-packages/pybind11/share/cmake/pybind11",
+        "-DBMSSP_ALLOCATION_PROBE=ON"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 0.841651583
+    },
+    {
+      "label": "release-build",
+      "argv": [
+        "cmake",
+        "--build",
+        "/private/tmp/bmssp-task12.__5l7a80/final-release",
+        "-j4"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 7.584610457999999
+    },
+    {
+      "label": "release-ctest",
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/bmssp-task12.__5l7a80/final-release",
+        "--output-on-failure"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 7.735191292
+    },
+    {
+      "label": "debug-configure",
+      "argv": [
+        "cmake",
+        "-S",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+        "-B",
+        "/private/tmp/bmssp-task12.__5l7a80/final-debug",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DCMAKE_CXX_COMPILER=/Library/Developer/CommandLineTools/usr/bin/clang++",
+        "-DBMSSP_PYTHON=ON",
+        "-DPython_EXECUTABLE=/private/tmp/bmssp-task6.ZTijar/venv/bin/python",
+        "-Dpybind11_DIR=/private/tmp/bmssp-task6.ZTijar/venv/lib/python3.11/site-packages/pybind11/share/cmake/pybind11"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 0.9876767500000001
+    },
+    {
+      "label": "debug-build",
+      "argv": [
+        "cmake",
+        "--build",
+        "/private/tmp/bmssp-task12.__5l7a80/final-debug",
+        "-j4"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 5.222186875
+    },
+    {
+      "label": "debug-ctest",
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/bmssp-task12.__5l7a80/final-debug",
+        "--output-on-failure"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 20.879499916
+    },
+    {
+      "label": "asan-configure",
+      "argv": [
+        "cmake",
+        "-S",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+        "-B",
+        "/private/tmp/bmssp-task12.__5l7a80/final-asan",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DCMAKE_CXX_COMPILER=/Library/Developer/CommandLineTools/usr/bin/clang++",
+        "-DBMSSP_PYTHON=ON",
+        "-DPython_EXECUTABLE=/private/tmp/bmssp-task6.ZTijar/venv/bin/python",
+        "-Dpybind11_DIR=/private/tmp/bmssp-task6.ZTijar/venv/lib/python3.11/site-packages/pybind11/share/cmake/pybind11",
+        "-DBMSSP_SANITIZERS=ON"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 0.8366839589999984
+    },
+    {
+      "label": "asan-build",
+      "argv": [
+        "cmake",
+        "--build",
+        "/private/tmp/bmssp-task12.__5l7a80/final-asan",
+        "-j4"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 8.602026000000002
+    },
+    {
+      "label": "asan-ctest",
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/bmssp-task12.__5l7a80/final-asan",
+        "--output-on-failure"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 61.20829945799999
+    },
+    {
+      "label": "tsan-configure",
+      "argv": [
+        "cmake",
+        "-S",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+        "-B",
+        "/private/tmp/bmssp-task12.__5l7a80/final-tsan",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DCMAKE_CXX_COMPILER=/Library/Developer/CommandLineTools/usr/bin/clang++",
+        "-DBMSSP_PYTHON=OFF",
+        "-DCMAKE_CXX_FLAGS=-fsanitize=thread -fno-omit-frame-pointer",
+        "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=thread"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 0.4558490000000006
+    },
+    {
+      "label": "tsan-build",
+      "argv": [
+        "cmake",
+        "--build",
+        "/private/tmp/bmssp-task12.__5l7a80/final-tsan",
+        "-j4"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 6.058121499999999
+    },
+    {
+      "label": "tsan-ctest",
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/bmssp-task12.__5l7a80/final-tsan",
+        "--output-on-failure"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 193.357402042
+    }
+  ],
+  "application_commands": [
+    {
+      "label": "python-integration",
+      "argv": [
+        "/private/tmp/bmssp-task6.ZTijar/venv/bin/python",
+        "-m",
+        "pytest",
+        "backend/tests",
+        "backend/native_tests",
+        "backend/logistics_tests",
+        "backend/road_tests",
+        "-p",
+        "no:cacheprovider",
+        "-q"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 12.46309875
+    },
+    {
+      "label": "frontend",
+      "argv": [
+        "node",
+        "--test",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/frontend/tests/contracts.test.cjs"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 0.07256008400000091
+    },
+    {
+      "label": "real-roads",
+      "argv": [
+        "/private/tmp/bmssp-task6.ZTijar/venv/bin/python",
+        "tools/road_acceptance.py",
+        "--output",
+        "/private/tmp/bmssp-task12.__5l7a80/real-roads"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 265.946028042
+    },
+    {
+      "label": "chrome-browser",
+      "argv": [
+        "python3",
+        "/private/tmp/bmssp-task12.__5l7a80/browser_gate.py"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 7.570544083000016
+    },
+    {
+      "label": "sanitized-python",
+      "argv": [
+        "/private/tmp/bmssp-task6.ZTijar/venv/bin/python",
+        "native/python/run_sanitized_macos.py",
+        "--compiler",
+        "/Library/Developer/CommandLineTools/usr/bin/clang++",
+        "--",
+        "-m",
+        "pytest",
+        "backend/native_tests",
+        "backend/logistics_tests",
+        "backend/road_tests",
+        "-p",
+        "no:cacheprovider",
+        "-q"
+      ],
+      "cwd": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+      "exit_code": 0,
+      "duration_seconds": 2.7797209580000413
+    }
+  ],
+  "road_checks": {
+    "seremban-small": {
+      "distance_comparisons": 20016,
+      "original_paths": 11113,
+      "unreachable_comparisons": 8903
+    },
+    "seremban-medium": {
+      "distance_comparisons": 347136,
+      "original_paths": 242088,
+      "unreachable_comparisons": 105048
+    },
+    "seremban-port-dickson": {
+      "distance_comparisons": 593664,
+      "original_paths": 390370,
+      "unreachable_comparisons": 203294
+    }
+  },
+  "verdicts": {
+    "recursive_integrity": "PASS",
+    "frame_ownership_memory_safety": "PASS",
+    "membership_equivalence": "PASS",
+    "allocation_improvement": "PASS",
+    "native_latency": "PASS",
+    "memory_measured_tradeoffs": "PASS",
+    "small_road_p99": "PASS",
+    "real_road_correctness": "PASS",
+    "application_regressions": "PASS"
+  },
+  "correctness": {
+    "release": "17/17",
+    "debug": "17/17",
+    "asan_ubsan": "16/16",
+    "tsan": "16/16",
+    "python": 123,
+    "sanitized_python": 89,
+    "frontend": 5,
+    "chrome": "PASS",
+    "frozen_traces": 2309,
+    "membership_states": 5071
+  }
+}

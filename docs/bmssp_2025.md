@@ -149,3 +149,13 @@ Task 10 BaseCase and validation marks remain separate. Algorithm 1's equality-va
 updates above B and strictly bounded membership expansion are unchanged. See
 [FindPivots ownership/reproduction](pivot_performance_workflow.md) and
 [Task 11 validation](pivot_performance_validation.md).
+
+## Task 12 recursive completed membership
+
+Non-base run frames now lease independent stable membership slots by depth.
+Eight inline exact keys promote lazily to paged epoch marks; active parents retain
+their markers across children and released sibling slots begin a fresh epoch.
+Returned complete vectors remain owned; bounded semantics and checks are unchanged.
+See [ownership and reproduction](completed_membership_workflow.md),
+[Task 12 validation](completed_membership_validation.md) and
+[compact measurements](completed_membership_summary.json).
