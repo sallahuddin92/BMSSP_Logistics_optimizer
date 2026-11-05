@@ -30,6 +30,7 @@ BMSSPWorkspace::BMSSPWorkspace(Graph graph, ExternalVertexId source, std::size_t
 void BMSSPWorkspace::reset(ExternalVertexId source) {
     validate_numeric_environment();
     const auto s = graph_.vertex_index(source);
+    base_heap_.clear();
     labels_.assign(graph_.vertex_count(), {});
     labels_[s] = SymbolicLabel::root(s);
     diagnostics_ = {};
@@ -72,19 +73,19 @@ BoundedResult BMSSPWorkspace::base_case(const SymbolicLabel &bound,
     if (frontier.size() != 1)
         throw std::invalid_argument("BaseCase requires singleton frontier");
     increment(diagnostics_.base_calls);
-    struct Item {
-        VertexIndex key;
-        SymbolicLabel value;
-    };
-    const auto greater = [](const Item &a, const Item &b) { return b.value < a.value; };
-    std::priority_queue<Item, std::vector<Item>, decltype(greater)> heap(greater);
+    detail::BaseCaseHeap::Use heap_use(base_heap_);
+    auto &heap = base_heap_;
     heap.push({frontier[0], labels_[frontier[0]]});
-    std::unordered_set<VertexIndex> extracted;
+    // Allocate only when a query reaches a BaseCase.
+    if (base_extracted_.size() != graph_.vertex_count())
+        base_extracted_.resize(graph_.vertex_count());
+    base_extracted_.begin();
+    auto &extracted = base_extracted_;
     std::vector<VertexIndex> completed;
     while (!heap.empty() && completed.size() < checked_size_add(k_, 1)) {
         const auto item = heap.top();
         heap.pop();
-        if (!(item.value == labels_[item.key]) || !extracted.insert(item.key).second)
+        if (!(item.value == labels_[item.key]) || !extracted.insert(item.key))
             continue;
         completed.push_back(item.key);
         for (const auto &edge : graph_.outgoing(item.key))

@@ -126,3 +126,15 @@ Workspace validity checks use dense epoch scratch that is dead before recursion;
 parent/child completed sets and pivot forests are not shared. Symbolic comparison
 ordering is unchanged. See [ownership, reproduction and benchmark contracts](native_performance_workflow.md)
 and [measured Task 9 results](native_performance_validation.md).
+
+## Task 10 BaseCase storage
+
+BaseCase now leases a private workspace vector heap and separate dense epoch
+marks. The leaf call clears all heap label owners on normal/partial/exception
+exit, retains capacity, and begins fresh membership each time. It uses Task 9's
+exact symbolic comparison and unrestricted checked vector growth; k+1 stopping,
+strict bounds, stale handling and equality-valid relaxation are unchanged.
+Returned completed vectors retain independent ownership. A measured small-result
+reserve experiment was deferred because of its small-road tail regression.
+See [ownership and reproduction](basecase_performance_workflow.md) and
+[Task 10 measurements](basecase_performance_validation.md).

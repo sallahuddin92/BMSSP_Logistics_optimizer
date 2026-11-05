@@ -6,8 +6,8 @@
 #include <type_traits>
 #include <vector>
 namespace bmssp::detail {
-// Scratch membership for one completed, non-nested validation operation. Not a
-// live recursion-frame set. Each workspace owns its own marks; no global state.
+// Scratch membership for one non-nested operation. Distinct operations with
+// overlapping lifetimes require separate instances; no global state.
 template <class Epoch = std::uint32_t> class DenseMarks {
     static_assert(std::is_integral_v<Epoch> && std::is_unsigned_v<Epoch> &&
                   !std::is_same_v<Epoch, bool>);
@@ -19,6 +19,12 @@ template <class Epoch = std::uint32_t> class DenseMarks {
     void resize(std::size_t size) {
         marks_.assign(size, 0);
         epoch_ = 1;
+    }
+    [[nodiscard]] std::size_t size() const noexcept {
+        return marks_.size();
+    }
+    [[nodiscard]] bool contains(std::size_t index) const {
+        return marks_.at(index) == epoch_;
     }
     void begin() {
         if (epoch_ == std::numeric_limits<Epoch>::max()) {
