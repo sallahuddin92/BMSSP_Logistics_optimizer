@@ -1,0 +1,1237 @@
+{
+  "status": "PASS",
+  "acceptance": {
+    "research_algorithm_integrity": "PASS",
+    "FindPivots_behavioral_equivalence": "PASS",
+    "correctness": "PASS",
+    "allocation_reduction": "PASS",
+    "useful_reproducible_latency_improvement": "PASS with reported small-road p99/source regressions",
+    "memory_overhead": "PASS with measured 8 bytes/transformed vertex when FindPivots runs",
+    "application_regressions": "PASS"
+  },
+  "baseline": {
+    "root": "/var/folders/yl/8kdbhlq96zn98b8bn8bgn4n80000gn/T/bmssp-task11.op1b6gw_",
+    "evidence": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task11-evidence",
+    "workspace": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer",
+    "initial_status": "clean",
+    "head": "62b2d0d8926df6ff4ac46b3a4e5c2deabea03b49",
+    "branch": "codex/genuine-bmssp-engine",
+    "origin": "https://github.com/sallahuddin92/BMSSP_Logistics_optimizer.git",
+    "archive_sha256": "b7710922c85ffc54aed531804818bba6bd92ddb54799b5a1f97db94c14873988",
+    "main_before": "94f54b5206b46541dc12f5c7d8cb7fa019e4f877",
+    "baseline_binary_sha256": "29ab3b4dcbdfa22c82f3d17fa37a560ac98dce1b7ade7101d5cf7bfdf6410b98",
+    "baseline_library_sha256": "dd6aa6f1f169c57525fc46b3ad29995ea9355dcfc1a6b4e905cedbbc6f87f5d5"
+  },
+  "final_binary_sha256": "303274e560a65465ee75899d72c7d720fb2654b2290355198f03ac3f17d2e80b",
+  "sampling": {
+    "baseline": {
+      "main_samples": 4227,
+      "find_pivots_inclusive": 616,
+      "fraction": 0.14572983203217413
+    },
+    "combined": {
+      "main_samples": 4209,
+      "find_pivots_inclusive": 255,
+      "fraction": 0.06058446186742694
+    }
+  },
+  "road_checks": {
+    "seremban-small": {
+      "distance_comparisons": 20016,
+      "original_paths": 11113,
+      "unreachable_comparisons": 8903
+    },
+    "seremban-medium": {
+      "distance_comparisons": 347136,
+      "original_paths": 242088,
+      "unreachable_comparisons": 105048
+    },
+    "seremban-port-dickson": {
+      "distance_comparisons": 593664,
+      "original_paths": 390370,
+      "unreachable_comparisons": 203294
+    }
+  },
+  "evidence_root": "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task11-evidence",
+  "test_counts": {
+    "Debug_CTest": 16,
+    "Release_CTest": 16,
+    "ASan_UBSan_CTest": 15,
+    "TSan_CTest": 15,
+    "Python": 123,
+    "sanitized_Python": 89,
+    "frontend": 5,
+    "FindPivots_calls_compared": 1846,
+    "FindPivots_rounds_compared": 3775
+  },
+  "trials": 4,
+  "warmups_per_job": 8,
+  "observations_per_variant_graph": 400,
+  "profiling_in_timed_queries": false,
+  "regions": {
+    "seremban-small": {
+      "snapshot_id": "ee772ad6f5e66e90556fccb44ab3ba83cfbe4ad287dc96d06a69dfdc4f167c11",
+      "graph_file_sha256": "ab74c84d6817a5a2cf6d810d7d13f9d6922822e6e3c3649a30ab432841d19595",
+      "query_file_sha256": "b4ed68e043c366d59ab74656b67c31ec0c219ed488c160b06458fd97bf235152",
+      "transformed_vertices": 3552,
+      "added_scratch_bytes": 28416,
+      "regressions": [
+        {
+          "source": 586359377,
+          "baseline": 0.0027102294989163056,
+          "combined": 0.002809916502883425,
+          "delta": 9.968700396711938e-05,
+          "percent": 3.6781757414632077,
+          "reachable": 784
+        },
+        {
+          "source": 6535592704,
+          "baseline": 2.8583002858795226e-05,
+          "combined": 3.1687501177657396e-05,
+          "delta": 3.10449831886217e-06,
+          "percent": 10.861344184860155,
+          "reachable": 2
+        },
+        {
+          "source": 7613411579,
+          "baseline": 2.943749859696254e-05,
+          "combined": 2.9604500014102086e-05,
+          "delta": 1.6700141713954508e-07,
+          "percent": 0.5673084504427939,
+          "reachable": 2
+        },
+        {
+          "source": 11957995111,
+          "baseline": 3.529099922161549e-05,
+          "combined": 3.643750460469164e-05,
+          "delta": 1.1465053830761462e-06,
+          "percent": 3.248718960538577,
+          "reachable": 7
+        }
+      ],
+      "baseline": {
+        "sssp": {
+          "count": 400,
+          "p50": 0.0025603749963920563,
+          "p95": 0.0027812499974970706,
+          "p99": 0.002955415999167599
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.0026225830006296746,
+            "p95": 0.002892374999646563,
+            "p99": 0.0030030830021132715
+          },
+          {
+            "count": 100,
+            "p50": 0.002593208999314811,
+            "p95": 0.0027812499974970706,
+            "p99": 0.002904375003708992
+          },
+          {
+            "count": 100,
+            "p50": 0.002523707997170277,
+            "p95": 0.002694791997782886,
+            "p99": 0.002784666001389269
+          },
+          {
+            "count": 100,
+            "p50": 0.002513749997888226,
+            "p95": 0.002705083999899216,
+            "p99": 0.0027489999993122183
+          }
+        ],
+        "trial_reductions": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "matrices": {
+          "1": {
+            "count": 20,
+            "p50": 0.002539458997489419,
+            "p95": 0.0029344579961616546,
+            "p99": null
+          },
+          "4": {
+            "count": 20,
+            "p50": 0.005167791998246685,
+            "p95": 0.005316542003129143,
+            "p99": null
+          },
+          "8": {
+            "count": 20,
+            "p50": 0.012703540996881202,
+            "p95": 0.013235167003585957,
+            "p99": null
+          }
+        },
+        "rss": {
+          "resident": [
+            853557248,
+            905592832,
+            927727616,
+            880705536
+          ],
+          "peak": [
+            899006464,
+            919109632,
+            928382976,
+            917061632
+          ]
+        },
+        "allocations": {
+          "queries": 10,
+          "calls": 255299,
+          "bytes": 31997120,
+          "native_peak_rss": 8536064
+        },
+        "profile": {
+          "parts": {
+            "cumulative": {
+              "allocations": 23165,
+              "bytes": 928800,
+              "frees": 23165,
+              "attempts": 21628,
+              "unique": 21254,
+              "duplicates": 374,
+              "constructions": 357,
+              "instrumented_operation_seconds": 0.001606677
+            },
+            "round": {
+              "allocations": 16804,
+              "bytes": 644216,
+              "frees": 16804,
+              "attempts": 13994,
+              "unique": 13991,
+              "duplicates": 3,
+              "constructions": 693,
+              "instrumented_operation_seconds": 0.0014447030000000003
+            },
+            "current_next": {
+              "allocations": 4060,
+              "bytes": 348704,
+              "frees": 4060,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.000595785
+            },
+            "forest": {
+              "allocations": 0,
+              "bytes": 0,
+              "frees": 0,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "owned_results": {
+              "allocations": 1428,
+              "bytes": 488768,
+              "frees": 1428,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.0004175089999999999
+            },
+            "other": {
+              "allocations": 3,
+              "bytes": 442368,
+              "frees": 3,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            }
+          },
+          "calls": 357,
+          "rounds": 693,
+          "early": 357,
+          "selected_pivots": 7637,
+          "calls_with_pivots": 357,
+          "instrumented_seconds": 0.008023217000000006,
+          "scratch_bytes": 0,
+          "peak_tagged_live_bytes": 252776,
+          "maximum_call_retained_bytes": 197888,
+          "current_frontier_total": 14711,
+          "current_frontier_max": 42,
+          "next_frontier_total": 13991,
+          "next_frontier_max": 41,
+          "visited_size_total": 35625,
+          "visited_size_max": 116
+        }
+      },
+      "combined": {
+        "sssp": {
+          "count": 400,
+          "p50": 0.002334958000574261,
+          "p95": 0.002606333000585437,
+          "p99": 0.0031095829981495626
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.002395625000644941,
+            "p95": 0.002841958004864864,
+            "p99": 0.0033064169983845204
+          },
+          {
+            "count": 100,
+            "p50": 0.0023147910033003427,
+            "p95": 0.002549708995502442,
+            "p99": 0.002844667003955692
+          },
+          {
+            "count": 100,
+            "p50": 0.002327291003894061,
+            "p95": 0.0025306250026915222,
+            "p99": 0.00261612499889452
+          },
+          {
+            "count": 100,
+            "p50": 0.002330041999812238,
+            "p95": 0.0024588329979451373,
+            "p99": 0.002491749997716397
+          }
+        ],
+        "trial_reductions": [
+          8.653987306797983,
+          10.736427186857412,
+          7.782873196758489,
+          7.308125240390617
+        ],
+        "matrices": {
+          "1": {
+            "count": 20,
+            "p50": 0.0023099169993656687,
+            "p95": 0.0025637080034357496,
+            "p99": null
+          },
+          "4": {
+            "count": 20,
+            "p50": 0.004803957999683917,
+            "p95": 0.005312791996402666,
+            "p99": null
+          },
+          "8": {
+            "count": 20,
+            "p50": 0.011618791999353562,
+            "p95": 0.012416749996191356,
+            "p99": null
+          }
+        },
+        "rss": {
+          "resident": [
+            904003584,
+            732774400,
+            928169984,
+            134889472
+          ],
+          "peak": [
+            905478144,
+            929497088,
+            928808960,
+            930562048
+          ]
+        },
+        "allocations": {
+          "queries": 10,
+          "calls": 215350,
+          "bytes": 30708264,
+          "native_peak_rss": 8536064
+        },
+        "profile": {
+          "parts": {
+            "cumulative": {
+              "allocations": 10,
+              "bytes": 142080,
+              "frees": 10,
+              "attempts": 21628,
+              "unique": 21254,
+              "duplicates": 374,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.000439018
+            },
+            "round": {
+              "allocations": 10,
+              "bytes": 142080,
+              "frees": 10,
+              "attempts": 13994,
+              "unique": 13991,
+              "duplicates": 3,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.000329971
+            },
+            "current_next": {
+              "allocations": 4060,
+              "bytes": 348704,
+              "frees": 4060,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.000639415
+            },
+            "forest": {
+              "allocations": 0,
+              "bytes": 0,
+              "frees": 0,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            },
+            "owned_results": {
+              "allocations": 1428,
+              "bytes": 488768,
+              "frees": 1428,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.000422131
+            },
+            "other": {
+              "allocations": 3,
+              "bytes": 442368,
+              "frees": 3,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            }
+          },
+          "calls": 357,
+          "rounds": 693,
+          "early": 357,
+          "selected_pivots": 7637,
+          "calls_with_pivots": 357,
+          "instrumented_seconds": 0.004236331000000001,
+          "scratch_bytes": 28416,
+          "peak_tagged_live_bytes": 277584,
+          "maximum_call_retained_bytes": 197888,
+          "current_frontier_total": 14711,
+          "current_frontier_max": 42,
+          "next_frontier_total": 13991,
+          "next_frontier_max": 41,
+          "visited_size_total": 35625,
+          "visited_size_max": 116
+        }
+      },
+      "round": {
+        "allocations": {
+          "queries": 10,
+          "calls": 238505,
+          "bytes": 31494984,
+          "native_peak_rss": 8536064
+        }
+      },
+      "cumulative": {
+        "allocations": {
+          "queries": 10,
+          "calls": 232144,
+          "bytes": 31210400,
+          "native_peak_rss": 8536064
+        }
+      },
+      "preprocessing_seconds": {
+        "baseline": [
+          0.000443042,
+          0.000442833,
+          0.000415041,
+          0.000488083
+        ],
+        "combined": [
+          0.000458916,
+          0.00043375,
+          0.000412458,
+          0.000426084
+        ]
+      },
+      "FindPivots_calls_per_query_range": [
+        1,
+        57
+      ],
+      "reference_seconds": {
+        "bmssp": {
+          "count": 100,
+          "p50": 0.002349333000893239,
+          "p95": 0.002478542002791073,
+          "p99": 0.0024991249956656247
+        },
+        "dijkstra": {
+          "count": 100,
+          "p50": 3.429199568927288e-05,
+          "p95": 3.687499702209607e-05,
+          "p99": 3.88329935958609e-05
+        }
+      }
+    },
+    "seremban-medium": {
+      "snapshot_id": "17b023d65bd0af6d1319a9fe4ed26c61eca795f09ca7ea17c98eec8df2b2c1d2",
+      "graph_file_sha256": "bbfe6f261d392eef7f17c30d73be5afeeb38000159c8536f3fc3c220b85b80e2",
+      "query_file_sha256": "1f8dec5023bd16ecfcb09239bae59ad85bb781b266ee2390484a70d41013cd64",
+      "transformed_vertices": 71060,
+      "added_scratch_bytes": 568480,
+      "regressions": [],
+      "baseline": {
+        "sssp": {
+          "count": 400,
+          "p50": 0.06131216599897016,
+          "p95": 0.06678345899854321,
+          "p99": 0.08144624999840744
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.06276558300305624,
+            "p95": 0.06765962499775924,
+            "p99": 0.08162254100170685
+          },
+          {
+            "count": 100,
+            "p50": 0.06012320800073212,
+            "p95": 0.06258829199941829,
+            "p99": 0.06582887499826029
+          },
+          {
+            "count": 100,
+            "p50": 0.06120312499842839,
+            "p95": 0.06654258399794344,
+            "p99": 0.08144624999840744
+          },
+          {
+            "count": 100,
+            "p50": 0.061530249993666075,
+            "p95": 0.06810145799681777,
+            "p99": 0.06966854100028286
+          }
+        ],
+        "trial_reductions": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "matrices": {
+          "1": {
+            "count": 20,
+            "p50": 0.061214291003125254,
+            "p95": 0.06462845799978822,
+            "p99": null
+          },
+          "4": {
+            "count": 20,
+            "p50": 0.24578462499630405,
+            "p95": 0.26954633399873273,
+            "p99": null
+          },
+          "8": {
+            "count": 20,
+            "p50": 0.4862572500060196,
+            "p95": 0.5122572079999372,
+            "p99": null
+          }
+        },
+        "rss": {
+          "resident": [
+            432078848,
+            905297920,
+            514785280,
+            880394240
+          ],
+          "peak": [
+            899006464,
+            919109632,
+            928382976,
+            917061632
+          ]
+        },
+        "allocations": {
+          "queries": 10,
+          "calls": 9292263,
+          "bytes": 1316189392,
+          "native_peak_rss": 58064896
+        },
+        "profile": {
+          "parts": {
+            "cumulative": {
+              "allocations": 979490,
+              "bytes": 39584408,
+              "frees": 979490,
+              "attempts": 967086,
+              "unique": 940817,
+              "duplicates": 26269,
+              "constructions": 5573,
+              "instrumented_operation_seconds": 0.04500332
+            },
+            "round": {
+              "allocations": 686347,
+              "bytes": 30374072,
+              "frees": 686347,
+              "attempts": 621575,
+              "unique": 621451,
+              "duplicates": 124,
+              "constructions": 11130,
+              "instrumented_operation_seconds": 0.04015792
+            },
+            "current_next": {
+              "allocations": 82912,
+              "bytes": 14230696,
+              "frees": 82912,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.013507420000000003
+            },
+            "forest": {
+              "allocations": 200,
+              "bytes": 8264,
+              "frees": 200,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 1.6378e-05
+            },
+            "owned_results": {
+              "allocations": 22298,
+              "bytes": 22119888,
+              "frees": 22298,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.010016143
+            },
+            "other": {
+              "allocations": 239,
+              "bytes": 43573288,
+              "frees": 239,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            }
+          },
+          "calls": 5573,
+          "rounds": 11130,
+          "early": 5568,
+          "selected_pivots": 345627,
+          "calls_with_pivots": 5573,
+          "instrumented_seconds": 0.2324065209999997,
+          "scratch_bytes": 0,
+          "peak_tagged_live_bytes": 5714312,
+          "maximum_call_retained_bytes": 207968,
+          "current_frontier_total": 676160,
+          "current_frontier_max": 284,
+          "next_frontier_total": 621451,
+          "next_frontier_max": 294,
+          "visited_size_total": 1605978,
+          "visited_size_max": 817
+        }
+      },
+      "combined": {
+        "sssp": {
+          "count": 400,
+          "p50": 0.0545797080048942,
+          "p95": 0.05873629100096878,
+          "p99": 0.06475645800674101
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.05557020899868803,
+            "p95": 0.06127437500254018,
+            "p99": 0.08113574999879347
+          },
+          {
+            "count": 100,
+            "p50": 0.05401425000309246,
+            "p95": 0.05721720799920149,
+            "p99": 0.06463737499871058
+          },
+          {
+            "count": 100,
+            "p50": 0.05497291600477183,
+            "p95": 0.05928245799441356,
+            "p99": 0.06300045800162479
+          },
+          {
+            "count": 100,
+            "p50": 0.05409254099504324,
+            "p95": 0.055444291996536776,
+            "p99": 0.05665204199613072
+          }
+        ],
+        "trial_reductions": [
+          11.463884600606422,
+          10.160731938264632,
+          10.179560265618049,
+          12.087890101841737
+        ],
+        "matrices": {
+          "1": {
+            "count": 20,
+            "p50": 0.055228000004717615,
+            "p95": 0.05750212499697227,
+            "p99": null
+          },
+          "4": {
+            "count": 20,
+            "p50": 0.2182589160001953,
+            "p95": 0.22247100000095088,
+            "p99": null
+          },
+          "8": {
+            "count": 20,
+            "p50": 0.4357493749994319,
+            "p95": 0.45675549999577925,
+            "p99": null
+          }
+        },
+        "rss": {
+          "resident": [
+            492683264,
+            739000320,
+            829816832,
+            133824512
+          ],
+          "peak": [
+            905478144,
+            929497088,
+            960413696,
+            930562048
+          ]
+        },
+        "allocations": {
+          "queries": 10,
+          "calls": 7626446,
+          "bytes": 1251915712,
+          "native_peak_rss": 56852480
+        },
+        "profile": {
+          "parts": {
+            "cumulative": {
+              "allocations": 10,
+              "bytes": 2842400,
+              "frees": 10,
+              "attempts": 967086,
+              "unique": 940817,
+              "duplicates": 26269,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.01372232
+            },
+            "round": {
+              "allocations": 10,
+              "bytes": 2842400,
+              "frees": 10,
+              "attempts": 621575,
+              "unique": 621451,
+              "duplicates": 124,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.009876587
+            },
+            "current_next": {
+              "allocations": 82912,
+              "bytes": 14230696,
+              "frees": 82912,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.0137163
+            },
+            "forest": {
+              "allocations": 200,
+              "bytes": 8264,
+              "frees": 200,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 1.9293e-05
+            },
+            "owned_results": {
+              "allocations": 22298,
+              "bytes": 22119888,
+              "frees": 22298,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.009807942
+            },
+            "other": {
+              "allocations": 239,
+              "bytes": 43573288,
+              "frees": 239,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            }
+          },
+          "calls": 5573,
+          "rounds": 11130,
+          "early": 5568,
+          "selected_pivots": 345627,
+          "calls_with_pivots": 5573,
+          "instrumented_seconds": 0.12117171199999933,
+          "scratch_bytes": 568480,
+          "peak_tagged_live_bytes": 6275888,
+          "maximum_call_retained_bytes": 568520,
+          "current_frontier_total": 676160,
+          "current_frontier_max": 284,
+          "next_frontier_total": 621451,
+          "next_frontier_max": 294,
+          "visited_size_total": 1605978,
+          "visited_size_max": 817
+        }
+      },
+      "round": {
+        "allocations": {
+          "queries": 10,
+          "calls": 8605926,
+          "bytes": 1288657720,
+          "native_peak_rss": 54231040
+        }
+      },
+      "cumulative": {
+        "allocations": {
+          "queries": 10,
+          "calls": 8312783,
+          "bytes": 1279447384,
+          "native_peak_rss": 54280192
+        }
+      },
+      "preprocessing_seconds": {
+        "baseline": [
+          0.011240834,
+          0.010822833,
+          0.010397791,
+          0.010989709
+        ],
+        "combined": [
+          0.011703334,
+          0.011271167,
+          0.010404834,
+          0.010352708
+        ]
+      },
+      "FindPivots_calls_per_query_range": [
+        557,
+        558
+      ],
+      "reference_seconds": {
+        "bmssp": {
+          "count": 100,
+          "p50": 0.05499179100297624,
+          "p95": 0.05647170799784362,
+          "p99": 0.057528999997884966
+        },
+        "dijkstra": {
+          "count": 100,
+          "p50": 0.000782082999648992,
+          "p95": 0.0008062089982558973,
+          "p99": 0.0008140409991028719
+        }
+      }
+    },
+    "seremban-port-dickson": {
+      "snapshot_id": "3a404e0196a500ec2320cffb600efe960ff4b50f4dbe0d91bc81c303411ac8df",
+      "graph_file_sha256": "7b11dee038b79ea36a85d7237526bca88ea7f973aa8a7495b8b5097255f2ac08",
+      "query_file_sha256": "25914657d0b1d04c77e561863ff468ed1a4635c4042b581b167060b82ddc5d95",
+      "transformed_vertices": 120428,
+      "added_scratch_bytes": 963424,
+      "regressions": [
+        {
+          "source": 11056440882,
+          "baseline": 0.0009281454986194149,
+          "combined": 0.0009332919980806764,
+          "delta": 5.1464994612615556e-06,
+          "percent": 0.5544927459021132,
+          "reachable": 69
+        }
+      ],
+      "baseline": {
+        "sssp": {
+          "count": 400,
+          "p50": 0.10474958299892023,
+          "p95": 0.11398504200042225,
+          "p99": 0.13142641699960222
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.10734545799641637,
+            "p95": 0.11562508399947546,
+            "p99": 0.12990320899552898
+          },
+          {
+            "count": 100,
+            "p50": 0.10592141600500327,
+            "p95": 0.11587058399891248,
+            "p99": 0.12662799999816343
+          },
+          {
+            "count": 100,
+            "p50": 0.10253654199914308,
+            "p95": 0.10673079200205393,
+            "p99": 0.13142641699960222
+          },
+          {
+            "count": 100,
+            "p50": 0.10444324999843957,
+            "p95": 0.11086208300548606,
+            "p99": 0.12980295900342753
+          }
+        ],
+        "trial_reductions": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "matrices": {
+          "1": {
+            "count": 20,
+            "p50": 0.1051479170055245,
+            "p95": 0.10905208299664082,
+            "p99": null
+          },
+          "4": {
+            "count": 20,
+            "p50": 0.4158354590035742,
+            "p95": 0.43774320800002897,
+            "p99": null
+          },
+          "8": {
+            "count": 20,
+            "p50": 0.8277895829960471,
+            "p95": 0.8947621250044904,
+            "p99": null
+          }
+        },
+        "rss": {
+          "resident": [
+            129138688,
+            904314880,
+            524812288,
+            917012480
+          ],
+          "peak": [
+            899006464,
+            919109632,
+            928382976,
+            916897792
+          ]
+        },
+        "allocations": {
+          "queries": 10,
+          "calls": 15736279,
+          "bytes": 2209092112,
+          "native_peak_rss": 93175808
+        },
+        "profile": {
+          "parts": {
+            "cumulative": {
+              "allocations": 1647683,
+              "bytes": 66824640,
+              "frees": 1647683,
+              "attempts": 1624331,
+              "unique": 1581959,
+              "duplicates": 42372,
+              "constructions": 9459,
+              "instrumented_operation_seconds": 0.07481017
+            },
+            "round": {
+              "allocations": 1153086,
+              "bytes": 50774224,
+              "frees": 1153086,
+              "attempts": 1043619,
+              "unique": 1043325,
+              "duplicates": 294,
+              "constructions": 18890,
+              "instrumented_operation_seconds": 0.06739980999999999
+            },
+            "current_next": {
+              "allocations": 140916,
+              "bytes": 24062496,
+              "frees": 140916,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.022823859999999994
+            },
+            "forest": {
+              "allocations": 43,
+              "bytes": 1824,
+              "frees": 43,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 3.875e-06
+            },
+            "owned_results": {
+              "allocations": 37838,
+              "bytes": 37184224,
+              "frees": 37838,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.01690195
+            },
+            "other": {
+              "allocations": 368,
+              "bytes": 70393096,
+              "frees": 368,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            }
+          },
+          "calls": 9459,
+          "rounds": 18890,
+          "early": 9458,
+          "selected_pivots": 581004,
+          "calls_with_pivots": 9459,
+          "instrumented_seconds": 0.3960705090000011,
+          "scratch_bytes": 0,
+          "peak_tagged_live_bytes": 8458848,
+          "maximum_call_retained_bytes": 206688,
+          "current_frontier_total": 1138247,
+          "current_frontier_max": 277,
+          "next_frontier_total": 1043325,
+          "next_frontier_max": 257,
+          "visited_size_total": 2702099,
+          "visited_size_max": 765
+        }
+      },
+      "combined": {
+        "sssp": {
+          "count": 400,
+          "p50": 0.09444483400147874,
+          "p95": 0.10135216699563898,
+          "p99": 0.10561874999984866
+        },
+        "trials": [
+          {
+            "count": 100,
+            "p50": 0.09568054100236623,
+            "p95": 0.10204100000555627,
+            "p99": 0.11214616699726321
+          },
+          {
+            "count": 100,
+            "p50": 0.0955579579967889,
+            "p95": 0.10380862499732757,
+            "p99": 0.10561874999984866
+          },
+          {
+            "count": 100,
+            "p50": 0.09304733299359214,
+            "p95": 0.0974882090013125,
+            "p99": 0.10025120899808826
+          },
+          {
+            "count": 100,
+            "p50": 0.09377279200271005,
+            "p95": 0.09877416599920252,
+            "p99": 0.10117004099447513
+          }
+        ],
+        "trial_reductions": [
+          10.866707555003929,
+          9.784100703227793,
+          9.254465598840122,
+          10.216512791289956
+        ],
+        "matrices": {
+          "1": {
+            "count": 20,
+            "p50": 0.09622466600558255,
+            "p95": 0.10217129200464115,
+            "p99": null
+          },
+          "4": {
+            "count": 20,
+            "p50": 0.37669633400219027,
+            "p95": 0.39717220799502684,
+            "p99": null
+          },
+          "8": {
+            "count": 20,
+            "p50": 0.7599019169938401,
+            "p95": 0.793279875004373,
+            "p99": null
+          }
+        },
+        "rss": {
+          "resident": [
+            133906432,
+            739180544,
+            815333376,
+            125222912
+          ],
+          "peak": [
+            905478144,
+            929497088,
+            960413696,
+            930562048
+          ]
+        },
+        "allocations": {
+          "queries": 10,
+          "calls": 12935530,
+          "bytes": 2101127488,
+          "native_peak_rss": 92389376
+        },
+        "profile": {
+          "parts": {
+            "cumulative": {
+              "allocations": 10,
+              "bytes": 4817120,
+              "frees": 10,
+              "attempts": 1624331,
+              "unique": 1581959,
+              "duplicates": 42372,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.023191299999999998
+            },
+            "round": {
+              "allocations": 10,
+              "bytes": 4817120,
+              "frees": 10,
+              "attempts": 1043619,
+              "unique": 1043325,
+              "duplicates": 294,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.01740854
+            },
+            "current_next": {
+              "allocations": 140916,
+              "bytes": 24062496,
+              "frees": 140916,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.02342074
+            },
+            "forest": {
+              "allocations": 43,
+              "bytes": 1824,
+              "frees": 43,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 6.248e-06
+            },
+            "owned_results": {
+              "allocations": 37838,
+              "bytes": 37184224,
+              "frees": 37838,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0.01654077
+            },
+            "other": {
+              "allocations": 368,
+              "bytes": 70393096,
+              "frees": 368,
+              "attempts": 0,
+              "unique": 0,
+              "duplicates": 0,
+              "constructions": 0,
+              "instrumented_operation_seconds": 0
+            }
+          },
+          "calls": 9459,
+          "rounds": 18890,
+          "early": 9458,
+          "selected_pivots": 581004,
+          "calls_with_pivots": 9459,
+          "instrumented_seconds": 0.20864737600000005,
+          "scratch_bytes": 963424,
+          "peak_tagged_live_bytes": 9420712,
+          "maximum_call_retained_bytes": 963464,
+          "current_frontier_total": 1138247,
+          "current_frontier_max": 277,
+          "next_frontier_total": 1043325,
+          "next_frontier_max": 257,
+          "visited_size_total": 2702099,
+          "visited_size_max": 765
+        }
+      },
+      "round": {
+        "allocations": {
+          "queries": 10,
+          "calls": 14583203,
+          "bytes": 2163135008,
+          "native_peak_rss": 96681984
+        }
+      },
+      "cumulative": {
+        "allocations": {
+          "queries": 10,
+          "calls": 14088606,
+          "bytes": 2147084592,
+          "native_peak_rss": 89931776
+        }
+      },
+      "preprocessing_seconds": {
+        "baseline": [
+          0.022952209,
+          0.019953167,
+          0.019517125,
+          0.023989916
+        ],
+        "combined": [
+          0.019627125,
+          0.024903958,
+          0.019785875,
+          0.023413083
+        ]
+      },
+      "FindPivots_calls_per_query_range": [
+        3,
+        946
+      ],
+      "reference_seconds": {
+        "bmssp": {
+          "count": 100,
+          "p50": 0.09452220799721545,
+          "p95": 0.09678112500114366,
+          "p99": 0.09730845800368115
+        },
+        "dijkstra": {
+          "count": 100,
+          "p50": 0.0013712090003537014,
+          "p95": 0.001422125002136454,
+          "p99": 0.0015415410016430542
+        }
+      }
+    }
+  }
+}

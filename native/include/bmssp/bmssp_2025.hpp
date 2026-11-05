@@ -4,6 +4,7 @@
 #include "bmssp/degree_reduction.hpp"
 #include "bmssp/detail/basecase_heap.hpp"
 #include "bmssp/detail/dense_marks.hpp"
+#include "bmssp/detail/pivot_scratch.hpp"
 #include "bmssp/profile.hpp"
 #include <functional>
 namespace bmssp {
@@ -72,6 +73,7 @@ class BMSSPWorkspace {
     detail::BaseCaseHeap base_heap_;
     // Separate from validation scratch; only the leaf BaseCase owns this epoch.
     detail::DenseMarks<> base_extracted_;
+    detail::PivotScratch<> pivot_scratch_;
     void validate_frontier(const SymbolicLabel &bound,
                            const std::vector<VertexIndex> &frontier) const;
     [[nodiscard]] std::size_t power(std::size_t exponent) const;

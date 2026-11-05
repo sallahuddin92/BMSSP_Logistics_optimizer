@@ -104,27 +104,36 @@ BoundedResult BMSSPWorkspace::base_case(const SymbolicLabel &bound,
 PivotResult BMSSPWorkspace::find_pivots(const SymbolicLabel &bound,
                                         const std::vector<VertexIndex> &frontier) {
     ProfileScope scope(ProfilePart::pivots);
+    detail::PivotScratch<>::Use scratch_use(pivot_scratch_);
     validate_frontier(bound, frontier);
     increment(diagnostics_.pivot_calls);
     std::vector<VertexIndex> visited = frontier, current = frontier;
-    std::unordered_set<VertexIndex> membership(frontier.begin(), frontier.end());
+    if (pivot_scratch_.visited.size() != graph_.vertex_count())
+        pivot_scratch_.visited.resize(graph_.vertex_count());
+    pivot_scratch_.visited.begin();
+    for (const auto v : frontier)
+        (void)pivot_scratch_.visited.insert(v);
+    auto &membership = pivot_scratch_.visited;
     if (frontier.size() > std::numeric_limits<std::size_t>::max() / k_)
         throw std::length_error("pivot workload overflow");
     const auto limit = k_ * frontier.size();
     for (std::size_t round = 0; round < k_; ++round) {
         std::vector<VertexIndex> next;
-        std::unordered_set<VertexIndex> next_members;
+        if (pivot_scratch_.round.size() != graph_.vertex_count())
+            pivot_scratch_.round.resize(graph_.vertex_count());
+        pivot_scratch_.round.begin();
+        auto &next_members = pivot_scratch_.round;
         for (const auto u : current)
             for (const auto &edge : graph_.outgoing(u)) {
                 increment(diagnostics_.pivot_edge_scans);
                 // Algorithm 1 updates even above B; only membership expansion is bounded.
                 if (relax(edge) && labels_[edge.to] < bound) {
-                    if (next_members.insert(edge.to).second)
+                    if (next_members.insert(edge.to))
                         next.push_back(edge.to);
                 }
             }
         for (const auto v : next)
-            if (membership.insert(v).second)
+            if (membership.insert(v))
                 visited.push_back(v);
         if (visited.size() > limit) {
             increment(diagnostics_.pivot_early_returns);

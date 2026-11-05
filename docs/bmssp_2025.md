@@ -138,3 +138,14 @@ Returned completed vectors retain independent ownership. A measured small-result
 reserve experiment was deferred because of its small-road tail regression.
 See [ownership and reproduction](basecase_performance_workflow.md) and
 [Task 10 measurements](basecase_performance_validation.md).
+
+## Task 11 FindPivots storage
+
+FindPivots now uses separate workspace epoch arrays for cumulative W membership
+and each round's next frontier. The traversal vectors and returned W/P retain
+independent ownership; predecessor-forest maps remain unchanged. Scratch cannot
+overlap another FindPivots operation and is dead before recursive children run.
+Task 10 BaseCase and validation marks remain separate. Algorithm 1's equality-valid
+updates above B and strictly bounded membership expansion are unchanged. See
+[FindPivots ownership/reproduction](pivot_performance_workflow.md) and
+[Task 11 validation](pivot_performance_validation.md).

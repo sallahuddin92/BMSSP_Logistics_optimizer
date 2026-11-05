@@ -13,6 +13,9 @@ struct Counters {
     std::array<std::size_t, 32> size_bins{};
 };
 inline thread_local Counters *active = nullptr;
+// Optional executable-only observer. Production libraries never include this file.
+using Observer = void (*)(void *, std::size_t, bool) noexcept;
+inline thread_local Observer observer = nullptr;
 inline thread_local std::size_t fail_after = std::numeric_limits<std::size_t>::max();
 struct FailAfter {
     std::size_t previous;
@@ -61,6 +64,8 @@ inline void *allocate(std::size_t n) {
     if (!p)
         throw std::bad_alloc();
     record(n);
+    if (observer)
+        observer(p, n, true);
     return p;
 }
 inline void *allocate_aligned(std::size_t n, std::size_t alignment) {
@@ -71,11 +76,15 @@ inline void *allocate_aligned(std::size_t n, std::size_t alignment) {
     if (posix_memalign(&p, alignment, n ? n : 1))
         throw std::bad_alloc();
     record(n);
+    if (observer)
+        observer(p, n, true);
     return p;
 }
 inline void release(void *p) noexcept {
     if (p && active)
         ++active->frees;
+    if (p && observer)
+        observer(p, 0, false);
     std::free(p);
 }
 } // namespace allocation_probe
