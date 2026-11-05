@@ -58,7 +58,7 @@ void BoundedFrontier::initialize(std::size_t m, SymbolicLabel bound) {
     fences_.clear();
     d0_.clear();
     d1_.clear();
-    d1_.push_back({{}, bound_});
+    d1_.emplace_back(&memory_, bound_);
     fences_.emplace(bound_, d1_.begin());
     counters_.initializations = checked_size_add(counters_.initializations, 1);
 }
@@ -106,7 +106,7 @@ void BoundedFrontier::split(Blocks::iterator block) {
     std::vector<FrontierEntry> high(entries.begin() + static_cast<std::ptrdiff_t>(half),
                                     entries.end());
     const auto low_fence = std::max_element(low.begin(), low.end(), less_entry)->value;
-    const auto left = d1_.insert(block, Block{{}, low_fence});
+    const auto left = d1_.emplace(block, &memory_, low_fence);
     fences_.emplace(low_fence, left);
     block->entries.clear();
     fill(left, false, std::move(low));
@@ -124,14 +124,14 @@ void BoundedFrontier::insert(VertexIndex key, const SymbolicLabel &value) {
         erase(key);
     }
     if (d1_.empty()) {
-        d1_.push_back({{}, bound_});
+        d1_.emplace_back(&memory_, bound_);
         fences_.emplace(bound_, d1_.begin());
     }
     auto fence = fences_.lower_bound(value);
     // Deleting an empty rightmost block can remove the B fence while earlier
     // blocks survive. A later larger insertion needs a fresh terminal block.
     if (fence == fences_.end()) {
-        d1_.push_back({{}, bound_});
+        d1_.emplace_back(&memory_, bound_);
         fence = fences_.emplace(bound_, std::prev(d1_.end())).first;
     }
     const auto block = fence->second;
@@ -154,7 +154,7 @@ void BoundedFrontier::prepend_partition(std::vector<FrontierEntry> entries, std:
     if (entries.empty())
         return;
     if (entries.size() <= limit) {
-        const auto block = d0_.insert(d0_.begin(), Block{});
+        const auto block = d0_.emplace(d0_.begin(), &memory_);
         fill(block, true, std::move(entries));
         return;
     }
@@ -171,7 +171,7 @@ void BoundedFrontier::batch_prepend(std::vector<FrontierEntry> batch) {
     ProfileScope scope(ProfilePart::frontier);
     counters_.batches = checked_size_add(counters_.batches, 1);
     std::vector<FrontierEntry> unique;
-    std::unordered_map<VertexIndex, std::size_t> indices;
+    std::pmr::unordered_map<VertexIndex, std::size_t> indices{&memory_};
     for (auto &e : batch) {
         if (!e.value.finite() || e.value.node()->vertex != e.key || !(e.value < bound_))
             throw std::invalid_argument("invalid prepend entry");

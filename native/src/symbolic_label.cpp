@@ -1,17 +1,36 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "bmssp/symbolic_label.hpp"
 #include "bmssp/profile.hpp"
+#include <algorithm>
 #include <mutex>
+#include <type_traits>
 namespace bmssp {
 struct LabelArena {
     std::mutex mutex;
-    std::vector<std::unique_ptr<LabelNode>> nodes;
+    // Moving owning handles never moves the separately allocated node arrays.
+    // Small initial blocks limit waste for isolated/short queries; large queries
+    // amortize allocation and destruction over bounded 4096-node slabs.
+    std::vector<std::unique_ptr<LabelNode[]>> blocks;
+    LabelNode *current = nullptr;
+    std::size_t capacity = 0, used = 0;
     const LabelNode *allocate(LabelNode value) {
         ProfileScope scope(ProfilePart::labels);
-        auto node = std::make_unique<LabelNode>(std::move(value));
-        const auto *result = node.get();
         std::lock_guard<std::mutex> lock(mutex);
-        nodes.push_back(std::move(node));
+        if (used == capacity) {
+            const auto next =
+                capacity == 0 ? std::size_t{32} : std::min(capacity * 2, std::size_t{4096});
+            auto block = std::make_unique_for_overwrite<LabelNode[]>(next);
+            // A failed array allocation or handle-vector growth leaves every
+            // published node and the previous allocation cursor unchanged.
+            blocks.push_back(std::move(block));
+            current = blocks.back().get();
+            capacity = next;
+            used = 0;
+        }
+        static_assert(std::is_nothrow_copy_assignable_v<LabelNode>);
+        auto *result = current + used;
+        *result = value; // Publish only after complete initialization under lock.
+        ++used;
         return result;
     }
 };

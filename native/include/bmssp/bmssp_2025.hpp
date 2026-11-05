@@ -2,6 +2,7 @@
 #pragma once
 #include "bmssp/bounded_frontier.hpp"
 #include "bmssp/degree_reduction.hpp"
+#include "bmssp/detail/dense_marks.hpp"
 #include "bmssp/profile.hpp"
 #include <functional>
 namespace bmssp {
@@ -66,6 +67,7 @@ class BMSSPWorkspace {
     BMSSPOptions options_;
     std::vector<SymbolicLabel> labels_;
     BMSSPDiagnostics diagnostics_;
+    mutable detail::DenseMarks<> validation_seen_;
     void validate_frontier(const SymbolicLabel &bound,
                            const std::vector<VertexIndex> &frontier) const;
     [[nodiscard]] std::size_t power(std::size_t exponent) const;

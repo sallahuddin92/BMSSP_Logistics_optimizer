@@ -15,6 +15,22 @@ Graph chain(std::size_t n, bool zero = false) {
 }
 } // namespace
 int main() {
+    test::run("dense_validation_epoch_wrap_and_bounds", [] {
+        detail::DenseMarks<std::uint8_t> marks(3);
+        CHECK(marks.insert(2));
+        for (std::size_t round = 0; round < 800; ++round) {
+            marks.begin();
+            CHECK(marks.insert(0));
+            CHECK(!marks.insert(0));
+            if (round % 7 == 0)
+                CHECK(marks.insert(2));
+        }
+        test::throws<std::out_of_range>([&] { (void)marks.insert(3); });
+        marks.resize(1);
+        CHECK(marks.insert(0));
+        CHECK(!marks.insert(0));
+    });
+
     test::run("BaseCase_partial_and_exhausted", [] {
         const auto g = chain(8);
         BMSSPWorkspace w(g, 0, 2, 1);

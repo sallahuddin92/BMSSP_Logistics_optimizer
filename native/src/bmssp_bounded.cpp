@@ -24,6 +24,7 @@ BMSSPWorkspace::BMSSPWorkspace(Graph graph, ExternalVertexId source, std::size_t
             if (++indegree[e.to] > 2)
                 throw std::invalid_argument("bounded routines require degree-reduced graph");
     }
+    validation_seen_.resize(graph_.vertex_count());
     reset(source);
 }
 void BMSSPWorkspace::reset(ExternalVertexId source) {
@@ -39,9 +40,11 @@ void BMSSPWorkspace::reset(ExternalVertexId source) {
 }
 void BMSSPWorkspace::validate_frontier(const SymbolicLabel &bound,
                                        const std::vector<VertexIndex> &frontier) const {
-    std::unordered_set<VertexIndex> seen;
+    // No mark is consumed after this validation returns. Parent/child calls may
+    // therefore reuse the scratch, unlike their live completed/pivot collections.
+    validation_seen_.begin();
     for (const auto v : frontier)
-        if (v >= labels_.size() || !seen.insert(v).second || !(labels_[v] < bound))
+        if (v >= labels_.size() || !validation_seen_.insert(v) || !(labels_[v] < bound))
             throw std::invalid_argument("invalid bounded frontier");
 }
 bool BMSSPWorkspace::relax(const Edge &edge, const SymbolicLabel &bound) {

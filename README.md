@@ -421,3 +421,7 @@ constraints, genuine duration units, geometry and offline acceptance limits.
 Real Malaysian road validation and explicit fixture preparation are documented in
 [the Task 8 workflow](docs/real_road_workflow.md) and
 [the measured acceptance report](docs/real_road_validation.md).
+
+Native execution allocation changes and their controlled A/B measurements are in
+[the Task 9 report](docs/native_performance_validation.md), with
+[reproduction commands](docs/native_performance_workflow.md).

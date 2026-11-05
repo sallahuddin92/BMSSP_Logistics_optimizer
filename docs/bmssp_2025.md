@@ -36,7 +36,7 @@ SSSP result. Normal bounded partial returns explicitly contain B' and U.
   parallel-edge refinement. Snapshots share an arena; raw parent views remain
   valid while a label owns that arena. Arena destruction is iterative, avoiding
   recursion proportional to path length. Comparisons never use pointer addresses
-  as tie breakers. Label allocation is synchronized; each query has its own arena.
+  as tie breakers. Label allocation is synchronized; each query has its own arena. Task 9 stores nodes in stable separately owned array slabs while retaining shared ownership and the mutex.
 - `base_case`: local bounded mini-Dijkstra, singleton frontier, equality-valid
   relaxation, at most k+1 extracted vertices. It returns B on exhaustion; otherwise
   the largest extracted symbolic label is the exclusive boundary and is excluded
@@ -116,3 +116,13 @@ pivot work, equality-valid relaxations, completed events across levels, unique
 root completion, original reachable count, transformation sizes, frontier
 operations/splits/selection volume/retired keys, path-node allocations, and
 preprocessing/query durations. Query time includes original-tree construction.
+
+
+## Task 9 native allocation engineering
+
+Frontier containers now use a private per-frame PMR pool; the D0/D1 lists, balanced
+fences, key handles, partial selection and operation semantics are unchanged.
+Workspace validity checks use dense epoch scratch that is dead before recursion;
+parent/child completed sets and pivot forests are not shared. Symbolic comparison
+ordering is unchanged. See [ownership, reproduction and benchmark contracts](native_performance_workflow.md)
+and [measured Task 9 results](native_performance_validation.md).

@@ -3,6 +3,7 @@
 #include "bmssp/symbolic_label.hpp"
 #include <list>
 #include <map>
+#include <memory_resource>
 #include <unordered_map>
 namespace bmssp {
 struct FrontierCounters {
@@ -40,22 +41,28 @@ class BoundedFrontier {
 
   private:
     struct Block {
-        std::list<FrontierEntry> entries;
+        std::pmr::list<FrontierEntry> entries;
         SymbolicLabel fence;
+        explicit Block(std::pmr::memory_resource *memory, SymbolicLabel boundary = {})
+            : entries(memory), fence(std::move(boundary)) {}
     };
-    using Blocks = std::list<Block>;
+    using Blocks = std::pmr::list<Block>;
     struct Location {
         bool prepend;
         Blocks::iterator block;
-        std::list<FrontierEntry>::iterator entry;
+        std::pmr::list<FrontierEntry>::iterator entry;
     };
     std::size_t m_;
     SymbolicLabel bound_;
     FrontierCounters &counters_;
     bool checks_;
-    Blocks d0_, d1_;
-    std::map<SymbolicLabel, Blocks::iterator, LabelLess> fences_;
-    std::unordered_map<VertexIndex, Location> locations_;
+    // A frontier is confined to one recursion frame/thread. Container nodes are
+    // recycled locally, preserving list iterators, insertion order and map fences.
+    // Declared first so the resource outlives every container using its storage.
+    std::pmr::unsynchronized_pool_resource memory_{std::pmr::new_delete_resource()};
+    Blocks d0_{&memory_}, d1_{&memory_};
+    std::pmr::map<SymbolicLabel, Blocks::iterator, LabelLess> fences_{LabelLess{}, &memory_};
+    std::pmr::unordered_map<VertexIndex, Location> locations_{&memory_};
     void erase(VertexIndex key);
     void fill(Blocks::iterator block, bool prepend, std::vector<FrontierEntry> entries);
     void split(Blocks::iterator block);
