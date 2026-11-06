@@ -1,0 +1,5825 @@
+{
+  "type": "object",
+  "properties": {
+    "protocol_id": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "phase": {
+      "type": "string"
+    },
+    "execution_authorized": {
+      "type": "boolean"
+    },
+    "promotion_authorized": {
+      "type": "boolean"
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "type": "string"
+        },
+        "canonicalization": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "canonicalization",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "baseline_commit": {
+      "type": "string"
+    },
+    "candidate_commit": {
+      "type": "string"
+    },
+    "repository": {
+      "type": "string"
+    },
+    "branch": {
+      "type": "string"
+    },
+    "origin": {
+      "type": "string"
+    },
+    "binaries": {
+      "type": "object",
+      "properties": {
+        "baseline": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": "string"
+            },
+            "source_commit": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "source_commit"
+          ],
+          "additionalProperties": false
+        },
+        "candidate": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": "string"
+            },
+            "source_commit": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "source_commit"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "baseline",
+        "candidate"
+      ],
+      "additionalProperties": false
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "seremban-small": {
+          "type": "object",
+          "properties": {
+            "graph_path": {
+              "type": "string"
+            },
+            "graph_sha256": {
+              "type": "string"
+            },
+            "fixture_manifest_path": {
+              "type": "string"
+            },
+            "fixture_manifest_sha256": {
+              "type": "string"
+            },
+            "snapshot_id": {
+              "type": "string"
+            },
+            "query_file_path": {
+              "type": "string"
+            },
+            "query_file_sha256": {
+              "type": "string"
+            },
+            "source_positions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "source_position_identity_sha256": {
+              "type": "string"
+            },
+            "positions": {
+              "type": "integer"
+            },
+            "unique_sources": {
+              "type": "integer"
+            },
+            "repeated_ids": {
+              "type": "object",
+              "properties": {
+                "4881016931": {
+                  "type": "integer"
+                },
+                "4882418061": {
+                  "type": "integer"
+                },
+                "4884533214": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "4881016931",
+                "4882418061",
+                "4884533214"
+              ],
+              "additionalProperties": false
+            },
+            "native_export_path": {
+              "type": "string"
+            },
+            "native_export_sha256": {
+              "type": "string"
+            },
+            "path_targets": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "warmup_positions": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          "required": [
+            "graph_path",
+            "graph_sha256",
+            "fixture_manifest_path",
+            "fixture_manifest_sha256",
+            "snapshot_id",
+            "query_file_path",
+            "query_file_sha256",
+            "source_positions",
+            "source_position_identity_sha256",
+            "positions",
+            "unique_sources",
+            "repeated_ids",
+            "native_export_path",
+            "native_export_sha256",
+            "path_targets",
+            "warmup_positions"
+          ],
+          "additionalProperties": false
+        },
+        "seremban-medium": {
+          "type": "object",
+          "properties": {
+            "graph_path": {
+              "type": "string"
+            },
+            "graph_sha256": {
+              "type": "string"
+            },
+            "fixture_manifest_path": {
+              "type": "string"
+            },
+            "fixture_manifest_sha256": {
+              "type": "string"
+            },
+            "snapshot_id": {
+              "type": "string"
+            },
+            "query_file_path": {
+              "type": "string"
+            },
+            "query_file_sha256": {
+              "type": "string"
+            },
+            "source_positions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "source_position_identity_sha256": {
+              "type": "string"
+            },
+            "positions": {
+              "type": "integer"
+            },
+            "unique_sources": {
+              "type": "integer"
+            },
+            "repeated_ids": {
+              "type": "object",
+              "properties": {},
+              "required": [],
+              "additionalProperties": false
+            },
+            "native_export_path": {
+              "type": "string"
+            },
+            "native_export_sha256": {
+              "type": "string"
+            },
+            "path_targets": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "warmup_positions": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          "required": [
+            "graph_path",
+            "graph_sha256",
+            "fixture_manifest_path",
+            "fixture_manifest_sha256",
+            "snapshot_id",
+            "query_file_path",
+            "query_file_sha256",
+            "source_positions",
+            "source_position_identity_sha256",
+            "positions",
+            "unique_sources",
+            "repeated_ids",
+            "native_export_path",
+            "native_export_sha256",
+            "path_targets",
+            "warmup_positions"
+          ],
+          "additionalProperties": false
+        },
+        "seremban-port-dickson": {
+          "type": "object",
+          "properties": {
+            "graph_path": {
+              "type": "string"
+            },
+            "graph_sha256": {
+              "type": "string"
+            },
+            "fixture_manifest_path": {
+              "type": "string"
+            },
+            "fixture_manifest_sha256": {
+              "type": "string"
+            },
+            "snapshot_id": {
+              "type": "string"
+            },
+            "query_file_path": {
+              "type": "string"
+            },
+            "query_file_sha256": {
+              "type": "string"
+            },
+            "source_positions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "source_position_identity_sha256": {
+              "type": "string"
+            },
+            "positions": {
+              "type": "integer"
+            },
+            "unique_sources": {
+              "type": "integer"
+            },
+            "repeated_ids": {
+              "type": "object",
+              "properties": {},
+              "required": [],
+              "additionalProperties": false
+            },
+            "native_export_path": {
+              "type": "string"
+            },
+            "native_export_sha256": {
+              "type": "string"
+            },
+            "path_targets": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "warmup_positions": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          "required": [
+            "graph_path",
+            "graph_sha256",
+            "fixture_manifest_path",
+            "fixture_manifest_sha256",
+            "snapshot_id",
+            "query_file_path",
+            "query_file_sha256",
+            "source_positions",
+            "source_position_identity_sha256",
+            "positions",
+            "unique_sources",
+            "repeated_ids",
+            "native_export_path",
+            "native_export_sha256",
+            "path_targets",
+            "warmup_positions"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "seremban-small",
+        "seremban-medium",
+        "seremban-port-dickson"
+      ],
+      "additionalProperties": false
+    },
+    "historical_anchor_seconds_by_original_position": {
+      "type": "object",
+      "properties": {
+        "seremban-small": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "seremban-medium": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "seremban-port-dickson": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }
+      },
+      "required": [
+        "seremban-small",
+        "seremban-medium",
+        "seremban-port-dickson"
+      ],
+      "additionalProperties": false
+    },
+    "evidence_files_used": {
+      "type": "object",
+      "properties": {
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/docs/comparison_execution_validation.md": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/docs/comparison_execution_summary.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/docs/comparison_execution_workflow.md": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/tools/native_ab_benchmark.py": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/tools/paired_source_probe.py": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/native/src/symbolic_label.cpp": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/native/include/bmssp/profile.hpp": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/native/src/bmssp_2025.cpp": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/native/python/bindings.cpp": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/native/src/graph.cpp": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/backend/road_fixture.py": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/native/tools/allocation_probe.cpp": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/native/test_support/allocation_tracking.hpp": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/evidence-index.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/git-delivery.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/toolchain.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/protocol-failure.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/guarded-micro-commands.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/cpu-counter-command.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/cpu-counters-baseline-toc.xml": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/cpu-counters-outlined-toc.xml": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/evidence-index.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/git-delivery.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/Independent_Task14_Review_Final_Evidence_Reconciliation.md": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/percentiles.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/cluster_bootstrap.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/per_source.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/outliers_all_observations.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/primary_corridor_top_1_percent.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/preservation_check.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/evidence_used.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/review-output-index.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/manifest.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-small-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-small-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-medium-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-medium-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-small-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-small-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-medium-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-medium-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-small-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-small-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-medium-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-medium-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-small-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-small-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-medium-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-medium-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/manifest.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-small-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-small-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-medium-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-medium-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-small-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-small-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-medium-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-medium-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-small-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-small-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-medium-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-medium-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-small-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-small-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-medium-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-medium-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/0-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/0-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/1-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/1-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/2-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/2-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/3-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/3-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/0-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/0-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/1-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/1-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/2-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/2-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/3-seremban-port-dickson-baseline.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/3-seremban-port-dickson-candidate.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/mach/thread_info.h": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/mach/mach_time.h": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/mach/time_value.h": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/proc_info.h": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/resource.h": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_time.h": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man/man3/clock_gettime.3": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man/man1/powermetrics.1": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/baseline/python/bmssp_native.cpython-311-darwin.so": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/candidate/python/bmssp_native.cpython-311-darwin.so": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/task8-queries/seremban-small/results.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/fixtures/seremban-small/manifest.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/fixtures/seremban-small/graph.graphml": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/task9-native/seremban-small.txt": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/task8-queries/seremban-medium/results.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/fixtures/seremban-medium/manifest.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/fixtures/seremban-medium/graph.graphml": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/task9-native/seremban-medium.txt": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/task8-queries/seremban-port-dickson/results.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/fixtures/seremban-port-dickson/manifest.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/fixtures/seremban-port-dickson/graph.graphml": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/task9-native/seremban-port-dickson.txt": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        },
+        "/Users/sallahuddin/Projects/BMSSP-task15-protocol-design-20261106-shap80uc/capability_inventory.json": {
+          "type": "object",
+          "properties": {
+            "sha256": {
+              "type": "string"
+            },
+            "bytes": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "sha256",
+            "bytes"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/docs/comparison_execution_validation.md",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/docs/comparison_execution_summary.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/docs/comparison_execution_workflow.md",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/tools/native_ab_benchmark.py",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/tools/paired_source_probe.py",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/native/src/symbolic_label.cpp",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/native/include/bmssp/profile.hpp",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/native/src/bmssp_2025.cpp",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/native/python/bindings.cpp",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/native/src/graph.cpp",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/backend/road_fixture.py",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/native/tools/allocation_probe.cpp",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer/native/test_support/allocation_tracking.hpp",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/evidence-index.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/git-delivery.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/toolchain.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/protocol-failure.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/guarded-micro-commands.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/cpu-counter-command.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/cpu-counters-baseline-toc.xml",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/cpu-counters-outlined-toc.xml",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/evidence-index.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/git-delivery.json",
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/Independent_Task14_Review_Final_Evidence_Reconciliation.md",
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/percentiles.json",
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/cluster_bootstrap.json",
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/per_source.json",
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/outliers_all_observations.json",
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/primary_corridor_top_1_percent.json",
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/preservation_check.json",
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/evidence_used.json",
+        "/Users/sallahuddin/Projects/BMSSP-task14-independent-review-20261106-yi5y6el2/review-output-index.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/manifest.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-small-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-small-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-medium-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-medium-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-port-dickson-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-small-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-small-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-medium-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-medium-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-port-dickson-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-small-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-small-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-medium-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-medium-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-port-dickson-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-small-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-small-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-medium-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-medium-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-port-dickson-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/manifest.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-small-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-small-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-medium-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-medium-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-port-dickson-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-small-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-small-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-medium-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-medium-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-port-dickson-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-small-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-small-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-medium-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-medium-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-port-dickson-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-small-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-small-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-medium-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-medium-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-port-dickson-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/0-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/0-seremban-port-dickson-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/1-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/1-seremban-port-dickson-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/2-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/2-seremban-port-dickson-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/3-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/final-ab/3-seremban-port-dickson-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/0-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/0-seremban-port-dickson-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/1-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/1-seremban-port-dickson-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/2-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/2-seremban-port-dickson-candidate.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/3-seremban-port-dickson-baseline.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task13-evidence/run/replication-ab/3-seremban-port-dickson-candidate.json",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/mach/thread_info.h",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/mach/mach_time.h",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/mach/time_value.h",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/proc_info.h",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/resource.h",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_time.h",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man/man3/clock_gettime.3",
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man/man1/powermetrics.1",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/baseline/python/bmssp_native.cpython-311-darwin.so",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/candidate/python/bmssp_native.cpython-311-darwin.so",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/task8-queries/seremban-small/results.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/fixtures/seremban-small/manifest.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/fixtures/seremban-small/graph.graphml",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/task9-native/seremban-small.txt",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/task8-queries/seremban-medium/results.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/fixtures/seremban-medium/manifest.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/fixtures/seremban-medium/graph.graphml",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/task9-native/seremban-medium.txt",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/task8-queries/seremban-port-dickson/results.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/fixtures/seremban-port-dickson/manifest.json",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/fixtures/seremban-port-dickson/graph.graphml",
+        "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/inputs/task9-native/seremban-port-dickson.txt",
+        "/Users/sallahuddin/Projects/BMSSP-task15-protocol-design-20261106-shap80uc/capability_inventory.json"
+      ],
+      "additionalProperties": false
+    },
+    "audit_artifacts": {
+      "type": "object",
+      "properties": {
+        "capability_inventory_path": {
+          "type": "string"
+        },
+        "capability_inventory_sha256": {
+          "type": "string"
+        },
+        "independent_review": {
+          "type": "string"
+        },
+        "prior_evidence": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "capability_inventory_path",
+        "capability_inventory_sha256",
+        "independent_review",
+        "prior_evidence"
+      ],
+      "additionalProperties": false
+    },
+    "capability_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "accessed": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "purpose",
+          "accessed"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "environment": {
+      "type": "object",
+      "properties": {
+        "hardware": {
+          "type": "string"
+        },
+        "os_at_design": {
+          "type": "string"
+        },
+        "compiler": {
+          "type": "string"
+        },
+        "compiler_path": {
+          "type": "string"
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "no_upgrades": {
+          "type": "boolean"
+        },
+        "xctrace": {
+          "type": "string"
+        },
+        "api_runtime_probe": {
+          "type": "string"
+        },
+        "record": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "boundary_collection_only_in_A": {
+          "type": "boolean"
+        },
+        "power_policy": {
+          "type": "string"
+        },
+        "sleep_policy": {
+          "type": "string"
+        },
+        "high_load_exclusion": {
+          "type": "boolean"
+        },
+        "background_policy": {
+          "type": "string"
+        },
+        "diagnostic_serialization": {
+          "type": "string"
+        },
+        "storage_preflight": {
+          "type": "string"
+        },
+        "host_verification_boundary": {
+          "type": "object",
+          "properties": {
+            "preserve_local_capability_audit": {
+              "type": "boolean"
+            },
+            "runtime_status": {
+              "type": "string"
+            },
+            "required_before_execution": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "absence_of_external_access": {
+              "type": "string"
+            },
+            "no_recording_in_amendment": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "preserve_local_capability_audit",
+            "runtime_status",
+            "required_before_execution",
+            "absence_of_external_access",
+            "no_recording_in_amendment"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "hardware",
+        "os_at_design",
+        "compiler",
+        "compiler_path",
+        "flags",
+        "no_upgrades",
+        "xctrace",
+        "api_runtime_probe",
+        "record",
+        "boundary_collection_only_in_A",
+        "power_policy",
+        "sleep_policy",
+        "high_load_exclusion",
+        "background_policy",
+        "diagnostic_serialization",
+        "storage_preflight",
+        "host_verification_boundary"
+      ],
+      "additionalProperties": false
+    },
+    "measurement_boundaries": {
+      "type": "object",
+      "properties": {
+        "T0": {
+          "type": "string"
+        },
+        "T1": {
+          "type": "string"
+        },
+        "T2": {
+          "type": "string"
+        },
+        "T3": {
+          "type": "string"
+        },
+        "T4": {
+          "type": "string"
+        },
+        "T5": {
+          "type": "string"
+        },
+        "T6_optional": {
+          "type": "string"
+        },
+        "order": {
+          "type": "string"
+        },
+        "endpoint_aperture": {
+          "type": "string"
+        },
+        "retained_result_policy": {
+          "type": "string"
+        },
+        "A_observed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "B_observed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "B_thread_CPU_windows": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "B_process_and_user_system_windows": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "derived_metrics": {
+          "type": "object",
+          "properties": {
+            "outer_wall": {
+              "type": "string"
+            },
+            "native_wall": {
+              "type": "string"
+            },
+            "entry_wall": {
+              "type": "string"
+            },
+            "workspace_cleanup": {
+              "type": "string"
+            },
+            "binding_return": {
+              "type": "string"
+            },
+            "legacy_residual": {
+              "type": "string"
+            },
+            "CPU_to_wall": {
+              "type": "string"
+            },
+            "nonCPU_elapsed_estimate": {
+              "type": "string"
+            },
+            "process_minus_thread": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "outer_wall",
+            "native_wall",
+            "entry_wall",
+            "workspace_cleanup",
+            "binding_return",
+            "legacy_residual",
+            "CPU_to_wall",
+            "nonCPU_elapsed_estimate",
+            "process_minus_thread"
+          ],
+          "additionalProperties": false
+        },
+        "native_read_order": {
+          "type": "string"
+        },
+        "B_process_switches": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "T0",
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5",
+        "T6_optional",
+        "order",
+        "endpoint_aperture",
+        "retained_result_policy",
+        "A_observed",
+        "B_observed",
+        "B_thread_CPU_windows",
+        "B_process_and_user_system_windows",
+        "derived_metrics",
+        "native_read_order",
+        "B_process_switches"
+      ],
+      "additionalProperties": false
+    },
+    "instruments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "api": {
+            "type": "string"
+          },
+          "availability": {
+            "type": "string"
+          },
+          "permissions": {
+            "type": "string"
+          },
+          "resolution": {
+            "type": "string"
+          },
+          "overhead": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "synchronization": {
+            "type": "string"
+          },
+          "ordinary_cohort": {
+            "type": "string"
+          },
+          "limitations": {
+            "type": "string"
+          },
+          "fallback": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "api",
+          "availability",
+          "permissions",
+          "resolution",
+          "overhead",
+          "scope",
+          "synchronization",
+          "ordinary_cohort",
+          "limitations",
+          "fallback"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "unsupported_instruments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cohorts": {
+      "type": "object",
+      "properties": {
+        "A": {
+          "type": "object",
+          "properties": {
+            "purpose": {
+              "type": "string"
+            },
+            "trial_clusters_per_protocol": {
+              "type": "integer"
+            },
+            "protocols": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "binaries": {
+              "type": "string"
+            },
+            "profiling": {
+              "type": "boolean"
+            },
+            "extra_instrumentation": {
+              "type": "string"
+            },
+            "pool_with_other_cohorts": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "purpose",
+            "trial_clusters_per_protocol",
+            "protocols",
+            "binaries",
+            "profiling",
+            "extra_instrumentation",
+            "pool_with_other_cohorts"
+          ],
+          "additionalProperties": false
+        },
+        "B": {
+          "type": "object",
+          "properties": {
+            "purpose": {
+              "type": "string"
+            },
+            "trial_clusters_per_protocol": {
+              "type": "integer"
+            },
+            "protocols": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "binaries": {
+              "type": "string"
+            },
+            "schedule": {
+              "type": "string"
+            },
+            "no_logging": {
+              "type": "string"
+            },
+            "pool_with_A": {
+              "type": "boolean"
+            },
+            "profiling": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "purpose",
+            "trial_clusters_per_protocol",
+            "protocols",
+            "binaries",
+            "schedule",
+            "no_logging",
+            "pool_with_A",
+            "profiling"
+          ],
+          "additionalProperties": false
+        },
+        "C": {
+          "type": "object",
+          "properties": {
+            "purpose": {
+              "type": "string"
+            },
+            "clusters_per_mode": {
+              "type": "integer"
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "P1",
+                "P2"
+              ]
+            },
+            "modes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "scope": {
+              "type": "string"
+            },
+            "timer_buffers": {
+              "type": "string"
+            },
+            "max_stall": {
+              "type": "string"
+            },
+            "stacks": {
+              "type": "string"
+            },
+            "conditions": {
+              "type": "string"
+            },
+            "no_pool": {
+              "type": "boolean"
+            },
+            "positions_by_region": {
+              "type": "object",
+              "properties": {
+                "seremban-small": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "seremban-medium": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "seremban-port-dickson": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "required": [
+                "seremban-small",
+                "seremban-medium",
+                "seremban-port-dickson"
+              ],
+              "additionalProperties": false
+            },
+            "selection_rule": {
+              "type": "string"
+            },
+            "historical_medium_tail_evidence": {
+              "type": "object",
+              "properties": {
+                "rule": {
+                  "type": "string"
+                },
+                "records": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "variant": {
+                        "type": "string"
+                      },
+                      "batch": {
+                        "type": "string"
+                      },
+                      "trial": {
+                        "type": "integer"
+                      },
+                      "raw_file": {
+                        "type": "string"
+                      },
+                      "sample_index": {
+                        "type": "integer"
+                      },
+                      "source_id": {
+                        "type": "string"
+                      },
+                      "wall_seconds": {
+                        "type": "number"
+                      },
+                      "p99_boundary_seconds": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "variant",
+                      "batch",
+                      "trial",
+                      "raw_file",
+                      "sample_index",
+                      "source_id",
+                      "wall_seconds",
+                      "p99_boundary_seconds"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "raw_input_hashes": {
+                  "type": "object",
+                  "properties": {
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-medium-baseline.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-medium-baseline.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-medium-baseline.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-medium-baseline.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-medium-baseline.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-medium-baseline.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-medium-baseline.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-medium-baseline.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-medium-candidate.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-medium-candidate.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-medium-candidate.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-medium-candidate.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-medium-candidate.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-medium-candidate.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-medium-candidate.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-medium-candidate.json": {
+                      "type": "object",
+                      "properties": {
+                        "sha256": {
+                          "type": "string"
+                        },
+                        "bytes": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "sha256",
+                        "bytes"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-medium-baseline.json",
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-medium-baseline.json",
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-medium-baseline.json",
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-medium-baseline.json",
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-medium-baseline.json",
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-medium-baseline.json",
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-medium-baseline.json",
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-medium-baseline.json",
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/0-seremban-medium-candidate.json",
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/1-seremban-medium-candidate.json",
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/2-seremban-medium-candidate.json",
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/final-ab/3-seremban-medium-candidate.json",
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/0-seremban-medium-candidate.json",
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/1-seremban-medium-candidate.json",
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/2-seremban-medium-candidate.json",
+                    "/Users/sallahuddin/Projects/BMSSP_Logistics_optimizer-task14-evidence/run/replication-ab/3-seremban-medium-candidate.json"
+                  ],
+                  "additionalProperties": false
+                },
+                "position_to_source": {
+                  "type": "object",
+                  "properties": {
+                    "0": {
+                      "type": "string"
+                    },
+                    "1": {
+                      "type": "string"
+                    },
+                    "2": {
+                      "type": "string"
+                    },
+                    "3": {
+                      "type": "string"
+                    },
+                    "4": {
+                      "type": "string"
+                    },
+                    "5": {
+                      "type": "string"
+                    },
+                    "6": {
+                      "type": "string"
+                    },
+                    "7": {
+                      "type": "string"
+                    },
+                    "8": {
+                      "type": "string"
+                    },
+                    "9": {
+                      "type": "string"
+                    },
+                    "12": {
+                      "type": "string"
+                    },
+                    "39": {
+                      "type": "string"
+                    },
+                    "55": {
+                      "type": "string"
+                    },
+                    "56": {
+                      "type": "string"
+                    },
+                    "57": {
+                      "type": "string"
+                    },
+                    "58": {
+                      "type": "string"
+                    },
+                    "60": {
+                      "type": "string"
+                    },
+                    "63": {
+                      "type": "string"
+                    },
+                    "66": {
+                      "type": "string"
+                    },
+                    "71": {
+                      "type": "string"
+                    },
+                    "78": {
+                      "type": "string"
+                    },
+                    "89": {
+                      "type": "string"
+                    },
+                    "90": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "12",
+                    "39",
+                    "55",
+                    "56",
+                    "57",
+                    "58",
+                    "60",
+                    "63",
+                    "66",
+                    "71",
+                    "78",
+                    "89",
+                    "90"
+                  ],
+                  "additionalProperties": false
+                },
+                "historical_selection_only": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "rule",
+                "records",
+                "raw_input_hashes",
+                "position_to_source",
+                "historical_selection_only"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "purpose",
+            "clusters_per_mode",
+            "protocol",
+            "modes",
+            "scope",
+            "timer_buffers",
+            "max_stall",
+            "stacks",
+            "conditions",
+            "no_pool",
+            "positions_by_region",
+            "selection_rule",
+            "historical_medium_tail_evidence"
+          ],
+          "additionalProperties": false
+        },
+        "D": {
+          "type": "object",
+          "properties": {
+            "purpose": {
+              "type": "string"
+            },
+            "clusters_per_mode": {
+              "type": "integer"
+            },
+            "protocol": {
+              "type": "string",
+              "enum": [
+                "P1",
+                "P2"
+              ]
+            },
+            "modes": {
+              "type": "object",
+              "properties": {
+                "system_trace_background": {
+                  "type": "object",
+                  "properties": {
+                    "control": {
+                      "type": "string"
+                    },
+                    "treatment": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "control",
+                    "treatment",
+                    "scope"
+                  ],
+                  "additionalProperties": false
+                },
+                "cpu_counters_cache": {
+                  "type": "object",
+                  "properties": {
+                    "control": {
+                      "type": "string"
+                    },
+                    "treatment": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "control",
+                    "treatment",
+                    "scope"
+                  ],
+                  "additionalProperties": false
+                },
+                "processor_trace": {
+                  "type": "object",
+                  "properties": {
+                    "control": {
+                      "type": "string"
+                    },
+                    "treatment": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "control",
+                    "treatment",
+                    "scope"
+                  ],
+                  "additionalProperties": false
+                },
+                "powermetrics": {
+                  "type": "object",
+                  "properties": {
+                    "control": {
+                      "type": "string"
+                    },
+                    "treatment": {
+                      "type": "string"
+                    },
+                    "scope": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "control",
+                    "treatment",
+                    "scope"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "system_trace_background",
+                "cpu_counters_cache",
+                "processor_trace",
+                "powermetrics"
+              ],
+              "additionalProperties": false
+            },
+            "unavailable_mode": {
+              "type": "string"
+            },
+            "no_pool": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "purpose",
+            "clusters_per_mode",
+            "protocol",
+            "modes",
+            "unavailable_mode",
+            "no_pool"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "additionalProperties": false
+    },
+    "design": {
+      "type": "object",
+      "properties": {
+        "primary_units": {
+          "type": "string"
+        },
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "positions_per_region": {
+          "type": "integer"
+        },
+        "A_clusters": {
+          "type": "integer"
+        },
+        "B_clusters": {
+          "type": "integer"
+        },
+        "sessions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "session": {
+                "type": "integer"
+              },
+              "relative_day": {
+                "type": "integer"
+              },
+              "window": {
+                "type": "string"
+              },
+              "separation_from_previous_seconds_min": {
+                "type": "integer"
+              },
+              "cohort_phase_order": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "fixed_idle_before_phase_seconds": {
+                "type": "integer"
+              },
+              "notes": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "session",
+              "relative_day",
+              "window",
+              "separation_from_previous_seconds_min",
+              "cohort_phase_order",
+              "fixed_idle_before_phase_seconds",
+              "notes"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "minimum_days": {
+          "type": "integer"
+        },
+        "warmup": {
+          "type": "string"
+        },
+        "process_lifecycle": {
+          "type": "string"
+        },
+        "P1": {
+          "type": "string"
+        },
+        "P2": {
+          "type": "string"
+        },
+        "IPC": {
+          "type": "string"
+        },
+        "trace_comparison": {
+          "type": "string"
+        },
+        "schedule_seed": {
+          "type": "string"
+        },
+        "schedule_algorithm": {
+          "type": "string"
+        },
+        "base_schedule": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "session": {
+                    "type": "integer"
+                  },
+                  "protocol": {
+                    "type": "string",
+                    "enum": [
+                      "P1",
+                      "P2"
+                    ]
+                  },
+                  "trial_within_protocol": {
+                    "type": "integer"
+                  },
+                  "startup_order": {
+                    "type": "string",
+                    "enum": [
+                      "AB",
+                      "BA"
+                    ]
+                  },
+                  "P1_variant_order": {
+                    "type": "string",
+                    "enum": [
+                      "AB",
+                      "BA"
+                    ]
+                  },
+                  "regions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "positions_by_region": {
+                    "type": "object",
+                    "properties": {
+                      "seremban-small": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      },
+                      "seremban-medium": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      },
+                      "seremban-port-dickson": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "required": [
+                      "seremban-small",
+                      "seremban-medium",
+                      "seremban-port-dickson"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "id",
+                  "session",
+                  "protocol",
+                  "trial_within_protocol",
+                  "startup_order",
+                  "P1_variant_order",
+                  "regions",
+                  "positions_by_region"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "session": {
+                    "type": "integer"
+                  },
+                  "protocol": {
+                    "type": "string",
+                    "enum": [
+                      "P1",
+                      "P2"
+                    ]
+                  },
+                  "trial_within_protocol": {
+                    "type": "integer"
+                  },
+                  "startup_order": {
+                    "type": "string",
+                    "enum": [
+                      "AB",
+                      "BA"
+                    ]
+                  },
+                  "regions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "positions_by_region": {
+                    "type": "object",
+                    "properties": {
+                      "seremban-small": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      },
+                      "seremban-medium": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      },
+                      "seremban-port-dickson": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "required": [
+                      "seremban-small",
+                      "seremban-medium",
+                      "seremban-port-dickson"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "P2_pair_orders_by_region": {
+                    "type": "object",
+                    "properties": {
+                      "seremban-small": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "AB",
+                            "BA"
+                          ]
+                        }
+                      },
+                      "seremban-medium": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "AB",
+                            "BA"
+                          ]
+                        }
+                      },
+                      "seremban-port-dickson": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "AB",
+                            "BA"
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "seremban-small",
+                      "seremban-medium",
+                      "seremban-port-dickson"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "id",
+                  "session",
+                  "protocol",
+                  "trial_within_protocol",
+                  "startup_order",
+                  "regions",
+                  "positions_by_region",
+                  "P2_pair_orders_by_region"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          }
+        },
+        "schedule_sha256": {
+          "type": "string"
+        },
+        "diagnostic_schedule": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "cohort": {
+                    "type": "string",
+                    "enum": [
+                      "A",
+                      "B",
+                      "C",
+                      "D"
+                    ]
+                  },
+                  "mode": {
+                    "type": "string"
+                  },
+                  "session": {
+                    "type": "integer"
+                  },
+                  "schedule_ref": {
+                    "type": "string"
+                  },
+                  "condition_order": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "control",
+                        "treatment"
+                      ]
+                    }
+                  },
+                  "variant_order": {
+                    "type": "string",
+                    "enum": [
+                      "AB",
+                      "BA"
+                    ]
+                  },
+                  "fresh_pair_per_condition": {
+                    "type": "boolean"
+                  },
+                  "all_regions_all_100_positions": {
+                    "type": "boolean"
+                  },
+                  "resolved_workload_sha256": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "cohort",
+                  "mode",
+                  "session",
+                  "schedule_ref",
+                  "condition_order",
+                  "variant_order",
+                  "fresh_pair_per_condition",
+                  "all_regions_all_100_positions",
+                  "resolved_workload_sha256"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "cohort": {
+                    "type": "string",
+                    "enum": [
+                      "A",
+                      "B",
+                      "C",
+                      "D"
+                    ]
+                  },
+                  "mode": {
+                    "type": "string"
+                  },
+                  "session": {
+                    "type": "integer"
+                  },
+                  "schedule_ref": {
+                    "type": "string"
+                  },
+                  "condition_order": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "control",
+                        "treatment"
+                      ]
+                    }
+                  },
+                  "variant_order": {
+                    "type": "string",
+                    "enum": [
+                      "AB",
+                      "BA"
+                    ]
+                  },
+                  "fresh_pair_per_condition": {
+                    "type": "boolean"
+                  },
+                  "all_regions_all_100_positions": {
+                    "type": "boolean"
+                  },
+                  "position_subset_ref": {
+                    "type": "string"
+                  },
+                  "resolved_workload_sha256": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "cohort",
+                  "mode",
+                  "session",
+                  "schedule_ref",
+                  "condition_order",
+                  "variant_order",
+                  "fresh_pair_per_condition",
+                  "all_regions_all_100_positions",
+                  "position_subset_ref",
+                  "resolved_workload_sha256"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          }
+        },
+        "diagnostic_schedule_sha256": {
+          "type": "string"
+        },
+        "cohort_execution_order": {
+          "type": "string"
+        },
+        "diagnostic_order": {
+          "type": "string"
+        },
+        "failures": {
+          "type": "string"
+        },
+        "sample_size_rationale": {
+          "type": "object",
+          "properties": {
+            "fixed_32_per_protocol": {
+              "type": "boolean"
+            },
+            "observations_per_variant_region_protocol_A": {
+              "type": "integer"
+            },
+            "NR_p99_rank_ascending": {
+              "type": "integer"
+            },
+            "NR_p99_rank_descending": {
+              "type": "integer"
+            },
+            "historical_tail_resolution": {
+              "type": "object",
+              "properties": {
+                "seremban-small": {
+                  "type": "object",
+                  "properties": {
+                    "historical_log_trial_p99_ratio_sd": {
+                      "type": "number"
+                    },
+                    "illustrative_normal_95_halfwidth_log_ratio_n8": {
+                      "type": "number"
+                    },
+                    "illustrative_normal_95_halfwidth_log_ratio_n32": {
+                      "type": "number"
+                    },
+                    "not_power_or_pooled_p99_CI": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "historical_log_trial_p99_ratio_sd",
+                    "illustrative_normal_95_halfwidth_log_ratio_n8",
+                    "illustrative_normal_95_halfwidth_log_ratio_n32",
+                    "not_power_or_pooled_p99_CI"
+                  ],
+                  "additionalProperties": false
+                },
+                "seremban-medium": {
+                  "type": "object",
+                  "properties": {
+                    "historical_log_trial_p99_ratio_sd": {
+                      "type": "number"
+                    },
+                    "illustrative_normal_95_halfwidth_log_ratio_n8": {
+                      "type": "number"
+                    },
+                    "illustrative_normal_95_halfwidth_log_ratio_n32": {
+                      "type": "number"
+                    },
+                    "not_power_or_pooled_p99_CI": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "historical_log_trial_p99_ratio_sd",
+                    "illustrative_normal_95_halfwidth_log_ratio_n8",
+                    "illustrative_normal_95_halfwidth_log_ratio_n32",
+                    "not_power_or_pooled_p99_CI"
+                  ],
+                  "additionalProperties": false
+                },
+                "seremban-port-dickson": {
+                  "type": "object",
+                  "properties": {
+                    "historical_log_trial_p99_ratio_sd": {
+                      "type": "number"
+                    },
+                    "illustrative_normal_95_halfwidth_log_ratio_n8": {
+                      "type": "number"
+                    },
+                    "illustrative_normal_95_halfwidth_log_ratio_n32": {
+                      "type": "number"
+                    },
+                    "not_power_or_pooled_p99_CI": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "historical_log_trial_p99_ratio_sd",
+                    "illustrative_normal_95_halfwidth_log_ratio_n8",
+                    "illustrative_normal_95_halfwidth_log_ratio_n32",
+                    "not_power_or_pooled_p99_CI"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "seremban-small",
+                "seremban-medium",
+                "seremban-port-dickson"
+              ],
+              "additionalProperties": false
+            },
+            "historical_severe_cluster_rate_example": {
+              "type": "string"
+            },
+            "session_correlation": {
+              "type": "string"
+            },
+            "feasibility": {
+              "type": "string"
+            },
+            "no_adaptive_stopping": {
+              "type": "boolean"
+            },
+            "if_underpowered": {
+              "type": "string"
+            },
+            "diagnostic_storage": {
+              "type": "string"
+            },
+            "readiness_expectation": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "fixed_32_per_protocol",
+            "observations_per_variant_region_protocol_A",
+            "NR_p99_rank_ascending",
+            "NR_p99_rank_descending",
+            "historical_tail_resolution",
+            "historical_severe_cluster_rate_example",
+            "session_correlation",
+            "feasibility",
+            "no_adaptive_stopping",
+            "if_underpowered",
+            "diagnostic_storage",
+            "readiness_expectation"
+          ],
+          "additionalProperties": false
+        },
+        "allocator_stack_companions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "diagnostic_session": {
+                "type": "integer"
+              },
+              "schedule_ref": {
+                "type": "string"
+              },
+              "positions_ref": {
+                "type": "string"
+              },
+              "condition": {
+                "type": "string"
+              },
+              "variant_order": {
+                "type": "string",
+                "enum": [
+                  "AB",
+                  "BA"
+                ]
+              },
+              "fresh_variant_pair": {
+                "type": "boolean"
+              },
+              "separate_from_Ctimed": {
+                "type": "boolean"
+              },
+              "resolved_workload_sha256": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "diagnostic_session",
+              "schedule_ref",
+              "positions_ref",
+              "condition",
+              "variant_order",
+              "fresh_variant_pair",
+              "separate_from_Ctimed",
+              "resolved_workload_sha256"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "order_assignment_construction": {
+          "type": "object",
+          "properties": {
+            "seed": {
+              "type": "string"
+            },
+            "position_pairs": {
+              "type": "object",
+              "properties": {
+                "seremban-small": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "seremban-medium": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "seremban-port-dickson": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "seremban-small",
+                "seremban-medium",
+                "seremban-port-dickson"
+              ],
+              "additionalProperties": false
+            },
+            "first_position_AB_slots_by_region_session": {
+              "type": "object",
+              "properties": {
+                "seremban-small": {
+                  "type": "object",
+                  "properties": {
+                    "0": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "1": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "2": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "3": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "4": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "5": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "6": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "7": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7"
+                  ],
+                  "additionalProperties": false
+                },
+                "seremban-medium": {
+                  "type": "object",
+                  "properties": {
+                    "0": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "1": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "2": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "3": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "4": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "5": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "6": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "7": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7"
+                  ],
+                  "additionalProperties": false
+                },
+                "seremban-port-dickson": {
+                  "type": "object",
+                  "properties": {
+                    "0": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "1": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "2": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "3": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "4": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "5": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "6": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "7": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "0",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "seremban-small",
+                "seremban-medium",
+                "seremban-port-dickson"
+              ],
+              "additionalProperties": false
+            },
+            "mandatory_guarantees": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "iteration_index_guarantee": {
+              "type": "boolean"
+            },
+            "iteration_index_note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "seed",
+            "position_pairs",
+            "first_position_AB_slots_by_region_session",
+            "mandatory_guarantees",
+            "iteration_index_guarantee",
+            "iteration_index_note"
+          ],
+          "additionalProperties": false
+        },
+        "runner_field_schema": {
+          "type": "object",
+          "properties": {
+            "common_required": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "P1_only_required": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "P2_only_required": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "extra_row_fields": {
+              "type": "string"
+            },
+            "index_rule": {
+              "type": "string"
+            },
+            "source_identity": {
+              "type": "string"
+            },
+            "trial_rule": {
+              "type": "string"
+            },
+            "diagnostic_rule": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "common_required",
+            "P1_only_required",
+            "P2_only_required",
+            "extra_row_fields",
+            "index_rule",
+            "source_identity",
+            "trial_rule",
+            "diagnostic_rule"
+          ],
+          "additionalProperties": false
+        },
+        "allocator_stack_companions_sha256": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "primary_units",
+        "regions",
+        "positions_per_region",
+        "A_clusters",
+        "B_clusters",
+        "sessions",
+        "minimum_days",
+        "warmup",
+        "process_lifecycle",
+        "P1",
+        "P2",
+        "IPC",
+        "trace_comparison",
+        "schedule_seed",
+        "schedule_algorithm",
+        "base_schedule",
+        "schedule_sha256",
+        "diagnostic_schedule",
+        "diagnostic_schedule_sha256",
+        "cohort_execution_order",
+        "diagnostic_order",
+        "failures",
+        "sample_size_rationale",
+        "allocator_stack_companions",
+        "order_assignment_construction",
+        "runner_field_schema",
+        "allocator_stack_companions_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "calibration": {
+      "type": "object",
+      "properties": {
+        "execution_now": {
+          "type": "boolean"
+        },
+        "before_new_query_collection": {
+          "type": "boolean"
+        },
+        "empty_endpoint_measurements": {
+          "type": "integer"
+        },
+        "fixed_harness_calibration_clusters": {
+          "type": "integer"
+        },
+        "per_cluster": {
+          "type": "string"
+        },
+        "diagnostic_precision_gates": {
+          "type": "object",
+          "properties": {
+            "clock_failures": {
+              "type": "integer"
+            },
+            "negative_cpu_deltas": {
+              "type": "string"
+            },
+            "read_aperture_p99_max_seconds": {
+              "type": "number"
+            },
+            "B_endpoint_cost_median_fraction_of_historical_small_p50_max": {
+              "type": "number"
+            },
+            "B_endpoint_cost_p99_fraction_of_historical_small_p50_max": {
+              "type": "number"
+            },
+            "differential_instrumentation_median_ratio_change_max_absolute": {
+              "type": "number"
+            },
+            "tiny_query_floor_seconds": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "clock_failures",
+            "negative_cpu_deltas",
+            "read_aperture_p99_max_seconds",
+            "B_endpoint_cost_median_fraction_of_historical_small_p50_max",
+            "B_endpoint_cost_p99_fraction_of_historical_small_p50_max",
+            "differential_instrumentation_median_ratio_change_max_absolute",
+            "tiny_query_floor_seconds"
+          ],
+          "additionalProperties": false
+        },
+        "no_bias_subtraction": {
+          "type": "string"
+        },
+        "if_B_gates_fail": {
+          "type": "string"
+        },
+        "C_gate": {
+          "type": "string"
+        },
+        "D_gate": {
+          "type": "string"
+        },
+        "runtime_artifact_lock": {
+          "type": "string"
+        },
+        "historical_small_NR_p50_seconds": {
+          "type": "number"
+        },
+        "C_event_limit_per_query": {
+          "type": "integer"
+        },
+        "B_boundary_implementation": {
+          "type": "string"
+        },
+        "instrumentation_loss_rule": {
+          "type": "string"
+        },
+        "per_instrument_fixed_calibration": {
+          "type": "object",
+          "properties": {
+            "instruments": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "paired_clusters_per_instrument": {
+              "type": "integer"
+            },
+            "conditions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "order": {
+              "type": "string"
+            },
+            "purpose": {
+              "type": "string"
+            },
+            "CPU_buffer_work": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "instruments",
+            "paired_clusters_per_instrument",
+            "conditions",
+            "order",
+            "purpose",
+            "CPU_buffer_work"
+          ],
+          "additionalProperties": false
+        },
+        "instrumentation_difference_definition": {
+          "type": "string"
+        },
+        "allocation_capacity_assessment": {
+          "type": "object",
+          "properties": {
+            "unit": {
+              "type": "string"
+            },
+            "historical_scope": {
+              "type": "string"
+            },
+            "historical_records": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "region": {
+                    "type": "string"
+                  },
+                  "variant": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "type": "string"
+                  },
+                  "sha256": {
+                    "type": "string"
+                  },
+                  "queries": {
+                    "type": "integer"
+                  },
+                  "sum_new_calls": {
+                    "type": "integer"
+                  },
+                  "max_per_query_new_calls": {
+                    "type": "integer"
+                  },
+                  "max_per_query_new_plus_delete": {
+                    "type": "integer"
+                  },
+                  "source_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "region",
+                  "variant",
+                  "path",
+                  "sha256",
+                  "queries",
+                  "sum_new_calls",
+                  "max_per_query_new_calls",
+                  "max_per_query_new_plus_delete",
+                  "source_ids"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "max_observed_per_query_operations": {
+              "type": "integer"
+            },
+            "old_capacity": {
+              "type": "integer"
+            },
+            "old_capacity_headroom_fraction": {
+              "type": "number"
+            },
+            "new_capacity": {
+              "type": "integer"
+            },
+            "new_capacity_vs_observed_max": {
+              "type": "number"
+            },
+            "record_size_bytes_max": {
+              "type": "integer"
+            },
+            "buffer_bytes_per_worker": {
+              "type": "integer"
+            },
+            "two_worker_buffer_bytes": {
+              "type": "integer"
+            },
+            "total_C_positions": {
+              "type": "integer"
+            },
+            "timed_query_captures": {
+              "type": "integer"
+            },
+            "worst_uncompressed_timed_C_event_bytes": {
+              "type": "integer"
+            },
+            "storage_preflight_GiB_min": {
+              "type": "integer"
+            },
+            "stop_free_GiB_min": {
+              "type": "integer"
+            },
+            "resident_memory_gate": {
+              "type": "string"
+            },
+            "coverage_limit": {
+              "type": "string"
+            },
+            "future_preflight": {
+              "type": "string"
+            },
+            "overflow": {
+              "type": "string"
+            },
+            "calibration_failure": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "unit",
+            "historical_scope",
+            "historical_records",
+            "max_observed_per_query_operations",
+            "old_capacity",
+            "old_capacity_headroom_fraction",
+            "new_capacity",
+            "new_capacity_vs_observed_max",
+            "record_size_bytes_max",
+            "buffer_bytes_per_worker",
+            "two_worker_buffer_bytes",
+            "total_C_positions",
+            "timed_query_captures",
+            "worst_uncompressed_timed_C_event_bytes",
+            "storage_preflight_GiB_min",
+            "stop_free_GiB_min",
+            "resident_memory_gate",
+            "coverage_limit",
+            "future_preflight",
+            "overflow",
+            "calibration_failure"
+          ],
+          "additionalProperties": false
+        },
+        "diagnostic_build_equivalence": {
+          "type": "object",
+          "properties": {
+            "execution_now": {
+              "type": "boolean"
+            },
+            "all_required": {
+              "type": "boolean"
+            },
+            "failure_action": {
+              "type": "string"
+            },
+            "gates": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "pass": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "pass"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "required": [
+            "execution_now",
+            "all_required",
+            "failure_action",
+            "gates"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "execution_now",
+        "before_new_query_collection",
+        "empty_endpoint_measurements",
+        "fixed_harness_calibration_clusters",
+        "per_cluster",
+        "diagnostic_precision_gates",
+        "no_bias_subtraction",
+        "if_B_gates_fail",
+        "C_gate",
+        "D_gate",
+        "runtime_artifact_lock",
+        "historical_small_NR_p50_seconds",
+        "C_event_limit_per_query",
+        "B_boundary_implementation",
+        "instrumentation_loss_rule",
+        "per_instrument_fixed_calibration",
+        "instrumentation_difference_definition",
+        "allocation_capacity_assessment",
+        "diagnostic_build_equivalence"
+      ],
+      "additionalProperties": false
+    },
+    "hypotheses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "signature": {
+            "type": "string"
+          },
+          "measurement": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "control": {
+            "type": "string"
+          },
+          "alternative": {
+            "type": "string"
+          },
+          "weakens": {
+            "type": "string"
+          },
+          "sufficient": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "signature",
+          "measurement",
+          "control",
+          "alternative",
+          "weakens",
+          "sufficient",
+          "limit"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "properties": {
+        "NR_percentiles": {
+          "type": "string"
+        },
+        "primary_estimand": {
+          "type": "string"
+        },
+        "additional_metrics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "median_definition": {
+          "type": "string"
+        },
+        "denominators": {
+          "type": "string"
+        },
+        "bootstrap": {
+          "type": "object",
+          "properties": {
+            "method": {
+              "type": "string"
+            },
+            "iterations": {
+              "type": "integer"
+            },
+            "seed": {
+              "type": "integer"
+            },
+            "rng": {
+              "type": "string"
+            },
+            "steps": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "ordinary_95_percentile_bounds": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "confirmatory_family": {
+              "type": "string"
+            },
+            "confirmatory_two_sided_family_alpha": {
+              "type": "number"
+            },
+            "bonferroni_per_estimand_alpha": {
+              "type": "number"
+            },
+            "simultaneous_percentile_bounds": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "studentized": {
+              "type": "boolean"
+            },
+            "limitations": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "method",
+            "iterations",
+            "seed",
+            "rng",
+            "steps",
+            "ordinary_95_percentile_bounds",
+            "confirmatory_family",
+            "confirmatory_two_sided_family_alpha",
+            "bonferroni_per_estimand_alpha",
+            "simultaneous_percentile_bounds",
+            "studentized",
+            "limitations"
+          ],
+          "additionalProperties": false
+        },
+        "sensitivity": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "historical_order": {
+          "type": "string"
+        },
+        "outliers": {
+          "type": "string"
+        },
+        "new_hypotheses": {
+          "type": "string"
+        },
+        "CI_decisions": {
+          "type": "string"
+        },
+        "equal_source_variability": {
+          "type": "string"
+        },
+        "protocol_interaction": {
+          "type": "string"
+        },
+        "secondary_CPU_family": {
+          "type": "object",
+          "properties": {
+            "estimand": {
+              "type": "string"
+            },
+            "alpha": {
+              "type": "number"
+            },
+            "two_sided_Bonferroni_per_cell_alpha": {
+              "type": "number"
+            },
+            "percentile_bounds": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "role": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "estimand",
+            "alpha",
+            "two_sided_Bonferroni_per_cell_alpha",
+            "percentile_bounds",
+            "role"
+          ],
+          "additionalProperties": false
+        },
+        "sensitivity_interval_rule": {
+          "type": "string"
+        },
+        "H1_event_rules": {
+          "type": "object",
+          "properties": {
+            "units": {
+              "type": "string"
+            },
+            "reference": {
+              "type": "string"
+            },
+            "precision_floor": {
+              "type": "string"
+            },
+            "moderate_absolute_paired_threshold": {
+              "type": "string"
+            },
+            "severe_absolute_paired_threshold": {
+              "type": "string"
+            },
+            "labels": {
+              "type": "string"
+            },
+            "historical_extreme_flag": {
+              "type": "string"
+            },
+            "continuous_analysis": {
+              "type": "string"
+            },
+            "offCPU_accounting": {
+              "type": "string"
+            },
+            "heuristic_interpretation": {
+              "type": "string"
+            },
+            "uncertainty": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "units",
+            "reference",
+            "precision_floor",
+            "moderate_absolute_paired_threshold",
+            "severe_absolute_paired_threshold",
+            "labels",
+            "historical_extreme_flag",
+            "continuous_analysis",
+            "offCPU_accounting",
+            "heuristic_interpretation",
+            "uncertainty"
+          ],
+          "additionalProperties": false
+        },
+        "bootstrap_execution_spec": {
+          "type": "object",
+          "properties": {
+            "numpy_version": {
+              "type": "string"
+            },
+            "python_serialization": {
+              "type": "string"
+            },
+            "primary_initialization": {
+              "type": "string"
+            },
+            "primary_draw_order": {
+              "type": "string"
+            },
+            "sharing": {
+              "type": "string"
+            },
+            "sensitivity_draw_order": {
+              "type": "string"
+            },
+            "diagnostic_draw_order": {
+              "type": "string"
+            },
+            "NR_index": {
+              "type": "string"
+            },
+            "endpoint_fractions": {
+              "type": "object",
+              "properties": {
+                "ordinary95": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "primary99_5": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "secondaryCPU": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "ordinary95",
+                "primary99_5",
+                "secondaryCPU"
+              ],
+              "additionalProperties": false
+            },
+            "ratio": {
+              "type": "string"
+            },
+            "failed_or_missing": {
+              "type": "string"
+            },
+            "deterministic_serialization": {
+              "type": "string"
+            },
+            "synthetic_vectors": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "numpy_version",
+            "python_serialization",
+            "primary_initialization",
+            "primary_draw_order",
+            "sharing",
+            "sensitivity_draw_order",
+            "diagnostic_draw_order",
+            "NR_index",
+            "endpoint_fractions",
+            "ratio",
+            "failed_or_missing",
+            "deterministic_serialization",
+            "synthetic_vectors"
+          ],
+          "additionalProperties": false
+        },
+        "session_level_descriptive": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "outputs": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "limits": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "label",
+            "outputs",
+            "limits"
+          ],
+          "additionalProperties": false
+        },
+        "claim_scope_ladder": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "NR_percentiles",
+        "primary_estimand",
+        "additional_metrics",
+        "median_definition",
+        "denominators",
+        "bootstrap",
+        "sensitivity",
+        "historical_order",
+        "outliers",
+        "new_hypotheses",
+        "CI_decisions",
+        "equal_source_variability",
+        "protocol_interaction",
+        "secondary_CPU_family",
+        "sensitivity_interval_rule",
+        "H1_event_rules",
+        "bootstrap_execution_spec",
+        "session_level_descriptive",
+        "claim_scope_ladder"
+      ],
+      "additionalProperties": false
+    },
+    "acceptance": {
+      "type": "object",
+      "properties": {
+        "A_typical": {
+          "type": "string"
+        },
+        "p95": {
+          "type": "string"
+        },
+        "B_medium_tail": {
+          "type": "string"
+        },
+        "C_corridor_tail": {
+          "type": "string"
+        },
+        "statistically_supported_regression": {
+          "type": "string"
+        },
+        "D_attribution": {
+          "type": "string"
+        },
+        "E_equivalence": {
+          "type": "string"
+        },
+        "F_instrumentation": {
+          "type": "string"
+        },
+        "G_integrity": {
+          "type": "string"
+        },
+        "promotion": {
+          "type": "string"
+        },
+        "diagnostic_equivalence_gate": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "A_typical",
+        "p95",
+        "B_medium_tail",
+        "C_corridor_tail",
+        "statistically_supported_regression",
+        "D_attribution",
+        "E_equivalence",
+        "F_instrumentation",
+        "G_integrity",
+        "promotion",
+        "diagnostic_equivalence_gate"
+      ],
+      "additionalProperties": false
+    },
+    "exclusion_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason",
+          "action"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required_output_schema": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "type": "string"
+        },
+        "id_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "identity_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "query_metrics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "null_policy": {
+          "type": "string"
+        },
+        "failure_record": {
+          "type": "string"
+        },
+        "allocation_events": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "host_records": {
+          "type": "string"
+        },
+        "summary_outputs": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "format",
+        "id_fields",
+        "identity_fields",
+        "query_metrics",
+        "null_policy",
+        "failure_record",
+        "allocation_events",
+        "host_records",
+        "summary_outputs"
+      ],
+      "additionalProperties": false
+    },
+    "stop_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "future_execution": {
+      "type": "object",
+      "properties": {
+        "runner_status": {
+          "type": "string"
+        },
+        "approval_gate": {
+          "type": "string"
+        },
+        "runner_contract": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "commands_are_interface_specification": {
+          "type": "boolean"
+        },
+        "requirements": {
+          "type": "string"
+        },
+        "artifact_manifest_required": {
+          "type": "string"
+        },
+        "active_protocol_file": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "runner_status",
+        "approval_gate",
+        "runner_contract",
+        "commands_are_interface_specification",
+        "requirements",
+        "artifact_manifest_required",
+        "active_protocol_file"
+      ],
+      "additionalProperties": false
+    },
+    "amendment_policy": {
+      "type": "string"
+    },
+    "runtime_tree_identities": {
+      "type": "object",
+      "properties": {
+        "native": {
+          "type": "string"
+        },
+        "backend": {
+          "type": "string"
+        },
+        "frontend": {
+          "type": "string"
+        },
+        "tools": {
+          "type": "string"
+        },
+        "CMakeLists.txt": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "native",
+        "backend",
+        "frontend",
+        "tools",
+        "CMakeLists.txt"
+      ],
+      "additionalProperties": false
+    },
+    "correctness_protection": {
+      "type": "object",
+      "properties": {
+        "unchanged": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "before_execution": {
+          "type": "string"
+        },
+        "during_each_query": {
+          "type": "string"
+        },
+        "fingerprint_encoding": {
+          "type": "string"
+        },
+        "oracle": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "unchanged",
+        "before_execution",
+        "during_each_query",
+        "fingerprint_encoding",
+        "oracle"
+      ],
+      "additionalProperties": false
+    },
+    "finding_state_at_freeze": {
+      "type": "object",
+      "properties": {
+        "F2": {
+          "type": "string"
+        },
+        "F3": {
+          "type": "string"
+        },
+        "resolved_findings_not_reopened": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hypothesis_verdicts": {
+          "type": "object",
+          "properties": {
+            "H1": {
+              "type": "string"
+            },
+            "H2": {
+              "type": "string"
+            },
+            "H3": {
+              "type": "string"
+            },
+            "H4": {
+              "type": "string"
+            },
+            "H5": {
+              "type": "string"
+            },
+            "H6": {
+              "type": "string"
+            },
+            "H7": {
+              "type": "string"
+            },
+            "H8": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "H1",
+            "H2",
+            "H3",
+            "H4",
+            "H5",
+            "H6",
+            "H7",
+            "H8"
+          ],
+          "additionalProperties": false
+        },
+        "Task15_review": {
+          "type": "object",
+          "properties": {
+            "F1": {
+              "type": "string"
+            },
+            "F2": {
+              "type": "string"
+            },
+            "F3": {
+              "type": "string"
+            },
+            "F4": {
+              "type": "string"
+            },
+            "F5": {
+              "type": "string"
+            },
+            "F6": {
+              "type": "string"
+            },
+            "F7": {
+              "type": "string"
+            },
+            "F8": {
+              "type": "string"
+            },
+            "F9": {
+              "type": "string"
+            },
+            "F10": {
+              "type": "string"
+            },
+            "F11": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "F2",
+        "F3",
+        "resolved_findings_not_reopened",
+        "hypothesis_verdicts",
+        "Task15_review"
+      ],
+      "additionalProperties": false
+    },
+    "amendment": {
+      "type": "object",
+      "properties": {
+        "parent_version": {
+          "type": "string"
+        },
+        "parent_canonical_sha256": {
+          "type": "string"
+        },
+        "parent_documentation_commit": {
+          "type": "string"
+        },
+        "parent_files": {
+          "type": "object",
+          "properties": {
+            "docs/task15_tail_attribution_protocol.json": {
+              "type": "string"
+            },
+            "docs/task15_tail_attribution_preregistration.md": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "docs/task15_tail_attribution_protocol.json",
+            "docs/task15_tail_attribution_preregistration.md"
+          ],
+          "additionalProperties": false
+        },
+        "approval_status": {
+          "type": "string"
+        },
+        "new_task15_observations_used": {
+          "type": "boolean"
+        },
+        "collection_absence_status": {
+          "type": "string"
+        },
+        "review_references": {
+          "type": "object",
+          "properties": {
+            "/Users/sallahuddin/Downloads/files/independent_task15_protocol_review.md": {
+              "type": "string"
+            },
+            "/Users/sallahuddin/Downloads/files/schedule_validation_results.json": {
+              "type": "string"
+            },
+            "/Users/sallahuddin/Downloads/files/validate_task15_protocol.py": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "/Users/sallahuddin/Downloads/files/independent_task15_protocol_review.md",
+            "/Users/sallahuddin/Downloads/files/schedule_validation_results.json",
+            "/Users/sallahuddin/Downloads/files/validate_task15_protocol.py"
+          ],
+          "additionalProperties": false
+        },
+        "ledger": {
+          "type": "string"
+        },
+        "generator_seed": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "parent_version",
+        "parent_canonical_sha256",
+        "parent_documentation_commit",
+        "parent_files",
+        "approval_status",
+        "new_task15_observations_used",
+        "collection_absence_status",
+        "review_references",
+        "ledger",
+        "generator_seed"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "protocol_id",
+    "version",
+    "phase",
+    "execution_authorized",
+    "promotion_authorized",
+    "identity",
+    "baseline_commit",
+    "candidate_commit",
+    "repository",
+    "branch",
+    "origin",
+    "binaries",
+    "inputs",
+    "historical_anchor_seconds_by_original_position",
+    "evidence_files_used",
+    "audit_artifacts",
+    "capability_sources",
+    "environment",
+    "measurement_boundaries",
+    "instruments",
+    "unsupported_instruments",
+    "cohorts",
+    "design",
+    "calibration",
+    "hypotheses",
+    "statistics",
+    "acceptance",
+    "exclusion_rules",
+    "required_output_schema",
+    "stop_conditions",
+    "future_execution",
+    "amendment_policy",
+    "runtime_tree_identities",
+    "correctness_protection",
+    "finding_state_at_freeze",
+    "amendment"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Task15 approved v1.1.0 closed structural schema; pinned canonical identity additionally required"
+}
