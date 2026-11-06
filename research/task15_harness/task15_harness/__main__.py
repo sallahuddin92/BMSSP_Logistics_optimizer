@@ -10,7 +10,7 @@ from .integrity import canonical
 from .manifest import SAFE_STATES, prepare_manifest, validate_manifest
 from .output import create_bundle, read_bundle_json
 from .planning import compile_plan, plan_counts, query_records, validate_plan
-from .protocol import PACKAGE_ROOT, load_protocol
+from .protocol import PACKAGE_ROOT, load_protocol, protocol_binding
 from .schedule import validate_schedule
 from .simulation import simulate
 
@@ -51,6 +51,11 @@ def main(argv: list[str] | None = None) -> int:
                      'harness_source': source_lock()}
         elif op == 'validate-schedule':
             value = validate_schedule(protocol.data())
+            order = protocol.data()['design']['resolved_diagnostic_order']
+            value['resolved_diagnostic_order'] = {
+                'entry_count': len(order['entries']), 'condition_block_count': len(order['condition_blocks']),
+                'rule': order['rule'], 'blocks_by_session': dict(Counter(
+                    b['diagnostic_session'] for b in order['condition_blocks']))}
         elif op == 'inspect-identities':
             value = inspect_identities(protocol, checked=not args.skip_external)
         elif op == 'inspect-storage':
@@ -65,6 +70,8 @@ def main(argv: list[str] | None = None) -> int:
             plan = compile_plan(protocol)
             validate_plan(protocol, plan)
             value = {'plan': plan, 'counts': plan_counts(protocol, plan)}
+        if op not in {'prepare-manifest', 'validate-manifest'}:
+            value['protocol'] = protocol_binding(protocol)
         if args.output is not None:
             filename = 'manifest.json' if op == 'prepare-manifest' else 'report.json'
             files: dict[str, bytes | Iterable[bytes]] = {filename: canonical(value)+b'\n'}

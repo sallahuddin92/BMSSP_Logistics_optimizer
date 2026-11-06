@@ -1,0 +1,439 @@
+{
+  "type": "object",
+  "required": [
+    "allocator_stack_companions_sha256",
+    "collection_authorized",
+    "diagnostic_schedule_sha256",
+    "diagnostic_source_lanes",
+    "dispatchable",
+    "identity_sha256",
+    "kind",
+    "ordering_caveat",
+    "protocol_file_sha256",
+    "protocol_sha256",
+    "protocol_version",
+    "query_identity_namespace_sha256",
+    "resolved_diagnostic_order_sha256",
+    "schedule_sha256",
+    "schema_version",
+    "scientific_approval",
+    "stack_companions",
+    "unit_order",
+    "units"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "allocator_stack_companions_sha256": {
+      "type": "string"
+    },
+    "collection_authorized": {
+      "type": "boolean"
+    },
+    "diagnostic_schedule_sha256": {
+      "type": "string"
+    },
+    "diagnostic_source_lanes": {
+      "type": "object",
+      "required": [
+        "allocation_stack_companions",
+        "main"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "allocation_stack_companions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "main": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "dispatchable": {
+      "type": "boolean"
+    },
+    "identity_sha256": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string"
+    },
+    "ordering_caveat": {
+      "type": "string"
+    },
+    "protocol_file_sha256": {
+      "type": "string"
+    },
+    "protocol_sha256": {
+      "type": "string"
+    },
+    "protocol_version": {
+      "type": "string"
+    },
+    "query_identity_namespace_sha256": {
+      "type": "string"
+    },
+    "resolved_diagnostic_order_sha256": {
+      "type": "string"
+    },
+    "schedule_sha256": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string",
+      "enum": [
+        "3"
+      ]
+    },
+    "scientific_approval": {
+      "type": "string"
+    },
+    "stack_companions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "cohort",
+          "condition",
+          "diagnostic_id",
+          "id",
+          "mode",
+          "protocol",
+          "resolved_condition_block",
+          "schedule_ref",
+          "schedule_ref_session",
+          "session_id",
+          "session_key",
+          "session_kind",
+          "startup_order",
+          "subset"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "cohort": {
+            "type": "string"
+          },
+          "condition": {
+            "type": "string"
+          },
+          "diagnostic_id": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string"
+          },
+          "protocol": {
+            "type": "string"
+          },
+          "resolved_condition_block": {
+            "type": "object",
+            "required": [
+              "cohort",
+              "condition",
+              "condition_index",
+              "diagnostic_entry_id",
+              "diagnostic_session",
+              "entry_sequence_index",
+              "lane",
+              "mode",
+              "schedule_ref",
+              "schedule_ref_session",
+              "sequence_index",
+              "session_key",
+              "source_lane_index",
+              "source_lane_session_index",
+              "startup_order",
+              "unit_id"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "cohort": {
+                "type": "string"
+              },
+              "condition": {
+                "type": "string"
+              },
+              "condition_index": {
+                "type": "integer"
+              },
+              "diagnostic_entry_id": {
+                "type": "string"
+              },
+              "diagnostic_session": {
+                "type": "integer"
+              },
+              "entry_sequence_index": {
+                "type": "integer"
+              },
+              "lane": {
+                "type": "string"
+              },
+              "mode": {
+                "type": "string"
+              },
+              "schedule_ref": {
+                "type": "string"
+              },
+              "schedule_ref_session": {
+                "type": "integer"
+              },
+              "sequence_index": {
+                "type": "integer"
+              },
+              "session_key": {
+                "type": "string"
+              },
+              "source_lane_index": {
+                "type": "integer"
+              },
+              "source_lane_session_index": {
+                "type": "integer"
+              },
+              "startup_order": {
+                "type": "string"
+              },
+              "unit_id": {
+                "type": "string"
+              }
+            }
+          },
+          "schedule_ref": {
+            "type": "string"
+          },
+          "schedule_ref_session": {
+            "type": "integer"
+          },
+          "session_id": {
+            "type": "integer"
+          },
+          "session_key": {
+            "type": "string"
+          },
+          "session_kind": {
+            "type": "string"
+          },
+          "startup_order": {
+            "type": "string"
+          },
+          "subset": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "unit_order": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "units": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "required": [
+              "cohort",
+              "condition",
+              "diagnostic_id",
+              "id",
+              "mode",
+              "protocol",
+              "resolved_condition_block",
+              "schedule_ref",
+              "schedule_ref_session",
+              "session_id",
+              "session_key",
+              "session_kind",
+              "startup_order",
+              "subset"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "cohort": {
+                "type": "string"
+              },
+              "condition": {
+                "type": "string"
+              },
+              "diagnostic_id": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "mode": {
+                "type": "string"
+              },
+              "protocol": {
+                "type": "string"
+              },
+              "resolved_condition_block": {
+                "type": "object",
+                "required": [
+                  "cohort",
+                  "condition",
+                  "condition_index",
+                  "diagnostic_entry_id",
+                  "diagnostic_session",
+                  "entry_sequence_index",
+                  "lane",
+                  "mode",
+                  "schedule_ref",
+                  "schedule_ref_session",
+                  "sequence_index",
+                  "session_key",
+                  "source_lane_index",
+                  "source_lane_session_index",
+                  "startup_order",
+                  "unit_id"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "cohort": {
+                    "type": "string"
+                  },
+                  "condition": {
+                    "type": "string"
+                  },
+                  "condition_index": {
+                    "type": "integer"
+                  },
+                  "diagnostic_entry_id": {
+                    "type": "string"
+                  },
+                  "diagnostic_session": {
+                    "type": "integer"
+                  },
+                  "entry_sequence_index": {
+                    "type": "integer"
+                  },
+                  "lane": {
+                    "type": "string"
+                  },
+                  "mode": {
+                    "type": "string"
+                  },
+                  "schedule_ref": {
+                    "type": "string"
+                  },
+                  "schedule_ref_session": {
+                    "type": "integer"
+                  },
+                  "sequence_index": {
+                    "type": "integer"
+                  },
+                  "session_key": {
+                    "type": "string"
+                  },
+                  "source_lane_index": {
+                    "type": "integer"
+                  },
+                  "source_lane_session_index": {
+                    "type": "integer"
+                  },
+                  "startup_order": {
+                    "type": "string"
+                  },
+                  "unit_id": {
+                    "type": "string"
+                  }
+                }
+              },
+              "schedule_ref": {
+                "type": "string"
+              },
+              "schedule_ref_session": {
+                "type": "integer"
+              },
+              "session_id": {
+                "type": "integer"
+              },
+              "session_key": {
+                "type": "string"
+              },
+              "session_kind": {
+                "type": "string"
+              },
+              "startup_order": {
+                "type": "string"
+              },
+              "subset": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "cohort",
+              "condition",
+              "diagnostic_id",
+              "id",
+              "mode",
+              "protocol",
+              "schedule_ref",
+              "schedule_ref_session",
+              "session_id",
+              "session_key",
+              "session_kind",
+              "startup_order",
+              "subset"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "cohort": {
+                "type": "string"
+              },
+              "condition": {
+                "type": "string"
+              },
+              "diagnostic_id": {
+                "type": "null"
+              },
+              "id": {
+                "type": "string"
+              },
+              "mode": {
+                "type": "null"
+              },
+              "protocol": {
+                "type": "string"
+              },
+              "schedule_ref": {
+                "type": "string"
+              },
+              "schedule_ref_session": {
+                "type": "integer"
+              },
+              "session_id": {
+                "type": "integer"
+              },
+              "session_key": {
+                "type": "string"
+              },
+              "session_kind": {
+                "type": "string"
+              },
+              "startup_order": {
+                "type": "string"
+              },
+              "subset": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

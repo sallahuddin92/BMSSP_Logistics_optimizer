@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 from .errors import ControlError, require
 from .integrity import digest, hash_file
-from .protocol import PACKAGE_ROOT, Protocol, AMENDMENT_MD_HASH, LEDGER_HASH
+from .protocol import PACKAGE_ROOT, Protocol, FROZEN_FILES, protocol_binding
 
 STATUSES = {'VERIFIED', 'MISMATCH', 'MISSING', 'UNREADABLE', 'NOT_CHECKED'}
 
@@ -44,19 +44,14 @@ def specifications(protocol: Protocol) -> list[tuple[str, Path, str]]:
     for path, record in p['evidence_files_used'].items():
         if Path(path).name == 'evidence-index.json':
             specs.append(('evidence_index/'+digest(path)[:16], Path(path), record['sha256']))
-    for path, expected in p['amendment']['parent_files'].items():
-        specs.append(('parent/'+path, protocol.repository/path, expected))
-    from .integrity import read_json
-    ledger = read_json(protocol.repository/'docs/task15_tail_attribution_amendment_v1.1.0.json')
-    specs += [('protocol/active_json', protocol.repository/'docs/task15_tail_attribution_protocol_v1.1.0.json', ledger['new_JSON_file_byte_sha256']),
-              ('protocol/active_md', protocol.repository/'docs/task15_tail_attribution_preregistration_v1.1.0.md', AMENDMENT_MD_HASH),
-              ('protocol/amendment_ledger', protocol.repository/'docs/task15_tail_attribution_amendment_v1.1.0.json', LEDGER_HASH)]
+    specs += [('protocol/'+path, protocol.repository/path, expected)
+              for path, expected in sorted(FROZEN_FILES.items())]
     return specs
 
 
 def inspect_identities(protocol: Protocol, checked: bool = True) -> dict[str, Any]:
     records = [inspect_file(*spec, checked=checked) for spec in specifications(protocol)]
-    return {'records': records, 'counts': {s: sum(r['status'] == s for r in records) for s in sorted(STATUSES)},
+    return {'protocol': protocol_binding(protocol), 'records': records, 'counts': {s: sum(r['status'] == s for r in records) for s in sorted(STATUSES)},
             'all_verified': all(r['status'] == 'VERIFIED' for r in records),
             'future_execution_eligible': False,
             'note': 'Byte identity only. Binaries were not loaded; compiler flags, clocks and instrumentation remain pending.'}

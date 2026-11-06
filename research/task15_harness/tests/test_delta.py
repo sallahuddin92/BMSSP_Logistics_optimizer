@@ -167,7 +167,7 @@ class DeltaTests(unittest.TestCase):
         bases = {r['id']: r for r in d['base_schedule']}
         diagnostics = {r['id']: r for r in d['diagnostic_schedule']}
         stacks = {r['id']: r for r in d['allocator_stack_companions']}
-        units = self.plan['units'] + self.plan['stack_companions']
+        units = self.plan['units']
         self.assertEqual(len(units), 228)
         grouping = Counter()
         mismatching_reference_sessions = 0
@@ -326,7 +326,7 @@ class DeltaTests(unittest.TestCase):
             for row in d['allocator_stack_companions']:
                 if row['diagnostic_session'] == session:
                     companions_expected.append(f'C/{row["id"]}/stack')
-        self.assertEqual([u['id'] for u in self.plan['units'] if u['session_kind'] == 'DIAGNOSTIC'], main_expected)
+        self.assertEqual(self.plan['diagnostic_source_lanes']['main'], main_expected)
         self.assertEqual([u['id'] for u in self.plan['stack_companions']], companions_expected)
         self.assertFalse(self.plan['collection_authorized'])
         self.assertEqual(self.plan['kind'], 'STATIC_EXECUTION_PLAN_NOT_EXECUTABLE')

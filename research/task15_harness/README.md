@@ -1,6 +1,6 @@
-# Task 15 measurement harness — Phase 1 control plane
+# Task 15 measurement harness — Phase 2 static integration
 
-Version **0.1.1**. Standard-library Python 3.11+ package; no installation or network
+Version **0.2.0**. Standard-library Python 3.11+ package; no installation or network
 is required. Production BMSSP, bindings, API, existing tools and all frozen protocol
 files are untouched. This package has **no execution adapter**: no native binding
 import, solver dispatch, worker launcher, calibration or profiler path exists.
@@ -61,16 +61,16 @@ signatures. The state machine cannot create any later state in this implementati
 ## Frozen authority and schemas
 
 Protocol identity is
-`6664cad958a863226925efdeac4ffc5fe220673e8cd7072c05cd6298facfb37f`.
-Both v1.0 originals and the v1.1 amendment are verified without edits. Normal loading
+`c41e45bccb68abdf03bab40ea793837a7f508fde17634c1aa8b358a3d82fceb0`.
+The complete v1.0 -> v1.1 -> v1.2 document chain is verified without edits. Normal loading
 never imports the amendment generator or reconstructs any order from a seed.
-`schemas/protocol-1.1.0.schema.json` is a closed structural schema for all approved
+`schemas/protocol-1.2.0.schema.json` is a closed structural schema for all approved
 fields; canonical identity additionally freezes all scientific strings/values.
 Independent semantic checks evaluate each stored execution index -> original
 position -> source ID; source occurrence identities remain distinct. The schema
 file is data, not an executable generator. `$schema` URLs are metadata only and are
-never fetched. `manifest-1.schema.json` and semantic verification define manifests.
-See [schema/state details](specs/control-plane-schema-v1.md).
+never fetched. `manifest-2.schema.json` and semantic verification define manifests.
+See [schema/state details](specs/control-plane-schema-v2.md).
 
 The source identity is separate from the protocol: streaming SHA-256 over each
 package `.py/.json/.md/.toml` file, sorted relative names, then canonical hash of that map.
@@ -80,7 +80,7 @@ preparation is distinguishable from a committed one. Content hashes are integrit
 locks, not cryptographic approval signatures. Modifying source or repository state
 makes an earlier manifest stale; prepare a new exclusive bundle, never overwrite it.
 
-## Exact plan semantics and incomplete ordering
+## Exact plan semantics and resolved ordering
 
 Primary A/B phases follow the eight sessions' frozen cohort order and the embedded
 base-row order filtered by session. P1 emits one whole variant batch per region;
@@ -91,13 +91,20 @@ the fixed mode/condition order and represents both required untimed hot solves i
 the CPU/cache mode. Every record identifies expected production identity; diagnostic
 binary identity is **null/PENDING_DIAGNOSTIC_BUILD**, never invented.
 
-The frozen protocol supplies main diagnostic and allocator-stack companion lists
-but does not define their cross-list interleaving. The plan retains **two ordered
-lanes**, preserving each list/session/reference. Main-then-companion serialization
-is not an assertion of execution order. This ambiguity must be independently
-clarified before a future executable runner; no scientific amendment is silently
-applied here. Fixed calibration requirements are preserved as pending manifest
-gates, not invented calibration query orders. No calibration planner/runner is enabled.
+Protocol v1.2.0 freezes SESSION_END ordering. The authoritative `units` array
+contains all 228 units: the unchanged 128 primary A/B units, then 100 diagnostic
+condition blocks ordered exactly by the resolved protocol sequence. Sessions 0/2
+have 26 blocks each; sessions 1/3 have 24. Each session's companions follow its
+main diagnostics. No companion is globally appended after session 3.
+
+Original main and companion lane IDs remain in `diagnostic_source_lanes` for
+provenance. `stack_companions` remains a four-unit provenance view, **not additional
+work**; consumers must enumerate `units` only. Each diagnostic unit includes its
+exact `resolved_condition_block`, source-lane indices and session reference.
+Plan schema **3** is closed and includes explicit `unit_order`, active protocol,
+resolved-order and stable source hashes, namespace, false dispatchability, pending
+scientific approval and a canonical plan identity. Resolving design order does not
+approve scientific execution. No dispatcher exists.
 
 ## Identity, storage and observations
 
@@ -150,12 +157,13 @@ This is a completion-marker transaction, not a claim of whole-directory rename
 atomicity. Same-user malicious file edits are not prevented by unsigned hashes;
 validation detects stale content. No automatic cleanup removes prior evidence.
 
-The cross-list issue is recorded separately as a [proposed clarification only](specs/proposed-ordering-clarification.md).
-No proposal has been adopted into the frozen protocol or into an executable order.
+The old [proposed clarification](specs/proposed-ordering-clarification.md) is historical.
+The separate frozen [v1.2.0 amendment](../../docs/task15_tail_attribution_preregistration_v1.2.0.md)
+now resolves the design order, with scientific approval still pending.
 
-## Phase-1.1 corrective contract
+## Preserved Phase-1.1 integrity controls
 
-Plans now use schema version **2**. Every unit, companion, query and per-cluster
+Session identity schema remains **2**, while the complete plan is schema **3**. Every unit, companion, query and per-cluster
 synthetic event carries `session_kind` (PRIMARY or DIAGNOSTIC), `session_id`
 (within that domain), `schedule_ref_session` (the frozen referenced row's primary
 session), and `session_key` (`PRIMARY/0` versus `DIAGNOSTIC/0`). Diagnostic indices
@@ -199,6 +207,53 @@ for the controlled Git metadata call. It is not a proof of absence of execution
 facilities or dynamic Python behavior. Neither test serialization nor companion
 placement grants cross-lane execution order.
 
-Old 0.1.0 manifests are stale after this source/plan change; do not edit historical
-bundles. Manifest format version 1 is retained, while harness version, source lock
-and plan identity enforce the changed contract. No frozen protocol identity changes.
+Old 0.1.0/0.1.1 manifests are stale under this upgraded harness; do not edit historical
+bundles. Manifest schema **2**, harness version **0.2.0**, source, active protocol,
+resolved-order and plan identities enforce the new contract. All frozen documents
+remain byte-identical; v1.2.0 is the explicitly selected active protocol.
+
+## Phase 2 loader, identities and validation
+
+Only exact protocol v1.2.0 is active. The loader verifies canonical identity,
+file-byte SHA, preregistration bytes, ledger canonical identity and file bytes,
+all eight historical/current files, parent canonical identities, ledger changed
+paths, resolved order reconstruction/hash and false authorization. No `--repo`
+override can substitute another version or alter scientific values. Protocol
+objects remain immutable and return defensive copies. The production harness
+imports neither the amendment generator nor its validator/tests.
+
+Manifest schema **2** binds active canonical/file/Markdown/ledger identities,
+resolved order, stable source schedules, query namespace, revised plan/unit-order
+hashes and current source/repository/artifact identities. State transitions remain
+DRAFT -> STATIC_VERIFIED -> AWAITING_APPROVAL; no scientific approval is inferred.
+Identity inspection now covers **24 artifacts**, because all eight protocol-chain
+files are included alongside the original binaries, graph inputs and evidence
+indices. VERIFIED remains byte identity only, never binary loading or calibration.
+
+Query IDs retain namespace
+`6664cad958a863226925efdeac4ffc5fe220673e8cd7072c05cd6298facfb37f`.
+Their ordered key is namespace, session_key, unit ID, phase, region, execution
+index, original position, variant. Active `protocol_sha256` is separately v1.2.0;
+records also expose `protocol_version`, `query_identity_namespace_sha256` and
+`resolved_diagnostic_order_sha256`. Every other scientific record field remains
+identical to v1.1.0. The complete pre-edit ledger is archived outside Git. The
+immutable fixture `tests/fixtures/v1.1-query-oracle.json` stores ordered per-unit
+scientific payload and ID fingerprints, full primary descriptors, population hash,
+source revision/version/hash and normalization, captured before any loader edit.
+It is a frozen test oracle, not generated mutable test-run evidence.
+
+Tests independently compare all 138,696 records and their payloads against that
+fixture; they do not derive expected results from the upgraded planner. Mutation
+controls for emitted occurrence/provenance are checked by the independent ledger
+verifier; namespace/order/manifest/duplicate controls also exercise production
+validation. Full simulation checks every unit, active provenance and whole-cluster
+invalidation. All original F-01 through F-11 controls remain, with only version and
+explicitly authorized ordering expectations adapted.
+
+The frozen amendment validator's semantic `verify_order` function is used as an
+independent test oracle only. Its original full CLI pins the old harness tree and
+therefore is historical evidence rather than a validator for the upgraded harness;
+it is unchanged. New current harness tests verify runtime preservation separately.
+Independent scientific approval, diagnostic builds, G1-G10/G8, compiler/SDK/Mach-O,
+host permissions, clocks/overhead/observer effects/event capacity, >=512 GiB storage
+and separate calibration/collection authorization all remain pending.

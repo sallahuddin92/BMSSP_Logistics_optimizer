@@ -3,7 +3,7 @@ from collections import Counter
 from typing import Any, Iterator
 from .errors import require
 from .integrity import digest, read_json, schema_check
-from .protocol import Protocol, PACKAGE_ROOT
+from .protocol import Protocol, PACKAGE_ROOT, PROTOCOL_FILE_HASH
 
 
 def session_fields(kind: str, index: int, reference: int) -> dict[str, Any]:
@@ -25,8 +25,8 @@ def compile_plan(protocol: Protocol) -> dict[str, Any]:
                         **session_fields('PRIMARY', row['session'], row['session']), 'schedule_ref': row['id'], 'protocol': row['protocol'],
                         'mode': None, 'condition': 'ordinary', 'startup_order': row['startup_order'],
                         'subset': 'ALL', 'diagnostic_id': None})
-    # Cohort order is a factor: diagnostic session filter preserves embedded list order.
-    # Lanes retain their own order; their relative interleaving is unspecified.
+    primary_count = len(units)
+    # Preserve both original lanes for provenance before joining the frozen resolved order.
     for session in sorted({r['session'] for r in d['diagnostic_schedule']}):
         for row in d['diagnostic_schedule']:
             if row['session'] != session:
@@ -43,22 +43,49 @@ def compile_plan(protocol: Protocol) -> dict[str, Any]:
                     'schedule_ref': row['schedule_ref'], 'protocol': 'P2', 'mode': 'allocation_stacks',
                     'condition': 'trace_on_count_only', 'startup_order': row['variant_order'],
                     'subset': 'C', 'diagnostic_id': row['id']})
-    # v1.1 does not order stack companions relative to other modes explicitly. This is
-    # separate ordered lanes, never approval to collect; independent review required.
-    plan = {'schema_version': '2', 'kind': 'STATIC_EXECUTION_PLAN_NOT_EXECUTABLE',
-            'protocol_sha256': protocol.identity, 'schedule_sha256': d['schedule_sha256'],
+    primary = units[:primary_count]
+    main_diagnostics = units[len(primary):]
+    existing = main_diagnostics + companions
+    by_id = {unit['id']: unit for unit in existing}
+    require(len(by_id) == len(existing), 'PLAN_UNIT_JOIN', 'ambiguous source unit IDs')
+    blocks = d['resolved_diagnostic_order']['condition_blocks']
+    require(len({b['unit_id'] for b in blocks}) == len(blocks) == len(by_id)
+            and {b['unit_id'] for b in blocks} == set(by_id), 'PLAN_UNIT_JOIN', 'resolved/source membership')
+    resolved = []
+    for block in blocks:
+        unit = dict(by_id[block['unit_id']])
+        matching = {'cohort': 'cohort', 'mode': 'mode', 'condition': 'condition',
+            'session_id': 'diagnostic_session', 'session_key': 'session_key',
+            'schedule_ref': 'schedule_ref', 'schedule_ref_session': 'schedule_ref_session',
+            'startup_order': 'startup_order', 'diagnostic_id': 'diagnostic_entry_id'}
+        require(all(unit[k] == block[v] for k, v in matching.items()), 'PLAN_UNIT_JOIN', unit['id'])
+        unit['resolved_condition_block'] = dict(block)
+        resolved.append(unit)
+    units = primary + resolved
+    plan = {'schema_version': '3', 'kind': 'STATIC_EXECUTION_PLAN_NOT_EXECUTABLE',
+            'protocol_version': p['version'], 'protocol_sha256': protocol.identity,
+            'protocol_file_sha256': PROTOCOL_FILE_HASH,
+            'query_identity_namespace_sha256': d['resolved_diagnostic_order']['query_identity_policy']['namespace_protocol_sha256'],
+            'resolved_diagnostic_order_sha256': d['resolved_diagnostic_order_sha256'],
+            'allocator_stack_companions_sha256': d['allocator_stack_companions_sha256'],
+            'schedule_sha256': d['schedule_sha256'],
             'diagnostic_schedule_sha256': d['diagnostic_schedule_sha256'], 'units': units,
-            'stack_companions': companions,
+            'stack_companions': [u for u in resolved if u['mode'] == 'allocation_stacks'],
+            'diagnostic_source_lanes': {'main': [u['id'] for u in main_diagnostics],
+                'allocation_stack_companions': [u['id'] for u in companions]},
+            'unit_order': [u['id'] for u in units],
+            'dispatchable': False, 'scientific_approval': 'NOT_INDEPENDENTLY_APPROVED',
             'collection_authorized': False,
-            'ordering_caveat': 'Two partial-order lanes: main and allocation_stack_companions. Frozen protocol does not specify their cross-list interleaving. Serialization order is not execution order; future clarification requires review, no inferred cross-lane dispatch.'}
+            'ordering_caveat': 'SESSION_END is resolved in frozen v1.2.0; original lanes remain provenance only. Serialization order is not execution order authorization. Scientific approval and all execution gates remain pending; no dispatcher.'}
     plan['identity_sha256'] = digest(plan)
     return plan
 
 
 def validate_plan(protocol: Protocol, plan: dict[str, Any]) -> None:
     require(plan == compile_plan(protocol), 'PLAN_MODIFIED', 'must equal deterministic frozen-schedule expansion')
+    schema_check(plan, read_json(PACKAGE_ROOT/'schemas/plan-3.schema.json'))
     schema = read_json(PACKAGE_ROOT/'schemas/session-2.schema.json')
-    for unit in plan.get('units', []) + plan.get('stack_companions', []):
+    for unit in plan['units']:
         schema_check({k: unit[k] for k in schema['required'] if k in unit}, schema)
 
 
@@ -71,7 +98,7 @@ def query_records(protocol: Protocol, plan: dict[str, Any]) -> Iterator[dict[str
     validate_plan(protocol, plan)
     p = protocol.data()
     rows = {r['id']: r for r in p['design']['base_schedule']}
-    for unit in plan['units'] + plan['stack_companions']:
+    for unit in plan['units']:
         row = rows[unit['schedule_ref']]
         for region in row['regions']:
             inp = p['inputs'][region]
@@ -81,8 +108,11 @@ def query_records(protocol: Protocol, plan: dict[str, Any]) -> Iterator[dict[str
                 seen[source] += 1
                 occurrences.append(seen[source])
             def record(variant: str, original: int, execution: int, phase: str, order: str) -> dict[str, Any]:
-                identity = [protocol.identity, unit['session_key'], unit['id'], phase, region, execution, original, variant]
+                identity = [p['design']['resolved_diagnostic_order']['query_identity_policy']['namespace_protocol_sha256'], unit['session_key'], unit['id'], phase, region, execution, original, variant]
                 return {'query_id': digest(identity), 'protocol_sha256': protocol.identity,
+                    'protocol_version': p['version'],
+                    'query_identity_namespace_sha256': plan['query_identity_namespace_sha256'],
+                    'resolved_diagnostic_order_sha256': plan['resolved_diagnostic_order_sha256'],
                     'cohort': unit['cohort'], **{k: unit[k] for k in ('session_kind', 'session_id', 'schedule_ref_session', 'session_key')}, 'trial_id': unit['id'],
                     'plan_lane': 'allocation_stack_companions' if unit['mode'] == 'allocation_stacks' else 'main',
                     'paired_cluster_id': unit['session_key'] + '/' + (unit['diagnostic_id'] or unit['id']),
@@ -123,7 +153,7 @@ def plan_counts(protocol: Protocol, plan: dict[str, Any]) -> dict[str, Any]:
     validate_plan(protocol, plan)
     p = protocol.data()
     totals: Counter[str] = Counter()
-    units = plan['units'] + plan['stack_companions']
+    units = plan['units']
     for unit in units:
         positions = sum(len(x) for x in p['cohorts']['C']['positions_by_region'].values()) if unit['subset'] == 'C' else sum(len(p['inputs'][r]['source_positions']) for r in p['inputs'])
         totals[f'{unit["cohort"]}/warmup'] += len(p['binaries']) * sum(len(i['warmup_positions']) for i in p['inputs'].values())
@@ -131,4 +161,4 @@ def plan_counts(protocol: Protocol, plan: dict[str, Any]) -> dict[str, Any]:
         if unit['mode'] == 'cpu_counters_cache':
             totals[f'{unit["cohort"]}/untimed_hot_preparation'] += len(p['binaries']) * positions
     return {'unit_count': len(units), 'query_record_count': sum(totals.values()),
-            'by_cohort_phase': dict(totals), 'partial_order_lanes': 2}
+            'by_cohort_phase': dict(totals), 'source_lanes': 2, 'resolved_unit_count': len(units)}

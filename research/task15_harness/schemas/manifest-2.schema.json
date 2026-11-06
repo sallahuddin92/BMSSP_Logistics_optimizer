@@ -1,0 +1,467 @@
+{
+  "type": "object",
+  "properties": {
+    "protocol": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "canonical_sha256": {
+          "type": "string"
+        },
+        "schedule_sha256": {
+          "type": "string"
+        },
+        "diagnostic_schedule_sha256": {
+          "type": "string"
+        },
+        "amendment_ledger_sha256": {
+          "type": "string"
+        },
+        "file_byte_sha256": {
+          "type": "string"
+        },
+        "preregistration_file_sha256": {
+          "type": "string"
+        },
+        "amendment_ledger_file_sha256": {
+          "type": "string"
+        },
+        "allocator_stack_companions_sha256": {
+          "type": "string"
+        },
+        "resolved_diagnostic_order_sha256": {
+          "type": "string"
+        },
+        "query_identity_namespace_sha256": {
+          "type": "string"
+        },
+        "scientific_approval": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "canonical_sha256",
+        "schedule_sha256",
+        "diagnostic_schedule_sha256",
+        "amendment_ledger_sha256",
+        "file_byte_sha256",
+        "preregistration_file_sha256",
+        "amendment_ledger_file_sha256",
+        "allocator_stack_companions_sha256",
+        "resolved_diagnostic_order_sha256",
+        "query_identity_namespace_sha256",
+        "scientific_approval"
+      ],
+      "additionalProperties": false
+    },
+    "repository": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "commit": {
+          "type": "string"
+        },
+        "branch": {
+          "type": "string"
+        },
+        "origin": {
+          "type": "string"
+        },
+        "worktree_status": {
+          "type": "string"
+        },
+        "runtime_trees": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "runtime_matches_task14": {
+          "type": "boolean"
+        },
+        "protected_worktree_changes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "path",
+        "commit",
+        "branch",
+        "origin",
+        "worktree_status",
+        "runtime_trees",
+        "runtime_matches_task14",
+        "protected_worktree_changes"
+      ],
+      "additionalProperties": false
+    },
+    "harness": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "source_lock": {
+          "type": "object",
+          "properties": {
+            "files": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "identity_sha256": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "files",
+            "identity_sha256"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "version",
+        "source_lock"
+      ],
+      "additionalProperties": false
+    },
+    "plan": {
+      "type": "object",
+      "properties": {
+        "identity_sha256": {
+          "type": "string"
+        },
+        "counts": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "schema_version": {
+          "type": "string"
+        },
+        "resolved_diagnostic_order_sha256": {
+          "type": "string"
+        },
+        "unit_order_sha256": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "identity_sha256",
+        "counts",
+        "schema_version",
+        "resolved_diagnostic_order_sha256",
+        "unit_order_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "identities": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              },
+              "expected_sha256": {
+                "type": "string"
+              },
+              "actual_sha256": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "bytes": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "VERIFIED",
+                  "MISMATCH",
+                  "MISSING",
+                  "UNREADABLE",
+                  "NOT_CHECKED"
+                ]
+              },
+              "detail": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "path",
+              "expected_sha256",
+              "actual_sha256",
+              "bytes",
+              "status",
+              "detail"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "counts": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "all_verified": {
+          "type": "boolean"
+        },
+        "future_execution_eligible": {
+          "type": "boolean"
+        },
+        "note": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            },
+            "canonical_sha256": {
+              "type": "string"
+            },
+            "schedule_sha256": {
+              "type": "string"
+            },
+            "diagnostic_schedule_sha256": {
+              "type": "string"
+            },
+            "amendment_ledger_sha256": {
+              "type": "string"
+            },
+            "file_byte_sha256": {
+              "type": "string"
+            },
+            "preregistration_file_sha256": {
+              "type": "string"
+            },
+            "amendment_ledger_file_sha256": {
+              "type": "string"
+            },
+            "allocator_stack_companions_sha256": {
+              "type": "string"
+            },
+            "resolved_diagnostic_order_sha256": {
+              "type": "string"
+            },
+            "query_identity_namespace_sha256": {
+              "type": "string"
+            },
+            "scientific_approval": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "version",
+            "canonical_sha256",
+            "schedule_sha256",
+            "diagnostic_schedule_sha256",
+            "amendment_ledger_sha256",
+            "file_byte_sha256",
+            "preregistration_file_sha256",
+            "amendment_ledger_file_sha256",
+            "allocator_stack_companions_sha256",
+            "resolved_diagnostic_order_sha256",
+            "query_identity_namespace_sha256",
+            "scientific_approval"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "records",
+        "counts",
+        "all_verified",
+        "future_execution_eligible",
+        "note",
+        "protocol"
+      ],
+      "additionalProperties": false
+    },
+    "requirements": {
+      "type": "object",
+      "properties": {
+        "interpreter": {
+          "type": "string"
+        },
+        "numpy_analysis": {
+          "type": "string"
+        },
+        "storage_status": {
+          "type": "string"
+        },
+        "clock_requirements": {
+          "type": "array",
+          "items": {}
+        },
+        "capacity": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "diagnostic_build_requirements": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "pending_preflight": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "evidence_destination": {
+          "type": "null"
+        },
+        "required_approvals": {
+          "type": "array",
+          "items": {}
+        },
+        "ordering_note": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "interpreter",
+        "numpy_analysis",
+        "storage_status",
+        "ordering_note",
+        "clock_requirements",
+        "capacity",
+        "diagnostic_build_requirements",
+        "pending_preflight",
+        "evidence_destination",
+        "required_approvals"
+      ],
+      "additionalProperties": false
+    },
+    "authorization": {
+      "type": "object",
+      "properties": {
+        "calibration": {
+          "type": "boolean"
+        },
+        "execution": {
+          "type": "boolean"
+        },
+        "promotion": {
+          "type": "boolean"
+        },
+        "future_execution_eligible": {
+          "type": "boolean"
+        },
+        "approval_signatures": {
+          "type": "array",
+          "items": {}
+        }
+      },
+      "required": [
+        "calibration",
+        "execution",
+        "promotion",
+        "future_execution_eligible",
+        "approval_signatures"
+      ],
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "operation": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "review_status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation",
+        "scope",
+        "review_status"
+      ],
+      "additionalProperties": false
+    },
+    "schema_version": {
+      "type": "string",
+      "enum": [
+        "2"
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "CONTROL_PLANE_EXECUTION_MANIFEST"
+      ]
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "STATIC_VERIFIED",
+        "AWAITING_APPROVAL",
+        "APPROVED_FOR_CALIBRATION",
+        "CALIBRATION_COMPLETE",
+        "APPROVED_FOR_COLLECTION",
+        "COLLECTION_COMPLETE",
+        "INVALID"
+      ]
+    },
+    "transitions": {
+      "type": "array",
+      "items": {}
+    },
+    "identity_sha256": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "protocol",
+    "repository",
+    "harness",
+    "plan",
+    "identities",
+    "requirements",
+    "authorization",
+    "provenance",
+    "schema_version",
+    "kind",
+    "state",
+    "transitions",
+    "identity_sha256"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Phase1 manifest schema1; semantic verifier enforces current identities and non-authorizing states"
+}

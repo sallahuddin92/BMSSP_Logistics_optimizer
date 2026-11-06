@@ -189,7 +189,7 @@ class ControlTests(unittest.TestCase):
 
     def test_27_protocol_immutable_and_constructor_fail_closed(self):
         data=self.protocol.data();data['version']='tampered'
-        self.assertEqual(self.protocol.data()['version'],'1.1.0')
+        self.assertEqual(self.protocol.data()['version'],'1.2.0')
         self.expect('PROTOCOL_VERSION',lambda:Protocol(canonical(data),REPO))
 
     def test_28_all_stored_schedule_counts(self):
@@ -210,7 +210,8 @@ class ControlTests(unittest.TestCase):
         self.assertEqual(dict(counts),expected['by_cohort_phase'])
         self.assertEqual(len(ids),expected['query_record_count'])
         # Serialization inventory only: this does not approve cross-lane execution.
-        self.assertEqual(last['plan_lane'],'allocation_stack_companions')
+        self.assertEqual(last['session_key'],'DIAGNOSTIC/3')
+        self.assertEqual(last['plan_lane'],'main')
 
     def test_30_p1_batch_and_p2_interleaving(self):
         from itertools import groupby

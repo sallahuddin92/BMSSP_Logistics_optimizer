@@ -6,13 +6,13 @@ from .artifacts import capacity, inspect_identities, repository_identity, source
 from .errors import require
 from .integrity import digest, read_json, schema_check
 from .planning import compile_plan, plan_counts
-from .protocol import PACKAGE_ROOT, Protocol, LEDGER_HASH
+from .protocol import PACKAGE_ROOT, Protocol, protocol_binding
 
 SAFE_STATES = ('DRAFT', 'STATIC_VERIFIED', 'AWAITING_APPROVAL')
 FUTURE_STATES = ('APPROVED_FOR_CALIBRATION', 'CALIBRATION_COMPLETE',
                  'APPROVED_FOR_COLLECTION', 'COLLECTION_COMPLETE', 'INVALID')
 PROVENANCE = {'operation': 'prepare-manifest', 'scope': 'STATIC_CONTROL_PLANE_ONLY',
-              'review_status': 'user reports conditional harness-preparation approval; no signed collection approval supplied'}
+              'review_status': 'user authorizes static v1.2 harness integration only; independent scientific approval pending; no calibration/collection/promotion approval'}
 
 
 def seal(value: dict[str, Any]) -> dict[str, Any]:
@@ -30,23 +30,26 @@ def requirements_for(protocol: Protocol, plan: dict[str, Any]) -> dict[str, Any]
             'diagnostic_build_requirements': p['calibration']['diagnostic_build_equivalence'],
             'pending_preflight': p['environment']['host_verification_boundary'],
             'evidence_destination': None, 'storage_status': 'NOT_CHECKED',
-            'required_approvals': ['independent harness review', 'separate calibration/collection authorization',
+            'required_approvals': ['independent protocol approval', 'independent harness review', 'separate calibration/collection authorization',
                                    'diagnostic G1..G10', 'Class L layout risk if applicable'],
-            'partial_order_note': plan['ordering_caveat']}
+            'ordering_note': plan['ordering_caveat']}
+
+
+def plan_binding(protocol: Protocol, plan: dict[str, Any]) -> dict[str, Any]:
+    return {'schema_version': plan['schema_version'], 'identity_sha256': plan['identity_sha256'],
+        'resolved_diagnostic_order_sha256': plan['resolved_diagnostic_order_sha256'],
+        'unit_order_sha256': digest(plan['unit_order']), 'counts': plan_counts(protocol, plan)}
 
 
 def prepare_manifest(protocol: Protocol, state: str = 'DRAFT', checked: bool = True) -> dict[str, Any]:
     require(state in SAFE_STATES, 'STATE_FORBIDDEN', state)
     p = protocol.data()
     plan = compile_plan(protocol)
-    value = {'schema_version': '1', 'kind': 'CONTROL_PLANE_EXECUTION_MANIFEST', 'state': 'DRAFT',
-        'protocol': {'id': p['protocol_id'], 'version': p['version'], 'canonical_sha256': protocol.identity,
-            'schedule_sha256': p['design']['schedule_sha256'],
-            'diagnostic_schedule_sha256': p['design']['diagnostic_schedule_sha256'],
-            'amendment_ledger_sha256': LEDGER_HASH},
+    value = {'schema_version': '2', 'kind': 'CONTROL_PLANE_EXECUTION_MANIFEST', 'state': 'DRAFT',
+        'protocol': protocol_binding(protocol),
         'repository': repository_identity(protocol),
         'harness': {'version': __version__, 'source_lock': source_lock()},
-        'plan': {'identity_sha256': plan['identity_sha256'], 'counts': plan_counts(protocol, plan)},
+        'plan': plan_binding(protocol, plan),
         'identities': inspect_identities(protocol, checked=checked),
         'requirements': requirements_for(protocol, plan),
         'authorization': {'calibration': False, 'execution': False, 'promotion': False,
@@ -81,11 +84,11 @@ def transition(protocol: Protocol, value: dict[str, Any], target: str) -> dict[s
 
 
 def validate_manifest(protocol: Protocol, value: dict[str, Any]) -> dict[str, Any]:
-    schema_check(value, read_json(PACKAGE_ROOT/'schemas/manifest-1.schema.json'))
+    schema_check(value, read_json(PACKAGE_ROOT/'schemas/manifest-2.schema.json'))
     require(value['state'] in SAFE_STATES, 'STATE_FORBIDDEN', value['state'])
     auth = value['authorization']
     require(all(auth[k] is False for k in ['calibration','execution','promotion','future_execution_eligible'])
-            and auth['approval_signatures'] == [], 'AUTHORIZATION', 'no Phase1 approval/dispatch')
+            and auth['approval_signatures'] == [], 'AUTHORIZATION', 'no static-integration approval/dispatch')
     check = deepcopy(value)
     stored = check.pop('identity_sha256')
     require(digest(check) == stored, 'MANIFEST_HASH', 'integrity')
@@ -94,12 +97,8 @@ def validate_manifest(protocol: Protocol, value: dict[str, Any]) -> dict[str, An
     require(value['requirements'] == requirements_for(protocol, compile_plan(protocol)),
             'MANIFEST_REQUIREMENTS', 'frozen pending gates cannot be weakened')
     require(value['harness']['version'] == __version__, 'HARNESS_CHANGED', 'version')
-    require(value['protocol'] == {'id': p['protocol_id'], 'version': p['version'],
-        'canonical_sha256': protocol.identity, 'schedule_sha256': p['design']['schedule_sha256'],
-        'diagnostic_schedule_sha256': p['design']['diagnostic_schedule_sha256'],
-        'amendment_ledger_sha256': LEDGER_HASH}, 'MANIFEST_PROTOCOL', 'frozen lock')
-    require(value['plan'] == {'identity_sha256': compile_plan(protocol)['identity_sha256'],
-        'counts': plan_counts(protocol, compile_plan(protocol))}, 'PLAN_MODIFIED', 'manifest plan')
+    require(value['protocol'] == protocol_binding(protocol), 'MANIFEST_PROTOCOL', 'frozen active provenance')
+    require(value['plan'] == plan_binding(protocol, compile_plan(protocol)), 'PLAN_MODIFIED', 'manifest plan')
     require(value['harness']['source_lock'] == source_lock(), 'HARNESS_CHANGED', 'current source identity')
     require(value['repository'] == repository_identity(protocol), 'REPOSITORY_CHANGED', 'revision/worktree')
     state = 'DRAFT'
@@ -120,8 +119,9 @@ def validate_manifest(protocol: Protocol, value: dict[str, Any]) -> dict[str, An
                 value['repository']['runtime_matches_task14'] and
                 value['repository']['branch'] == p['branch'] and
                 value['repository']['origin'] == p['origin'], 'STATIC_GATE', 'revalidate identities')
-    return {'status': 'VALID_STATIC_MANIFEST_STRUCTURE',
+    return {'status': 'VALID_STATIC_MANIFEST_STRUCTURE', 'protocol': protocol_binding(protocol),
+            'plan_identity_sha256': value['plan']['identity_sha256'],
             'external_identity_verification': 'NOT_CHECKED' if unchecked else
                 ('ALL_VERIFIED' if current['all_verified'] else 'FAILED'), 'state': state, 'future_execution_eligible': False,
-            'pending': ['diagnostic builds/G8', 'clock/permission/overhead/capacity/storage preflight',
+            'pending': ['independent protocol approval', 'diagnostic builds/G8', 'clock/permission/overhead/capacity/storage preflight',
                         'independent harness review and separate authorization']}
