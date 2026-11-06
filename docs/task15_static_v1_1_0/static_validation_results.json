@@ -1,0 +1,205 @@
+{
+  "errors": [],
+  "unverified": [],
+  "balance": {
+    "seremban-small": {
+      "original_position_AB_min": 16,
+      "original_position_AB_max": 16,
+      "session_AB_values": [
+        2
+      ],
+      "iteration_AB_min": 9,
+      "iteration_AB_max": 22
+    },
+    "seremban-medium": {
+      "original_position_AB_min": 16,
+      "original_position_AB_max": 16,
+      "session_AB_values": [
+        2
+      ],
+      "iteration_AB_min": 11,
+      "iteration_AB_max": 26
+    },
+    "seremban-port-dickson": {
+      "original_position_AB_min": 16,
+      "original_position_AB_max": 16,
+      "session_AB_values": [
+        2
+      ],
+      "iteration_AB_min": 9,
+      "iteration_AB_max": 25
+    }
+  },
+  "P1_combinations": {
+    "BA/BA": 8,
+    "AB/BA": 8,
+    "AB/AB": 8,
+    "BA/AB": 8
+  },
+  "negative_controls": [
+    {
+      "synthetic_mutation": "flip_one_P2_order",
+      "expected_failure": "P2_TRIAL_BALANCE",
+      "observed_failure_codes": [
+        "DIAG_WORKLOAD",
+        "P2_MAPPING",
+        "P2_POSITION_BALANCE",
+        "P2_SESSION_BALANCE",
+        "P2_TRIAL_BALANCE"
+      ],
+      "rejected": true
+    },
+    {
+      "synthetic_mutation": "wrong_execution_to_original_mapping",
+      "expected_failure": "P2_MAPPING",
+      "observed_failure_codes": [
+        "DIAG_WORKLOAD",
+        "P2_MAPPING",
+        "P2_POSITION_BALANCE",
+        "P2_SESSION_BALANCE"
+      ],
+      "rejected": true
+    },
+    {
+      "synthetic_mutation": "duplicate_position",
+      "expected_failure": "PERMUTATION",
+      "observed_failure_codes": [
+        "PERMUTATION",
+        "TRIAL_MAPPING"
+      ],
+      "rejected": true
+    },
+    {
+      "synthetic_mutation": "remove_trial",
+      "expected_failure": "TRIAL_COUNT",
+      "observed_failure_codes": [
+        "ROW_SEQUENCE",
+        "TRIAL_COUNT",
+        "TRIAL_UNIQUENESS"
+      ],
+      "rejected": true
+    },
+    {
+      "synthetic_mutation": "corrupt_diagnostic_reference",
+      "expected_failure": "DIAG_REFERENCE",
+      "observed_failure_codes": [
+        "DIAG_IDENTITY",
+        "DIAG_REFERENCE"
+      ],
+      "rejected": true
+    },
+    {
+      "synthetic_mutation": "corrupt_canonical_hash",
+      "expected_failure": "CANONICAL_HASH",
+      "observed_failure_codes": [
+        "CANONICAL_HASH"
+      ],
+      "rejected": true
+    },
+    {
+      "synthetic_mutation": "break_repeated_source_position",
+      "expected_failure": "INPUT_IDS",
+      "observed_failure_codes": [
+        "INPUT_IDS",
+        "SOURCE_OCCURRENCE"
+      ],
+      "rejected": true
+    },
+    {
+      "synthetic_mutation": "add_cross_protocol_field",
+      "expected_failure": "ROW_SCHEMA",
+      "observed_failure_codes": [
+        "ROW_SCHEMA"
+      ],
+      "rejected": true
+    },
+    {
+      "synthetic_mutation": "relax_tail_gate",
+      "expected_failure": "ACCEPTANCE_UNCHANGED",
+      "observed_failure_codes": [
+        "ACCEPTANCE_UNCHANGED"
+      ],
+      "rejected": true
+    },
+    {
+      "synthetic_mutation": "stale_derived_workload_hash",
+      "expected_failure": "DIAG_WORKLOAD",
+      "observed_failure_codes": [
+        "DIAG_WORKLOAD"
+      ],
+      "rejected": true
+    }
+  ],
+  "bootstrap_vectors": {
+    "fixture": "SYNTHETIC_DIMENSIONLESS_NOT_PERFORMANCE",
+    "numpy": "1.24.4",
+    "draw_vectors": 4,
+    "quantile_ratio_vectors": 12,
+    "interval_endpoint_vectors": 6,
+    "status": "PASS"
+  },
+  "status": "PASS_STATIC_HOST",
+  "check_count": 15461,
+  "error_count": 0,
+  "no_BMSSP_workload_executed": true,
+  "check_counts_by_code": {
+    "CANONICAL_HASH": 1,
+    "PARENT_HASH": 1,
+    "VERSION_AUTH": 1,
+    "PARENT_BYTES": 2,
+    "RUNTIME_IDENTITY": 5,
+    "INPUT_IDS": 1,
+    "TRIAL_COUNT": 1,
+    "TRIAL_UNIQUENESS": 1,
+    "SESSION_IDS": 1,
+    "SESSIONS_PRESERVED": 1,
+    "ROW_SEQUENCE": 1,
+    "ROW_SCHEMA": 64,
+    "TRIAL_MAPPING": 64,
+    "ZERO_BASED_ID": 64,
+    "REGION_ORDER": 64,
+    "PERMUTATION": 192,
+    "PAIR_PROOF": 3,
+    "P2_TRIAL_BALANCE": 96,
+    "SLOT_PROOF": 4800,
+    "P2_MAPPING": 9600,
+    "SOURCE_OCCURRENCE": 96,
+    "P2_POSITION_BALANCE": 3,
+    "P2_SESSION_BALANCE": 3,
+    "SESSION_TRIAL_COUNT": 16,
+    "STARTUP_BALANCE": 16,
+    "P1_ORTHOGONAL": 8,
+    "REGION_COUNTS": 6,
+    "SCHEDULE_HASH": 1,
+    "DIAGNOSTIC_HASH": 1,
+    "STACK_HASH": 1,
+    "DIAG_IDS": 1,
+    "DIAG_REFERENCE": 52,
+    "DIAG_IDENTITY": 52,
+    "DIAG_WORKLOAD": 52,
+    "C_UNCHANGED_SMALL_CORRIDOR": 1,
+    "MEDIUM_DECLARED_MAPPING": 1,
+    "MEDIUM_DECLARED_COVERAGE": 1,
+    "HISTORICAL_SOURCE_MAPPING": 16,
+    "MEDIUM_RAW_TAIL": 1,
+    "MEDIUM_COVERAGE": 1,
+    "EXTERNAL_HASH": 140,
+    "ALLOCATION_HASH": 6,
+    "ALLOCATION_SCOPE": 6,
+    "ALLOCATION_MAX": 6,
+    "ALLOCATION_MAX_ALL": 1,
+    "EVENT_CAPACITY": 1,
+    "ACCEPTANCE_UNCHANGED": 1,
+    "BOOTSTRAP_THRESHOLDS": 1,
+    "CPU_THRESHOLDS": 1,
+    "CALIBRATION_THRESHOLDS": 1,
+    "H1_SPEC": 1,
+    "EQUIVALENCE_GATES": 1,
+    "BOOTSTRAP_EXECUTION_CONSTANTS": 1,
+    "BOOTSTRAP_SPEC": 1,
+    "NO_APPROVAL": 1
+  },
+  "protocol_canonical_sha256": "6664cad958a863226925efdeac4ffc5fe220673e8cd7072c05cd6298facfb37f",
+  "validator_sha256": "4228ac56b3ea6d6d0f6b4aa0b2acb252f232c96ee63f3a8ff406dd77ffe65580",
+  "scope": "STATIC mathematical/schema/byte integrity and synthetic fixtures only; diagnostic build equivalence and runtime measurement capabilities NOT executed/verified"
+}

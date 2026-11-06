@@ -1,0 +1,2108 @@
+{
+  "amendment_version": "1.1.0",
+  "parent_version": "1.0.0",
+  "parent_commit": "afc1867f57f663ac56104521474c582e72461882",
+  "parent_canonical_sha256": "590838e4fdde2dcd86228fe0c521845e479fcc6372fa39d3745cb21270ce8247",
+  "parent_file_byte_sha256": {
+    "task15_tail_attribution_protocol.json": "081b6f2cb06e59c9a0578b78f9a007be505fef11f2302ae834d4c62dd209ed17",
+    "task15_tail_attribution_preregistration.md": "c9ae85657fd94c1d51485f06a2ea6e022d848473e79969354a36ae13cc5330c5"
+  },
+  "initiated_utc": "2026-11-06T05:59:15.322425+00:00",
+  "approval_status": "NOT_INDEPENDENTLY_APPROVED; READY_FOR_INDEPENDENT_RE_REVIEW",
+  "execution_authorized": false,
+  "promotion_authorized": false,
+  "new_experiment_observations_used": false,
+  "global_no_collection_claim": "UNVERIFIED; available design/delivery/review evidence reports no Task15 collection; only historical Task14 data used",
+  "independent_review_artifacts": {
+    "/Users/sallahuddin/Downloads/files/independent_task15_protocol_review.md": "221b9fd3eb5d65686b493cbc3ba62edac44e0c23369ae7ca1759f7d1405ccdfe",
+    "/Users/sallahuddin/Downloads/files/schedule_validation_results.json": "36d0d48c14ac4bd6fe6331fd5c3bd4daf02e2aeb0cee2a5d0b468d611344f279",
+    "/Users/sallahuddin/Downloads/files/validate_task15_protocol.py": "aa18814a8f38ae88526fe5a1eb402c17bb2c350b5f0d1ede4624fb61bee8b6fd"
+  },
+  "new_canonical_sha256": "6664cad958a863226925efdeac4ffc5fe220673e8cd7072c05cd6298facfb37f",
+  "new_JSON_file_byte_sha256": "c4debb684c6bf534f9942c3776d994938577270d5c2d9cbee3224cf8be242dfe",
+  "new_schedule_sha256": "46559c673c7427dd3ab70138efd2299a0db354bc0d9e0a3f35ccd2fda4ac4996",
+  "new_diagnostic_schedule_sha256": "41cabb4e16f5ad0fb99c2a9f352833ff1c5daa2be1915e57283399271dad32be",
+  "new_stack_companions_sha256": "906dbe7951eee1a9257d98e9fb854b5e26ad2bb1eb22634a84dfeb5ccc60839e",
+  "static_tool_byte_sha256": {
+    "bootstrap_vectors.json": "7f9c2e27b6a1e52d2c18ce18da771fdb361a40f3fc0296b10dbd870e3f39fe80",
+    "static_validation_results.json": "bfb7a85f0ea6a3f8645781708379e390748eb714799c9430be6002cd5f48e354",
+    "generate_amendment.py": "86bb2c313faade732f2a512d70c62a1a3f93c1b3bf3c2e818c0328ed05d461ef",
+    "validate_protocol.py": "4228ac56b3ea6d6d0f6b4aa0b2acb252f232c96ee63f3a8ff406dd77ffe65580"
+  },
+  "findings": {
+    "F1": {
+      "status": "CORRECTED_STATICALLY_VERIFIED",
+      "before": "order balance was16per execution index,7..24 per original position",
+      "after": "50/50each trial,16/16each original position,2/2each original position/session, execution arrays mapped through unchanged permutations",
+      "justification": "balances the actual paired query unit, independent from latency",
+      "comparability": "changes first/second scheduling only; sources, source permutations and trial graph/session IDs unchanged"
+    },
+    "F2": {
+      "status": "CORRECTED_STATICALLY_VERIFIED",
+      "before": "P1joint10/6/6/10",
+      "after": "8/8/8/8overall,oneeach/session; four minimal P1variant-order flips, startup unchanged",
+      "justification": "separates startup and batch-order factors",
+      "comparability": "only four P1batch-order assignments changed"
+    },
+    "F3": {
+      "status": "RETAINED_LIMITATION_CLARIFIED",
+      "before": "eight sessions, approximate percentile bootstrap",
+      "after": "same counts/estimator plus explicit finite-sample undercoverage warning and n8 descriptive session table",
+      "justification": "nominal99.5% does not establish actual coverage",
+      "comparability": "confirmatory estimand and gates unchanged"
+    },
+    "F4": {
+      "status": "RETAINED_LIMITATION_CLARIFIED",
+      "before": "strict p99zero-regression objective",
+      "after": "unchanged; frequent INCONCLUSIVE is an expected possible outcome,~9%illustrative width not power",
+      "justification": "do not relax readiness target to obtain PASS",
+      "comparability": "thresholds unchanged"
+    },
+    "F5": {
+      "status": "CORRECTED_FROM_HISTORICAL_RAW",
+      "before": "medium0..9 only",
+      "after": "medium0..9unionboth variants historical NRp99-inclusive positions,23medium/41totalCpositions",
+      "justification": "covers candidate and baseline medium tails before new data",
+      "comparability": "Ctargeted diagnostic subset expands; A/B/Dworkloads unchanged"
+    },
+    "F6": {
+      "status": "DESIGN_CORRECTED_FUTURE_CALIBRATION_PENDING",
+      "before": "2M event cap, allocation scope insufficiently explicit",
+      "after": "ten-query scope verified,max1,886,462operations/query in measured cohort; bounded4Moperation-events/query at128bytes max,512GiB storage preflight",
+      "justification": "conservative headroom, no assumption unobserved tail sources fit",
+      "comparability": "Cmemory/recording footprint changes, matched controls reserve equally; never pool withA"
+    },
+    "F7": {
+      "status": "DESIGN_CORRECTED_CAUSATION_UNRESOLVED",
+      "before": "H1event signature required10ms excess",
+      "after": "separate moderate/severe current matched deltas with frozen-position reference and precision floor; all distribution shifts continuous",
+      "justification": "do not miss smaller shifts, retain scheduler evidence and label80%/50%heuristics",
+      "comparability": "diagnostic labels change, full-data quantiles/gates unchanged"
+    },
+    "F8": {
+      "status": "GATES_DEFINED_NOT_EXECUTED",
+      "before": "codegen equivalence review lacked objective outcomes",
+      "after": "G1..G10semantic/ABI/flag/input/codegen/overhead/identity gates; ClassMblocks,ClassLexplicit prereview",
+      "justification": "prevent observer-induced execution changes supporting false cause claims",
+      "comparability": "diagnostic eligibility stricter; Aunchanged"
+    },
+    "F9": {
+      "status": "SPECIFIED_SYNTHETIC_STATIC_VERIFIED",
+      "before": "counts/seeds/PCG64/hierarchy/bounds already present, remaining draw-order ambiguity",
+      "after": "exact RNG call order/fresh repeated-session draws/version/NRendpoints/faileddata/serialization, four draw and12ratio synthetic vectors",
+      "justification": "independent implementations must produce identical resamples",
+      "comparability": "statistical thresholds and method unchanged"
+    },
+    "F10": {
+      "status": "CORRECTED_SCHEMA_VERIFIED",
+      "before": "unused cross-protocol fields",
+      "after": "P1onlybatch-order andP2onlyexecution-order fields; unknown/cross fields rejected; diagnostic startup separate",
+      "justification": "runner cannot mistake execution index for original position",
+      "comparability": "removes unused instructions only"
+    },
+    "F11": {
+      "status": "HOST_STATIC_HASHES_VERIFIED_RUNTIME_PENDING",
+      "before": "Mac-local files unavailable to independent reviewer",
+      "after": "local original inputs/reviews rehashed; API/template audit remains documentary; runtime clock/permission/overhead/storage gates pending",
+      "justification": "installed declarations do not prove runtime instrument validity",
+      "comparability": "no new capability or performance claim"
+    }
+  },
+  "exact_JSON_changes": [
+    {
+      "json_pointer": "/acceptance/diagnostic_equivalence_gate",
+      "operation": "add",
+      "after": "all calibration.diagnostic_build_equivalence gates must PASS, including any ClassL explicit approval; pending/fail blocks affected diagnostic cohort. No gates executed in this amendment.",
+      "findings": ["F8"]
+    },
+    {
+      "json_pointer": "/amendment",
+      "operation": "add",
+      "after": {
+        "value_type": "dict",
+        "length": 10,
+        "canonical_value_sha256": "2ac4865678fbabae9edd7755e34aeaeb8ae08d27e3d5ffcf92d1ad74207950fd"
+      },
+      "findings": ["AMENDMENT_METADATA"]
+    },
+    {
+      "json_pointer": "/calibration/C_event_limit_per_query",
+      "operation": "replace",
+      "before": 2000000,
+      "after": 4000000,
+      "findings": ["F6"]
+    },
+    {
+      "json_pointer": "/calibration/allocation_capacity_assessment",
+      "operation": "add",
+      "after": {
+        "value_type": "dict",
+        "length": 21,
+        "canonical_value_sha256": "d5ff1409009652e5cbbbe098f3f662480d8d45e6ac9b17a67840b478861902a5"
+      },
+      "findings": ["F6"]
+    },
+    {
+      "json_pointer": "/calibration/diagnostic_build_equivalence",
+      "operation": "add",
+      "after": {
+        "value_type": "dict",
+        "length": 4,
+        "canonical_value_sha256": "1b7121ab7eaa529ef016f31376baa0c7935de1f5db94bbdfeddc8c6fc65b38cc"
+      },
+      "findings": ["F8"]
+    },
+    {
+      "json_pointer": "/calibration/per_instrument_fixed_calibration/order",
+      "operation": "replace",
+      "before": "AB/BA/BA/AB condition order, startup inverse, same28prespecifiedCpositions/all3regions, all fresh worker pairs",
+      "after": "AB/BA/BA/AB condition order, startup inverse, same41prespecifiedCpositions/all3regions, all fresh worker pairs",
+      "findings": ["AMENDMENT_METADATA"]
+    },
+    {
+      "json_pointer": "/cohorts/C/historical_medium_tail_evidence",
+      "operation": "add",
+      "after": {
+        "value_type": "dict",
+        "length": 5,
+        "canonical_value_sha256": "d46a6f3349cc9d6bd8b0d11f070378e8e1febbc440e2fa5b2d51d6ce56d98f4f"
+      },
+      "findings": ["F5", "F6"]
+    },
+    {
+      "json_pointer": "/cohorts/C/positions_by_region/seremban-medium",
+      "operation": "replace",
+      "before": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "after": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 39, 55, 56, 57, 58, 60, 63, 66, 71, 78, 89, 90],
+      "findings": ["F5", "F6"]
+    },
+    {
+      "json_pointer": "/cohorts/C/selection_rule",
+      "operation": "replace",
+      "before": "fixed28 positions from original frozen100: first10 small/medium plus eight historical corridor p99-inclusive positions; contains all three named sources. No future-data source selection. A/B/D retain all100.",
+      "after": "Parent small/corridor positions unchanged; medium is original0..9 UNION all original positions at or above combined800-observation Task14 primary NRp99 for EACH baseline/candidate; deduplicate positions only, preserve occurrence identity. No future Task15 selection.",
+      "findings": ["F5", "F6"]
+    },
+    {
+      "json_pointer": "/cohorts/C/timer_buffers",
+      "operation": "replace",
+      "before": "preallocate fixed per-query capacity 2000000 events; overflow flags incomplete instrumentation; no active realloc or stack unwinding per allocation",
+      "after": "fixed4000000 outermost operation events/query, maximum128bytes/record; two endpoint timestamps in one event, not two events. Preallocate/prefault outside timing, bounded failure-attempt events also count; never grow during capture.",
+      "findings": ["F6"]
+    },
+    {
+      "json_pointer": "/design/allocator_stack_companions/0/resolved_workload_sha256",
+      "operation": "add",
+      "after": "755e823e8d364c952f749440cba2af162fbe2f498e79ed25038d72715bda7c09",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/allocator_stack_companions/1/resolved_workload_sha256",
+      "operation": "add",
+      "after": "1ea9a018093722b15a1ea7f08cf805ddfb92fc8a544a7238bf4104253f14f45a",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/allocator_stack_companions/2/resolved_workload_sha256",
+      "operation": "add",
+      "after": "6280ce763b4d0e9c69053d88537ab38995dae5e18af8a37facaa29a3c808ad15",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/allocator_stack_companions/3/resolved_workload_sha256",
+      "operation": "add",
+      "after": "82d2166a80c77edc325e4a00c5d1758cc9f91548b7ce63a02e8eaacf95aa979c",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/allocator_stack_companions_sha256",
+      "operation": "add",
+      "after": "906dbe7951eee1a9257d98e9fb854b5e26ad2bb1eb22634a84dfeb5ccc60839e",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/0/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "4af74f6294e756a6a117a87e70b4b77612a82f0f8074ef866bda733b884a5448"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/1/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/1/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [1, 4, 6, 9, 13, 14, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 29, 31, 32, 37, 38, 40, 44, 46, 48, 50, 52, 53, 56, 59, 60, 61, 62, 63, 64, 66, 69, 70, 71, 72, 73, 75, 76, 78, 80, 82, 83, 87, 90, 91, 92, 95, 97, 99],
+      "before": ["AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB"],
+      "after": ["BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/1/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [0, 4, 6, 8, 11, 12, 13, 17, 18, 21, 22, 26, 27, 28, 29, 31, 34, 36, 40, 41, 44, 50, 51, 52, 53, 54, 58, 60, 61, 63, 66, 67, 69, 70, 77, 79, 80, 84, 95, 96, 97, 99],
+      "before": ["BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA"],
+      "after": ["AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/1/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [0, 3, 4, 6, 7, 10, 12, 16, 18, 19, 20, 24, 27, 30, 33, 34, 35, 36, 37, 38, 44, 45, 49, 50, 52, 53, 55, 61, 66, 70, 77, 80, 81, 84, 86, 93, 94, 95, 96, 98],
+      "before": ["AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB"],
+      "after": ["BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/2/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/2/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [3, 6, 12, 13, 15, 17, 20, 21, 23, 26, 27, 28, 30, 31, 34, 35, 37, 40, 43, 44, 45, 49, 51, 55, 59, 66, 67, 68, 72, 73, 74, 75, 76, 78, 82, 85, 91, 92, 93, 95, 96, 97, 98, 99],
+      "before": ["BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB"],
+      "after": ["AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/2/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [0, 1, 2, 3, 7, 11, 12, 13, 15, 21, 22, 23, 24, 26, 28, 30, 32, 33, 35, 36, 38, 39, 42, 43, 45, 48, 49, 51, 54, 55, 58, 59, 64, 67, 72, 73, 74, 79, 81, 82, 83, 84, 86, 87, 90, 91, 95, 99],
+      "before": ["AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB"],
+      "after": ["BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/2/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [3, 5, 6, 9, 11, 12, 13, 14, 15, 17, 18, 21, 23, 24, 25, 26, 27, 28, 30, 33, 34, 35, 36, 37, 40, 41, 43, 46, 47, 51, 52, 54, 56, 57, 59, 60, 61, 64, 65, 66, 69, 71, 74, 75, 78, 80, 81, 83, 84, 86, 87, 91, 94, 96, 98, 99],
+      "before": ["BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA"],
+      "after": ["AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/3/P1_variant_order",
+      "operation": "replace",
+      "before": "AB",
+      "after": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/3/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "6a2232b34e729383096ba13b9051dbc59556cd8987b8a174313d3e6d819f6307"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/4/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "ee28604d1a2488c1e168b0b99f63769f90d7c20662b0f117c5908348b37e21e3"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/5/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/5/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [0, 3, 5, 6, 7, 19, 28, 34, 37, 41, 45, 46, 48, 51, 52, 53, 54, 55, 56, 59, 61, 62, 63, 67, 68, 69, 74, 75, 76, 77, 78, 80, 81, 82, 83, 86, 87, 91, 92, 93, 95, 96],
+      "before": ["BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB"],
+      "after": ["AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/5/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [3, 5, 12, 14, 16, 18, 26, 27, 30, 35, 37, 38, 40, 42, 46, 47, 50, 51, 52, 55, 56, 57, 58, 59, 61, 62, 63, 64, 65, 66, 68, 71, 72, 74, 75, 77, 78, 80, 81, 84, 85, 88, 90, 91, 92, 94, 95, 96, 98, 99],
+      "before": ["BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB"],
+      "after": ["AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/5/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [2, 3, 4, 5, 6, 10, 15, 16, 17, 20, 22, 27, 28, 29, 31, 32, 35, 36, 40, 41, 42, 45, 46, 49, 52, 55, 56, 57, 59, 63, 64, 66, 69, 71, 74, 78, 79, 81, 82, 89],
+      "before": ["BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA"],
+      "after": ["AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/6/P1_variant_order",
+      "operation": "replace",
+      "before": "BA",
+      "after": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/6/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "1c7edb24a206490184d675dfbf363fcec85b4756bc8598c196ed65747868d6b3"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/7/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/7/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [1, 2, 3, 6, 7, 11, 12, 13, 15, 21, 23, 25, 29, 30, 32, 34, 35, 37, 38, 39, 40, 44, 45, 47, 49, 50, 51, 53, 63, 65, 67, 68, 72, 74, 77, 79, 80, 81, 82, 84, 87, 90, 93, 97, 98, 99],
+      "before": ["BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA"],
+      "after": ["AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/7/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [0, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 22, 23, 28, 32, 36, 38, 41, 42, 43, 44, 48, 49, 50, 52, 59, 60, 65, 66, 69, 71, 73, 74, 75, 76, 78, 80, 82, 83, 90, 92, 94, 96, 98],
+      "before": ["BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA"],
+      "after": ["AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/7/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [0, 2, 7, 10, 14, 15, 16, 17, 18, 19, 20, 22, 25, 26, 30, 32, 33, 35, 39, 40, 44, 45, 46, 48, 49, 50, 51, 52, 55, 60, 61, 63, 67, 68, 69, 70, 73, 74, 75, 76, 78, 79, 81, 82, 84, 85, 87, 90, 91, 92, 94, 95, 96, 97],
+      "before": ["BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB"],
+      "after": ["AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/8/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/8/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [4, 5, 6, 7, 8, 9, 11, 14, 15, 17, 19, 20, 21, 25, 28, 31, 34, 37, 39, 40, 44, 47, 48, 50, 51, 52, 53, 54, 57, 58, 60, 61, 63, 64, 65, 66, 67, 69, 71, 72, 73, 76, 78, 79, 80, 81, 82, 87, 88, 89, 90, 93, 95, 97],
+      "before": ["AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA"],
+      "after": ["BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/8/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [0, 2, 3, 5, 6, 7, 8, 10, 11, 15, 16, 21, 22, 26, 29, 30, 31, 32, 35, 37, 40, 44, 45, 46, 50, 55, 60, 62, 65, 66, 67, 74, 75, 77, 84, 85, 86, 93, 97, 99],
+      "before": ["AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB"],
+      "after": ["BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/8/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [2, 3, 8, 11, 12, 15, 17, 18, 19, 20, 21, 22, 25, 28, 29, 33, 35, 38, 39, 42, 44, 47, 50, 51, 53, 54, 55, 56, 57, 59, 63, 64, 66, 70, 73, 74, 76, 79, 82, 84, 85, 96],
+      "before": ["BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA"],
+      "after": ["AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/9/P1_variant_order",
+      "operation": "replace",
+      "before": "AB",
+      "after": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/9/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "2ef05ab3eeec6d53d407ec0fc93c70192471513abcd6be8e93900025a59cab28"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/10/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/10/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [1, 3, 4, 5, 6, 8, 9, 15, 18, 19, 23, 24, 28, 29, 33, 36, 37, 40, 41, 42, 43, 44, 46, 47, 48, 49, 51, 52, 56, 58, 59, 62, 63, 66, 67, 69, 70, 74, 76, 82, 83, 85, 87, 88, 93, 98],
+      "before": ["AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB"],
+      "after": ["BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/10/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [0, 2, 3, 7, 8, 11, 13, 14, 15, 19, 20, 21, 23, 28, 29, 31, 33, 36, 38, 39, 43, 46, 49, 50, 53, 54, 56, 57, 59, 65, 66, 67, 69, 70, 74, 75, 82, 84, 86, 87, 88, 91, 95, 96, 97, 98],
+      "before": ["BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB"],
+      "after": ["AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/10/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [0, 2, 3, 5, 7, 10, 11, 16, 17, 19, 20, 22, 24, 29, 34, 38, 42, 47, 48, 49, 51, 55, 56, 57, 59, 61, 63, 65, 66, 67, 69, 72, 75, 76, 80, 81, 83, 84, 87, 89, 90, 94, 97, 99],
+      "before": ["BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB"],
+      "after": ["AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/11/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "404e2b43864a964eceaecde90329e554eff3450aaa61ff29796c9910042c92c2"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/12/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/12/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [0, 1, 2, 3, 8, 9, 14, 17, 22, 27, 28, 31, 32, 33, 36, 41, 42, 43, 44, 46, 47, 48, 49, 51, 52, 58, 59, 60, 62, 65, 69, 74, 77, 78, 79, 80, 81, 83, 84, 86, 90, 91, 93, 94, 95, 96],
+      "before": ["BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB"],
+      "after": ["AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/12/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [2, 3, 4, 5, 7, 8, 9, 10, 12, 14, 15, 16, 19, 21, 26, 27, 29, 31, 32, 37, 38, 39, 40, 41, 43, 44, 47, 48, 50, 51, 52, 53, 54, 55, 56, 59, 60, 62, 63, 66, 68, 69, 71, 72, 74, 75, 77, 78, 79, 82, 84, 85, 86, 91, 93, 96, 97, 99],
+      "before": ["AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA"],
+      "after": ["BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/12/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [3, 4, 10, 12, 15, 16, 19, 22, 24, 26, 32, 33, 34, 39, 40, 47, 48, 50, 52, 54, 55, 56, 58, 59, 61, 62, 64, 69, 72, 73, 74, 77, 78, 81, 82, 83, 84, 87, 91, 93, 98, 99],
+      "before": ["BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA"],
+      "after": ["AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/13/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "815b32f9dae03bfe944bd6836f164f3317b7ea5c24ab98429d7c209d44331011"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/14/P1_variant_order",
+      "operation": "replace",
+      "before": "BA",
+      "after": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/14/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "ea2481003f8a9514be7c78bc9acd76499416bf7aa248ff6ec7e2c47ddc39f948"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/15/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/15/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [4, 6, 8, 10, 12, 13, 14, 15, 16, 17, 18, 21, 24, 25, 30, 31, 32, 35, 36, 37, 39, 46, 53, 56, 57, 59, 60, 61, 63, 65, 67, 68, 69, 71, 72, 75, 76, 77, 79, 83, 84, 86, 87, 92, 94, 95, 97, 98],
+      "before": ["AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA"],
+      "after": ["BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/15/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [1, 3, 6, 7, 13, 14, 20, 21, 23, 25, 26, 27, 28, 32, 33, 36, 39, 40, 45, 46, 49, 53, 54, 57, 58, 62, 63, 65, 69, 70, 73, 74, 77, 79, 82, 83, 84, 85, 86, 93, 94, 95, 96, 98],
+      "before": ["BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA"],
+      "after": ["AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/15/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [0, 1, 3, 5, 6, 7, 8, 9, 10, 11, 15, 18, 19, 20, 25, 26, 27, 28, 30, 32, 33, 34, 36, 38, 42, 46, 47, 52, 53, 56, 57, 59, 61, 62, 63, 64, 66, 67, 72, 74, 75, 78, 81, 83, 86, 87, 88, 89, 94, 95, 97, 99],
+      "before": ["AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA"],
+      "after": ["BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/16/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "2f82e62d19cf619afd3654fef89cd21edcce9ac5e195f5bc0166eb8adf70bdc5"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/17/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "cdfeb36eb9071b8372300da810d0fc175c141249ed0e9cc75c826842a8270666"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/18/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/18/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [0, 1, 5, 11, 14, 15, 18, 21, 22, 24, 25, 26, 27, 28, 31, 32, 34, 36, 39, 40, 41, 43, 50, 51, 55, 57, 58, 61, 62, 65, 67, 71, 72, 73, 82, 83, 85, 87, 89, 90, 93, 96, 97, 98],
+      "before": ["AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB"],
+      "after": ["BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/18/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [2, 4, 8, 9, 10, 11, 12, 14, 15, 17, 19, 21, 23, 30, 32, 33, 35, 36, 37, 38, 39, 40, 42, 48, 50, 52, 56, 57, 58, 59, 60, 61, 62, 63, 69, 70, 73, 74, 75, 79, 83, 85, 86, 87, 88, 89, 91, 93, 95, 98],
+      "before": ["AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB"],
+      "after": ["BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/18/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [0, 1, 2, 4, 7, 8, 9, 13, 17, 20, 22, 25, 28, 29, 33, 34, 35, 36, 37, 38, 42, 43, 45, 49, 50, 51, 52, 53, 54, 56, 57, 61, 62, 63, 64, 65, 68, 70, 71, 77, 79, 80, 85, 90, 92, 95, 96, 99],
+      "before": ["AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB"],
+      "after": ["BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/19/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "5db0e6b5434b83d03d9dd2d158fbb0cccbecafc592274e493ecbb80543d925ea"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/20/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/20/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [2, 5, 8, 9, 10, 11, 13, 16, 18, 20, 24, 27, 29, 31, 34, 35, 37, 39, 41, 45, 46, 47, 48, 55, 56, 57, 58, 59, 60, 64, 68, 76, 77, 79, 80, 84, 85, 86, 87, 90, 92, 96],
+      "before": ["BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB"],
+      "after": ["AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/20/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [2, 3, 5, 8, 14, 15, 16, 17, 18, 19, 22, 23, 25, 26, 27, 28, 30, 31, 34, 36, 37, 38, 39, 41, 44, 46, 49, 53, 54, 55, 56, 59, 60, 62, 63, 66, 69, 70, 75, 80, 81, 82, 84, 85, 86, 87, 91, 92, 93, 95, 96, 98],
+      "before": ["BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA"],
+      "after": ["AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/20/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [0, 1, 3, 5, 6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 22, 24, 25, 32, 34, 36, 38, 39, 40, 46, 50, 51, 52, 54, 55, 56, 57, 58, 61, 62, 64, 65, 66, 67, 68, 73, 74, 75, 76, 77, 79, 80, 84, 85, 87, 89, 93, 94, 96, 97],
+      "before": ["BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB"],
+      "after": ["AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/21/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "806fcfecf56c3c458111f64aae94c80fcf069b0763d3fb14557bb08e42f3cf88"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/22/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/22/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [3, 5, 7, 10, 13, 14, 16, 19, 20, 21, 23, 25, 26, 33, 34, 35, 38, 39, 41, 45, 46, 47, 48, 50, 51, 56, 57, 58, 60, 61, 66, 70, 71, 73, 76, 79, 80, 81, 83, 85, 86, 90, 91, 94, 95, 99],
+      "before": ["BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA"],
+      "after": ["AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/22/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [1, 2, 6, 7, 10, 15, 18, 21, 24, 25, 26, 28, 29, 30, 33, 37, 38, 39, 40, 45, 47, 48, 49, 52, 53, 54, 56, 64, 67, 69, 71, 73, 74, 75, 84, 85, 86, 87, 88, 91, 92, 93, 96, 97],
+      "before": ["BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB"],
+      "after": ["AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/22/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [2, 3, 5, 8, 9, 10, 11, 12, 14, 15, 18, 20, 21, 24, 25, 28, 33, 38, 44, 46, 47, 48, 49, 52, 54, 57, 59, 60, 61, 62, 65, 67, 69, 74, 75, 79, 80, 84, 85, 87, 89, 92, 97, 99],
+      "before": ["AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB"],
+      "after": ["BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/23/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/23/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [2, 4, 6, 8, 11, 12, 14, 15, 16, 19, 20, 22, 24, 27, 28, 31, 33, 35, 36, 37, 38, 39, 42, 44, 45, 47, 52, 54, 55, 56, 58, 59, 61, 62, 63, 66, 67, 68, 76, 79, 82, 83, 86, 94],
+      "before": ["AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB"],
+      "after": ["BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/23/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [3, 8, 10, 13, 14, 17, 21, 25, 26, 27, 28, 29, 32, 36, 37, 40, 41, 47, 48, 52, 55, 58, 59, 61, 63, 64, 67, 70, 72, 74, 75, 76, 81, 82, 84, 88, 91, 99],
+      "before": ["AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB"],
+      "after": ["BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/23/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [0, 2, 5, 7, 8, 9, 11, 13, 14, 16, 20, 25, 31, 33, 35, 37, 39, 40, 47, 48, 49, 50, 52, 54, 55, 57, 59, 61, 63, 65, 67, 68, 70, 71, 72, 73, 75, 80, 81, 83, 84, 88, 91, 93, 94, 96, 98, 99],
+      "before": ["BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA"],
+      "after": ["AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/24/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/24/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [3, 6, 7, 10, 14, 15, 16, 25, 26, 27, 28, 29, 30, 33, 34, 36, 37, 38, 40, 43, 44, 46, 49, 52, 55, 57, 59, 63, 65, 67, 71, 74, 75, 79, 81, 82, 84, 86, 92, 94, 95, 96, 97, 98],
+      "before": ["AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA"],
+      "after": ["BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/24/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [2, 3, 4, 6, 8, 10, 12, 15, 18, 19, 20, 21, 22, 25, 26, 29, 30, 34, 38, 41, 42, 44, 46, 48, 50, 53, 54, 59, 61, 63, 64, 66, 68, 69, 71, 72, 76, 77, 79, 80, 82, 83, 87, 88, 89, 91, 92, 96],
+      "before": ["AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA"],
+      "after": ["BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/24/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [0, 1, 3, 6, 8, 9, 15, 16, 17, 19, 21, 22, 23, 25, 32, 33, 34, 36, 37, 38, 39, 40, 41, 44, 45, 49, 51, 53, 57, 59, 60, 66, 67, 72, 78, 80, 81, 82, 83, 84, 85, 86, 87, 90, 93, 97, 98, 99],
+      "before": ["AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB"],
+      "after": ["BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/25/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "afdccaa4e15cfa13ebdc488de7ca864ed6cf31a32f4917428e0ad99a1e2335b6"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/26/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/26/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [0, 1, 2, 4, 8, 9, 11, 13, 14, 15, 16, 18, 20, 22, 24, 25, 28, 29, 31, 32, 33, 37, 41, 44, 46, 47, 50, 51, 52, 53, 56, 58, 59, 61, 64, 65, 66, 70, 71, 74, 76, 78, 79, 80, 82, 83, 84, 86, 88, 91, 93, 94, 95, 96],
+      "before": ["AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB"],
+      "after": ["BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/26/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [0, 1, 2, 3, 4, 5, 7, 8, 13, 15, 17, 21, 24, 26, 27, 30, 31, 32, 34, 36, 37, 38, 45, 47, 51, 52, 53, 54, 56, 59, 60, 62, 63, 65, 66, 67, 68, 73, 74, 77, 80, 81, 82, 84, 90, 93, 95, 96],
+      "before": ["BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA"],
+      "after": ["AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/26/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [0, 1, 4, 7, 9, 10, 14, 15, 17, 19, 20, 23, 24, 26, 28, 29, 30, 31, 32, 33, 37, 40, 41, 43, 44, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 62, 67, 68, 70, 74, 75, 76, 77, 79, 81, 83, 84, 85, 86, 87, 97, 98],
+      "before": ["AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA"],
+      "after": ["BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/27/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "4c2cd5031e1bae3cf313552aab9b30cf738d9ec8a2d967cd4b886122ec64d010"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/28/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/28/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [0, 1, 2, 3, 5, 7, 9, 10, 12, 15, 16, 20, 21, 22, 26, 27, 28, 29, 32, 33, 35, 36, 37, 39, 40, 42, 44, 45, 46, 47, 48, 49, 51, 52, 56, 58, 59, 60, 63, 64, 65, 70, 72, 73, 74, 75, 77, 78, 81, 82, 85, 86, 88, 90, 92, 95, 96, 97],
+      "before": ["BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA"],
+      "after": ["AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/28/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [7, 10, 11, 13, 15, 16, 18, 19, 22, 23, 24, 27, 28, 29, 30, 31, 32, 34, 35, 38, 40, 41, 42, 44, 46, 47, 48, 49, 53, 54, 57, 59, 60, 63, 66, 67, 70, 71, 72, 76, 77, 79, 82, 87, 88, 91, 92, 97, 98, 99],
+      "before": ["BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA"],
+      "after": ["AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/28/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [1, 3, 4, 5, 9, 10, 12, 13, 14, 15, 17, 18, 19, 20, 21, 23, 24, 26, 29, 31, 33, 34, 38, 39, 40, 41, 42, 43, 44, 47, 49, 51, 52, 53, 54, 55, 57, 60, 64, 65, 69, 70, 71, 72, 76, 80, 83, 84, 86, 87, 89, 90, 91, 94, 98, 99],
+      "before": ["BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB"],
+      "after": ["AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/29/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/29/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [1, 2, 3, 4, 10, 11, 12, 17, 18, 20, 21, 22, 24, 25, 26, 27, 28, 29, 33, 34, 37, 39, 40, 44, 48, 52, 57, 60, 63, 64, 68, 69, 73, 74, 75, 77, 78, 80, 85, 86, 87, 88, 90, 96, 97, 99],
+      "before": ["AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB"],
+      "after": ["BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/29/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [1, 2, 3, 8, 11, 12, 15, 17, 24, 26, 27, 30, 31, 32, 34, 35, 40, 41, 42, 43, 48, 50, 52, 55, 56, 62, 63, 64, 65, 66, 71, 72, 73, 74, 75, 76, 79, 81, 82, 84, 85, 86, 89, 91, 92, 93, 96, 97, 98, 99],
+      "before": ["BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA"],
+      "after": ["AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/29/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [1, 2, 10, 11, 13, 14, 15, 16, 17, 18, 21, 23, 25, 28, 31, 35, 36, 41, 42, 45, 51, 55, 58, 60, 62, 63, 64, 65, 71, 73, 74, 75, 77, 78, 79, 81, 82, 83, 84, 86, 89, 90, 92, 95, 96, 99],
+      "before": ["AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA"],
+      "after": ["BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/30/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "04b9fce29505d721653725d0d442803f809c9244a995d36801aedcc2e5d288c4"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/31/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "f41c2d61ecd97ad2cf14386383ebf1c843505f3f298477ce830c530103353f4b"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/32/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "45c99dece14acdfebac145cad427d0cf13f29f2589201fd44387a1766b4ca68d"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/33/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/33/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [0, 3, 4, 8, 18, 24, 27, 30, 32, 33, 37, 39, 40, 42, 43, 44, 46, 50, 52, 57, 58, 59, 61, 62, 64, 66, 67, 71, 72, 73, 75, 79, 80, 81, 82, 83, 84, 86, 88, 93, 96, 97, 98, 99],
+      "before": ["AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB"],
+      "after": ["BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/33/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [0, 2, 5, 7, 9, 10, 11, 13, 14, 15, 18, 19, 21, 26, 28, 30, 34, 35, 36, 44, 45, 46, 47, 50, 54, 56, 57, 60, 62, 65, 67, 68, 70, 71, 73, 75, 76, 77, 78, 80, 81, 83, 88, 89, 91, 92, 93, 94, 96, 98],
+      "before": ["BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA"],
+      "after": ["AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/33/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [1, 2, 4, 8, 9, 12, 13, 15, 19, 20, 21, 24, 25, 26, 30, 31, 32, 33, 35, 36, 37, 38, 39, 40, 45, 47, 48, 49, 50, 51, 53, 54, 58, 59, 61, 62, 63, 66, 67, 68, 69, 70, 71, 74, 75, 76, 78, 80, 81, 83, 84, 85, 89, 90, 91, 94, 95, 97, 98, 99],
+      "before": ["AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA"],
+      "after": ["BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/34/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/34/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [0, 1, 2, 3, 7, 10, 11, 12, 13, 14, 16, 17, 21, 23, 25, 26, 27, 29, 31, 33, 34, 35, 36, 39, 40, 43, 47, 48, 50, 51, 54, 56, 59, 61, 62, 67, 68, 69, 70, 71, 73, 76, 77, 78, 81, 86, 87, 89, 93, 94, 98, 99],
+      "before": ["BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA"],
+      "after": ["AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/34/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [0, 1, 2, 3, 4, 7, 12, 15, 16, 19, 22, 26, 27, 28, 29, 30, 31, 35, 36, 37, 39, 42, 44, 46, 47, 50, 53, 54, 56, 58, 59, 61, 62, 63, 64, 65, 66, 67, 70, 72, 73, 74, 75, 76, 77, 78, 80, 81, 82, 84, 86, 89, 90, 92, 94, 95, 96, 98],
+      "before": ["AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB"],
+      "after": ["BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/34/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [1, 3, 6, 7, 9, 10, 11, 13, 14, 16, 19, 20, 21, 23, 24, 26, 28, 30, 31, 32, 33, 34, 36, 38, 40, 42, 45, 47, 54, 56, 57, 59, 60, 62, 64, 65, 68, 70, 73, 75, 76, 77, 81, 86, 87, 90, 92, 93, 95, 97, 98, 99],
+      "before": ["BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB"],
+      "after": ["AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/35/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "40b4e4e2b01d3530e2615fc10bd1164c34399f3ea502b06a4cc9fcef01293916"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/36/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "54a852ff63b5349df5fb5a6a9a5ec989599099be4fcd2078655d492c084e323a"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/37/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/37/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [7, 10, 13, 16, 18, 20, 21, 22, 23, 24, 26, 28, 30, 31, 32, 33, 34, 35, 37, 38, 39, 41, 42, 44, 45, 46, 47, 49, 51, 55, 58, 59, 60, 63, 64, 65, 68, 69, 71, 74, 75, 76, 80, 81, 86, 87, 88, 89, 90, 91, 94, 95, 96, 98],
+      "before": ["BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA"],
+      "after": ["AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/37/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [0, 3, 4, 5, 9, 10, 12, 13, 14, 15, 19, 20, 21, 22, 23, 24, 26, 32, 34, 35, 36, 39, 42, 43, 44, 45, 46, 47, 54, 58, 59, 60, 61, 66, 67, 68, 69, 71, 72, 73, 77, 78, 82, 83, 84, 85, 87, 88, 90, 91, 93, 94, 95, 96],
+      "before": ["AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB"],
+      "after": ["BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/37/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [2, 4, 8, 16, 18, 19, 23, 27, 28, 29, 30, 32, 34, 35, 36, 39, 40, 41, 42, 45, 51, 52, 53, 56, 57, 58, 60, 65, 67, 70, 72, 75, 76, 78, 79, 82, 83, 84, 85, 90, 91, 95, 96, 98],
+      "before": ["BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA"],
+      "after": ["AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/38/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "3b5252415cafa3f380e0afa2a6606a654a5ec04f777d57704b8fa88eac00ea24"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/39/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/39/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [0, 1, 3, 8, 11, 12, 14, 15, 17, 18, 19, 21, 22, 24, 26, 28, 32, 33, 36, 37, 38, 39, 40, 41, 42, 45, 46, 48, 50, 52, 55, 59, 62, 63, 69, 71, 72, 75, 77, 79, 82, 85, 86, 87, 88, 89, 91, 92, 95, 97, 98, 99],
+      "before": ["AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB"],
+      "after": ["BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/39/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [1, 3, 4, 5, 7, 8, 9, 13, 16, 19, 20, 21, 22, 23, 27, 30, 31, 32, 35, 38, 40, 41, 42, 43, 44, 49, 50, 51, 52, 55, 60, 61, 62, 64, 66, 70, 71, 76, 78, 90, 91, 92],
+      "before": ["BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB"],
+      "after": ["AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/39/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [0, 1, 3, 6, 7, 8, 9, 13, 14, 18, 19, 20, 23, 24, 27, 28, 30, 31, 33, 34, 36, 37, 39, 40, 41, 42, 46, 47, 48, 50, 51, 52, 55, 56, 58, 59, 60, 61, 64, 67, 69, 71, 72, 74, 77, 78, 80, 82, 84, 85, 86, 87, 88, 90, 91, 94, 98, 99],
+      "before": ["AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA"],
+      "after": ["BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/40/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/40/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [1, 6, 7, 10, 13, 14, 16, 18, 19, 20, 22, 23, 24, 26, 27, 29, 33, 35, 37, 38, 39, 41, 44, 45, 49, 50, 51, 53, 54, 55, 57, 59, 64, 65, 68, 70, 72, 73, 75, 77, 78, 79, 80, 82, 83, 84, 86, 91, 93, 97, 98, 99],
+      "before": ["BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB"],
+      "after": ["AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/40/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [1, 2, 6, 7, 8, 11, 13, 15, 17, 19, 20, 23, 24, 25, 27, 29, 30, 34, 36, 38, 40, 41, 42, 43, 45, 47, 49, 50, 51, 53, 56, 57, 59, 62, 64, 68, 72, 73, 77, 78, 81, 82, 85, 88, 89, 90, 92, 95, 96, 97, 98, 99],
+      "before": ["AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB"],
+      "after": ["BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/40/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [4, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 21, 22, 25, 26, 29, 31, 32, 33, 34, 35, 38, 39, 41, 43, 45, 47, 48, 50, 51, 52, 53, 54, 55, 57, 60, 61, 65, 68, 69, 70, 72, 76, 77, 80, 83, 85, 86, 87, 89, 91, 94, 95, 97],
+      "before": ["BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA"],
+      "after": ["AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/41/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/41/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [0, 1, 2, 5, 7, 8, 10, 11, 14, 19, 20, 25, 27, 28, 29, 30, 32, 35, 37, 40, 44, 45, 46, 47, 48, 49, 52, 56, 57, 62, 70, 72, 73, 74, 76, 78, 79, 80, 84, 85, 93, 99],
+      "before": ["BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA"],
+      "after": ["AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/41/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [1, 2, 3, 4, 5, 7, 8, 9, 11, 12, 13, 14, 16, 19, 20, 23, 24, 25, 30, 31, 33, 37, 41, 44, 45, 46, 47, 48, 54, 56, 58, 60, 62, 63, 65, 67, 69, 70, 72, 76, 77, 78, 81, 82, 84, 86, 87, 90, 92, 93, 94, 98],
+      "before": ["BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB"],
+      "after": ["AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/41/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [7, 8, 10, 11, 13, 15, 16, 18, 21, 22, 26, 28, 29, 30, 31, 32, 34, 35, 40, 42, 44, 45, 46, 48, 50, 53, 57, 58, 60, 62, 63, 64, 68, 69, 70, 72, 75, 76, 77, 81, 82, 83, 84, 85, 86, 87, 89, 91, 92, 93, 94, 96, 97, 99],
+      "before": ["BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA"],
+      "after": ["AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/42/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "81eda03850503935405957657275cd958e25d5f29d47b74688c55b8b56ca4791"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/43/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "336b582b0aaac039301c811e8068f9a13dae91013b1e3b2481475a40da4ed1f5"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/44/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "a284e48676cb2ebca564eafcae8bfb314f0e0da24982f63580ffa7fb27a0723e"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/45/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/45/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [2, 3, 4, 5, 6, 8, 13, 17, 18, 21, 24, 27, 30, 33, 34, 35, 36, 38, 39, 41, 42, 43, 44, 45, 54, 55, 57, 68, 69, 70, 72, 73, 76, 77, 78, 83, 86, 87, 89, 90, 91, 92, 95, 97, 98, 99],
+      "before": ["BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB"],
+      "after": ["AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/45/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [1, 2, 3, 5, 6, 7, 8, 11, 13, 18, 20, 21, 22, 23, 26, 27, 30, 31, 32, 33, 36, 39, 41, 42, 46, 47, 52, 55, 56, 57, 61, 66, 67, 71, 72, 73, 74, 75, 79, 80, 81, 82, 87, 88, 91, 93, 95, 97],
+      "before": ["AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA"],
+      "after": ["BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/45/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [1, 3, 4, 6, 9, 11, 13, 16, 18, 19, 20, 21, 25, 31, 34, 35, 37, 40, 42, 44, 45, 47, 49, 50, 51, 53, 54, 56, 59, 63, 64, 66, 70, 71, 75, 77, 78, 79, 80, 82, 88, 89, 90, 91, 93, 94, 95, 97, 98, 99],
+      "before": ["AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB"],
+      "after": ["BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/46/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/46/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [7, 9, 11, 12, 14, 15, 19, 21, 22, 23, 25, 26, 30, 32, 33, 34, 36, 37, 38, 39, 40, 44, 55, 59, 60, 61, 62, 65, 68, 69, 70, 71, 72, 73, 74, 75, 77, 78, 79, 80, 81, 83, 85, 88, 90, 95, 96, 98],
+      "before": ["BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB"],
+      "after": ["AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/46/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [4, 5, 6, 7, 9, 10, 17, 21, 23, 24, 25, 33, 34, 37, 39, 40, 41, 44, 47, 50, 51, 53, 54, 55, 56, 57, 59, 61, 62, 63, 65, 68, 70, 71, 72, 73, 74, 79, 81, 82, 84, 88, 89, 92, 98, 99],
+      "before": ["BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA"],
+      "after": ["AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/46/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [0, 1, 3, 4, 5, 8, 9, 11, 13, 14, 15, 16, 17, 21, 24, 26, 31, 33, 34, 35, 36, 40, 42, 44, 45, 46, 47, 48, 51, 59, 60, 62, 65, 66, 69, 72, 73, 75, 79, 83, 86, 87, 88, 89, 90, 91, 92, 93, 94, 97],
+      "before": ["AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB"],
+      "after": ["BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/47/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "39e1cb702d75ba1bdd0dc3cefb03ca8ab431376adeaa24800417ec2518aff715"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/48/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/48/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [1, 2, 3, 4, 5, 11, 12, 13, 14, 15, 16, 17, 19, 23, 24, 25, 26, 28, 33, 35, 38, 39, 41, 45, 46, 47, 48, 50, 52, 53, 58, 61, 64, 65, 66, 67, 72, 74, 75, 76, 77, 79, 80, 83, 84, 85, 87, 88, 92, 93, 95, 98],
+      "before": ["BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA"],
+      "after": ["AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/48/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [0, 2, 4, 5, 6, 8, 14, 17, 20, 22, 25, 26, 27, 28, 30, 31, 33, 39, 40, 42, 44, 45, 47, 49, 50, 51, 52, 53, 54, 55, 59, 64, 65, 66, 68, 69, 70, 72, 73, 74, 75, 81, 85, 89, 90, 92, 93, 95, 96, 98],
+      "before": ["BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA"],
+      "after": ["AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/48/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [0, 1, 2, 4, 6, 7, 8, 9, 10, 11, 12, 21, 23, 25, 27, 31, 34, 35, 36, 38, 39, 40, 41, 43, 47, 49, 53, 54, 55, 59, 62, 63, 65, 67, 68, 71, 74, 77, 78, 79, 81, 83, 84, 89, 90, 91],
+      "before": ["BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB"],
+      "after": ["AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/49/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "18f53faba7a1e19dafbeca07391516524d35d593bba21fd29edc549eacf1969c"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/50/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "febe6788bb0dc978d16ecc2d4f0901d4526cc4c339f1adbd217114bc595b8ba1"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/51/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/51/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [0, 1, 2, 3, 4, 5, 8, 10, 13, 14, 18, 22, 23, 29, 32, 35, 38, 39, 42, 44, 45, 48, 51, 52, 53, 54, 55, 56, 58, 59, 63, 64, 67, 68, 75, 77, 80, 82, 83, 85, 86, 88, 90, 91, 94, 95, 96, 97],
+      "before": ["BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB"],
+      "after": ["AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/51/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [1, 3, 4, 5, 14, 15, 16, 17, 23, 24, 25, 28, 30, 32, 33, 34, 36, 38, 41, 42, 44, 45, 46, 47, 48, 49, 50, 51, 56, 61, 63, 64, 65, 66, 70, 71, 73, 74, 76, 77, 79, 81, 82, 84, 85, 89, 91, 94, 95, 98],
+      "before": ["BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB"],
+      "after": ["AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/51/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [2, 7, 12, 14, 15, 17, 18, 19, 20, 21, 22, 23, 27, 29, 31, 36, 37, 38, 39, 40, 41, 42, 43, 44, 46, 49, 50, 54, 63, 66, 68, 70, 71, 72, 73, 75, 77, 78, 79, 80, 82, 87, 88, 90, 91, 93, 94, 95, 96, 99],
+      "before": ["AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB"],
+      "after": ["BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/52/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/52/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [1, 2, 3, 5, 6, 7, 8, 11, 12, 15, 16, 19, 20, 22, 23, 25, 29, 32, 33, 35, 36, 38, 40, 42, 43, 45, 48, 50, 51, 52, 58, 59, 61, 67, 68, 69, 70, 71, 73, 76, 77, 78, 79, 80, 81, 83, 85, 87, 88, 89, 90, 91, 92, 94, 97, 99],
+      "before": ["BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA"],
+      "after": ["AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/52/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 20, 21, 22, 23, 27, 29, 32, 35, 38, 39, 41, 42, 43, 44, 45, 47, 49, 52, 57, 58, 59, 70, 71, 72, 74, 75, 78, 80, 81, 84, 85, 86, 87, 88, 89, 90, 91, 92, 94, 97, 98],
+      "before": ["BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA"],
+      "after": ["AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/52/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [1, 4, 5, 6, 9, 10, 12, 14, 17, 20, 21, 23, 24, 25, 26, 27, 28, 30, 33, 35, 36, 38, 39, 41, 42, 47, 48, 49, 52, 53, 54, 57, 61, 63, 65, 66, 68, 70, 73, 76, 77, 78, 80, 83, 85, 86, 87, 90, 91, 97],
+      "before": ["BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA"],
+      "after": ["AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/53/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "de2cef98b7f14aeb162dd66006dcb47197242f0af6fe10b9b72bc69e8115b18b"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/54/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/54/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [1, 4, 5, 7, 8, 11, 12, 14, 15, 16, 19, 20, 22, 25, 26, 27, 29, 31, 35, 36, 38, 42, 45, 46, 48, 50, 52, 53, 55, 57, 61, 64, 65, 69, 70, 73, 74, 77, 80, 81, 84, 88, 94, 95, 96, 97],
+      "before": ["AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA"],
+      "after": ["BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/54/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [10, 12, 14, 18, 19, 23, 24, 25, 26, 27, 31, 33, 34, 36, 37, 38, 41, 42, 43, 46, 50, 52, 54, 55, 56, 57, 59, 62, 63, 64, 67, 68, 70, 72, 75, 76, 77, 80, 84, 88, 90, 91, 94, 96, 98, 99],
+      "before": ["BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA"],
+      "after": ["AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/54/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [2, 4, 5, 6, 8, 9, 14, 15, 17, 21, 22, 23, 28, 30, 33, 34, 35, 36, 38, 40, 42, 45, 46, 47, 50, 51, 53, 54, 55, 56, 57, 58, 59, 60, 61, 66, 68, 70, 71, 72, 73, 76, 82, 85, 86, 87, 89, 91, 92, 93, 95, 99],
+      "before": ["AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB"],
+      "after": ["BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/55/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "4751288d9af4d63b3ef72dd9263c08b1bc5bd0843ad7d2af6c6bbc928571b200"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/56/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/56/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [0, 3, 6, 7, 9, 11, 14, 16, 18, 19, 24, 25, 27, 28, 29, 30, 32, 34, 37, 38, 39, 40, 41, 43, 44, 45, 46, 49, 50, 51, 52, 53, 54, 56, 57, 60, 65, 66, 67, 68, 70, 75, 77, 79, 80, 81, 82, 85, 87, 88, 91, 93, 94, 95],
+      "before": ["AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA"],
+      "after": ["BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/56/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [0, 2, 4, 5, 7, 8, 12, 13, 16, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 42, 43, 44, 48, 53, 55, 56, 57, 58, 61, 64, 65, 66, 67, 68, 69, 76, 77, 80, 82, 83, 84, 85, 87, 89, 90, 91, 96, 97],
+      "before": ["AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB"],
+      "after": ["BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/56/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [0, 2, 4, 5, 7, 8, 11, 14, 19, 20, 22, 23, 24, 26, 29, 32, 36, 40, 42, 45, 46, 48, 51, 54, 57, 58, 59, 60, 61, 63, 66, 70, 75, 76, 77, 79, 81, 83, 85, 87, 92, 93, 96, 99],
+      "before": ["BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA"],
+      "after": ["AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/57/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/57/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [0, 1, 2, 3, 6, 7, 10, 13, 14, 15, 18, 21, 23, 26, 27, 30, 35, 39, 41, 47, 49, 51, 52, 53, 54, 56, 57, 58, 59, 61, 62, 66, 67, 69, 71, 73, 74, 75, 76, 80, 83, 85, 86, 87, 88, 89, 92, 95, 96, 97],
+      "before": ["BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB"],
+      "after": ["AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/57/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [1, 2, 6, 8, 9, 11, 13, 14, 15, 17, 18, 19, 25, 26, 27, 28, 29, 30, 31, 32, 34, 35, 38, 39, 41, 42, 43, 47, 48, 50, 55, 60, 61, 62, 63, 64, 65, 67, 68, 69, 71, 76, 80, 82, 83, 86, 89, 91, 93, 96],
+      "before": ["AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB"],
+      "after": ["BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/57/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [1, 2, 5, 6, 7, 8, 9, 12, 13, 15, 25, 27, 29, 30, 33, 35, 40, 44, 45, 46, 47, 49, 50, 51, 58, 59, 60, 61, 62, 63, 69, 71, 72, 76, 80, 81, 82, 83, 84, 86, 87, 88, 89, 90, 91, 94, 98, 99],
+      "before": ["AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB"],
+      "after": ["BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/58/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "4479fff31647f03978249cd4843d839699e196df08221f91ab2d9d45a0de5e61"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/59/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "1e4294024f99a213f7d15411fe3472f9b3c81271512b24d88992ce26a84d827b"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/60/P1_variant_order",
+      "operation": "remove",
+      "before": "AB",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/60/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [0, 2, 3, 6, 7, 9, 13, 14, 16, 17, 18, 21, 23, 24, 26, 27, 28, 29, 30, 34, 36, 39, 42, 44, 46, 50, 51, 52, 53, 55, 57, 61, 62, 66, 67, 73, 74, 77, 79, 81, 83, 85, 86, 90, 91, 92, 94, 95, 98, 99],
+      "before": ["AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA"],
+      "after": ["BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/60/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [1, 2, 3, 4, 9, 10, 11, 12, 15, 17, 18, 22, 25, 26, 28, 31, 34, 35, 36, 37, 41, 45, 46, 48, 52, 57, 58, 59, 60, 61, 62, 63, 65, 69, 71, 73, 74, 78, 79, 80, 83, 85, 88, 89, 91, 94, 97, 98],
+      "before": ["BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB"],
+      "after": ["AB", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/60/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [2, 4, 5, 9, 10, 11, 15, 16, 21, 26, 27, 29, 33, 36, 37, 38, 40, 41, 45, 49, 51, 53, 56, 57, 59, 60, 61, 62, 72, 73, 74, 80, 81, 82, 85, 88, 90, 91, 94, 96],
+      "before": ["AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "AB", "BA"],
+      "after": ["BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/61/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "fcc2d6861af79ae094a74ed83e487cf679f4ddca28a26321a1e2b3a1b5e4daa6"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/62/P2_pair_orders_by_region",
+      "operation": "remove",
+      "before": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "8e98a6d833dd609a5d5ea30e90b7c803ab745cf82b5f1d2a3b3850d0cd6c51aa"
+      },
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/63/P1_variant_order",
+      "operation": "remove",
+      "before": "BA",
+      "findings": ["F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/63/P2_pair_orders_by_region/seremban-medium",
+      "operation": "replace_indices",
+      "indices": [5, 8, 9, 10, 12, 15, 20, 21, 22, 24, 25, 31, 35, 37, 39, 46, 47, 48, 50, 51, 52, 53, 54, 55, 56, 59, 60, 65, 68, 72, 73, 77, 78, 79, 81, 87, 88, 89, 90, 92, 94, 96, 98, 99],
+      "before": ["AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB"],
+      "after": ["BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/63/P2_pair_orders_by_region/seremban-port-dickson",
+      "operation": "replace_indices",
+      "indices": [0, 2, 3, 5, 7, 8, 11, 13, 15, 20, 21, 23, 27, 29, 30, 32, 33, 34, 36, 37, 38, 39, 40, 42, 43, 46, 48, 49, 50, 51, 54, 58, 59, 60, 61, 62, 64, 65, 67, 69, 70, 73, 74, 76, 77, 81, 82, 84, 85, 87, 88, 90, 92, 93, 94, 97],
+      "before": ["AB", "AB", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB"],
+      "after": ["BA", "BA", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/base_schedule/63/P2_pair_orders_by_region/seremban-small",
+      "operation": "replace_indices",
+      "indices": [0, 1, 4, 5, 7, 8, 9, 11, 13, 16, 17, 19, 20, 22, 23, 25, 30, 31, 32, 33, 37, 39, 40, 41, 43, 44, 45, 46, 48, 49, 52, 54, 55, 57, 60, 62, 63, 65, 68, 74, 75, 76, 79, 80, 81, 82, 87, 89, 92, 94, 95, 99],
+      "before": ["AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "AB", "BA", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "BA", "AB", "BA", "AB", "BA"],
+      "after": ["BA", "BA", "BA", "BA", "BA", "BA", "AB", "BA", "AB", "BA", "AB", "BA", "AB", "AB", "BA", "AB", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "BA", "AB", "AB", "BA", "AB", "BA", "BA", "AB", "BA", "BA", "AB", "AB", "AB", "AB", "AB", "AB", "AB", "BA", "AB", "AB", "BA", "AB", "BA", "AB"],
+      "exact_pointer_rule": "append /<index> for each listed index",
+      "findings": ["F1", "F10"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/0/resolved_workload_sha256",
+      "operation": "add",
+      "after": "92f787275374399df6bd9a34db4bcbba4e246e05b078f3f575e4beca23377a45",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/1/resolved_workload_sha256",
+      "operation": "add",
+      "after": "364c7e004f982c4576218b5f13ae3b86924eda2208fc3e0319724b7b0b5697ea",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/2/resolved_workload_sha256",
+      "operation": "add",
+      "after": "b113fc4a8307b6f014ebb260c916ebb3a25a52a86bdf57c0d69c7ee5faceaae6",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/3/resolved_workload_sha256",
+      "operation": "add",
+      "after": "9a87763f2d6b7136192da0e3c18855af88f60d3658429c95b144bbac9828d22b",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/4/resolved_workload_sha256",
+      "operation": "add",
+      "after": "3429af19c76259a7abf26a21b137ffd073b01edd7a8777018bf6f6e0fb3a1db9",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/5/resolved_workload_sha256",
+      "operation": "add",
+      "after": "044e76464952fb14d935927bfda377c8a2e42da35bd1aab26aaacf8a555b3991",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/6/resolved_workload_sha256",
+      "operation": "add",
+      "after": "364c7e004f982c4576218b5f13ae3b86924eda2208fc3e0319724b7b0b5697ea",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/7/resolved_workload_sha256",
+      "operation": "add",
+      "after": "645a77d3ff4e0c18d208991a6dd967f406784e407cb1025c1d079ae4c2612c4a",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/8/resolved_workload_sha256",
+      "operation": "add",
+      "after": "9a07e221877c193c8f39817134288b1d2fcd11b93d21c5ec516ddc1b5a5bdceb",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/9/resolved_workload_sha256",
+      "operation": "add",
+      "after": "755e823e8d364c952f749440cba2af162fbe2f498e79ed25038d72715bda7c09",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/10/resolved_workload_sha256",
+      "operation": "add",
+      "after": "9c398cd12937dc353cba75c54a4f450ba7802e378b5d5b63380cc186fdd8db3b",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/11/resolved_workload_sha256",
+      "operation": "add",
+      "after": "9c398cd12937dc353cba75c54a4f450ba7802e378b5d5b63380cc186fdd8db3b",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/12/resolved_workload_sha256",
+      "operation": "add",
+      "after": "daf480a75b2226dd0665229952f0b97e8aaba2f8781849a0964032ae3a6f0a11",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/13/resolved_workload_sha256",
+      "operation": "add",
+      "after": "9a07e221877c193c8f39817134288b1d2fcd11b93d21c5ec516ddc1b5a5bdceb",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/14/resolved_workload_sha256",
+      "operation": "add",
+      "after": "1ea9a018093722b15a1ea7f08cf805ddfb92fc8a544a7238bf4104253f14f45a",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/15/resolved_workload_sha256",
+      "operation": "add",
+      "after": "daf480a75b2226dd0665229952f0b97e8aaba2f8781849a0964032ae3a6f0a11",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/16/resolved_workload_sha256",
+      "operation": "add",
+      "after": "3429af19c76259a7abf26a21b137ffd073b01edd7a8777018bf6f6e0fb3a1db9",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/17/resolved_workload_sha256",
+      "operation": "add",
+      "after": "6280ce763b4d0e9c69053d88537ab38995dae5e18af8a37facaa29a3c808ad15",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/18/resolved_workload_sha256",
+      "operation": "add",
+      "after": "645a77d3ff4e0c18d208991a6dd967f406784e407cb1025c1d079ae4c2612c4a",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/19/resolved_workload_sha256",
+      "operation": "add",
+      "after": "04b4f47fb28d5e0480294848ee460c916dc8e71c776bd31ec05bec2d472eb9d4",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/20/resolved_workload_sha256",
+      "operation": "add",
+      "after": "044e76464952fb14d935927bfda377c8a2e42da35bd1aab26aaacf8a555b3991",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/21/resolved_workload_sha256",
+      "operation": "add",
+      "after": "6280ce763b4d0e9c69053d88537ab38995dae5e18af8a37facaa29a3c808ad15",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/22/resolved_workload_sha256",
+      "operation": "add",
+      "after": "364c7e004f982c4576218b5f13ae3b86924eda2208fc3e0319724b7b0b5697ea",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/23/resolved_workload_sha256",
+      "operation": "add",
+      "after": "92f787275374399df6bd9a34db4bcbba4e246e05b078f3f575e4beca23377a45",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/24/resolved_workload_sha256",
+      "operation": "add",
+      "after": "9a07e221877c193c8f39817134288b1d2fcd11b93d21c5ec516ddc1b5a5bdceb",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/25/resolved_workload_sha256",
+      "operation": "add",
+      "after": "82d2166a80c77edc325e4a00c5d1758cc9f91548b7ce63a02e8eaacf95aa979c",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/26/resolved_workload_sha256",
+      "operation": "add",
+      "after": "2dba2d13d164fb887f600cb8ec9e0ca98374d73e2da54b1ad5bcef8650522d64",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/27/resolved_workload_sha256",
+      "operation": "add",
+      "after": "364c7e004f982c4576218b5f13ae3b86924eda2208fc3e0319724b7b0b5697ea",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/28/resolved_workload_sha256",
+      "operation": "add",
+      "after": "82d2166a80c77edc325e4a00c5d1758cc9f91548b7ce63a02e8eaacf95aa979c",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/29/resolved_workload_sha256",
+      "operation": "add",
+      "after": "daf480a75b2226dd0665229952f0b97e8aaba2f8781849a0964032ae3a6f0a11",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/30/resolved_workload_sha256",
+      "operation": "add",
+      "after": "645a77d3ff4e0c18d208991a6dd967f406784e407cb1025c1d079ae4c2612c4a",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/31/resolved_workload_sha256",
+      "operation": "add",
+      "after": "9a07e221877c193c8f39817134288b1d2fcd11b93d21c5ec516ddc1b5a5bdceb",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/32/resolved_workload_sha256",
+      "operation": "add",
+      "after": "2dba2d13d164fb887f600cb8ec9e0ca98374d73e2da54b1ad5bcef8650522d64",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/33/resolved_workload_sha256",
+      "operation": "add",
+      "after": "92f787275374399df6bd9a34db4bcbba4e246e05b078f3f575e4beca23377a45",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/34/resolved_workload_sha256",
+      "operation": "add",
+      "after": "daf480a75b2226dd0665229952f0b97e8aaba2f8781849a0964032ae3a6f0a11",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/35/resolved_workload_sha256",
+      "operation": "add",
+      "after": "2dba2d13d164fb887f600cb8ec9e0ca98374d73e2da54b1ad5bcef8650522d64",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/36/resolved_workload_sha256",
+      "operation": "add",
+      "after": "b113fc4a8307b6f014ebb260c916ebb3a25a52a86bdf57c0d69c7ee5faceaae6",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/37/resolved_workload_sha256",
+      "operation": "add",
+      "after": "3429af19c76259a7abf26a21b137ffd073b01edd7a8777018bf6f6e0fb3a1db9",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/38/resolved_workload_sha256",
+      "operation": "add",
+      "after": "92f787275374399df6bd9a34db4bcbba4e246e05b078f3f575e4beca23377a45",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/39/resolved_workload_sha256",
+      "operation": "add",
+      "after": "044e76464952fb14d935927bfda377c8a2e42da35bd1aab26aaacf8a555b3991",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/40/resolved_workload_sha256",
+      "operation": "add",
+      "after": "3429af19c76259a7abf26a21b137ffd073b01edd7a8777018bf6f6e0fb3a1db9",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/41/resolved_workload_sha256",
+      "operation": "add",
+      "after": "04b4f47fb28d5e0480294848ee460c916dc8e71c776bd31ec05bec2d472eb9d4",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/42/resolved_workload_sha256",
+      "operation": "add",
+      "after": "9a87763f2d6b7136192da0e3c18855af88f60d3658429c95b144bbac9828d22b",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/43/resolved_workload_sha256",
+      "operation": "add",
+      "after": "645a77d3ff4e0c18d208991a6dd967f406784e407cb1025c1d079ae4c2612c4a",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/44/resolved_workload_sha256",
+      "operation": "add",
+      "after": "1ea9a018093722b15a1ea7f08cf805ddfb92fc8a544a7238bf4104253f14f45a",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/45/resolved_workload_sha256",
+      "operation": "add",
+      "after": "755e823e8d364c952f749440cba2af162fbe2f498e79ed25038d72715bda7c09",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/46/resolved_workload_sha256",
+      "operation": "add",
+      "after": "044e76464952fb14d935927bfda377c8a2e42da35bd1aab26aaacf8a555b3991",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule/47/resolved_workload_sha256",
+      "operation": "add",
+      "after": "2dba2d13d164fb887f600cb8ec9e0ca98374d73e2da54b1ad5bcef8650522d64",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/diagnostic_schedule_sha256",
+      "operation": "replace",
+      "before": "168d7900e1862b518770e2e9b1b32b50b7927c664ceafaceb8201f55cbfb5acd",
+      "after": "41cabb4e16f5ad0fb99c2a9f352833ff1c5daa2be1915e57283399271dad32be",
+      "findings": ["F1", "F5"]
+    },
+    {
+      "json_pointer": "/design/order_assignment_construction",
+      "operation": "add",
+      "after": {
+        "value_type": "dict",
+        "length": 6,
+        "canonical_value_sha256": "f0b6b8fdf04c9dcc7004f83150d5dbb7e15ead2a6ae4bb15d3d4b7c5f04b8d58"
+      },
+      "findings": ["F1", "F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/runner_field_schema",
+      "operation": "add",
+      "after": {
+        "value_type": "dict",
+        "length": 8,
+        "canonical_value_sha256": "8b0a15178f269c082f481727fe7b87971e4cd3acc218af9fb24f3caaea93f335"
+      },
+      "findings": ["F10"]
+    },
+    {
+      "json_pointer": "/design/sample_size_rationale/diagnostic_storage",
+      "operation": "replace",
+      "before": "C timed events can require tens of GiB; fixed28-source-position subset and128GiB preflight headroom bound feasibility. D branch traces may require more and stop on declared storage safety limit; no compressed data may be dropped.",
+      "after": "Expanded41positions; 335872000000bytes (312.805GiB) worst uncompressed timed C events at cap, plus128GiB diagnostic trace/metadata reserve; preflight512GiB. Not measured future output size.",
+      "findings": ["F6"]
+    },
+    {
+      "json_pointer": "/design/sample_size_rationale/readiness_expectation",
+      "operation": "add",
+      "after": "Strict zero-regression at99.5% may often be INCONCLUSIVE even at true ratio1. Historical SD gives only illustrative ~9% simultaneous-bound halfwidth at32trials, optimistic under8sessions; not power or a reliable9% requirement. Preserve32trials,8sessions and no adaptive extension.",
+      "findings": ["AMENDMENT_METADATA"]
+    },
+    {
+      "json_pointer": "/design/schedule_algorithm",
+      "operation": "replace",
+      "before": "SHA256 canonical JSON [seed,domain,value] sort, ties by str(value); schedule embedded is authoritative, not runtime random choice; region cycle first2 must be position-disjoint, then remaining4 by original hash order; five full cycles plus first2",
+      "after": {
+        "value_type": "str",
+        "length": 462,
+        "canonical_value_sha256": "b6e947a5e45b55b593bdb4ae17b8dc08e7a4bd8dd9fc7895ce4e1bc260e4d342"
+      },
+      "findings": ["F1", "F2", "F10"]
+    },
+    {
+      "json_pointer": "/design/schedule_sha256",
+      "operation": "replace",
+      "before": "430d1aa47af6b9caa926e9ae3aaa694a5ecc8c7c6fd6fddc7e4808c02a3298f3",
+      "after": "46559c673c7427dd3ab70138efd2299a0db354bc0d9e0a3f35ccd2fda4ac4996",
+      "findings": ["F1", "F2", "F10"]
+    },
+    {
+      "json_pointer": "/environment/host_verification_boundary",
+      "operation": "add",
+      "after": {
+        "value_type": "dict",
+        "length": 5,
+        "canonical_value_sha256": "989841ac418354b96ac37590e675c313d94967b583f59561d375038717cca664"
+      },
+      "findings": ["F11"]
+    },
+    {
+      "json_pointer": "/environment/storage_preflight",
+      "operation": "replace",
+      "before": "at least128GiB free on evidence volume before C/D; verify headroom between complete blocks, stop before next if below16GiB, archive partial/no replacement; conservative planning allowance, not measured output size",
+      "after": "minimum512GiB free before C/D; worst timed C events335872000000bytes plus traces/metadata reserve, check between whole blocks; stop before next below16GiB and archive incomplete/no replacement. No compression assumed.",
+      "findings": ["F6"]
+    },
+    {
+      "json_pointer": "/finding_state_at_freeze/Task15_review",
+      "operation": "add",
+      "after": {
+        "value_type": "dict",
+        "length": 11,
+        "canonical_value_sha256": "fcba2faf56c5eba7b81494b0350a982cc25506335bfb6d84e80bfba5933a2370"
+      },
+      "findings": ["AMENDMENT_METADATA"]
+    },
+    {
+      "json_pointer": "/future_execution/active_protocol_file",
+      "operation": "add",
+      "after": "docs/task15_tail_attribution_protocol_v1.1.0.json",
+      "findings": ["AMENDMENT_METADATA"]
+    },
+    {
+      "json_pointer": "/future_execution/approval_gate",
+      "operation": "replace",
+      "before": "independent protocol approval plus separately authorized harness/diagnostic implementation and verification required before any collection",
+      "after": "v1.0 NOT approved. v1.1 awaits actual independent re-review; no harness/calibration/collection authorization from this amendment. Future host preflight and diagnostic equivalence gates mandatory after separate authorization.",
+      "findings": ["AMENDMENT_METADATA"]
+    },
+    {
+      "json_pointer": "/future_execution/runner_status",
+      "operation": "replace",
+      "before": "NOT_IMPLEMENTED_IN_THIS_TASK; old controllers cannot execute v1 randomization/CPU boundaries and must not be used unchanged",
+      "after": "NOT_IMPLEMENTED; only static schedule/document validation tooling is delivered, no workload runner.",
+      "findings": ["AMENDMENT_METADATA"]
+    },
+    {
+      "json_pointer": "/hypotheses/0/signature",
+      "operation": "replace",
+      "before": "wall excess >=10ms with threadCPU excess <=20% of wall excess and nonCPU excess >=80%, plus traced runnable off-CPU interval",
+      "after": "Analyze continuous wall/threadCPU paired differences and distribution shifts. Moderate/severe flags follow statistics.H1_event_rules; runnable offCPU trace required for descheduling, never wall-minusCPU alone.",
+      "findings": ["F7"]
+    },
+    {
+      "json_pointer": "/hypotheses/0/sufficient",
+      "operation": "replace",
+      "before": "same-query trace accounts for >=80% excess, >=3 events in >=2 sessions; controlled intervention changes matched excess by >=50% with uncertainty excluding zero; blocked waits classified separately",
+      "after": ">=3 query-linked events in >=2sessions, uncertainty-valid runnable offCPU trace explaining dominant excess, blocked waits separated; 80% accounting and50% controlled intervention are engineering heuristics defined in H1_event_rules, not confidence guarantees. Missing direct support =>UNRESOLVED.",
+      "findings": ["F7"]
+    },
+    {
+      "json_pointer": "/identity/sha256",
+      "operation": "replace",
+      "before": "590838e4fdde2dcd86228fe0c521845e479fcc6372fa39d3745cb21270ce8247",
+      "after": "6664cad958a863226925efdeac4ffc5fe220673e8cd7072c05cd6298facfb37f",
+      "findings": ["AMENDMENT_METADATA"]
+    },
+    {
+      "json_pointer": "/phase",
+      "operation": "replace",
+      "before": "DESIGN_ONLY_FROZEN_FOR_INDEPENDENT_REVIEW",
+      "after": "PRE_DATA_AMENDMENT_AWAITING_INDEPENDENT_RE_REVIEW",
+      "findings": ["AMENDMENT_METADATA"]
+    },
+    {
+      "json_pointer": "/statistics/H1_event_rules",
+      "operation": "add",
+      "after": {
+        "value_type": "dict",
+        "length": 11,
+        "canonical_value_sha256": "0e7548122eb828d063cc89b7d91eaa26e07d2f0fdaf542ff99a83ccfa2913b65"
+      },
+      "findings": ["F7"]
+    },
+    {
+      "json_pointer": "/statistics/bootstrap/limitations",
+      "operation": "replace",
+      "before": "approximate bootstrap coverage,8sessionclusters and rare tails; not a theorem or formal powered production SLO certification",
+      "after": "Approximate percentile bootstrap with eight top-level sessions; 99.5% nominal intervals can have poor/anti-conservative finite-sample coverage. Bonferroni does not repair bootstrap miscoverage. No high-reliability production-population assurance.",
+      "findings": ["F3", "F4", "F9"]
+    },
+    {
+      "json_pointer": "/statistics/bootstrap_execution_spec",
+      "operation": "add",
+      "after": {
+        "value_type": "dict",
+        "length": 13,
+        "canonical_value_sha256": "ae00d0a0b38561acde919d2edf539dcfd0f0b5c4b81fadb20663a0d7ab5d712b"
+      },
+      "findings": ["F9"]
+    },
+    {
+      "json_pointer": "/statistics/claim_scope_ladder",
+      "operation": "add",
+      "after": ["observed fixed-workload sample p99 ratio", "approximate conditional session/process bootstrap interval", "robust population-wide production statement NOT established by8sessions", "causal software regression requires direct mechanism/control evidence beyond ratio"],
+      "findings": ["F3", "F4", "F9"]
+    },
+    {
+      "json_pointer": "/statistics/outliers",
+      "operation": "replace",
+      "before": "no trimming,winsorization,source filtering or per-variant exclusion; preflag spike W>max(1.5*historical_position_baseline_NRmedian, historical_anchor+0.010s); flag used only attribution, full distribution retained",
+      "after": "No trimming/winsorization/filtering. Preserve historical extreme flag and amended moderate/severe flags; continuous full-data estimands unchanged. H1_event_rules is authoritative.",
+      "findings": ["F7"]
+    },
+    {
+      "json_pointer": "/statistics/session_level_descriptive",
+      "operation": "add",
+      "after": {
+        "value_type": "dict",
+        "length": 3,
+        "canonical_value_sha256": "53ffae670f88d1911d8e1de4325a31dafa762450e547c56f7d20c223935a1619"
+      },
+      "findings": ["F3", "F4", "F9"]
+    },
+    {
+      "json_pointer": "/version",
+      "operation": "replace",
+      "before": "1.0.0",
+      "after": "1.1.0",
+      "findings": ["AMENDMENT_METADATA"]
+    }
+  ],
+  "path_semantics": "JSON Pointer; replace_indices records expand exactly to json_pointer/index for each listed index. Other operations address their exact subtree; full values available from parent/new immutable JSON.",
+  "hash_cycle_policy": "ledger file-byte hash recorded in new Markdown and external delivery, not inside ledger; new Markdown file-byte hash recorded externally; commit SHA after delivery external, never self-referenced."
+}
