@@ -1,6 +1,7 @@
 from __future__ import annotations
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 from typing import Any
@@ -25,8 +26,12 @@ def strict_json_bytes(raw: bytes) -> Any:
         return out
     def invalid(value: str) -> Any:
         raise ControlError('JSON_NONFINITE', value)
+    def finite(value: str) -> float:
+        result = float(value)
+        require(math.isfinite(result), 'JSON_NONFINITE', value)
+        return result
     try:
-        return json.loads(raw.decode('utf-8'), object_pairs_hook=pairs, parse_constant=invalid)
+        return json.loads(raw.decode('utf-8'), object_pairs_hook=pairs, parse_constant=invalid, parse_float=finite)
     except (UnicodeError, json.JSONDecodeError) as exc:
         raise ControlError('JSON_PARSE', str(exc)) from exc
 

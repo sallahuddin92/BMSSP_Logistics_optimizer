@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "scope",
+    "files_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": [
+        "1"
+      ]
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "CONTROL_PLANE_ONLY_NOT_MEASUREMENT"
+      ]
+    },
+    "files_sha256": {
+      "type": "object"
+    }
+  }
+}

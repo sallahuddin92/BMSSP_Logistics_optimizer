@@ -18,15 +18,16 @@ def run_tests(output: Path | None, protocol: Protocol) -> int:
             return [item for child in node for item in cases(child)]
         return [node.id()]
     case_ids = cases(suite)
-    require(len(case_ids) >= 43 and all(any(f'.test_{i:02d}_' in name for name in case_ids)
-            for i in range(1, 26)), 'TEST_SCOPE', 'all required control cases must be discovered')
+    require(len(case_ids) >= 56 and all(any(f'.test_{i:02d}_' in name for name in case_ids)
+            for i in range(1, 46)), 'TEST_SCOPE', 'all required control cases must be discovered')
     log = io.StringIO()
     result = unittest.TextTestRunner(stream=log, verbosity=2).run(suite)
     report = {'scope': 'STATIC_AND_SYNTHETIC_ONLY', 'tests_run': result.testsRun,
               'failures': len(result.failures), 'errors': len(result.errors),
               'skipped': len(result.skipped), 'successful': result.wasSuccessful() and not result.skipped, 'case_ids': case_ids,
               'no_BMSSP_workload': True,
-              'negative_controls': getattr(sys.modules.get('test_control'), 'NEGATIVE_RESULTS', [])}
+              'negative_controls': [record for module in ('test_control', 'test_delta')
+                                    for record in getattr(sys.modules.get(module), 'NEGATIVE_RESULTS', [])]}
     if output is not None:
         create_bundle(protocol, output, {'tests.json': canonical(report)+b'\n',
                                         'tests.log': log.getvalue().encode()})

@@ -6,9 +6,9 @@ import sys
 from typing import Iterable
 from .artifacts import capacity, inspect_identities, inspect_storage, source_lock
 from .errors import ControlError, require
-from .integrity import canonical, read_json
+from .integrity import canonical
 from .manifest import SAFE_STATES, prepare_manifest, validate_manifest
-from .output import create_bundle, read_bundle
+from .output import create_bundle, read_bundle_json
 from .planning import compile_plan, plan_counts, query_records, validate_plan
 from .protocol import PACKAGE_ROOT, load_protocol
 from .schedule import validate_schedule
@@ -30,6 +30,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--output', type=Path)
     parser.add_argument('--manifest', type=Path)
     parser.add_argument('--destination', type=Path)
+    parser.add_argument('--check-hardlinks', action='store_true', help='tiny private storage capability probe only')
     parser.add_argument('--state', choices=SAFE_STATES, default='DRAFT')
     parser.add_argument('--skip-external', action='store_true', help='all external identities NOT_CHECKED')
     parser.add_argument('--with-queries', action='store_true', help='stream full static query records with plan')
@@ -37,6 +38,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--interrupt-after', type=int, help='synthetic simulator only')
     args = parser.parse_args(args_list)
     try:
+        require(not args.check_hardlinks or args.operation == 'inspect-storage',
+                'ARGUMENT', '--check-hardlinks is only for inspect-storage')
         protocol = load_protocol(args.repo)
         op = args.operation
         if op == 'self-test':
@@ -51,13 +54,13 @@ def main(argv: list[str] | None = None) -> int:
         elif op == 'inspect-identities':
             value = inspect_identities(protocol, checked=not args.skip_external)
         elif op == 'inspect-storage':
-            value = {'capacity': capacity(protocol), 'inspection': inspect_storage(protocol, args.destination)}
+            value = {'capacity': capacity(protocol), 'inspection': inspect_storage(protocol, args.destination, check_hardlinks=args.check_hardlinks)}
         elif op == 'prepare-manifest':
             value = prepare_manifest(protocol, state=args.state, checked=not args.skip_external)
         elif op == 'validate-manifest':
             require(args.manifest is not None, 'ARGUMENT', '--manifest bundle required')
-            read_bundle(args.manifest)
-            value = validate_manifest(protocol, read_json(args.manifest/'manifest.json'))
+            value = validate_manifest(protocol, read_bundle_json(
+                args.manifest, 'manifest.json', expected_payloads={'manifest.json'}))
         else:
             plan = compile_plan(protocol)
             validate_plan(protocol, plan)

@@ -1,6 +1,6 @@
 # Task 15 measurement harness — Phase 1 control plane
 
-Version **0.1.0**. Standard-library Python 3.11+ package; no installation or network
+Version **0.1.1**. Standard-library Python 3.11+ package; no installation or network
 is required. Production BMSSP, bindings, API, existing tools and all frozen protocol
 files are untouched. This package has **no execution adapter**: no native binding
 import, solver dispatch, worker launcher, calibration or profiler path exists.
@@ -50,7 +50,7 @@ signatures. The state machine cannot create any later state in this implementati
 | `protocol.py` | Strict immutable frozen loader, canonical/file/parent/ledger hashes |
 | `integrity.py` | Duplicate/nonfinite JSON rejection, closed schema checks, streaming SHA |
 | `schedule.py` | Independent stored-order validation and actual per-position/session counts |
-| `artifacts.py` | Binary/input/index/source identities, Git metadata, read-only disk inspection |
+| `artifacts.py` | Binary/input/index/source identities, Git metadata, disk observation and optional private hard-link probe |
 | `planning.py` | Deterministic compact plan and lazy per-query records; no seed regeneration |
 | `manifest.py` | Deterministic manifests, source/repository/identity locks, restricted states |
 | `output.py` | Exclusive directory/file publication, completion integrity marker, interrupted audit |
@@ -73,7 +73,7 @@ never fetched. `manifest-1.schema.json` and semantic verification define manifes
 See [schema/state details](specs/control-plane-schema-v1.md).
 
 The source identity is separate from the protocol: streaming SHA-256 over each
-package `.py/.json/.md` file, sorted relative names, then canonical hash of that map.
+package `.py/.json/.md/.toml` file, sorted relative names, then canonical hash of that map.
 Python bytecode/cache and mutable external outputs are excluded. Manifest provenance
 records actual Git revision, dirty status, runtime trees and source hashes; a dirty
 preparation is distinguishable from a committed one. Content hashes are integrity
@@ -113,8 +113,11 @@ check; absent destination is NOT_CHECKED. It reports destination/device/free byt
 and STORAGE_CAPACITY_VERIFIED or INSUFFICIENT_CAPACITY against **512 GiB**. It does
 not assume the root volume or reserve space. Static calculations preserve 4M
 operation-events/query, 128 bytes/event maximum, 41 selected positions,
-335,872,000,000 worst timed-C bytes and equal paired-buffer footprints. No buffers
-or allocator probes are created. A failed storage/capacity gate blocks future C,
+335,872,000,000 worst timed-C bytes and equal paired-buffer footprints. No buffers or allocator probes are created. The optional `--check-hardlinks`
+flag creates a tiny private temporary directory in the explicit destination,
+links a small private file, verifies it and removes only its own probe files.
+Protected repository/evidence roots cannot be probed. Failure is reported as
+UNSUPPORTED_OR_DENIED; this is a point-in-time capability check, not a guarantee. A failed storage/capacity gate blocks future C,
 not documentation or control-plane static verification. Instantaneous disk space
 can change; a future authorized stage must recheck it.
 
@@ -149,3 +152,53 @@ validation detects stale content. No automatic cleanup removes prior evidence.
 
 The cross-list issue is recorded separately as a [proposed clarification only](specs/proposed-ordering-clarification.md).
 No proposal has been adopted into the frozen protocol or into an executable order.
+
+## Phase-1.1 corrective contract
+
+Plans now use schema version **2**. Every unit, companion, query and per-cluster
+synthetic event carries `session_kind` (PRIMARY or DIAGNOSTIC), `session_id`
+(within that domain), `schedule_ref_session` (the frozen referenced row's primary
+session), and `session_key` (`PRIMARY/0` versus `DIAGNOSTIC/0`). Diagnostic indices
+are preserved even when they differ from their reference sessions. Cluster IDs
+include the namespace; query and plan hashes consequently change. The session
+projection is validated by `schemas/session-2.schema.json` and exact frozen plan
+reconciliation. The summary event reports its observed `session_keys` inventory.
+
+`expected_binary.planned_binary_sha256` replaces the misleading loaded-hash field.
+Every record says `load_status: NOT_LOADED`; the production plan status is
+PLANNED_PRODUCTION_IDENTITY. Diagnostic planned hashes remain null pending builds.
+`validate-manifest` returns VALID_STATIC_MANIFEST_STRUCTURE plus
+`external_identity_verification`: NOT_CHECKED, ALL_VERIFIED, or FAILED. An unchecked
+DRAFT can be structurally valid; it cannot transition to STATIC_VERIFIED.
+STORAGE_CAPACITY_VERIFIED is retained for compatibility and always accompanied by
+`verification_scope: POINT_IN_TIME_FREE_SPACE_ONLY` and `space_reserved: false`.
+No status grants execution authorization.
+
+Completion markers follow the closed `schemas/completion-1.schema.json` plus
+semantic checks for safe lowercase basenames, lowercase 64-digit hashes, exact
+payload inventory, regular non-symlink files and distinct payload inodes. Supported
+sets are manifest-only, report-only, report+plan (optionally queries),
+report+synthetic-events, and tests.json+tests.log. Explicit fixture consumers may
+supply their own exact inventory. Manifest consumers require manifest-only and
+parse the exact bytes whose digest they verify. Missing, unlisted, aliased,
+interrupted or modified payloads fail closed with classified errors. Unsigned
+hashes remain integrity checks, never authentication or approval signatures.
+
+Strict JSON rejects overflow exponents such as 1e999 as JSON_NONFINITE. Fixed
+read-only Git queries use absolute repository roots and a controlled environment,
+ignoring inherited GIT_* overrides and global/system Git configuration with a
+stable C locale. This does not protect against every same-user local attack.
+
+The complete independent P2 target oracle reconciles all 19,200 Cohort A targets
+and all 41,352 diagnostic targets, retaining execution-indexed subset mapping.
+It independently counts 50/50 per trial, 16/16 per original position, and 2/2 per
+position/session for each region. Mutated emitted pairs, positions, variants,
+orders, source occurrences, missing and duplicate records must be detected.
+The advisory AST lint checks simple aliases and attributes with a narrow exception
+for the controlled Git metadata call. It is not a proof of absence of execution
+facilities or dynamic Python behavior. Neither test serialization nor companion
+placement grants cross-lane execution order.
+
+Old 0.1.0 manifests are stale after this source/plan change; do not edit historical
+bundles. Manifest format version 1 is retained, while harness version, source lock
+and plan identity enforce the changed contract. No frozen protocol identity changes.

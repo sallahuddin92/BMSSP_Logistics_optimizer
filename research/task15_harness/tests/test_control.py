@@ -142,7 +142,7 @@ class ControlTests(unittest.TestCase):
             out=Path(tmp)/'interrupted'
             self.expect('OUTPUT_INTERRUPTED',lambda:create_bundle(self.protocol,out,{'fixture.json':broken()}))
             self.assertFalse((out/'COMPLETED.json').exists())
-            self.expect('BUNDLE_INCOMPLETE',lambda:read_bundle(out))
+            self.expect('BUNDLE_INCOMPLETE',lambda:read_bundle(out, expected_payloads={'fixture.json'}))
             self.expect('OUTPUT_EXISTS',lambda:create_bundle(self.protocol,out,{'fixture.json':b'{}'}))
 
     def test_20_unsupported_commands_and_environment_bypass(self):
@@ -209,6 +209,7 @@ class ControlTests(unittest.TestCase):
         expected=plan_counts(self.protocol,self.plan)
         self.assertEqual(dict(counts),expected['by_cohort_phase'])
         self.assertEqual(len(ids),expected['query_record_count'])
+        # Serialization inventory only: this does not approve cross-lane execution.
         self.assertEqual(last['plan_lane'],'allocation_stack_companions')
 
     def test_30_p1_batch_and_p2_interleaving(self):
@@ -285,7 +286,7 @@ class ControlTests(unittest.TestCase):
         with tempfile.TemporaryDirectory()as tmp:
             out=Path(tmp)/'bundle';create_bundle(self.protocol,out,{'fixture.json':b'{}'})
             (out/'fixture.json').write_bytes(b'changed')
-            self.expect('BUNDLE_HASH',lambda:read_bundle(out))
+            self.expect('BUNDLE_HASH',lambda:read_bundle(out, expected_payloads={'fixture.json'}))
 
     def test_44_no_forged_approval_provenance(self):
         m=self.draft();m['provenance']['review_status']='approved for collection';m=seal(m)

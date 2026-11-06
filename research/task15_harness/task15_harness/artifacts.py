@@ -2,6 +2,7 @@ from __future__ import annotations
 import os
 import shutil
 import subprocess
+import tempfile
 from pathlib import Path
 from typing import Any
 from .errors import ControlError, require
@@ -70,17 +71,26 @@ def source_lock() -> dict[str, Any]:
 
 
 def repository_identity(protocol: Protocol) -> dict[str, Any]:
+    repository = protocol.repository.resolve()
+    environment = {'PATH': os.defpath, 'LC_ALL': 'C', 'LANG': 'C',
+                   'GIT_CONFIG_NOSYSTEM': '1', 'GIT_CONFIG_GLOBAL': os.devnull,
+                   'GIT_TERMINAL_PROMPT': '0', 'GIT_OPTIONAL_LOCKS': '0'}
     def git(*args: str) -> str:
         # Only fixed read-only Git metadata queries. No subprocess execution facility is exposed.
-        result = subprocess.run(['git', '-c', 'core.fsmonitor=false', '-c', 'core.hooksPath=/dev/null',
-                                 '-C', str(protocol.repository), *args],
-                                check=False, capture_output=True, text=True)
+        try:
+            result = subprocess.run(['git', '-c', 'core.fsmonitor=false', '-c', 'core.hooksPath=/dev/null',
+                                 '-C', str(repository), *args],
+                                check=False, capture_output=True, text=True, encoding='utf-8', env=environment, timeout=15)
+        except (OSError, UnicodeError, subprocess.TimeoutExpired) as exc:
+            raise ControlError('GIT_METADATA', str(exc)) from exc
         require(result.returncode == 0, 'GIT_METADATA', result.stderr)
         return result.stdout.strip()
+    require(Path(git('rev-parse', '--show-toplevel')).resolve() == repository,
+            'GIT_METADATA', 'repository root mismatch')
     expected = protocol.data()['runtime_tree_identities']
     actual = {name: git('rev-parse', 'HEAD:'+name) for name in expected}
     protected = ['native','backend','frontend','tools','CMakeLists.txt']
-    changes = sorted(set(git('diff','HEAD','--name-only','--',*protected).splitlines()) |
+    changes = sorted(set(git('diff','--no-ext-diff','--no-textconv','HEAD','--name-only','--',*protected).splitlines()) |
                      set(git('ls-files','--others','--exclude-standard','--',*protected).splitlines()))
     return {'path': str(protocol.repository), 'commit': git('rev-parse','HEAD'),
             'branch': git('branch','--show-current'), 'origin': git('remote','get-url','origin'),
@@ -96,20 +106,40 @@ def capacity(protocol: Protocol) -> dict[str, Any]:
     return {'event_cap_per_query': c['new_capacity'], 'event_bytes_max': c['record_size_bytes_max'],
             'selected_positions': positions, 'buffer_bytes_per_worker': c['new_capacity']*c['record_size_bytes_max'],
             'two_worker_buffer_bytes': 2*c['new_capacity']*c['record_size_bytes_max'],
-            'worst_timed_C_event_bytes': 8*2*positions*c['new_capacity']*c['record_size_bytes_max'],
+            'worst_timed_C_event_bytes': p['cohorts']['C']['clusters_per_mode']*len(p['binaries'])*positions*c['new_capacity']*c['record_size_bytes_max'],
             'required_storage_bytes': c['storage_preflight_GiB_min']*2**30,
             'allocation_capacity_calibration': 'PENDING', 'buffers_allocated': False}
 
 
-def inspect_storage(protocol: Protocol, destination: Path | None) -> dict[str, Any]:
+def inspect_storage(protocol: Protocol, destination: Path | None, *, check_hardlinks: bool = False) -> dict[str, Any]:
     needed = capacity(protocol)['required_storage_bytes']
     if destination is None:
+        require(not check_hardlinks, 'STORAGE_DESTINATION', 'hard-link probe requires explicit destination')
         return {'status': 'NOT_CHECKED', 'destination': None, 'required_bytes': needed,
-                'free_bytes': None, 'device': None}
+                'free_bytes': None, 'device': None, 'space_reserved': False,
+                'verification_scope': 'NOT_CHECKED',
+                'hardlink_capability': {'status': 'NOT_CHECKED', 'scope': 'PRIVATE_TINY_PROBE_ONLY', 'detail': ''}}
     destination = destination.resolve(strict=True)
     require(destination.is_dir(), 'STORAGE_DESTINATION', 'explicit existing evidence directory required')
     usage = shutil.disk_usage(destination)
-    return {'status': 'STORAGE_CAPACITY_VERIFIED' if usage.free >= needed else 'INSUFFICIENT_CAPACITY',
+    hardlinks = {'status': 'NOT_CHECKED', 'scope': 'PRIVATE_TINY_PROBE_ONLY', 'detail': ''}
+    if check_hardlinks:
+        from .output import safe_destination
+        safe_destination(protocol, destination/'task15-hardlink-probe')
+        try:
+            with tempfile.TemporaryDirectory(prefix='.task15-hardlink-', dir=destination) as name:
+                folder = Path(name)
+                source = folder/'source'
+                source.write_bytes(b'task15-capability-probe\n')
+                os.link(source, folder/'linked')
+                require(source.stat().st_ino == (folder/'linked').stat().st_ino
+                        and source.read_bytes() == (folder/'linked').read_bytes(),
+                        'STORAGE_HARDLINK', 'probe identity mismatch')
+            hardlinks['status'] = 'HARDLINK_SUPPORTED_AT_CHECK'
+        except (OSError, ControlError) as exc:
+            hardlinks.update(status='UNSUPPORTED_OR_DENIED', detail=str(exc))
+    return {'hardlink_capability': hardlinks, 'status': 'STORAGE_CAPACITY_VERIFIED' if usage.free >= needed else 'INSUFFICIENT_CAPACITY',
             'destination': str(destination), 'required_bytes': needed, 'free_bytes': usage.free,
-            'device': destination.stat().st_dev,
-            'scope': 'read-only instantaneous free-space observation; not a reservation or allocation-capacity calibration'}
+            'device': destination.stat().st_dev, 'space_reserved': False,
+            'verification_scope': 'POINT_IN_TIME_FREE_SPACE_ONLY',
+            'scope': 'instantaneous free-space observation; optional private hard-link probe; no reservation or allocation-capacity calibration'}

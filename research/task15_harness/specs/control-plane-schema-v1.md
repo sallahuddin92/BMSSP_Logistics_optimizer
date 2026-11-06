@@ -2,7 +2,7 @@
 
 No runtime scientific configuration overrides exist. Protocol ID/version/canonical
 hash, amendment hash and frozen file identities are pinned in the loader. Strict
-JSON rejects duplicate keys, NaN/Infinity, non-UTF8, missing/unknown declared keys,
+JSON rejects duplicate keys, NaN/Infinity and overflowing exponents, non-UTF8, missing/unknown declared keys,
 wrong primitive types and inputs larger than 8 MiB. The complete bundled structural
 schema plus independent schedule validation runs before canonical acceptance.
 Each immutable Protocol object owns bytes and returns defensive copies. Even direct
@@ -44,3 +44,13 @@ necessary protocol clarification require separate authorization/review. Frozen
 scientific values cannot be changed through manifest fields, fixture input or JSON
 schema configuration. Synthetic data carry SYNTHETIC_CONTROL_PLANE_TEST and cannot
 be accepted as future performance evidence.
+
+Phase-1.1 uses plan schema version 2 and the closed session identity projection in
+`../schemas/session-2.schema.json`. Reference sessions and diagnostic domain
+sessions are independent. Query/cluster identities include the session namespace.
+Manifest envelope schema version 1 remains compatible structurally; harness version
+0.1.1, source and plan identities intentionally invalidate older observations.
+Validation returns VALID_STATIC_MANIFEST_STRUCTURE and explicit current external
+identity verification; an unchecked DRAFT has NOT_CHECKED external verification.
+Completion marker schema version 1 is now enforced together with an exact consumer
+payload contract and classified semantic filename/hash/reference checks.

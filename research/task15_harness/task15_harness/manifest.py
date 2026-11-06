@@ -120,6 +120,8 @@ def validate_manifest(protocol: Protocol, value: dict[str, Any]) -> dict[str, An
                 value['repository']['runtime_matches_task14'] and
                 value['repository']['branch'] == p['branch'] and
                 value['repository']['origin'] == p['origin'], 'STATIC_GATE', 'revalidate identities')
-    return {'status': 'VALID_STATIC_MANIFEST', 'state': state, 'future_execution_eligible': False,
+    return {'status': 'VALID_STATIC_MANIFEST_STRUCTURE',
+            'external_identity_verification': 'NOT_CHECKED' if unchecked else
+                ('ALL_VERIFIED' if current['all_verified'] else 'FAILED'), 'state': state, 'future_execution_eligible': False,
             'pending': ['diagnostic builds/G8', 'clock/permission/overhead/capacity/storage preflight',
                         'independent harness review and separate authorization']}

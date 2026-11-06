@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Plan v2 session identity projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "session_kind",
+    "session_id",
+    "schedule_ref_session",
+    "session_key"
+  ],
+  "properties": {
+    "session_kind": {
+      "type": "string",
+      "enum": [
+        "PRIMARY",
+        "DIAGNOSTIC"
+      ]
+    },
+    "session_id": {
+      "type": "integer"
+    },
+    "schedule_ref_session": {
+      "type": "integer"
+    },
+    "session_key": {
+      "type": "string"
+    }
+  }
+}

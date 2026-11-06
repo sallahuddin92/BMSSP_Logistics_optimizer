@@ -1,11 +1,12 @@
 from __future__ import annotations
 import hashlib
 import os
+import re
 from pathlib import Path
 from typing import Iterable
 from .errors import ControlError, require
-from .integrity import canonical, read_json, hash_file
-from .protocol import Protocol
+from .integrity import canonical, read_json, hash_file, strict_json_bytes, schema_check
+from .protocol import Protocol, PACKAGE_ROOT
 
 
 def safe_destination(protocol: Protocol, destination: Path) -> Path:
@@ -25,6 +26,8 @@ def safe_destination(protocol: Protocol, destination: Path) -> Path:
 def create_bundle(protocol: Protocol, destination: Path,
                   files: dict[str, bytes | Iterable[bytes]]) -> None:
     """Exclusive directory, atomic files, completion marker LAST. Never reuse incomplete runs."""
+    require(bool(files) and all(re.fullmatch(r'[a-z0-9][a-z0-9_.-]*', name)
+            and name not in {'.', '..'} for name in files), 'OUTPUT_NAME', 'safe lowercase payload names required')
     dest = safe_destination(protocol, destination)
     try:
         dest.mkdir(mode=0o700)
@@ -75,11 +78,64 @@ def create_bundle(protocol: Protocol, destination: Path,
         raise ControlError('OUTPUT_INTERRUPTED', f'{dest}: {exc}') from exc
 
 
-def read_bundle(path: Path) -> dict[str, str]:
+SUPPORTED_PAYLOAD_SETS = tuple(map(frozenset, [
+    {'manifest.json'}, {'report.json'}, {'report.json', 'plan.json'},
+    {'report.json', 'plan.json', 'queries.jsonl'},
+    {'report.json', 'synthetic-events.jsonl'}, {'tests.json', 'tests.log'}]))
+
+
+def read_bundle(path: Path, *, expected_payloads: set[str] | None = None) -> dict[str, str]:
+    """Validate a closed inventory. Hashes detect modification, not authentication."""
     require(not (path/'INTERRUPTED.json').exists() and (path/'COMPLETED.json').is_file(),
             'BUNDLE_INCOMPLETE', str(path))
-    marker = read_json(path/'COMPLETED.json')
-    for name, expected in marker['files_sha256'].items():
-        require(Path(name).name == name, 'OUTPUT_NAME', name)
-        require(hash_file(path/name)[0] == expected, 'BUNDLE_HASH', name)
-    return marker['files_sha256']
+    require(not (path/'COMPLETED.json').is_symlink(), 'BUNDLE_PAYLOAD_REFERENCE', 'marker symlink')
+    try:
+        marker = read_json(path/'COMPLETED.json')
+        schema_check(marker, read_json(PACKAGE_ROOT/'schemas/completion-1.schema.json'))
+    except ControlError as exc:
+        raise ControlError('BUNDLE_MARKER_SCHEMA', str(exc)) from exc
+    require(type(marker) is dict and set(marker) == {'schema_version', 'files_sha256', 'scope'},
+            'BUNDLE_MARKER_SCHEMA', 'closed completion marker')
+    require(marker['schema_version'] == '1' and marker['scope'] == 'CONTROL_PLANE_ONLY_NOT_MEASUREMENT'
+            and type(marker['files_sha256']) is dict and bool(marker['files_sha256']),
+            'BUNDLE_MARKER_SCHEMA', 'version, scope and nonempty inventory required')
+    inventory = marker['files_sha256']
+    for name, expected in inventory.items():
+        require(re.fullmatch(r'[a-z0-9][a-z0-9_.-]*', name) is not None
+                and name not in {'.', '..', 'COMPLETED.json', 'INTERRUPTED.json'},
+                'BUNDLE_PAYLOAD_NAME', name)
+        require(type(expected) is str and re.fullmatch(r'[0-9a-f]{64}', expected) is not None,
+                'BUNDLE_HASH_FORMAT', name)
+    require(len({n.casefold() for n in inventory}) == len(inventory), 'BUNDLE_PAYLOAD_NAME', 'aliases')
+    require(set(inventory) == expected_payloads if expected_payloads is not None
+            else frozenset(inventory) in SUPPORTED_PAYLOAD_SETS,
+            'BUNDLE_PAYLOAD_SET', 'consumer requires an exact supported inventory')
+    try:
+        actual = {p.name for p in path.iterdir()}
+        require(not (set(inventory) - actual), 'BUNDLE_PAYLOAD_MISSING', 'declared payload absent')
+        require(actual == set(inventory) | {'COMPLETED.json'}, 'BUNDLE_UNEXPECTED_PAYLOAD', 'unlisted entry')
+        inodes = set()
+        for name, expected in inventory.items():
+            payload = path/name
+            require(payload.is_file() and not payload.is_symlink(), 'BUNDLE_PAYLOAD_REFERENCE', name)
+            stat = payload.stat()
+            inode = (stat.st_dev, stat.st_ino)
+            require(inode not in inodes, 'BUNDLE_PAYLOAD_REFERENCE', 'aliased payload')
+            inodes.add(inode)
+            require(hash_file(payload)[0] == expected, 'BUNDLE_HASH', name)
+    except OSError as exc:
+        raise ControlError('BUNDLE_UNREADABLE', str(exc)) from exc
+    return inventory
+
+
+def read_bundle_json(path: Path, name: str, *, expected_payloads: set[str]) -> object:
+    inventory = read_bundle(path, expected_payloads=expected_payloads)
+    require(name in inventory, 'BUNDLE_PAYLOAD_SET', name)
+    try:
+        with (path/name).open('rb') as stream:
+            raw = stream.read(8 * 1024 * 1024 + 1)
+    except OSError as exc:
+        raise ControlError('BUNDLE_UNREADABLE', str(exc)) from exc
+    require(len(raw) <= 8 * 1024 * 1024, 'JSON_SIZE', name)
+    require(hashlib.sha256(raw).hexdigest() == inventory[name], 'BUNDLE_HASH', name)
+    return strict_json_bytes(raw)  # parse exactly the bytes whose hash was checked
