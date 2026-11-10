@@ -189,7 +189,7 @@ class ControlTests(unittest.TestCase):
 
     def test_27_protocol_immutable_and_constructor_fail_closed(self):
         data=self.protocol.data();data['version']='tampered'
-        self.assertEqual(self.protocol.data()['version'],'1.2.0')
+        self.assertEqual(self.protocol.data()['version'],'1.3.0')
         self.expect('PROTOCOL_VERSION',lambda:Protocol(canonical(data),REPO))
 
     def test_28_all_stored_schedule_counts(self):

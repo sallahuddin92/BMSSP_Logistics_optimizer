@@ -1,4 +1,4 @@
-"""v1.2 static integration and independent pre-upgrade payload-ledger controls."""
+"""Retained v1.2 ordering controls applied to active v1.3 provenance; immutable old oracle."""
 from collections import Counter
 from contextlib import contextmanager, redirect_stdout
 from copy import deepcopy
@@ -18,14 +18,14 @@ from task15_harness.integrity import canonical, digest, read_json, strict_json_b
 from task15_harness.manifest import prepare_manifest, validate_manifest, seal
 from task15_harness.planning import compile_plan, query_records, validate_plan
 from task15_harness.protocol import (PACKAGE_ROOT, PROTOCOL_HASH, PROTOCOL_FILE_HASH, PARENT_HASH,
-    LEDGER_HASH, FROZEN_FILES, Protocol, load_protocol, validate_document, canonical_protocol_hash)
+    LEDGER_HASH, FROZEN_FILES, Protocol, load_protocol, validate_document, canonical_protocol_hash, parent_projection)
 from task15_harness.simulation import simulate, reject_synthetic_for_measurement
 
 REPO=PACKAGE_ROOT.parents[1]
 ORACLE=PACKAGE_ROOT/'tests/fixtures/v1.1-query-oracle.json'
 ORACLE_HASH='8dcc00537d586b61f97b0fb20dc489ca7e900c64c89bc5cb8b52afc4318be975'
 NAMESPACE='6664cad958a863226925efdeac4ffc5fe220673e8cd7072c05cd6298facfb37f'
-ACTIVE='c41e45bccb68abdf03bab40ea793837a7f508fde17634c1aa8b358a3d82fceb0'
+ACTIVE='b639d9960353f00c5a3d5efc58255206d5dd7d7f701311ebe7f715f5ad277ddd'
 NEGATIVE_RESULTS=[]
 NEW_PROVENANCE={'protocol_sha256','protocol_version','query_identity_namespace_sha256','resolved_diagnostic_order_sha256'}
 
@@ -37,7 +37,7 @@ def reconcile(records, oracle):
     """
     groups={};population=[];unit_order=[]
     for record in records:
-        require(record['protocol_sha256']==ACTIVE and record['protocol_version']=='1.2.0',
+        require(record['protocol_sha256']==ACTIVE and record['protocol_version']=='1.3.0',
                 'QUERY_ACTIVE_PROVENANCE','active provenance')
         require(record['query_identity_namespace_sha256']==NAMESPACE,'QUERY_NAMESPACE','legacy identity')
         require(record['resolved_diagnostic_order_sha256']=='3e22c8ebfbdb23af04059bece54734844ee58664a3c43abd9170625922cf20ba',
@@ -91,7 +91,7 @@ class V12Tests(unittest.TestCase):
         old=read_json(REPO/'docs/task15_tail_attribution_protocol_v1.1.0.json')
         self.reject('PROTOCOL_VERSION',lambda:validate_document(old))
         with self.copied_repo() as root:
-            shutil.copyfile(root/'docs/task15_tail_attribution_protocol_v1.1.0.json',root/'docs/task15_tail_attribution_protocol_v1.2.0.json')
+            shutil.copyfile(root/'docs/task15_tail_attribution_protocol_v1.1.0.json',root/'docs/task15_tail_attribution_protocol_v1.3.0.json')
             self.reject('PROTOCOL_VERSION',lambda:load_protocol(root))
 
     def test_02_stale_canonical(self):
@@ -100,17 +100,17 @@ class V12Tests(unittest.TestCase):
 
     def test_03_stale_file_byte_hash(self):
         with self.copied_repo() as root:
-            path=root/'docs/task15_tail_attribution_protocol_v1.2.0.json';path.write_bytes(path.read_bytes()+b' ')
+            path=root/'docs/task15_tail_attribution_protocol_v1.3.0.json';path.write_bytes(path.read_bytes()+b' ')
             self.reject('PROTOCOL_FILE_HASH',lambda:load_protocol(root))
 
     def test_04_altered_preregistration(self):
         with self.copied_repo() as root:
-            path=root/'docs/task15_tail_attribution_preregistration_v1.2.0.md';path.write_bytes(path.read_bytes()+b'changed')
+            path=root/'docs/task15_tail_attribution_preregistration_v1.3.0.md';path.write_bytes(path.read_bytes()+b'changed')
             self.reject('FROZEN_FILE_HASH',lambda:load_protocol(root))
 
     def test_05_altered_ledger(self):
         with self.copied_repo() as root:
-            path=root/'docs/task15_tail_attribution_amendment_v1.2.0.json';ledger=read_json(path)
+            path=root/'docs/task15_tail_attribution_amendment_v1.3.0.json';ledger=read_json(path)
             ledger['independent_approval_status']='APPROVED';ledger.pop('identity_sha256');ledger['identity_sha256']=digest(ledger)
             path.write_bytes(canonical(ledger))
             self.reject('AMENDMENT_HASH',lambda:load_protocol(root))
@@ -222,7 +222,7 @@ class V12Tests(unittest.TestCase):
     def test_26_independent_order_reference_and_join(self):
         spec=importlib.util.spec_from_file_location('frozen_v12_reference',REPO/'research/task15_ordering_v1_2/validate_amendment.py')
         reference=importlib.util.module_from_spec(spec);spec.loader.exec_module(reference)
-        report=reference.verify_order(self.p,read_json(REPO/'docs/task15_tail_attribution_protocol_v1.1.0.json'))
+        report=reference.verify_order(parent_projection(self.p),read_json(REPO/'docs/task15_tail_attribution_protocol_v1.1.0.json'))
         self.assertEqual(report['blocks_by_session'],{0:26,1:24,2:26,3:24})
         blocks=self.p['design']['resolved_diagnostic_order']['condition_blocks']
         self.assertEqual([u['resolved_condition_block'] for u in self.plan['units'][128:]],blocks)
@@ -257,11 +257,11 @@ class V12Tests(unittest.TestCase):
         p=deepcopy(self.p);p['design']['base_schedule']=[None]
         self.reject('SCHEMA_TYPE',lambda:validate_document(p))
         with self.copied_repo() as root:
-            path=root/'docs/task15_tail_attribution_amendment_v1.2.0.json';path.write_bytes(b'[]')
+            path=root/'docs/task15_tail_attribution_amendment_v1.3.0.json';path.write_bytes(b'[]')
             self.reject('AMENDMENT_HASH',lambda:load_protocol(root))
 
         with self.copied_repo() as root:
-            (root/'docs/task15_tail_attribution_preregistration_v1.2.0.md').unlink()
+            (root/'docs/task15_tail_attribution_preregistration_v1.3.0.md').unlink()
             self.reject('FROZEN_FILE_HASH',lambda:load_protocol(root))
 
     def test_29_missing_or_changed_source_lane_blocks(self):

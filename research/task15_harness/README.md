@@ -1,3 +1,12 @@
+> Active integration: **harness0.3.0 / protocol v1.3.0 / plan3 / manifest3**.
+> The environment-only amendment is described in
+> [the v1.3 package](../task15_environment_v1_3/README.md).
+> New manifests bind TECHNICALLY_VERIFIED / SCIENTIFIC_ACCEPTANCE_PENDING
+> analysis provenance and optional read-only live file checks. `--skip-external`
+> leaves it NOT_CHECKED and cannot reach STATIC_VERIFIED. No benchmark runner
+> or execution authorization exists. Historical sections below document the
+> prior integration; v1.2 manifest2 objects remain historical, never migrated.
+
 # Task 15 measurement harness — Phase 2 static integration
 
 Version **0.2.0**. Standard-library Python 3.11+ package; no installation or network

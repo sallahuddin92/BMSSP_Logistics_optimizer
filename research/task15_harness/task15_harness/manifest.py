@@ -5,6 +5,7 @@ from . import __version__
 from .artifacts import capacity, inspect_identities, repository_identity, source_lock
 from .errors import require
 from .integrity import digest, read_json, schema_check
+from .analysis_environment import inspect_environment
 from .planning import compile_plan, plan_counts
 from .protocol import PACKAGE_ROOT, Protocol, protocol_binding
 
@@ -12,7 +13,7 @@ SAFE_STATES = ('DRAFT', 'STATIC_VERIFIED', 'AWAITING_APPROVAL')
 FUTURE_STATES = ('APPROVED_FOR_CALIBRATION', 'CALIBRATION_COMPLETE',
                  'APPROVED_FOR_COLLECTION', 'COLLECTION_COMPLETE', 'INVALID')
 PROVENANCE = {'operation': 'prepare-manifest', 'scope': 'STATIC_CONTROL_PLANE_ONLY',
-              'review_status': 'user authorizes static v1.2 harness integration only; independent scientific approval pending; no calibration/collection/promotion approval'}
+              'review_status': 'user authorizes static v1.3 environment integration only; independent scientific approval pending; no calibration/collection/promotion approval'}
 
 
 def seal(value: dict[str, Any]) -> dict[str, Any]:
@@ -30,7 +31,7 @@ def requirements_for(protocol: Protocol, plan: dict[str, Any]) -> dict[str, Any]
             'diagnostic_build_requirements': p['calibration']['diagnostic_build_equivalence'],
             'pending_preflight': p['environment']['host_verification_boundary'],
             'evidence_destination': None, 'storage_status': 'NOT_CHECKED',
-            'required_approvals': ['independent protocol approval', 'independent harness review', 'separate calibration/collection authorization',
+            'required_approvals': ['independent protocol approval', 'independent harness review', 'separate calibration/collection authorization', 'independent reconstructed analysis-environment acceptance',
                                    'diagnostic G1..G10', 'Class L layout risk if applicable'],
             'ordering_note': plan['ordering_caveat']}
 
@@ -45,12 +46,13 @@ def prepare_manifest(protocol: Protocol, state: str = 'DRAFT', checked: bool = T
     require(state in SAFE_STATES, 'STATE_FORBIDDEN', state)
     p = protocol.data()
     plan = compile_plan(protocol)
-    value = {'schema_version': '2', 'kind': 'CONTROL_PLANE_EXECUTION_MANIFEST', 'state': 'DRAFT',
+    value = {'schema_version': '3', 'kind': 'CONTROL_PLANE_EXECUTION_MANIFEST', 'state': 'DRAFT',
         'protocol': protocol_binding(protocol),
         'repository': repository_identity(protocol),
         'harness': {'version': __version__, 'source_lock': source_lock()},
         'plan': plan_binding(protocol, plan),
         'identities': inspect_identities(protocol, checked=checked),
+        'analysis_environment': inspect_environment(protocol, checked=checked),
         'requirements': requirements_for(protocol, plan),
         'authorization': {'calibration': False, 'execution': False, 'promotion': False,
                           'approval_signatures': [], 'future_execution_eligible': False},
@@ -74,7 +76,9 @@ def transition(protocol: Protocol, value: dict[str, Any], target: str) -> dict[s
     require(value['identities'] == inspect_identities(protocol) and
             value['identities']['all_verified'] and value['repository']['runtime_matches_task14'] and
             value['repository']['branch'] == protocol.data()['branch'] and
-            value['repository']['origin'] == protocol.data()['origin'],
+            value['repository']['origin'] == protocol.data()['origin']
+            and value['analysis_environment'] == inspect_environment(protocol)
+            and value['analysis_environment']['live_identity_status'] == 'VERIFIED',
             'STATIC_GATE', 'artifact/runtime mismatch blocks static eligibility')
     out = deepcopy(value)
     out['transitions'].append({'from': out['state'], 'to': target,
@@ -84,7 +88,9 @@ def transition(protocol: Protocol, value: dict[str, Any], target: str) -> dict[s
 
 
 def validate_manifest(protocol: Protocol, value: dict[str, Any]) -> dict[str, Any]:
-    schema_check(value, read_json(PACKAGE_ROOT/'schemas/manifest-2.schema.json'))
+    require(type(value) is dict, 'SCHEMA_TYPE', 'manifest object')
+    require(value.get('schema_version') != '2', 'HISTORICAL_MANIFEST', 'v1.2 manifests are historical; no automatic migration')
+    schema_check(value, read_json(PACKAGE_ROOT/'schemas/manifest-3.schema.json'))
     require(value['state'] in SAFE_STATES, 'STATE_FORBIDDEN', value['state'])
     auth = value['authorization']
     require(all(auth[k] is False for k in ['calibration','execution','promotion','future_execution_eligible'])
@@ -93,6 +99,9 @@ def validate_manifest(protocol: Protocol, value: dict[str, Any]) -> dict[str, An
     stored = check.pop('identity_sha256')
     require(digest(check) == stored, 'MANIFEST_HASH', 'integrity')
     p = protocol.data()
+    env_checked = value['analysis_environment']['live_identity_status'] != 'NOT_CHECKED'
+    require(value['analysis_environment'] == inspect_environment(protocol, checked=env_checked),
+            'ANALYSIS_ENVIRONMENT_CHANGED', 'revalidate immutable environment lock and pending acceptance')
     require(value['provenance'] == PROVENANCE, 'MANIFEST_PROVENANCE', 'no invented approval provenance')
     require(value['requirements'] == requirements_for(protocol, compile_plan(protocol)),
             'MANIFEST_REQUIREMENTS', 'frozen pending gates cannot be weakened')
@@ -118,7 +127,8 @@ def validate_manifest(protocol: Protocol, value: dict[str, Any]) -> dict[str, An
         require(value['identities'] == current and current['all_verified'] and
                 value['repository']['runtime_matches_task14'] and
                 value['repository']['branch'] == p['branch'] and
-                value['repository']['origin'] == p['origin'], 'STATIC_GATE', 'revalidate identities')
+                value['repository']['origin'] == p['origin']
+                and value['analysis_environment']['live_identity_status'] == 'VERIFIED', 'STATIC_GATE', 'revalidate identities')
     return {'status': 'VALID_STATIC_MANIFEST_STRUCTURE', 'protocol': protocol_binding(protocol),
             'plan_identity_sha256': value['plan']['identity_sha256'],
             'external_identity_verification': 'NOT_CHECKED' if unchecked else

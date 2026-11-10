@@ -76,7 +76,7 @@ def compile_plan(protocol: Protocol) -> dict[str, Any]:
             'unit_order': [u['id'] for u in units],
             'dispatchable': False, 'scientific_approval': 'NOT_INDEPENDENTLY_APPROVED',
             'collection_authorized': False,
-            'ordering_caveat': 'SESSION_END is resolved in frozen v1.2.0; original lanes remain provenance only. Serialization order is not execution order authorization. Scientific approval and all execution gates remain pending; no dispatcher.'}
+            'ordering_caveat': 'SESSION_END is resolved in frozen v1.3.0; original lanes remain provenance only. Serialization order is not execution order authorization. Scientific approval and all execution gates remain pending; no dispatcher.'}
     plan['identity_sha256'] = digest(plan)
     return plan
 

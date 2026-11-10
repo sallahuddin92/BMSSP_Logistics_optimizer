@@ -1,0 +1,40 @@
+{
+  "amendment_version": "1.3.0",
+  "kind": "ANALYSIS_ENVIRONMENT_PROVENANCE_ONLY",
+  "parent_version": "1.2.0",
+  "parent_commit": "a8a021399da77935b7f66d1157bfac3d6fa93442",
+  "parent_canonical_sha256": "c41e45bccb68abdf03bab40ea793837a7f508fde17634c1aa8b358a3d82fceb0",
+  "new_canonical_sha256": "b639d9960353f00c5a3d5efc58255206d5dd7d7f701311ebe7f715f5ad277ddd",
+  "new_JSON_file_byte_sha256": "d561f8c313400d72ffaa0290cb5df055a53ef270e79aa452dd91cfffba90bb0e",
+  "new_MD_file_byte_sha256": "45aa925620346fab8dc012623b1f9de2d37949b9afc7c5ecccee7585b887a659",
+  "analysis_environment_amendment_sha256": "872d08f37b65e77aa63b5f47d3c8a6e3a2b0a55d1ddc93386aa24b46f61f7459",
+  "changed_json_paths": [
+    "/analysis_environment_amendment",
+    "/future_execution/active_protocol_file",
+    "/future_execution/approval_gate",
+    "/identity/sha256",
+    "/statistics/bootstrap_execution_spec/numpy_version",
+    "/version"
+  ],
+  "prepared_utc": "2026-11-10T06:20:21.801530+00:00",
+  "independent_approval_status": "NOT_INDEPENDENTLY_APPROVED",
+  "approval_signatures": [],
+  "execution_authorized": false,
+  "promotion_authorized": false,
+  "calibration_authorized": false,
+  "collection_authorized": false,
+  "confirmatory_analysis_authorized": false,
+  "new_task15_observations_used": false,
+  "data_declaration": {
+    "classification": "PRE_DATA_WITHIN_REVIEWED_LOCAL_SCOPE",
+    "new_task15_performance_observations_used": false,
+    "new_task15_performance_observations_generated_by_this_task": false,
+    "basis": "Reviewed reconstruction/recovery evidence is synthetic/metadata only; this amendment task performs static and synthetic checks only.",
+    "worldwide_absence_of_task15_observations_established": false,
+    "limitation": "Repository/local evidence cannot prove global absence of observations. A truthful independent data-status attestation remains required before scientific acceptance; do not backdate."
+  },
+  "scientific_schedule_sha256": "46559c673c7427dd3ab70138efd2299a0db354bc0d9e0a3f35ccd2fda4ac4996",
+  "resolved_diagnostic_order_sha256": "3e22c8ebfbdb23af04059bece54734844ee58664a3c43abd9170625922cf20ba",
+  "query_identity_namespace_sha256": "6664cad958a863226925efdeac4ffc5fe220673e8cd7072c05cd6298facfb37f",
+  "identity_sha256": "7363631745b5666dac6bf4b598ced4cc4373e9de491a10bbe3cd780e8e1bd800"
+}

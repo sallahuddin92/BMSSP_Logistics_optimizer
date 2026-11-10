@@ -18,6 +18,12 @@ def safe_destination(protocol: Protocol, destination: Path) -> Path:
     for key in protocol.data()['evidence_files_used']:
         if Path(key).name == 'evidence-index.json':
             protected.append(Path(key).parent)
+    amendment = protocol.data().get('analysis_environment_amendment')
+    if amendment is not None:
+        protected += [Path(amendment['replacement']['environment_path']).parent,
+                      Path(amendment['numpy']['offline_source']),
+                      Path(amendment['historical_recovery']['original_executable']).parents[1],
+                      Path(amendment['historical_recovery']['evidence_manifest']['path']).parent]
     for root in protected:
         require(not resolved.is_relative_to(root.resolve()), 'OUTPUT_PROTECTED', str(root))
     return dest
