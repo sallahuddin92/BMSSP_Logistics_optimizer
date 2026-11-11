@@ -1,0 +1,784 @@
+{
+  "title": "Phase8 separate closed static preflight extension; additional semantic validation in outputs.py",
+  "anyOf": [
+    {
+      "type": "object",
+      "required": [
+        "calibration_authorized",
+        "collection_authorized",
+        "data",
+        "kind",
+        "measurement_eligible",
+        "schema",
+        "scientific_acceptance",
+        "scope"
+      ],
+      "properties": {
+        "schema": {
+          "enum": [
+            "preflight-extension-1"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "preflight-summary"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "STATIC_PREFLIGHT_ONLY_NO_MEASUREMENTS"
+          ]
+        },
+        "calibration_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "collection_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "scientific_acceptance": {
+          "enum": [
+            "pending"
+          ]
+        },
+        "measurement_eligible": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "errors",
+            "phase8_source_identity",
+            "static_foundations_verified",
+            "technical_result"
+          ],
+          "properties": {
+            "technical_result": {
+              "type": "string",
+              "enum": [
+                "TECHNICAL_STATIC_PREFLIGHT_BLOCKED",
+                "TECHNICAL_STATIC_PREFLIGHT_PARTIAL",
+                "TECHNICAL_STATIC_PREFLIGHT_PASS"
+              ]
+            },
+            "errors": {
+              "type": "array"
+            },
+            "static_foundations_verified": {
+              "type": "boolean"
+            },
+            "phase8_source_identity": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "calibration_authorized",
+        "collection_authorized",
+        "data",
+        "kind",
+        "measurement_eligible",
+        "schema",
+        "scientific_acceptance",
+        "scope"
+      ],
+      "properties": {
+        "schema": {
+          "enum": [
+            "preflight-extension-1"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "phase7-evidence-validation"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "STATIC_PREFLIGHT_ONLY_NO_MEASUREMENTS"
+          ]
+        },
+        "calibration_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "collection_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "scientific_acceptance": {
+          "enum": [
+            "pending"
+          ]
+        },
+        "measurement_eligible": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "validation"
+          ],
+          "properties": {
+            "validation": {}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "calibration_authorized",
+        "collection_authorized",
+        "data",
+        "kind",
+        "measurement_eligible",
+        "schema",
+        "scientific_acceptance",
+        "scope"
+      ],
+      "properties": {
+        "schema": {
+          "enum": [
+            "preflight-extension-1"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "protocol-and-plan-identity"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "STATIC_PREFLIGHT_ONLY_NO_MEASUREMENTS"
+          ]
+        },
+        "calibration_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "collection_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "scientific_acceptance": {
+          "enum": [
+            "pending"
+          ]
+        },
+        "measurement_eligible": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "harness_source_lock",
+            "plan",
+            "protocol",
+            "repository"
+          ],
+          "properties": {
+            "repository": {},
+            "plan": {},
+            "harness_source_lock": {},
+            "protocol": {}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "calibration_authorized",
+        "collection_authorized",
+        "data",
+        "kind",
+        "measurement_eligible",
+        "schema",
+        "scientific_acceptance",
+        "scope"
+      ],
+      "properties": {
+        "schema": {
+          "enum": [
+            "preflight-extension-1"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "original-artifact-identities"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "STATIC_PREFLIGHT_ONLY_NO_MEASUREMENTS"
+          ]
+        },
+        "calibration_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "collection_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "scientific_acceptance": {
+          "enum": [
+            "pending"
+          ]
+        },
+        "measurement_eligible": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "identities"
+          ],
+          "properties": {
+            "identities": {}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "calibration_authorized",
+        "collection_authorized",
+        "data",
+        "kind",
+        "measurement_eligible",
+        "schema",
+        "scientific_acceptance",
+        "scope"
+      ],
+      "properties": {
+        "schema": {
+          "enum": [
+            "preflight-extension-1"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "analysis-environment-status"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "STATIC_PREFLIGHT_ONLY_NO_MEASUREMENTS"
+          ]
+        },
+        "calibration_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "collection_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "scientific_acceptance": {
+          "enum": [
+            "pending"
+          ]
+        },
+        "measurement_eligible": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "environment"
+          ],
+          "properties": {
+            "environment": {}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "calibration_authorized",
+        "collection_authorized",
+        "data",
+        "kind",
+        "measurement_eligible",
+        "schema",
+        "scientific_acceptance",
+        "scope"
+      ],
+      "properties": {
+        "schema": {
+          "enum": [
+            "preflight-extension-1"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "host-runtime-observations"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "STATIC_PREFLIGHT_ONLY_NO_MEASUREMENTS"
+          ]
+        },
+        "calibration_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "collection_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "scientific_acceptance": {
+          "enum": [
+            "pending"
+          ]
+        },
+        "measurement_eligible": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "observations",
+            "storage"
+          ],
+          "properties": {
+            "storage": {},
+            "observations": {}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "calibration_authorized",
+        "collection_authorized",
+        "data",
+        "kind",
+        "measurement_eligible",
+        "schema",
+        "scientific_acceptance",
+        "scope"
+      ],
+      "properties": {
+        "schema": {
+          "enum": [
+            "preflight-extension-1"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "cohort-readiness-matrix"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "STATIC_PREFLIGHT_ONLY_NO_MEASUREMENTS"
+          ]
+        },
+        "calibration_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "collection_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "scientific_acceptance": {
+          "enum": [
+            "pending"
+          ]
+        },
+        "measurement_eligible": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "cohorts",
+            "schedule_preserved"
+          ],
+          "properties": {
+            "schedule_preserved": {},
+            "cohorts": {}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "calibration_authorized",
+        "collection_authorized",
+        "data",
+        "kind",
+        "measurement_eligible",
+        "schema",
+        "scientific_acceptance",
+        "scope"
+      ],
+      "properties": {
+        "schema": {
+          "enum": [
+            "preflight-extension-1"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "calibration-prerequisites"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "STATIC_PREFLIGHT_ONLY_NO_MEASUREMENTS"
+          ]
+        },
+        "calibration_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "collection_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "scientific_acceptance": {
+          "enum": [
+            "pending"
+          ]
+        },
+        "measurement_eligible": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "requirements"
+          ],
+          "properties": {
+            "requirements": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "cohorts",
+                      "status",
+                      "protocol_reference",
+                      "requirement",
+                      "reason",
+                      "next_action"
+                    ],
+                    "properties": {
+                      "id": {},
+                      "cohorts": {},
+                      "status": {
+                        "type": "string",
+                        "enum": [
+                          "VERIFIED",
+                          "PENDING",
+                          "BLOCKED",
+                          "UNSUPPORTED",
+                          "NOT_APPLICABLE"
+                        ]
+                      },
+                      "protocol_reference": {},
+                      "requirement": {},
+                      "reason": {},
+                      "next_action": {}
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "calibration_authorized",
+        "collection_authorized",
+        "data",
+        "kind",
+        "measurement_eligible",
+        "schema",
+        "scientific_acceptance",
+        "scope"
+      ],
+      "properties": {
+        "schema": {
+          "enum": [
+            "preflight-extension-1"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "blockers-and-next-actions"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "STATIC_PREFLIGHT_ONLY_NO_MEASUREMENTS"
+          ]
+        },
+        "calibration_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "collection_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "scientific_acceptance": {
+          "enum": [
+            "pending"
+          ]
+        },
+        "measurement_eligible": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "blockers",
+            "next_single_task"
+          ],
+          "properties": {
+            "next_single_task": {},
+            "blockers": {}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "calibration_authorized",
+        "collection_authorized",
+        "data",
+        "kind",
+        "measurement_eligible",
+        "schema",
+        "scientific_acceptance",
+        "scope"
+      ],
+      "properties": {
+        "schema": {
+          "enum": [
+            "preflight-extension-1"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "static-manifest-reference"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "STATIC_PREFLIGHT_ONLY_NO_MEASUREMENTS"
+          ]
+        },
+        "calibration_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "collection_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "scientific_acceptance": {
+          "enum": [
+            "pending"
+          ]
+        },
+        "measurement_eligible": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "manifest_file",
+            "reason",
+            "state"
+          ],
+          "properties": {
+            "state": {},
+            "manifest_file": {},
+            "reason": {}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "calibration_authorized",
+        "collection_authorized",
+        "data",
+        "kind",
+        "measurement_eligible",
+        "schema",
+        "scientific_acceptance",
+        "scope"
+      ],
+      "properties": {
+        "schema": {
+          "enum": [
+            "preflight-extension-1"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "manifest-validation"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "STATIC_PREFLIGHT_ONLY_NO_MEASUREMENTS"
+          ]
+        },
+        "calibration_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "collection_authorized": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "scientific_acceptance": {
+          "enum": [
+            "pending"
+          ]
+        },
+        "measurement_eligible": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "data": {
+          "type": "object",
+          "required": [
+            "validation"
+          ],
+          "properties": {
+            "validation": {}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  ]
+}
