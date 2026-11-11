@@ -1,0 +1,18 @@
+diff --git a/native/src/bounded_frontier.cpp b/native/src/bounded_frontier.cpp
+index acef5da..359f2d3 100644
+--- a/native/src/bounded_frontier.cpp
++++ b/native/src/bounded_frontier.cpp
+@@ -135,7 +135,12 @@ void BoundedFrontier::insert(VertexIndex key, const SymbolicLabel &value) {
+         fence = fences_.emplace(bound_, std::prev(d1_.end())).first;
+     }
+     const auto block = fence->second;
+-    fill(block, false, {{key, value}});
++    // A singleton insert already knows its destination. Avoid staging an owning
++    // label through a heap-backed vector; keep fill's order/index/counter semantics.
++    block->entries.push_back({key, value});
++    const auto entry = std::prev(block->entries.end());
++    locations_.insert_or_assign(key, Location{false, block, entry});
++    counters_.peak_keys = std::max(counters_.peak_keys, locations_.size());
+     if (block->entries.size() > m_)
+         split(block);
+     if (checks_)
