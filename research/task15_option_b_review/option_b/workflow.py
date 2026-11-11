@@ -21,7 +21,7 @@ def source_lock(repo):
     return {str(p.relative_to(repo)):file_sha(p) for p in sorted((repo/'research/task15_option_b_review').rglob('*')) if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.pyc'}
 
 def protected(repo):
-    require(subprocess.run(['git','diff','--quiet',BASE,'--'],cwd=repo).returncode==0,'PROTECTED_SOURCE_CHANGED')
+    require(subprocess.run(['git','diff','--quiet','--diff-filter=DMRTUXB',BASE,'--'],cwd=repo).returncode==0,'PROTECTED_SOURCE_CHANGED')
     names=subprocess.check_output(['git','ls-tree','-r','--name-only',BASE],cwd=repo,text=True).splitlines()
     return {name:file_sha(repo/name) for name in names}
 

@@ -2,15 +2,15 @@
 
 Implementation: PASS. Scientific recommendation: BLOCKED. No independent acceptance or construction/calibration/collection authorization is granted.
 
-Authoritative external evidence bundle: [/Users/sallahuddin/Projects/BMSSP-task15-phase11-option-b-2odoz45a/publication](/Users/sallahuddin/Projects/BMSSP-task15-phase11-option-b-2odoz45a/publication). Its 15 files contain only identities, observations, retained failures and review documents; no SDK/compiler bytes were copied.
+Authoritative external evidence bundle: [/Users/sallahuddin/Projects/BMSSP-task15-phase11-option-b-2odoz45a/delivery](/Users/sallahuddin/Projects/BMSSP-task15-phase11-option-b-2odoz45a/delivery). Its 15 files contain only identities, observations, retained failures and review documents; no SDK/compiler bytes were copied.
 
-Completion receipt SHA-256: `f929e9d65d45fa3a824ee6e9452313efca91011fdc9ea8fb4c0b8feaf5af004d`.
+Completion receipt SHA-256: `f9dc1e298cbdf6233539610fb894b985dc7599ae7bdf48d8388c3547341ccaff`.
 
 Review packet SHA-256: `f69651fbcd637d48726644b203d1ead1941c9bddf87e3be4ffd1c095cb72dffe`.
 
 Selected complete SDK: 49730 entries; deterministic tree SHA-256 `7c9ce24e66dd49d1598e8165020ccd309c37216ab46e43761bb3d9cd6722c5ac`. Other physical inventories and all closure failures are in the lock. Total 61612 physical entries. Current lock remains CURRENT_BYTES_PARTIAL.
 
-Validation: 33 new disposable-fixture tests and 293 unchanged static/fake regressions passed. All 321 previously tracked files remain unchanged from `2d529eebf9a5f9e01954bfcb8eab21233dccb5e3`. Full command argv, durations and raw test logs are retained in negative-tests.json. Native builds, queries, calibration and collection: zero.
+Validation: 34 new disposable-fixture tests and 293 unchanged static/fake regressions passed. All 321 previously tracked files remain unchanged from `2d529eebf9a5f9e01954bfcb8eab21233dccb5e3`. Full command argv, durations and raw test logs are retained in negative-tests.json. Native builds, queries, calibration and collection: zero.
 
 Implementation: [README](../research/task15_option_b_review/README.md). Validate with the standard-library `run.py validate --bundle` entry point; no dependency installation is required. The external completion receipt hashes all 14 companion files and package sources. This delivery record is supplemental Git documentation, outside that external receipt.
 

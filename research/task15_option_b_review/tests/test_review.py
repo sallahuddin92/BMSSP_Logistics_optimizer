@@ -100,3 +100,14 @@ class ReviewTests(unittest.TestCase):
 
     def test_forged_route_authorization(self):
         self.reject('FORGED_G8_PASS',lambda:no_approval({'route1':{'authorized':True}}))
+
+    def test_protected_guard_allows_additions_rejects_original_edits(self):
+        import subprocess
+        from option_b.workflow import protected
+        repo=self.root/'repo';repo.mkdir()
+        def git(*args):return subprocess.check_output(['git',*args],cwd=repo,stderr=subprocess.DEVNULL,text=True).strip()
+        git('init');(repo/'original').write_text('preserve');git('add','original');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-m','fixture');base=git('rev-parse','HEAD')
+        (repo/'new-tool').write_text('addition');git('add','new-tool');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-m','addition')
+        with patch('option_b.workflow.BASE',base):
+            self.assertEqual(set(protected(repo)),{'original'})
+            (repo/'original').write_text('unauthorized');self.reject('PROTECTED_SOURCE_CHANGED',lambda:protected(repo))
