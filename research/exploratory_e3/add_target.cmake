@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+add_executable(e3_off "${CMAKE_CURRENT_LIST_DIR}/worker.cpp")
+add_executable(e3_on "${CMAKE_CURRENT_LIST_DIR}/worker.cpp")
+add_executable(e3_check "${CMAKE_CURRENT_LIST_DIR}/correctness.cpp")
+target_compile_definitions(e3_off PRIVATE E3_TRACE_ON=0)
+target_compile_definitions(e3_on PRIVATE E3_TRACE_ON=1)
+foreach(target e3_off e3_on e3_check)
+ target_link_libraries(${target} PRIVATE bmssp_foundation)
+ set_target_properties(${target} PROPERTIES CXX_EXTENSIONS OFF)
+endforeach()

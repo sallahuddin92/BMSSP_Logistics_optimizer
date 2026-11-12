@@ -1,0 +1,15 @@
+"""Pre-primary instrument and diagnostic classification lock, no E3 timings read."""
+import json,pathlib,math
+from availability import ROOT,put,sha
+def run():
+ selection=json.loads((ROOT/'source-selection.json').read_text())
+ raw=pathlib.Path('/Volumes/RAID1_PHOTOS/BMSSP-exploratory-E2-8va49w4u/raw-wall-cpu-observations.jsonl')
+ groups={}
+ for line in raw.open():
+  r=json.loads(line);key=(r['graph'],r['condition'],r['position'])
+  if r['graph'] in selection['graphs'] and r['position'] in selection['graphs'][r['graph']]['positions']:groups.setdefault(key,[]).append(r)
+ def p95(a):return sorted(a)[math.ceil(.95*len(a))-1]
+ assert not (ROOT/'primary-start.json').exists()
+ put('classification-plan.json',{'E2_raw_sha256':sha(raw),'primary_sessions_before_freeze':0,'spike_rule':'A query is a targeted spike if wall_ns OR cpu_ns exceeds its own graph/condition/original-position E2 nearest-rank p95; diagnostic flag only, not acceptance or representative workload p99. All queries retain state joins.','thresholds':[{'graph':g,'condition':c,'position':p,'n':len(a),'wall_ns_p95':p95([r['wall_ns'] for r in a]),'cpu_ns_p95':p95([r['cpu_ns'] for r in a])} for (g,c,p),a in groups.items()],'classification_rule':'Only valid PID/TID/anchor/signpost joins qualify. Runnable overlapping duration above twice the full mapping bound width supports a scheduler contribution; Blocked/Waiting similarly supports blocking. Interrupted/Preempted retained separately, never assigned implicitly. Both supports MIXED_CONTRIBUTION. State presence supports contribution, not whole-tail or candidate-specific causation. CPU time alone does not support work inflation or hardware bottleneck. Work inflation requires increased existing deterministic engine work versus same-source baseline; hardware category requires attributed actual metrics. Otherwise INSUFFICIENT_EVIDENCE. Off queries lack direct scheduler evidence and are INSUFFICIENT_EVIDENCE.','matched_controls':'Other A1/A2/B/D same block,graph,source position,repeat,trace mode. A1/A2 byte-identical shared-runtime control. No causal H1 claim from correlation.','no_acceptance_thresholds_added':True})
+ put('instrument-lock.json',{'primary_sessions_before_lock':0,'essential_capture':'System Trace only; probe recorded actual thread-state/context-switch/os-signpost and validated independent RAW anchor mapping','probe_synchronization_sha256':sha(ROOT/'probe-synchronization.json'),'optional_CPU_Counters':'Attempted System Trace + CPU Counters; no probe launched; issue: No counting mode selected / Select a counting mode for CPU Bottlenecks. Combined path unusable as configured, not proof of universal unsupported hardware. No more probes.','Processor_Trace':'Listed and service advertised; actual recording/export permission untested, not selected. No processor trace or hardware causal claim.','primary_trace_limit_seconds':10,'window_seconds':10,'primary_total_trace_cap_bytes':4*1024**3,'per_trace_cap_bytes':256*1024**2,'min_free_bytes':3*1024**3,'instrument_order':'frozen fixed-execution-plan.json','hardware_metrics':None})
+if __name__=='__main__':run()
